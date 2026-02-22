@@ -1,12 +1,14 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"os"
 	"sort"
 	"strings"
 
 	"github.com/lucasew/ccgo-tree-sitter/grammar"
+	"github.com/lucasew/ccgo-tree-sitter/parsejson"
 	"github.com/spf13/cobra"
 )
 
@@ -44,7 +46,6 @@ func run(languageName, filename string) error {
 			supportedLanguages(),
 		)
 	}
-	fmt.Printf("Using grammar: %p\n", lang)
 
 	// Create parser
 	parser := grammar.NewParser()
@@ -57,9 +58,19 @@ func run(languageName, filename string) error {
 	tree := parser.ParseString(string(source))
 	defer tree.Delete()
 
-	// Print tree
+	// Convert parse tree to JSON
 	root := tree.RootNode()
-	printNode(root, source, "", "")
+	output := parsejson.Output{
+		Language: strings.ToLower(languageName),
+		File:     filename,
+		Root:     parsejson.BuildNode(root, source, ""),
+	}
+
+	enc := json.NewEncoder(os.Stdout)
+	enc.SetIndent("", "  ")
+	if err := enc.Encode(output); err != nil {
+		return fmt.Errorf("failed to encode output: %w", err)
+	}
 	return nil
 }
 
@@ -70,33 +81,4 @@ func supportedLanguages() string {
 	}
 	sort.Strings(langs)
 	return strings.Join(langs, ", ")
-}
-
-func printNode(n *grammar.Node, source []byte, indent string, fieldName string) {
-	if n.IsNull() {
-		return
-	}
-
-	typeStr := n.Type()
-	start := n.StartByte()
-	end := n.EndByte()
-
-	prefix := ""
-	if fieldName != "" {
-		prefix = fieldName + ": "
-	}
-
-	fmt.Printf("%s%s%s [%d-%d]", indent, prefix, typeStr, start, end)
-
-	if n.ChildCount() == 0 {
-		fmt.Printf(" %q", string(source[start:end]))
-	}
-	fmt.Println()
-
-	count := n.ChildCount()
-	for i := uint32(0); i < count; i++ {
-		child := n.Child(i)
-		field := n.FieldNameForChild(i)
-		printNode(child, source, indent+"  ", field)
-	}
 }
