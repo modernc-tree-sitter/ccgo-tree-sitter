@@ -8,6 +8,7 @@ import subprocess
 import sys
 import tempfile
 import re
+import json
 
 
 def run_command(command, cwd=None, check=True):
@@ -75,25 +76,38 @@ def main():
         else:
             print("✅ No struct padding found in generated code (or N=0)")
 
-        # 4. Run Test with JSON
+        # 4. Run test with JSON
         print("Running test with JSON...")
         with tempfile.NamedTemporaryFile(suffix=".json", mode="w", delete=False) as f:
             f.write('{"key": [1, true]}')
             test_json = f.name
 
         try:
-            result = run_command(f"go run ./cmd/parse {test_json}", cwd=repo_root)
+            result = run_command(f"go run ./cmd/parse json {test_json}", cwd=repo_root)
             output = result.stdout.strip()
             print("Output:")
             print(output)
 
-            # 5. Verify Output
-            checks = ["document [", "pair [", "key:", "value: array"]
+            # 5. Verify output
+            parsed = json.loads(output)
             passed = True
-            for check in checks:
-                if check not in output:
-                    print(f"❌ Missing expected string: '{check}'")
-                    passed = False
+
+            if parsed.get("language") != "json":
+                print("❌ Unexpected language in output")
+                passed = False
+
+            root = parsed.get("root", {})
+            if root.get("type") != "document":
+                print("❌ Expected root type 'document'")
+                passed = False
+
+            root_children = root.get("children", [])
+            if not root_children:
+                print("❌ Expected root children")
+                passed = False
+            elif root_children[0].get("type") != "object":
+                print("❌ Expected first root child to be 'object'")
+                passed = False
 
             if passed:
                 print("✅ JSON Test PASSED")
@@ -113,10 +127,11 @@ def main():
                 f.write("local x = 10\nprint(x)")
                 test_lua = f.name
             try:
-                result = run_command(f"go run ./cmd/parse {test_lua}", cwd=repo_root)
+                result = run_command(f"go run ./cmd/parse lua {test_lua}", cwd=repo_root)
                 print("Lua Output:")
                 print(result.stdout.strip())
-                if "chunk [" in result.stdout:
+                parsed = json.loads(result.stdout)
+                if parsed.get("language") == "lua" and parsed.get("root", {}).get("type") == "chunk":
                     print("✅ Lua Test PASSED")
                 else:
                     print("❌ Lua Test FAILED")
