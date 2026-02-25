@@ -1,5 +1,5 @@
 [tools]
-go = "1.26.0"
+go = "1.24.0"
 uv = "0.9.28"
 "go:golang.org/x/tools/gopls" = "0.21.0"
 python = "3.12"
@@ -62,3 +62,4 @@ run = "workspaced codebase format"
 
 [tasks.ci]
 depends = ["lint", "test"]
+run = "go version && python --version && workspaced --version"
