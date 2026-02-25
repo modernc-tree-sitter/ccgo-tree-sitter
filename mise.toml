@@ -2,6 +2,10 @@
 go = "1.26.0"
 uv = "0.9.28"
 "go:golang.org/x/tools/gopls" = "0.21.0"
+python = "3.12"
+
+[env]
+PATH = "{{env.HOME}}/go/bin:{{env.PATH}}"
 
 [tasks."codegen:linux-amd64"]
 env = {
@@ -21,4 +25,40 @@ run = "go run -v ./cmd/codegen"
 depends = ["codegen:*"]
 
 [tasks.install]
-run = "go get -v ./..."
+depends = ["install:*"]
+
+[tasks."install:submodules"]
+run = "git submodule update --init --recursive"
+
+[tasks."install:go"]
+run = "go mod download"
+
+[tasks."install:workspaced"]
+run = """
+if ! command -v workspaced >/dev/null 2>&1; then
+    echo "Installing workspaced..."
+    dir=$(mktemp -d)
+    git clone https://github.com/lucasew/workspaced "$dir"
+    cd "$dir"
+    git checkout 08a6dce4000a
+    go install ./cmd/workspaced
+    rm -rf "$dir"
+else
+    echo "workspaced already installed"
+fi
+"""
+
+[tasks.test]
+depends = ["test:*"]
+
+[tasks."test:integration"]
+run = "uv run test.py"
+
+[tasks.lint]
+run = "workspaced codebase lint"
+
+[tasks.fmt]
+run = "workspaced codebase format"
+
+[tasks.ci]
+depends = ["lint", "test"]
