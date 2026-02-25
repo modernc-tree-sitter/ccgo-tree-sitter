@@ -1,4 +1,4 @@
-name: Codegen and Test
+name: CI
 
 on:
   push:
@@ -8,35 +8,36 @@ on:
     - cron: '0 0 * * 6' # Weekly on Saturday at midnight
   workflow_dispatch:
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
-  codegen:
+  autorelease:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
     steps:
       - name: Checkout code
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        uses: actions/checkout@v4
         with:
+          fetch-depth: 0
           submodules: recursive
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Set up tools (mise)
-        uses: jdx/mise-action@6d1e696aa24c1aa1bcc1adea0212707c71ab78a8 # v3
 
       - name: Install system dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y gcc
 
-      - name: Run Codegen and Test
-        run: uv run test.py
+      - name: Set up tools (mise)
+        uses: jdx/mise-action@v3
+
+      - name: Install dependencies
+        run: mise run install
 
       - name: Codegen
         run: mise run codegen
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@c0f553fe549906ede9cf27b5156039d195d2ece0 # v8
+        uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "chore: update generated grammars"
@@ -44,3 +45,17 @@ jobs:
           body: "Automated update of tree-sitter grammars generated code."
           branch: "codegen-update"
           delete-branch: true
+
+      - name: Run CI
+        run: mise run ci
+
+      - name: Build Artifacts
+        run: mise run build
+
+      - name: Release
+        if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            ccgo-tree-sitter-codegen
+            ccgo-tree-sitter-parse

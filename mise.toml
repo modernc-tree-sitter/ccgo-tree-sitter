@@ -3,6 +3,33 @@ go = "1.26.0"
 uv = "0.9.28"
 "go:golang.org/x/tools/gopls" = "0.21.0"
 
+[env]
+PATH = "{{env.HOME}}/go/bin:{{env.PATH}}"
+
+[tasks."install:workspaced"]
+run = """
+mkdir -p /tmp/workspaced_install
+git clone https://github.com/lucasew/workspaced /tmp/workspaced_install
+cd /tmp/workspaced_install
+go build -o $HOME/go/bin/workspaced ./cmd/workspaced
+rm -rf /tmp/workspaced_install
+"""
+
+[tasks."install:deps"]
+run = "go get -v ./..."
+
+[tasks.install]
+depends = ["install:*"]
+
+[tasks.lint]
+run = "workspaced codebase lint"
+
+[tasks.fmt]
+run = "workspaced codebase format"
+
+[tasks.test]
+run = "uv run test.py"
+
 [tasks."codegen:linux-amd64"]
 env = {
   TARGET_GOOS = "linux",
@@ -20,5 +47,8 @@ run = "go run -v ./cmd/codegen"
 [tasks.codegen]
 depends = ["codegen:*"]
 
-[tasks.install]
-run = "go get -v ./..."
+[tasks.ci]
+depends = ["lint", "test"]
+
+[tasks.build]
+run = "go build -o ccgo-tree-sitter-codegen ./cmd/codegen && go build -o ccgo-tree-sitter-parse ./cmd/parse"
