@@ -42,6 +42,7 @@ jobs:
           title: "Update generated grammars"
           body: "Automated update of tree-sitter grammars generated code."
           branch: "codegen-update"
+          base: main
           delete-branch: true
 
       - name: CI
