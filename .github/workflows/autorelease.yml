@@ -1,27 +1,26 @@
-name: Codegen and Test
+name: Autorelease
 
 on:
   push:
     branches:
       - main
-  schedule:
-    - cron: '0 0 * * 6' # Weekly on Saturday at midnight
+  pull_request:
   workflow_dispatch:
 
 jobs:
-  codegen:
+  ci-release:
     runs-on: ubuntu-latest
     permissions:
       contents: write
       pull-requests: write
     steps:
       - name: Checkout code
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
           submodules: recursive
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set up tools (mise)
+      - name: Install mise
         uses: jdx/mise-action@6d1e696aa24c1aa1bcc1adea0212707c71ab78a8 # v3
 
       - name: Install system dependencies
@@ -29,8 +28,8 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y gcc
 
-      - name: Run Codegen and Test
-        run: uv run test.py
+      - name: Install
+        run: mise run install
 
       - name: Codegen
         run: mise run codegen
@@ -44,3 +43,19 @@ jobs:
           body: "Automated update of tree-sitter grammars generated code."
           branch: "codegen-update"
           delete-branch: true
+
+      - name: CI
+        run: mise run ci
+
+      - name: Release
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release create "v$(date +'%Y%m%d%H%M%S')" --generate-notes
+
+      - name: Upload Artifacts
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: actions/upload-artifact@65c4c4a1ddee5b733e7b08b8ef733d519639506a # v4
+        with:
+          name: grammar
+          path: grammar/
