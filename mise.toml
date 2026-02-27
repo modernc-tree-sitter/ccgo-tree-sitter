@@ -3,9 +3,6 @@ go = "1.25.0"
 uv = "0.9.28"
 "go:golang.org/x/tools/gopls" = "0.21.0"
 
-[env]
-PATH = "{{env.HOME}}/go/bin:$PATH"
-
 [tasks."codegen:linux-amd64"]
 env = {
   TARGET_GOOS = "linux",
@@ -33,10 +30,10 @@ run = "go get -v ./..."
 run = "bash scripts/install-workspaced.sh"
 
 [tasks.lint]
-run = "workspaced codebase lint"
+run = "PATH=\"$HOME/go/bin:$PATH\" workspaced codebase lint"
 
 [tasks.fmt]
-run = "workspaced codebase format"
+run = "PATH=\"$HOME/go/bin:$PATH\" workspaced codebase format"
 
 [tasks.test]
 depends = ["test:*"]
