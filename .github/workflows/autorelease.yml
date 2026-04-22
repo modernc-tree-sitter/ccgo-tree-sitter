@@ -1,0 +1,63 @@
+name: Autorelease
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  schedule:
+    - cron: '0 0 * * 6'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          submodules: recursive
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc
+
+      - name: Setup mise
+        uses: jdx/mise-action@52283134fb3bb5afcae965d1d643b469cc4e22ab # v2
+
+      - name: Install
+        run: mise run install
+
+      - name: Codegen
+        run: mise run codegen
+
+      - name: PR if Difference
+        uses: peter-evans/create-pull-request@67ccf781d68cd99b580ae25a5c18a1cc84ffff1f # v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: update generated grammars"
+          title: "Update generated grammars"
+          body: "Automated update of tree-sitter grammars generated code."
+          branch: "codegen-update"
+          base: main
+          delete-branch: true
+
+      - name: CI
+        run: mise run ci
+
+      - name: Release
+        if: github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release create "v$(date +'%Y%m%d%H%M%S')" --title "Release $(date +'%Y-%m-%d %H:%M:%S')" --notes "Automated release" || true
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4.4.3
+        with:
+          name: grammar
+          path: grammar/
