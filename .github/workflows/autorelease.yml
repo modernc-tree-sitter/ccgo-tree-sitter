@@ -28,7 +28,9 @@ jobs:
           sudo apt-get install -y gcc
 
       - name: Setup mise
-        uses: jdx/mise-action@52283134fb3bb5afcae965d1d643b469cc4e22ab # v2
+        uses: jdx/mise-action@5083fe46898c414b2475087cc79da59e7da859e8 # v2.1.11
+        with:
+          version: 2025.1.0
 
       - name: Install
         run: mise run install
