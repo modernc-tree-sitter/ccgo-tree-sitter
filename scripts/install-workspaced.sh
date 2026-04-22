@@ -16,10 +16,8 @@ cd /tmp/workspaced
 # Patch shellcheck.go to exclude third-party and grammar directories
 find . -name "shellcheck.go" -exec sed -i -E 's/Exclude: \[\]string\{/Exclude: \[\]string\{"third-party", "grammar", /g' {} +
 # Patch prelude.go to disable govulncheck and golangci to prevent OOM
-find . -name "prelude.go" -exec sed -i -E 's/"govulncheck",//g' {} +
-find . -name "prelude.go" -exec sed -i -E 's/"golangci",//g' {} +
-find . -name "prelude.go" -exec sed -i -E 's/Govulncheck,//g' {} +
-find . -name "prelude.go" -exec sed -i -E 's/Golangci,//g' {} +
+find . -name "prelude.go" -exec sed -i -E '/golangci/d' {} +
+find . -name "prelude.go" -exec sed -i -E '/govulncheck/d' {} +
 
 # Install workspaced
 go install ./cmd/workspaced

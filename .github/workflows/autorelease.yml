@@ -50,7 +50,7 @@ jobs:
       - name: CI
         run: mise run ci
         env:
-          GOMAXPROCS: 2 # limit threads to avoid OOM
+          GOMAXPROCS: 1 # limit threads to avoid OOM
 
       - name: Release
         if: github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/')
