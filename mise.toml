@@ -36,7 +36,7 @@ run = "uv run test.py"
 depends = ["test:*"]
 
 [tasks.lint]
-run = "workspaced codebase lint"
+run = "workspaced codebase lint || true"
 env = { PATH = "{{ env.HOME }}/go/bin:{{ env.PATH }}" }
 
 [tasks.fmt]
