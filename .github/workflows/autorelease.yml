@@ -1,19 +1,21 @@
-name: Codegen and Test
+name: Autorelease
 
 on:
   push:
     branches:
       - main
+  pull_request:
   schedule:
-    - cron: '0 0 * * 6' # Weekly on Saturday at midnight
+    - cron: '0 0 * * 6'
   workflow_dispatch:
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
-  codegen:
+  autorelease:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
     steps:
       - name: Checkout code
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
@@ -29,13 +31,13 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y gcc
 
-      - name: Run Codegen and Test
-        run: uv run test.py
+      - name: Install dependencies
+        run: mise run install
 
-      - name: Codegen
+      - name: Run Codegen
         run: mise run codegen
 
-      - name: Create Pull Request
+      - name: Create Pull Request if differences exist
         uses: peter-evans/create-pull-request@c0f553fe549906ede9cf27b5156039d195d2ece0 # v8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -43,4 +45,20 @@ jobs:
           title: "Update generated grammars"
           body: "Automated update of tree-sitter grammars generated code."
           branch: "codegen-update"
+          base: "main"
           delete-branch: true
+
+      - name: CI (Lint & Test)
+        run: mise run ci
+
+      - name: Release
+        if: github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release create "v$(date +'%Y.%m.%d-%H%M%S')" --generate-notes
+
+      - name: Upload Grammar Artifacts
+        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
+        with:
+          name: grammar-artifacts
+          path: grammar/

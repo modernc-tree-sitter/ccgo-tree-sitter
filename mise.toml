@@ -20,5 +20,28 @@ run = "go run -v ./cmd/codegen"
 [tasks.codegen]
 depends = ["codegen:*"]
 
-[tasks.install]
+[tasks."install:deps"]
 run = "go get -v ./..."
+
+[tasks."install:workspaced"]
+run = "./scripts/install-workspaced.sh"
+
+[tasks.install]
+depends = ["install:*"]
+
+[tasks."test:python"]
+run = "uv run test.py"
+
+[tasks.test]
+depends = ["test:*"]
+
+[tasks.lint]
+run = "workspaced codebase lint"
+env = { PATH = "{{ env.HOME }}/go/bin:{{ env.PATH }}" }
+
+[tasks.fmt]
+run = "workspaced codebase format"
+env = { PATH = "{{ env.HOME }}/go/bin:{{ env.PATH }}" }
+
+[tasks.ci]
+depends = ["lint", "test"]
