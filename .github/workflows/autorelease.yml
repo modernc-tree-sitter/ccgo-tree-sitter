@@ -24,7 +24,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up tools (mise)
-        uses: jdx/mise-action@5083fe46898c414b2475087cc79da59e7da859e8 # v2
+        uses: jdx/mise-action@5228313 # v4
 
       - name: Install system dependencies
         run: |

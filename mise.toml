@@ -36,8 +36,8 @@ run = "uv run test.py"
 depends = ["test:*"]
 
 [tasks.lint]
-run = "workspaced codebase lint || true"
-env = { PATH = "{{ env.HOME }}/go/bin:{{ env.PATH }}" }
+run = "workspaced codebase lint"
+env = { PATH = "{{ env.HOME }}/go/bin:{{ env.PATH }}", GOGC = "50", GOMEMLIMIT = "3GiB", GOLANGCI_LINT_CACHE = "/tmp/golangci-lint", GL_DEBUG = "linters_output,env" }
 
 [tasks.fmt]
 run = "workspaced codebase format"
