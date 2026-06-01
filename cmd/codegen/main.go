@@ -1,7 +1,9 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
+	"io"
 	"log/slog"
 	"os"
 	"path/filepath"
@@ -70,12 +72,33 @@ func run(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
+
+	var summaryWriter io.Writer
+
+	if summaryPath := os.Getenv("GITHUB_STEP_SUMMARY"); summaryPath != "" {
+		summaryFile, err := os.OpenFile(summaryPath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+		if err != nil {
+			slog.Warn("failed to open GITHUB_STEP_SUMMARY", "path", summaryPath, "error", err)
+		} else {
+			summaryWriter = summaryFile
+			defer summaryFile.Close()
+		}
+	} else {
+		var buf bytes.Buffer
+		defer fmt.Println(buf.String())
+		summaryWriter = &buf
+	}
+
+	fmt.Fprintf(summaryWriter, "## Grammar Codegen Summary\n\n")
 	// Transpile grammars
 	for i, grammarPath := range grammars {
-		slog.Info("transpiling grammar", "index", i+1, "total", len(grammars), "path", grammarPath)
+		grammarName := extractGrammarName(grammarPath)
+		slog.Info("transpiling grammar", "index", i+1, "total", len(grammars), "grammar", grammarName, "path", grammarPath)
 		if err := transpiler.TranspileGrammar(grammarPath, OUTPUT_DIR+"/grammar"); err != nil {
-			return fmt.Errorf("failed to transpile grammar %s: %w", grammarPath, err)
+			slog.Warn("failed to transpile grammar, skipping", "grammar", grammarName, "path", grammarPath, "error", err)
+			fmt.Fprintf(summaryWriter, "- `%s/%s` `%s`: failed\n", targetGOOS, targetGOARCH, grammarName)
 		}
+		fmt.Fprintf(summaryWriter, "- `%s/%s` `%s`: generated\n", targetGOOS, targetGOARCH, grammarName)
 	}
 
 	slog.Info("updating languages registry in cmd/parse/languages.go")
