@@ -96,9 +96,10 @@ func run(cmd *cobra.Command, args []string) error {
 		slog.Info("transpiling grammar", "index", i+1, "total", len(grammars), "grammar", grammarName, "path", grammarPath)
 		if err := transpiler.TranspileGrammar(grammarPath, OUTPUT_DIR+"/grammar"); err != nil {
 			slog.Warn("failed to transpile grammar, skipping", "grammar", grammarName, "path", grammarPath, "error", err)
-			fmt.Fprintf(summaryWriter, "- `%s/%s` `%s`: failed\n", targetGOOS, targetGOARCH, grammarName)
+			fmt.Fprintf(summaryWriter, "- `%s/%s` `%s`: ❌\n", targetGOOS, targetGOARCH, grammarName)
+			continue
 		}
-		fmt.Fprintf(summaryWriter, "- `%s/%s` `%s`: generated\n", targetGOOS, targetGOARCH, grammarName)
+		fmt.Fprintf(summaryWriter, "- `%s/%s` `%s`: ✅\n", targetGOOS, targetGOARCH, grammarName)
 	}
 
 	slog.Info("updating languages registry in cmd/parse/languages.go")
