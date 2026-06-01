@@ -14,6 +14,7 @@ import (
 	_ "github.com/lucasew/ccgo-tree-sitter/grammar/json"
 	_ "github.com/lucasew/ccgo-tree-sitter/grammar/julia"
 	_ "github.com/lucasew/ccgo-tree-sitter/grammar/lua"
+	_ "github.com/lucasew/ccgo-tree-sitter/grammar/nix"
 	_ "github.com/lucasew/ccgo-tree-sitter/grammar/python"
 	_ "github.com/lucasew/ccgo-tree-sitter/grammar/regex"
 	_ "github.com/lucasew/ccgo-tree-sitter/grammar/ruby"
