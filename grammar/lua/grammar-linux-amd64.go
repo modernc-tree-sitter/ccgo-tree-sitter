@@ -1,4 +1,4 @@
-// Code generated for linux/amd64 by 'ccgo /tmp/grammar-gen-2264949694/preprocessed.c -o /tmp/grammar-gen-2264949694/grammar.go', DO NOT EDIT.
+// Code generated for linux/amd64 by 'ccgo /tmp/grammar-gen-2093568142/preprocessed.c -o /tmp/grammar-gen-2093568142/grammar.go', DO NOT EDIT.
 
 //go:build linux && amd64
 
