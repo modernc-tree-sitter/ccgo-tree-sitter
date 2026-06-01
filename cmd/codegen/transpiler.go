@@ -11,6 +11,7 @@ import (
 	"path/filepath"
 	"regexp"
 	"strings"
+	"sync"
 
 	"modernc.org/ccgo/v4/lib"
 )
@@ -23,9 +24,19 @@ type Transpiler struct {
 	KeepTemp       bool
 }
 
+const (
+	deterministicTempRoot = "ccgo-tree-sitter-gen"
+)
+
+var (
+	libcVersionOnce sync.Once
+	libcVersion     string
+	libcVersionErr  error
+)
+
 // TranspileCore transpiles the tree-sitter core library
 func (t *Transpiler) TranspileCore(outputDir string) error {
-	tmpDir, err := os.MkdirTemp("", "tree-sitter-gen-*")
+	tmpDir, err := t.prepareWorkDir("tree-sitter-core", "")
 	if err != nil {
 		return err
 	}
@@ -64,7 +75,7 @@ func (t *Transpiler) TranspileCore(outputDir string) error {
 			return err
 		}
 
-		goCode := postProcess(string(data))
+		goCode := postProcess(string(data), tmpDir)
 		// Change package from main to grammar
 		goCode = strings.Replace(goCode, "package main", "package grammar", 1)
 
@@ -77,7 +88,7 @@ func (t *Transpiler) TranspileCore(outputDir string) error {
 	if err != nil {
 		return err
 	}
-	fmt.Print(postProcess(string(data)))
+	fmt.Print(postProcess(string(data), tmpDir))
 	return nil
 }
 
@@ -99,7 +110,7 @@ func (t *Transpiler) TranspileGrammar(grammarPath, outputDir string) error {
 		hasScanner = false
 	}
 
-	tmpDir, err := os.MkdirTemp("", "grammar-gen-*")
+	tmpDir, err := t.prepareWorkDir("grammar", grammarName)
 	if err != nil {
 		return err
 	}
@@ -139,7 +150,7 @@ func (t *Transpiler) TranspileGrammar(grammarPath, outputDir string) error {
 			return err
 		}
 
-		goCode := postProcess(string(data))
+		goCode := postProcess(string(data), tmpDir)
 		// Change package from main to grammar name (preserve comments)
 		goCode = strings.Replace(goCode, "package main", "package grammar_"+grammarName, 1)
 
@@ -185,6 +196,7 @@ func combineFiles(inputs []string, output string) error {
 }
 
 func (t *Transpiler) preprocessCore(outputPath string) error {
+	workDir := filepath.Dir(outputPath)
 	f, err := os.Create(outputPath)
 	if err != nil {
 		return err
@@ -193,6 +205,8 @@ func (t *Transpiler) preprocessCore(outputPath string) error {
 
 	args := []string{
 		"-E", "-O0", "-fno-inline",
+		"-ffile-prefix-map=" + filepath.ToSlash(workDir) + "=.",
+		"-fmacro-prefix-map=" + filepath.ToSlash(workDir) + "=.",
 		filepath.Join(t.TreeSitterPath, "lib/src/lib.c"),
 		"-I", filepath.Join(t.TreeSitterPath, "lib/include"),
 		"-I", filepath.Join(t.TreeSitterPath, "lib/src"),
@@ -224,6 +238,8 @@ func (t *Transpiler) transpileGrammarFile(grammarPath, inputC, outputGo, workDir
 
 	args := []string{
 		"-E", "-O0", "-fno-inline",
+		"-ffile-prefix-map=" + filepath.ToSlash(workDir) + "=.",
+		"-fmacro-prefix-map=" + filepath.ToSlash(workDir) + "=.",
 		"-Dfunc=func_token",
 		"-Dinterface=interface_token",
 		"-Dselect=select_token",
@@ -266,7 +282,15 @@ func (t *Transpiler) transpileGrammarFile(grammarPath, inputC, outputGo, workDir
 }
 
 func (t *Transpiler) runCcgo(workDir, inputPath, outputPath string) error {
-	ccgoArgs := []string{"ccgo", inputPath, "-o", outputPath}
+	inputArg := inputPath
+	if rel, err := filepath.Rel(workDir, inputPath); err == nil {
+		inputArg = rel
+	}
+	outputArg := outputPath
+	if rel, err := filepath.Rel(workDir, outputPath); err == nil {
+		outputArg = rel
+	}
+	ccgoArgs := []string{"ccgo", inputArg, "-o", outputArg}
 
 	// Change to work dir
 	origDir, err := os.Getwd()
@@ -342,20 +366,50 @@ func runCcgoIsolated(goos, goarch string, args []string) error {
 // Helper functions
 
 func setupGoMod(dir string) error {
+	libcVer, err := currentLibcVersion()
+	if err != nil {
+		return err
+	}
+
 	goModPath := filepath.Join(dir, "go.mod")
-	goModContent := "module treesitter\n\ngo 1.25\n"
+	goModContent := "module treesitter\n\ngo 1.25\n\nrequire modernc.org/libc " + libcVer + "\n"
 	if err := os.WriteFile(goModPath, []byte(goModContent), 0644); err != nil {
 		return err
 	}
 
-	getCmd := exec.Command("go", "get", "modernc.org/libc@latest")
+	getCmd := exec.Command("go", "mod", "download", "modernc.org/libc@"+libcVer)
 	getCmd.Dir = dir
 	getCmd.Stderr = os.Stderr
 	getCmd.Stdout = io.Discard
 	return getCmd.Run()
 }
 
-func postProcess(goCode string) string {
+func currentLibcVersion() (string, error) {
+	libcVersionOnce.Do(func() {
+		cmd := exec.Command("go", "list", "-m", "-f", "{{.Version}}", "modernc.org/libc")
+		out, err := cmd.Output()
+		if err != nil {
+			libcVersionErr = fmt.Errorf("resolve modernc.org/libc version: %w", err)
+			return
+		}
+		libcVersion = strings.TrimSpace(string(out))
+		if libcVersion == "" {
+			libcVersionErr = fmt.Errorf("resolve modernc.org/libc version: empty version from go list")
+		}
+	})
+	if libcVersionErr != nil {
+		return "", libcVersionErr
+	}
+	return libcVersion, nil
+}
+
+func postProcess(goCode, workDir string) string {
+	// Normalize temp workdir path so regenerated code is deterministic across runs.
+	workDirSlash := filepath.ToSlash(workDir)
+	goCode = strings.ReplaceAll(goCode, workDirSlash+"/", "./")
+	goCode = strings.ReplaceAll(goCode, workDirSlash, ".")
+	goCode = regexp.MustCompile(`/tmp/(grammar-gen|tree-sitter-gen)-\d+`).ReplaceAllString(goCode, "/tmp/$1")
+
 	// Fix assert types
 	goCode = regexp.MustCompile(`libc\.X__assert_fail\(tls, ([^,]*), ([^,]*), uint32\((\d+)\)`).
 		ReplaceAllString(goCode, `libc.X__assert_fail(tls, $1, $2, int32($3)`)
@@ -528,6 +582,26 @@ func postProcess(goCode string) string {
 }`)
 
 	return goCode
+}
+
+func (t *Transpiler) prepareWorkDir(kind, suffix string) (string, error) {
+	parts := []string{
+		os.TempDir(),
+		deterministicTempRoot,
+		fmt.Sprintf("%s-%s", t.GOOS, t.GOARCH),
+		kind,
+	}
+	if suffix != "" {
+		parts = append(parts, suffix)
+	}
+	workDir := filepath.Join(parts...)
+	if err := os.RemoveAll(workDir); err != nil {
+		return "", err
+	}
+	if err := os.MkdirAll(workDir, 0755); err != nil {
+		return "", err
+	}
+	return workDir, nil
 }
 
 func extractGrammarName(path string) string {
