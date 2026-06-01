@@ -1,4 +1,4 @@
-// Code generated for linux/amd64 by 'ccgo /tmp/tree-sitter-gen-1831488157/core_complete.c -o /tmp/tree-sitter-gen-1831488157/core.go', DO NOT EDIT.
+// Code generated for linux/amd64 by 'ccgo /tmp/tree-sitter-gen-317951371/core_complete.c -o /tmp/tree-sitter-gen-317951371/core.go', DO NOT EDIT.
 
 //go:build linux && amd64
 
