@@ -1,4 +1,4 @@
-// Code generated for linux/amd64 by 'ccgo /tmp/grammar-gen-4214695230/preprocessed.c -o /tmp/grammar-gen-4214695230/grammar.go', DO NOT EDIT.
+// Code generated for linux/amd64 by 'ccgo preprocessed.c -o grammar.go', DO NOT EDIT.
 
 //go:build linux && amd64
 
@@ -1337,7 +1337,7 @@ func deserialize(tls *libc.TLS, scanner uintptr, buffer uintptr, length uint32) 
 			_ = libc.Uint64FromInt64(4)
 			{
 				if !((*Scanner)(unsafe.Pointer(scanner)).Fcontext_stack.Fdata != libc.UintptrFromInt32(0)) {
-					libc.X__assert_fail(tls, __ccgo_ts+51, __ccgo_ts+12, int32(177), uintptr(unsafe.Pointer(&__func__)))
+					libc.X__assert_fail(tls, __ccgo_ts+25, __ccgo_ts+12, int32(177), uintptr(unsafe.Pointer(&__func__)))
 				}
 			}
 			if libc.Uint32FromInt32(libc.Int32FromInt32(16)) > (*Scanner)(unsafe.Pointer(scanner)).Fcontext_stack.Flen1*uint32(2) {
@@ -1359,7 +1359,7 @@ func deserialize(tls *libc.TLS, scanner uintptr, buffer uintptr, length uint32) 
 	_ = libc.Uint64FromInt64(4)
 	{
 		if !(size == length) {
-			libc.X__assert_fail(tls, __ccgo_ts+91, __ccgo_ts+12, int32(179), uintptr(unsafe.Pointer(&__func__)))
+			libc.X__assert_fail(tls, __ccgo_ts+65, __ccgo_ts+12, int32(179), uintptr(unsafe.Pointer(&__func__)))
 		}
 	}
 }
@@ -1468,7 +1468,7 @@ func scan(tls *libc.TLS, scanner uintptr, lexer uintptr, valid_symbols uintptr) 
 			_ = libc.Uint64FromInt64(4)
 			{
 				if !((*Scanner)(unsafe.Pointer(scanner)).Fcontext_stack.Fdata != libc.UintptrFromInt32(0)) {
-					libc.X__assert_fail(tls, __ccgo_ts+51, __ccgo_ts+12, int32(251), uintptr(unsafe.Pointer(&__func__1)))
+					libc.X__assert_fail(tls, __ccgo_ts+25, __ccgo_ts+12, int32(251), uintptr(unsafe.Pointer(&__func__1)))
 				}
 			}
 			if libc.Uint32FromInt32(libc.Int32FromInt32(16)) > (*Scanner)(unsafe.Pointer(scanner)).Fcontext_stack.Flen1*uint32(2) {
@@ -1514,7 +1514,7 @@ func scan(tls *libc.TLS, scanner uintptr, lexer uintptr, valid_symbols uintptr) 
 				_ = libc.Uint64FromInt64(4)
 				{
 					if !((*Scanner)(unsafe.Pointer(scanner)).Fcontext_stack.Fdata != libc.UintptrFromInt32(0)) {
-						libc.X__assert_fail(tls, __ccgo_ts+51, __ccgo_ts+12, int32(267), uintptr(unsafe.Pointer(&__func__1)))
+						libc.X__assert_fail(tls, __ccgo_ts+25, __ccgo_ts+12, int32(267), uintptr(unsafe.Pointer(&__func__1)))
 					}
 				}
 				if libc.Uint32FromInt32(libc.Int32FromInt32(16)) > (*Scanner)(unsafe.Pointer(scanner)).Fcontext_stack.Flen1*uint32(2) {
@@ -1568,7 +1568,7 @@ func scan(tls *libc.TLS, scanner uintptr, lexer uintptr, valid_symbols uintptr) 
 				_ = libc.Uint64FromInt64(4)
 				{
 					if !((*Scanner)(unsafe.Pointer(scanner)).Fcontext_stack.Fdata != libc.UintptrFromInt32(0)) {
-						libc.X__assert_fail(tls, __ccgo_ts+51, __ccgo_ts+12, int32(293), uintptr(unsafe.Pointer(&__func__1)))
+						libc.X__assert_fail(tls, __ccgo_ts+25, __ccgo_ts+12, int32(293), uintptr(unsafe.Pointer(&__func__1)))
 					}
 				}
 				if libc.Uint32FromInt32(libc.Int32FromInt32(16)) > (*Scanner)(unsafe.Pointer(scanner)).Fcontext_stack.Flen1*uint32(2) {
@@ -1655,7 +1655,7 @@ func scan(tls *libc.TLS, scanner uintptr, lexer uintptr, valid_symbols uintptr) 
 			_ = libc.Uint64FromInt64(4)
 			{
 				if !((*Scanner)(unsafe.Pointer(scanner)).Fcontext_stack.Fdata != libc.UintptrFromInt32(0)) {
-					libc.X__assert_fail(tls, __ccgo_ts+51, __ccgo_ts+12, int32(322), uintptr(unsafe.Pointer(&__func__1)))
+					libc.X__assert_fail(tls, __ccgo_ts+25, __ccgo_ts+12, int32(322), uintptr(unsafe.Pointer(&__func__1)))
 				}
 			}
 			if libc.Uint32FromInt32(libc.Int32FromInt32(16)) > (*Scanner)(unsafe.Pointer(scanner)).Fcontext_stack.Flen1*uint32(2) {
@@ -1966,127 +1966,127 @@ const aux_sym_attr_splat_repeat1 = 119
 const aux_sym_template_literal_repeat1 = 120
 
 var ts_symbol_names = [121]uintptr{
-	0:   __ccgo_ts + 106,
-	1:   __ccgo_ts + 110,
-	2:   __ccgo_ts + 112,
-	3:   __ccgo_ts + 114,
-	4:   __ccgo_ts + 116,
-	5:   __ccgo_ts + 127,
-	6:   __ccgo_ts + 129,
-	7:   __ccgo_ts + 131,
-	8:   __ccgo_ts + 150,
-	9:   __ccgo_ts + 169,
-	10:  __ccgo_ts + 174,
-	11:  __ccgo_ts + 180,
-	12:  __ccgo_ts + 189,
-	13:  __ccgo_ts + 191,
-	14:  __ccgo_ts + 193,
-	15:  __ccgo_ts + 195,
-	16:  __ccgo_ts + 197,
-	17:  __ccgo_ts + 199,
-	18:  __ccgo_ts + 219,
-	19:  __ccgo_ts + 222,
-	20:  __ccgo_ts + 226,
-	21:  __ccgo_ts + 229,
-	22:  __ccgo_ts + 233,
-	23:  __ccgo_ts + 236,
-	24:  __ccgo_ts + 239,
-	25:  __ccgo_ts + 248,
-	26:  __ccgo_ts + 250,
-	27:  __ccgo_ts + 252,
-	28:  __ccgo_ts + 254,
-	29:  __ccgo_ts + 256,
-	30:  __ccgo_ts + 258,
-	31:  __ccgo_ts + 260,
-	32:  __ccgo_ts + 262,
-	33:  __ccgo_ts + 264,
-	34:  __ccgo_ts + 267,
-	35:  __ccgo_ts + 269,
-	36:  __ccgo_ts + 272,
-	37:  __ccgo_ts + 275,
-	38:  __ccgo_ts + 278,
-	39:  __ccgo_ts + 281,
-	40:  __ccgo_ts + 284,
-	41:  __ccgo_ts + 287,
-	42:  __ccgo_ts + 291,
-	43:  __ccgo_ts + 304,
-	44:  __ccgo_ts + 311,
-	45:  __ccgo_ts + 316,
-	46:  __ccgo_ts + 322,
-	47:  __ccgo_ts + 330,
-	48:  __ccgo_ts + 342,
-	49:  __ccgo_ts + 364,
-	50:  __ccgo_ts + 384,
-	51:  __ccgo_ts + 408,
-	52:  __ccgo_ts + 437,
-	53:  __ccgo_ts + 464,
-	54:  __ccgo_ts + 489,
-	55:  __ccgo_ts + 512,
-	56:  __ccgo_ts + 531,
-	57:  __ccgo_ts + 543,
-	58:  __ccgo_ts + 548,
-	59:  __ccgo_ts + 558,
-	60:  __ccgo_ts + 564,
-	61:  __ccgo_ts + 576,
-	62:  __ccgo_ts + 586,
-	63:  __ccgo_ts + 597,
-	64:  __ccgo_ts + 608,
-	65:  __ccgo_ts + 622,
-	66:  __ccgo_ts + 634,
-	67:  __ccgo_ts + 643,
-	68:  __ccgo_ts + 654,
-	69:  __ccgo_ts + 671,
-	70:  __ccgo_ts + 678,
-	71:  __ccgo_ts + 684,
-	72:  __ccgo_ts + 696,
-	73:  __ccgo_ts + 706,
-	74:  __ccgo_ts + 719,
-	75:  __ccgo_ts + 726,
-	76:  __ccgo_ts + 739,
-	77:  __ccgo_ts + 750,
-	78:  __ccgo_ts + 764,
-	79:  __ccgo_ts + 776,
-	80:  __ccgo_ts + 782,
-	81:  __ccgo_ts + 792,
-	82:  __ccgo_ts + 805,
-	83:  __ccgo_ts + 814,
-	84:  __ccgo_ts + 820,
-	85:  __ccgo_ts + 831,
-	86:  __ccgo_ts + 842,
-	87:  __ccgo_ts + 851,
-	88:  __ccgo_ts + 866,
-	89:  __ccgo_ts + 882,
-	90:  __ccgo_ts + 892,
-	91:  __ccgo_ts + 901,
-	92:  __ccgo_ts + 915,
-	93:  __ccgo_ts + 929,
-	94:  __ccgo_ts + 950,
-	95:  __ccgo_ts + 969,
-	96:  __ccgo_ts + 988,
-	97:  __ccgo_ts + 1000,
-	98:  __ccgo_ts + 1010,
-	99:  __ccgo_ts + 1026,
-	100: __ccgo_ts + 1043,
-	101: __ccgo_ts + 1057,
-	102: __ccgo_ts + 1073,
-	103: __ccgo_ts + 1090,
-	104: __ccgo_ts + 1104,
-	105: __ccgo_ts + 1114,
-	106: __ccgo_ts + 1131,
-	107: __ccgo_ts + 1154,
-	108: __ccgo_ts + 1173,
-	109: __ccgo_ts + 1186,
-	110: __ccgo_ts + 1205,
-	111: __ccgo_ts + 1222,
-	112: __ccgo_ts + 1234,
-	113: __ccgo_ts + 1252,
-	114: __ccgo_ts + 1272,
-	115: __ccgo_ts + 1288,
-	116: __ccgo_ts + 1301,
-	117: __ccgo_ts + 1315,
-	118: __ccgo_ts + 1336,
-	119: __ccgo_ts + 1358,
-	120: __ccgo_ts + 1377,
+	0:   __ccgo_ts + 80,
+	1:   __ccgo_ts + 84,
+	2:   __ccgo_ts + 86,
+	3:   __ccgo_ts + 88,
+	4:   __ccgo_ts + 90,
+	5:   __ccgo_ts + 101,
+	6:   __ccgo_ts + 103,
+	7:   __ccgo_ts + 105,
+	8:   __ccgo_ts + 124,
+	9:   __ccgo_ts + 143,
+	10:  __ccgo_ts + 148,
+	11:  __ccgo_ts + 154,
+	12:  __ccgo_ts + 163,
+	13:  __ccgo_ts + 165,
+	14:  __ccgo_ts + 167,
+	15:  __ccgo_ts + 169,
+	16:  __ccgo_ts + 171,
+	17:  __ccgo_ts + 173,
+	18:  __ccgo_ts + 193,
+	19:  __ccgo_ts + 196,
+	20:  __ccgo_ts + 200,
+	21:  __ccgo_ts + 203,
+	22:  __ccgo_ts + 207,
+	23:  __ccgo_ts + 210,
+	24:  __ccgo_ts + 213,
+	25:  __ccgo_ts + 222,
+	26:  __ccgo_ts + 224,
+	27:  __ccgo_ts + 226,
+	28:  __ccgo_ts + 228,
+	29:  __ccgo_ts + 230,
+	30:  __ccgo_ts + 232,
+	31:  __ccgo_ts + 234,
+	32:  __ccgo_ts + 236,
+	33:  __ccgo_ts + 238,
+	34:  __ccgo_ts + 241,
+	35:  __ccgo_ts + 243,
+	36:  __ccgo_ts + 246,
+	37:  __ccgo_ts + 249,
+	38:  __ccgo_ts + 252,
+	39:  __ccgo_ts + 255,
+	40:  __ccgo_ts + 258,
+	41:  __ccgo_ts + 261,
+	42:  __ccgo_ts + 265,
+	43:  __ccgo_ts + 278,
+	44:  __ccgo_ts + 285,
+	45:  __ccgo_ts + 290,
+	46:  __ccgo_ts + 296,
+	47:  __ccgo_ts + 304,
+	48:  __ccgo_ts + 316,
+	49:  __ccgo_ts + 338,
+	50:  __ccgo_ts + 358,
+	51:  __ccgo_ts + 382,
+	52:  __ccgo_ts + 411,
+	53:  __ccgo_ts + 438,
+	54:  __ccgo_ts + 463,
+	55:  __ccgo_ts + 486,
+	56:  __ccgo_ts + 505,
+	57:  __ccgo_ts + 517,
+	58:  __ccgo_ts + 522,
+	59:  __ccgo_ts + 532,
+	60:  __ccgo_ts + 538,
+	61:  __ccgo_ts + 550,
+	62:  __ccgo_ts + 560,
+	63:  __ccgo_ts + 571,
+	64:  __ccgo_ts + 582,
+	65:  __ccgo_ts + 596,
+	66:  __ccgo_ts + 608,
+	67:  __ccgo_ts + 617,
+	68:  __ccgo_ts + 628,
+	69:  __ccgo_ts + 645,
+	70:  __ccgo_ts + 652,
+	71:  __ccgo_ts + 658,
+	72:  __ccgo_ts + 670,
+	73:  __ccgo_ts + 680,
+	74:  __ccgo_ts + 693,
+	75:  __ccgo_ts + 700,
+	76:  __ccgo_ts + 713,
+	77:  __ccgo_ts + 724,
+	78:  __ccgo_ts + 738,
+	79:  __ccgo_ts + 750,
+	80:  __ccgo_ts + 756,
+	81:  __ccgo_ts + 766,
+	82:  __ccgo_ts + 779,
+	83:  __ccgo_ts + 788,
+	84:  __ccgo_ts + 794,
+	85:  __ccgo_ts + 805,
+	86:  __ccgo_ts + 816,
+	87:  __ccgo_ts + 825,
+	88:  __ccgo_ts + 840,
+	89:  __ccgo_ts + 856,
+	90:  __ccgo_ts + 866,
+	91:  __ccgo_ts + 875,
+	92:  __ccgo_ts + 889,
+	93:  __ccgo_ts + 903,
+	94:  __ccgo_ts + 924,
+	95:  __ccgo_ts + 943,
+	96:  __ccgo_ts + 962,
+	97:  __ccgo_ts + 974,
+	98:  __ccgo_ts + 984,
+	99:  __ccgo_ts + 1000,
+	100: __ccgo_ts + 1017,
+	101: __ccgo_ts + 1031,
+	102: __ccgo_ts + 1047,
+	103: __ccgo_ts + 1064,
+	104: __ccgo_ts + 1078,
+	105: __ccgo_ts + 1088,
+	106: __ccgo_ts + 1105,
+	107: __ccgo_ts + 1128,
+	108: __ccgo_ts + 1147,
+	109: __ccgo_ts + 1160,
+	110: __ccgo_ts + 1179,
+	111: __ccgo_ts + 1196,
+	112: __ccgo_ts + 1208,
+	113: __ccgo_ts + 1226,
+	114: __ccgo_ts + 1246,
+	115: __ccgo_ts + 1262,
+	116: __ccgo_ts + 1275,
+	117: __ccgo_ts + 1289,
+	118: __ccgo_ts + 1310,
+	119: __ccgo_ts + 1332,
+	120: __ccgo_ts + 1351,
 }
 
 var ts_symbol_map = [121]TSSymbol{
@@ -2629,8 +2629,8 @@ const field_val = 2
 
 var ts_field_names = [3]uintptr{
 	0: libc.UintptrFromInt32(0),
-	1: __ccgo_ts + 1402,
-	2: __ccgo_ts + 1406,
+	1: __ccgo_ts + 1376,
+	2: __ccgo_ts + 1380,
 }
 
 var ts_field_map_slices = [2]TSMapSlice{
@@ -53628,7 +53628,7 @@ var language = TSLanguage{
 		Fsymbol_map: uintptr(unsafe.Pointer(&ts_external_scanner_symbol_map)),
 	},
 	Fprimary_state_ids: uintptr(unsafe.Pointer(&ts_primary_state_ids)),
-	Fname:              __ccgo_ts + 1410,
+	Fname:              __ccgo_ts + 1384,
 	Fmetadata: TSLanguageMetadata{
 		Fmajor_version: uint8(1),
 		Fminor_version: uint8(2),
@@ -53652,4 +53652,4 @@ func __ccgo_fp(f interface{}) uintptr {
 
 var __ccgo_ts = (*reflect.StringHeader)(unsafe.Pointer(&__ccgo_ts1)).Data
 
-var __ccgo_ts1 = "tmp != NULL\x00/tmp/grammar-gen-4214695230/combined.c\x00((scanner->context_stack)).data != NULL\x00size == length\x00end\x00=\x00{\x00}\x00identifier\x00(\x00)\x00numeric_lit_token1\x00numeric_lit_token2\x00true\x00false\x00null_lit\x00,\x00[\x00]\x00:\x00.\x00legacy_index_token1\x00.*\x00[*]\x00=>\x00for\x00in\x00if\x00ellipsis\x00?\x00-\x00!\x00*\x00/\x00%\x00+\x00>\x00>=\x00<\x00<=\x00==\x00!=\x00&&\x00||\x00<<\x00<<-\x00strip_marker\x00endfor\x00else\x00endif\x00comment\x00_whitespace\x00quoted_template_start\x00quoted_template_end\x00_template_literal_chunk\x00template_interpolation_start\x00template_interpolation_end\x00template_directive_start\x00template_directive_end\x00heredoc_identifier\x00config_file\x00body\x00attribute\x00block\x00block_start\x00block_end\x00expression\x00_expr_term\x00literal_value\x00numeric_lit\x00bool_lit\x00string_lit\x00collection_value\x00_comma\x00tuple\x00tuple_start\x00tuple_end\x00_tuple_elems\x00object\x00object_start\x00object_end\x00_object_elems\x00object_elem\x00index\x00new_index\x00legacy_index\x00get_attr\x00splat\x00attr_splat\x00full_splat\x00for_expr\x00for_tuple_expr\x00for_object_expr\x00for_intro\x00for_cond\x00variable_expr\x00function_call\x00_function_call_start\x00_function_call_end\x00function_arguments\x00conditional\x00operation\x00unary_operation\x00binary_operation\x00template_expr\x00quoted_template\x00heredoc_template\x00heredoc_start\x00_template\x00template_literal\x00template_interpolation\x00template_directive\x00template_for\x00template_for_start\x00template_for_end\x00template_if\x00template_if_intro\x00template_else_intro\x00template_if_end\x00body_repeat1\x00block_repeat1\x00_tuple_elems_repeat1\x00_object_elems_repeat1\x00attr_splat_repeat1\x00template_literal_repeat1\x00key\x00val\x00hcl\x00"
+var __ccgo_ts1 = "tmp != NULL\x00./combined.c\x00((scanner->context_stack)).data != NULL\x00size == length\x00end\x00=\x00{\x00}\x00identifier\x00(\x00)\x00numeric_lit_token1\x00numeric_lit_token2\x00true\x00false\x00null_lit\x00,\x00[\x00]\x00:\x00.\x00legacy_index_token1\x00.*\x00[*]\x00=>\x00for\x00in\x00if\x00ellipsis\x00?\x00-\x00!\x00*\x00/\x00%\x00+\x00>\x00>=\x00<\x00<=\x00==\x00!=\x00&&\x00||\x00<<\x00<<-\x00strip_marker\x00endfor\x00else\x00endif\x00comment\x00_whitespace\x00quoted_template_start\x00quoted_template_end\x00_template_literal_chunk\x00template_interpolation_start\x00template_interpolation_end\x00template_directive_start\x00template_directive_end\x00heredoc_identifier\x00config_file\x00body\x00attribute\x00block\x00block_start\x00block_end\x00expression\x00_expr_term\x00literal_value\x00numeric_lit\x00bool_lit\x00string_lit\x00collection_value\x00_comma\x00tuple\x00tuple_start\x00tuple_end\x00_tuple_elems\x00object\x00object_start\x00object_end\x00_object_elems\x00object_elem\x00index\x00new_index\x00legacy_index\x00get_attr\x00splat\x00attr_splat\x00full_splat\x00for_expr\x00for_tuple_expr\x00for_object_expr\x00for_intro\x00for_cond\x00variable_expr\x00function_call\x00_function_call_start\x00_function_call_end\x00function_arguments\x00conditional\x00operation\x00unary_operation\x00binary_operation\x00template_expr\x00quoted_template\x00heredoc_template\x00heredoc_start\x00_template\x00template_literal\x00template_interpolation\x00template_directive\x00template_for\x00template_for_start\x00template_for_end\x00template_if\x00template_if_intro\x00template_else_intro\x00template_if_end\x00body_repeat1\x00block_repeat1\x00_tuple_elems_repeat1\x00_object_elems_repeat1\x00attr_splat_repeat1\x00template_literal_repeat1\x00key\x00val\x00hcl\x00"
