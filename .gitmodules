@@ -63,3 +63,6 @@
 [submodule "third-party/tree-sitter-regex"]
 	path = third-party/tree-sitter-regex
 	url = https://github.com/tree-sitter/tree-sitter-regex
+[submodule "third-party/tree-sitter-nix"]
+	path = third-party/tree-sitter-nix
+	url = https://github.com/nix-community/tree-sitter-nix
