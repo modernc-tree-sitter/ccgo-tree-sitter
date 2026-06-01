@@ -1,4 +1,4 @@
-// Code generated for linux/amd64 by 'ccgo /tmp/grammar-gen-2537550558/preprocessed.c -o /tmp/grammar-gen-2537550558/grammar.go', DO NOT EDIT.
+// Code generated for linux/amd64 by 'ccgo preprocessed.c -o grammar.go', DO NOT EDIT.
 
 //go:build linux && amd64
 
@@ -2351,9 +2351,9 @@ func scan_raw_text(tls *libc.TLS, scanner uintptr, lexer uintptr) (r uint8) {
 		Fsize     uint32_t
 		Fcapacity uint32_t
 	})(unsafe.Pointer(scanner)).Fsize-uint32(1))*24)).Ftype_token == int32(SCRIPT) {
-		v1 = __ccgo_ts + 197
+		v1 = __ccgo_ts + 171
 	} else {
-		v1 = __ccgo_ts + 206
+		v1 = __ccgo_ts + 180
 	}
 	end_delimiter = v1
 	delimiter_index = uint32(0)
@@ -2738,47 +2738,47 @@ const aux_sym_document_repeat1 = 39
 const aux_sym_start_tag_repeat1 = 40
 
 var ts_symbol_names = [41]uintptr{
-	0:  __ccgo_ts + 214,
-	1:  __ccgo_ts + 218,
-	2:  __ccgo_ts + 221,
-	3:  __ccgo_ts + 236,
-	4:  __ccgo_ts + 238,
-	5:  __ccgo_ts + 246,
-	6:  __ccgo_ts + 248,
-	7:  __ccgo_ts + 251,
-	8:  __ccgo_ts + 254,
-	9:  __ccgo_ts + 256,
-	10: __ccgo_ts + 271,
-	11: __ccgo_ts + 287,
-	12: __ccgo_ts + 294,
-	13: __ccgo_ts + 271,
-	14: __ccgo_ts + 296,
-	15: __ccgo_ts + 271,
-	16: __ccgo_ts + 298,
-	17: __ccgo_ts + 303,
-	18: __ccgo_ts + 303,
-	19: __ccgo_ts + 303,
-	20: __ccgo_ts + 303,
-	21: __ccgo_ts + 312,
-	22: __ccgo_ts + 335,
-	23: __ccgo_ts + 353,
-	24: __ccgo_ts + 362,
-	25: __ccgo_ts + 370,
-	26: __ccgo_ts + 238,
-	27: __ccgo_ts + 379,
-	28: __ccgo_ts + 385,
-	29: __ccgo_ts + 393,
-	30: __ccgo_ts + 408,
-	31: __ccgo_ts + 422,
-	32: __ccgo_ts + 422,
-	33: __ccgo_ts + 422,
-	34: __ccgo_ts + 432,
-	35: __ccgo_ts + 449,
-	36: __ccgo_ts + 457,
-	37: __ccgo_ts + 475,
-	38: __ccgo_ts + 485,
-	39: __ccgo_ts + 508,
-	40: __ccgo_ts + 525,
+	0:  __ccgo_ts + 188,
+	1:  __ccgo_ts + 192,
+	2:  __ccgo_ts + 195,
+	3:  __ccgo_ts + 210,
+	4:  __ccgo_ts + 212,
+	5:  __ccgo_ts + 220,
+	6:  __ccgo_ts + 222,
+	7:  __ccgo_ts + 225,
+	8:  __ccgo_ts + 228,
+	9:  __ccgo_ts + 230,
+	10: __ccgo_ts + 245,
+	11: __ccgo_ts + 261,
+	12: __ccgo_ts + 268,
+	13: __ccgo_ts + 245,
+	14: __ccgo_ts + 270,
+	15: __ccgo_ts + 245,
+	16: __ccgo_ts + 272,
+	17: __ccgo_ts + 277,
+	18: __ccgo_ts + 277,
+	19: __ccgo_ts + 277,
+	20: __ccgo_ts + 277,
+	21: __ccgo_ts + 286,
+	22: __ccgo_ts + 309,
+	23: __ccgo_ts + 327,
+	24: __ccgo_ts + 336,
+	25: __ccgo_ts + 344,
+	26: __ccgo_ts + 212,
+	27: __ccgo_ts + 353,
+	28: __ccgo_ts + 359,
+	29: __ccgo_ts + 367,
+	30: __ccgo_ts + 382,
+	31: __ccgo_ts + 396,
+	32: __ccgo_ts + 396,
+	33: __ccgo_ts + 396,
+	34: __ccgo_ts + 406,
+	35: __ccgo_ts + 423,
+	36: __ccgo_ts + 431,
+	37: __ccgo_ts + 449,
+	38: __ccgo_ts + 459,
+	39: __ccgo_ts + 482,
+	40: __ccgo_ts + 499,
 }
 
 var ts_symbol_map = [41]TSSymbol{
@@ -9237,4 +9237,4 @@ func __ccgo_fp(f interface{}) uintptr {
 
 var __ccgo_ts = (*reflect.StringHeader)(unsafe.Pointer(&__ccgo_ts1)).Data
 
-var __ccgo_ts1 = "index < self->size\x00third-party/tree-sitter-html/src/tree_sitter/array.h\x00old_end <= self->size\x00(uint32_t)((&scanner->tags)->size - 1) < (&scanner->tags)->size\x00/tmp/grammar-gen-2537550558/combined.c\x00</SCRIPT\x00</STYLE\x00end\x00<!\x00doctype_token1\x00>\x00doctype\x00<\x00/>\x00</\x00=\x00attribute_name\x00attribute_value\x00entity\x00'\x00\"\x00text\x00tag_name\x00erroneous_end_tag_name\x00_implicit_end_tag\x00raw_text\x00comment\x00document\x00_node\x00element\x00script_element\x00style_element\x00start_tag\x00self_closing_tag\x00end_tag\x00erroneous_end_tag\x00attribute\x00quoted_attribute_value\x00document_repeat1\x00start_tag_repeat1\x00"
+var __ccgo_ts1 = "index < self->size\x00third-party/tree-sitter-html/src/tree_sitter/array.h\x00old_end <= self->size\x00(uint32_t)((&scanner->tags)->size - 1) < (&scanner->tags)->size\x00./combined.c\x00</SCRIPT\x00</STYLE\x00end\x00<!\x00doctype_token1\x00>\x00doctype\x00<\x00/>\x00</\x00=\x00attribute_name\x00attribute_value\x00entity\x00'\x00\"\x00text\x00tag_name\x00erroneous_end_tag_name\x00_implicit_end_tag\x00raw_text\x00comment\x00document\x00_node\x00element\x00script_element\x00style_element\x00start_tag\x00self_closing_tag\x00end_tag\x00erroneous_end_tag\x00attribute\x00quoted_attribute_value\x00document_repeat1\x00start_tag_repeat1\x00"
