@@ -1,4 +1,4 @@
-// Code generated for linux/amd64 by 'ccgo /tmp/grammar-gen-3854229482/preprocessed.c -o /tmp/grammar-gen-3854229482/grammar.go', DO NOT EDIT.
+// Code generated for linux/amd64 by 'ccgo /tmp/grammar-gen-1744066753/preprocessed.c -o /tmp/grammar-gen-1744066753/grammar.go', DO NOT EDIT.
 
 //go:build linux && amd64
 
@@ -30624,8 +30624,7 @@ var language = TSLanguage{
 	Fsupertype_map_slices:  uintptr(unsafe.Pointer(&ts_supertype_map_slices)),
 	Fsupertype_map_entries: uintptr(unsafe.Pointer(&ts_supertype_map_entries)),
 	Fmetadata: TSLanguageMetadata{
-		Fminor_version: uint8(4),
-		Fpatch_version: uint8(1),
+		Fminor_version: uint8(5),
 	},
 }
 
