@@ -10,6 +10,9 @@ on:
 
 jobs:
   codegen:
+    concurrency:
+      group: codegen-${{ github.workflow }}
+      cancel-in-progress: true
     runs-on: ubuntu-latest
     permissions:
       contents: write
