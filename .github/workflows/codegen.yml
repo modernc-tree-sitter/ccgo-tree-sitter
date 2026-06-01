@@ -33,7 +33,7 @@ jobs:
           sudo apt-get install -y gcc
 
       - name: Run Go Tests
-        run: go test ./...
+        run: go test -v ./...
 
       - name: Codegen
         run: mise run codegen
