@@ -1,4 +1,4 @@
-name: Codegen and Test
+name: Auto Release
 
 on:
   push:
@@ -9,9 +9,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  codegen:
+  autorelease:
     concurrency:
-      group: codegen-${{ github.workflow }}
+      group: autorelease-${{ github.workflow }}
       cancel-in-progress: true
     runs-on: ubuntu-latest
     permissions:
@@ -32,18 +32,35 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y gcc
 
-      - name: Run Go Tests
-        run: go test -v ./...
+      - name: Install
+        run: mise run install
 
       - name: Codegen
         run: mise run codegen
 
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@c0f553fe549906ede9cf27b5156039d195d2ece0 # v8
+      - name: PR if Difference
+        uses: peter-evans/create-pull-request@aa523f9db61947bd5e06efd77870ef065eae32cc # v8
         with:
+          base: main
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "chore: update generated grammars"
           title: "Update generated grammars"
           body: "Automated update of tree-sitter grammars generated code."
           branch: "codegen-update"
           delete-branch: true
+
+      - name: CI
+        run: mise run ci
+
+      - name: Release
+        if: github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release create ${{ github.ref_name }} --generate-notes
+
+      - name: Artifacts
+        if: github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/')
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v4
+        with:
+          name: artifacts
+          path: ./
