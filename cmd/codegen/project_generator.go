@@ -7,13 +7,17 @@ import (
 	"strings"
 )
 
-// ProjectGenerator generates a complete Go project with CLI
+// ProjectGenerator generates a complete Go project structure including a CLI utility.
+// It scaffolds the necessary directories and entrypoints to consume the transpiled grammars.
 type ProjectGenerator struct {
+	// OutputDir is the destination directory for the generated project.
 	OutputDir string
-	Grammars  []string
+	// Grammars is a list of grammar names to include in the generated CLI support.
+	Grammars []string
 }
 
-// Generate creates the complete project structure
+// Generate orchestrates the creation of the complete project structure,
+// currently focusing on generating the CLI parsing utility.
 func (pg *ProjectGenerator) Generate() error {
 
 	// Create CLI
@@ -24,6 +28,9 @@ func (pg *ProjectGenerator) Generate() error {
 	return nil
 }
 
+// generateCLI scaffolds a command-line tool in the target output directory
+// that can parse files using any of the available transpiled grammars, automatically
+// matching the grammar to the file extension.
 func (pg *ProjectGenerator) generateCLI() error {
 	cmdDir := filepath.Join(pg.OutputDir, "cmd", "parse")
 	if err := os.MkdirAll(cmdDir, 0755); err != nil {

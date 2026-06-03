@@ -16,12 +16,18 @@ import (
 	"modernc.org/ccgo/v4/lib"
 )
 
-// Transpiler handles C to Go transpilation using ccgo
+// Transpiler handles C to Go transpilation using ccgo.
+// It orchestrates the process of transpiling tree-sitter C code into Go,
+// setting up isolated execution environments to prevent ccgo state pollution.
 type Transpiler struct {
+	// TreeSitterPath is the root directory of the tree-sitter source.
 	TreeSitterPath string
-	GOOS           string
-	GOARCH         string
-	KeepTemp       bool
+	// GOOS is the target operating system for generated Go code.
+	GOOS string
+	// GOARCH is the target architecture for generated Go code.
+	GOARCH string
+	// KeepTemp specifies whether to leave intermediate C and go files intact for debugging.
+	KeepTemp bool
 }
 
 const (
@@ -34,7 +40,10 @@ var (
 	libcVersionErr  error
 )
 
-// TranspileCore transpiles the tree-sitter core library
+// TranspileCore transpiles the tree-sitter core library into the target directory.
+// The flow consists of preprocessing C headers, generating a synthetic go.mod to satisfy
+// ccgo dependencies, executing ccgo on the unified C files, and finally post-processing
+// to fix deterministic paths and perform AST patching for CGO-free pointers.
 func (t *Transpiler) TranspileCore(outputDir string) error {
 	tmpDir, err := t.prepareWorkDir("tree-sitter-core", "")
 	if err != nil {
@@ -92,7 +101,10 @@ func (t *Transpiler) TranspileCore(outputDir string) error {
 	return nil
 }
 
-// TranspileGrammar transpiles a tree-sitter grammar
+// TranspileGrammar transpiles a tree-sitter grammar into the target directory.
+// It parses the grammar source directory, optionally merges a scanner implementation
+// if present, delegates to ccgo for transpilation, and generates an API wrapper
+// to expose the grammar functions cleanly.
 func (t *Transpiler) TranspileGrammar(grammarPath, outputDir string) error {
 	// Get the clean grammar name (e.g., "lua" from "tree-sitter-lua")
 	grammarName := extractGrammarName(grammarPath)
@@ -174,6 +186,8 @@ func (t *Transpiler) TranspileGrammar(grammarPath, outputDir string) error {
 	return nil
 }
 
+// combineFiles sequentially concatenates multiple C input source paths
+// into a single output file to supply ccgo with unified compilation units.
 func combineFiles(inputs []string, output string) error {
 	out, err := os.Create(output)
 	if err != nil {
@@ -317,7 +331,10 @@ func (t *Transpiler) runCcgo(workDir, inputPath, outputPath string) error {
 	return nil
 }
 
-// runCcgoIsolated runs ccgo with completely isolated state
+// runCcgoIsolated runs ccgo with completely isolated state.
+// Because ccgo pollutes the global flag.CommandLine and os.Args during processing,
+// running multiple transpilation tasks within the same process leads to panics
+// and argument bleed. This function safely restores the global state upon exit.
 func runCcgoIsolated(goos, goarch string, args []string) error {
 	// Save state
 	oldArgs := os.Args
@@ -403,6 +420,9 @@ func currentLibcVersion() (string, error) {
 	return libcVersion, nil
 }
 
+// postProcess normalizes generated paths for deterministic cross-run outputs,
+// and applies structural patches to pointer dereferencing in the tree-sitter AST
+// to prevent panics when traversing null child relationships natively in Go.
 func postProcess(goCode, workDir string) string {
 	// Normalize temp workdir path so regenerated code is deterministic across runs.
 	workDirSlash := filepath.ToSlash(workDir)
