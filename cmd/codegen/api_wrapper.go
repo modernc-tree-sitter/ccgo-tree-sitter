@@ -6,14 +6,6 @@ import (
 	"path/filepath"
 )
 
-func getModuleName(outputDir string) string {
-	moduleName := filepath.Base(outputDir)
-	if moduleName == "." {
-		moduleName = "github.com/lucasew/ccgo-tree-sitter"
-	}
-	return moduleName
-}
-
 var coreAPITemplate = `package grammar
 
 import (
@@ -183,13 +175,20 @@ func (n *Node) PrintTree() string {
 }
 `
 
-// GenerateAPIWrapper creates API wrapper files for core and grammars (without external scanner)
-func GenerateAPIWrapper(outputDir, grammarName string) error {
+func writeCoreAPI(outputDir string) error {
 	coreAPIPath := filepath.Join(outputDir, "api.go")
 	if _, err := os.Stat(coreAPIPath); os.IsNotExist(err) {
 		if err := os.WriteFile(coreAPIPath, []byte(coreAPITemplate), 0644); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+// GenerateAPIWrapper creates API wrapper files for core and grammars (without external scanner)
+func GenerateAPIWrapper(outputDir, grammarName string) error {
+	if err := writeCoreAPI(outputDir); err != nil {
+		return err
 	}
 
 	grammarAPI := fmt.Sprintf(`package grammar_%s
@@ -216,11 +215,8 @@ func init() {
 
 // GenerateAPIWrapperWithScanner creates API wrapper with external scanner support
 func GenerateAPIWrapperWithScanner(outputDir, grammarName string) error {
-	coreAPIPath := filepath.Join(outputDir, "api.go")
-	if _, err := os.Stat(coreAPIPath); os.IsNotExist(err) {
-		if err := os.WriteFile(coreAPIPath, []byte(coreAPITemplate), 0644); err != nil {
-			return err
-		}
+	if err := writeCoreAPI(outputDir); err != nil {
+		return err
 	}
 
 	grammarAPI := fmt.Sprintf(`package grammar_%s

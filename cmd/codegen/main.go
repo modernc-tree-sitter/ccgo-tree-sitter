@@ -12,6 +12,7 @@ import (
 	"strings"
 
 	"github.com/spf13/cobra"
+	"github.com/lucasew/ccgo-tree-sitter/internal/reporter"
 )
 
 var (
@@ -30,6 +31,7 @@ var rootCmd = &cobra.Command{
 This tool uses ccgo to convert tree-sitter's C implementation into Go code,
 allowing you to use tree-sitter parsers natively in Go without CGO.`,
 	RunE: run,
+	SilenceErrors: true,
 }
 
 func env(key, defaultValue string) string {
@@ -47,6 +49,7 @@ func init() {
 
 func main() {
 	if err := rootCmd.Execute(); err != nil {
+		reporter.HandleError("command execution failed", err)
 		os.Exit(1)
 	}
 }
@@ -78,7 +81,7 @@ func run(cmd *cobra.Command, args []string) error {
 	if summaryPath := os.Getenv("GITHUB_STEP_SUMMARY"); summaryPath != "" {
 		summaryFile, err := os.OpenFile(summaryPath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 		if err != nil {
-			slog.Warn("failed to open GITHUB_STEP_SUMMARY", "path", summaryPath, "error", err)
+			reporter.HandleError("failed to open GITHUB_STEP_SUMMARY", err, "path", summaryPath)
 		} else {
 			summaryWriter = summaryFile
 			defer summaryFile.Close()
@@ -95,7 +98,7 @@ func run(cmd *cobra.Command, args []string) error {
 		grammarName := extractGrammarName(grammarPath)
 		slog.Info("transpiling grammar", "index", i+1, "total", len(grammars), "grammar", grammarName, "path", grammarPath)
 		if err := transpiler.TranspileGrammar(grammarPath, OUTPUT_DIR+"/grammar"); err != nil {
-			slog.Warn("failed to transpile grammar, skipping", "grammar", grammarName, "path", grammarPath, "error", err)
+			reporter.HandleError("failed to transpile grammar, skipping", err, "grammar", grammarName, "path", grammarPath)
 			fmt.Fprintf(summaryWriter, "- `%s/%s` `%s`: ❌\n", targetGOOS, targetGOARCH, grammarName)
 			continue
 		}
