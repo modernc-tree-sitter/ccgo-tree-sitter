@@ -406,13 +406,26 @@ func currentLibcVersion() (string, error) {
 	return libcVersion, nil
 }
 
-var (
-	reTempDir            = regexp.MustCompile(`/tmp/(grammar-gen|tree-sitter-gen)-\d+`)
-	reAssert             = regexp.MustCompile(`libc\.X__assert_fail\(tls, ([^,]*), ([^,]*), uint32\((\d+)\)`)
-	reNegativePadding    = regexp.MustCompile(`\t+_ \[-\d+\]byte\n`)
-	reDebugPrintln1      = regexp.MustCompile(`println\(__ccgo_ts \+ \d+\)[\s;]*`)
-	reDebugPrintln2      = regexp.MustCompile(`println\(__ccgo_ts\+\d+, __ccgo_ts\+\d+\)[\s;]*`)
-	reSubtreeChildCount  = regexp.MustCompile(`func ts_subtree_child_count\(tls \*libc\.TLS, _self Subtree\) \(r uint32_t\) \{
+func postProcess(goCode, workDir string) string {
+	// Normalize temp workdir path so regenerated code is deterministic across runs.
+	workDirSlash := filepath.ToSlash(workDir)
+	goCode = strings.ReplaceAll(goCode, workDirSlash+"/", "./")
+	goCode = strings.ReplaceAll(goCode, workDirSlash, ".")
+	goCode = regexp.MustCompile(`/tmp/(grammar-gen|tree-sitter-gen)-\d+`).ReplaceAllString(goCode, "/tmp/$1")
+
+	// Fix assert types
+	goCode = regexp.MustCompile(`libc\.X__assert_fail\(tls, ([^,]*), ([^,]*), uint32\((\d+)\)`).
+		ReplaceAllString(goCode, `libc.X__assert_fail(tls, $1, $2, int32($3)`)
+
+	// Remove negative padding (any number of tabs)
+	goCode = regexp.MustCompile(`\t+_ \[-\d+\]byte\n`).ReplaceAllString(goCode, "")
+
+	// Remove debug println statements from ccgo
+	goCode = regexp.MustCompile(`println\(__ccgo_ts \+ \d+\)[\s;]*`).ReplaceAllString(goCode, "")
+	goCode = regexp.MustCompile(`println\(__ccgo_ts\+\d+, __ccgo_ts\+\d+\)[\s;]*`).ReplaceAllString(goCode, "")
+
+	// Patch ts_subtree_child_count to check for NULL pointer before dereferencing
+	goCode = regexp.MustCompile(`func ts_subtree_child_count\(tls \*libc\.TLS, _self Subtree\) \(r uint32_t\) \{
 	bp := tls\.Alloc\(16\)
 	defer tls\.Free\(16\)
 	\*\(\*Subtree\)\(unsafe\.Pointer\(bp\)\) = _self
@@ -424,64 +437,7 @@ var (
 		v1 = \(\*SubtreeHeapData\)\(unsafe\.Pointer\(\*\(\*uintptr\)\(unsafe\.Pointer\(bp\)\)\)\)\.Fchild_count
 	\}
 	return v1
-\}`)
-	reSubtreeExtra       = regexp.MustCompile(`func ts_subtree_extra\(tls \*libc\.TLS, _self Subtree\) \(r uint8\) \{
-	bp := tls\.Alloc\(16\)
-	defer tls\.Free\(16\)
-	\*\(\*Subtree\)\(unsafe\.Pointer\(bp\)\) = _self
-	var v1 int32
-	_ = v1
-	if int32\(\*\(\*uint8\)\(unsafe\.Pointer\(bp \+ 0\)\)&0x1>>0\) != 0 \{
-		v1 = int32\(\*\(\*uint8\)\(unsafe\.Pointer\(bp \+ 0\)\) & 0x8 >> 3\)
-	\} else \{
-		v1 = int32\(\*\(\*uint8\)\(unsafe\.Pointer\(\*\(\*uintptr\)\(unsafe\.Pointer\(bp\)\) \+ 44\)\) & 0x4 >> 2\)
-	\}
-	return libc\.Uint8FromInt32\(libc\.BoolInt32\(v1 != 0\)\)
-\}`)
-	reSubtreeSymbol      = regexp.MustCompile(`func ts_subtree_symbol\(tls \*libc\.TLS, _self Subtree\) \(r TSSymbol\) \{
-	bp := tls\.Alloc\(16\)
-	defer tls\.Free\(16\)
-	\*\(\*Subtree\)\(unsafe\.Pointer\(bp\)\) = _self
-	var v1 int32
-	_ = v1
-	if int32\(\*\(\*uint8\)\(unsafe\.Pointer\(bp \+ 0\)\)&0x1>>0\) != 0 \{
-		v1 = libc\.Int32FromUint8\(\(\*\(\*SubtreeInlineData\)\(unsafe\.Pointer\(bp\)\)\)\.Fsymbol\)
-	\} else \{
-		v1 = libc\.Int32FromUint16\(\(\*SubtreeHeapData\)\(unsafe\.Pointer\(\*\(\*uintptr\)\(unsafe\.Pointer\(bp\)\)\)\)\.Fsymbol\)
-	\}
-	return libc\.Uint16FromInt32\(v1\)
-\}`)
-	reSubtreeVisible     = regexp.MustCompile(`func ts_subtree_visible\(tls \*libc\.TLS, _self Subtree\) \(r uint8\) \{
-	bp := tls\.Alloc\(16\)
-	defer tls\.Free\(16\)
-	\*\(\*Subtree\)\(unsafe\.Pointer\(bp\)\) = _self
-	var v1 int32
-	_ = v1
-	if int32\(\*\(\*uint8\)\(unsafe\.Pointer\(bp \+ 0\)\)&0x1>>0\) != 0 \{
-		v1 = int32\(\*\(\*uint8\)\(unsafe\.Pointer\(bp \+ 0\)\) & 0x2 >> 1\)
-	\} else \{
-		v1 = int32\(\*\(\*uint8\)\(unsafe\.Pointer\(\*\(\*uintptr\)\(unsafe\.Pointer\(bp\)\) \+ 44\)\) & 0x1 >> 0\)
-	\}
-	return libc\.Uint8FromInt32\(libc\.BoolInt32\(v1 != 0\)\)
-\}`)
-	reSubtreeNamed       = regexp.MustCompile(`func ts_subtree_named\(tls \*libc\.TLS, _self Subtree\) \(r uint8\) \{
-	bp := tls\.Alloc\(16\)
-	defer tls\.Free\(16\)
-	\*\(\*Subtree\)\(unsafe\.Pointer\(bp\)\) = _self
-	var v1 int32
-	_ = v1
-	if int32\(\*\(\*uint8\)\(unsafe\.Pointer\(bp \+ 0\)\)&0x1>>0\) != 0 \{
-		v1 = int32\(\*\(\*uint8\)\(unsafe\.Pointer\(bp \+ 0\)\) & 0x4 >> 2\)
-	\} else \{
-		v1 = int32\(\*\(\*uint8\)\(unsafe\.Pointer\(\*\(\*uintptr\)\(unsafe\.Pointer\(bp\)\) \+ 44\)\) & 0x2 >> 1\)
-	\}
-	return libc\.Uint8FromInt32\(libc\.BoolInt32\(v1 != 0\)\)
-\}`)
-)
-
-const (
-	replaceAssert = `libc.X__assert_fail(tls, $1, $2, int32($3)`
-	replaceSubtreeChildCount = `func ts_subtree_child_count(tls *libc.TLS, _self Subtree) (r uint32_t) {
+\}`).ReplaceAllString(goCode, `func ts_subtree_child_count(tls *libc.TLS, _self Subtree) (r uint32_t) {
 	// NULL check - if the subtree pointer is 0, return 0
 	ptr := *(*uintptr)(unsafe.Pointer(&_self))
 	if ptr == 0 {
@@ -498,8 +454,22 @@ const (
 		v1 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)))).Fchild_count
 	}
 	return v1
-}`
-	replaceSubtreeExtra = `func ts_subtree_extra(tls *libc.TLS, _self Subtree) (r uint8) {
+}`)
+
+	// Patch ts_subtree_extra to check for NULL pointer
+	goCode = regexp.MustCompile(`func ts_subtree_extra\(tls \*libc\.TLS, _self Subtree\) \(r uint8\) \{
+	bp := tls\.Alloc\(16\)
+	defer tls\.Free\(16\)
+	\*\(\*Subtree\)\(unsafe\.Pointer\(bp\)\) = _self
+	var v1 int32
+	_ = v1
+	if int32\(\*\(\*uint8\)\(unsafe\.Pointer\(bp \+ 0\)\)&0x1>>0\) != 0 \{
+		v1 = int32\(\*\(\*uint8\)\(unsafe\.Pointer\(bp \+ 0\)\) & 0x8 >> 3\)
+	\} else \{
+		v1 = int32\(\*\(\*uint8\)\(unsafe\.Pointer\(\*\(\*uintptr\)\(unsafe\.Pointer\(bp\)\) \+ 44\)\) & 0x4 >> 2\)
+	\}
+	return libc\.Uint8FromInt32\(libc\.BoolInt32\(v1 != 0\)\)
+\}`).ReplaceAllString(goCode, `func ts_subtree_extra(tls *libc.TLS, _self Subtree) (r uint8) {
 	// NULL check
 	ptr := *(*uintptr)(unsafe.Pointer(&_self))
 	if ptr == 0 {
@@ -516,8 +486,22 @@ const (
 		v1 = int32(*(*uint8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)) + 44)) & 0x4 >> 2)
 	}
 	return libc.Uint8FromInt32(libc.BoolInt32(v1 != 0))
-}`
-	replaceSubtreeSymbol = `func ts_subtree_symbol(tls *libc.TLS, _self Subtree) (r TSSymbol) {
+}`)
+
+	// Patch ts_subtree_symbol to check for NULL pointer
+	goCode = regexp.MustCompile(`func ts_subtree_symbol\(tls \*libc\.TLS, _self Subtree\) \(r TSSymbol\) \{
+	bp := tls\.Alloc\(16\)
+	defer tls\.Free\(16\)
+	\*\(\*Subtree\)\(unsafe\.Pointer\(bp\)\) = _self
+	var v1 int32
+	_ = v1
+	if int32\(\*\(\*uint8\)\(unsafe\.Pointer\(bp \+ 0\)\)&0x1>>0\) != 0 \{
+		v1 = libc\.Int32FromUint8\(\(\*\(\*SubtreeInlineData\)\(unsafe\.Pointer\(bp\)\)\)\.Fsymbol\)
+	\} else \{
+		v1 = libc\.Int32FromUint16\(\(\*SubtreeHeapData\)\(unsafe\.Pointer\(\*\(\*uintptr\)\(unsafe\.Pointer\(bp\)\)\)\)\.Fsymbol\)
+	\}
+	return libc\.Uint16FromInt32\(v1\)
+\}`).ReplaceAllString(goCode, `func ts_subtree_symbol(tls *libc.TLS, _self Subtree) (r TSSymbol) {
 	// NULL check
 	ptr := *(*uintptr)(unsafe.Pointer(&_self))
 	if ptr == 0 {
@@ -534,8 +518,22 @@ const (
 		v1 = libc.Int32FromUint16((*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)))).Fsymbol)
 	}
 	return libc.Uint16FromInt32(v1)
-}`
-	replaceSubtreeVisible = `func ts_subtree_visible(tls *libc.TLS, _self Subtree) (r uint8) {
+}`)
+
+	// Patch ts_subtree_visible to check for NULL pointer
+	goCode = regexp.MustCompile(`func ts_subtree_visible\(tls \*libc\.TLS, _self Subtree\) \(r uint8\) \{
+	bp := tls\.Alloc\(16\)
+	defer tls\.Free\(16\)
+	\*\(\*Subtree\)\(unsafe\.Pointer\(bp\)\) = _self
+	var v1 int32
+	_ = v1
+	if int32\(\*\(\*uint8\)\(unsafe\.Pointer\(bp \+ 0\)\)&0x1>>0\) != 0 \{
+		v1 = int32\(\*\(\*uint8\)\(unsafe\.Pointer\(bp \+ 0\)\) & 0x2 >> 1\)
+	\} else \{
+		v1 = int32\(\*\(\*uint8\)\(unsafe\.Pointer\(\*\(\*uintptr\)\(unsafe\.Pointer\(bp\)\) \+ 44\)\) & 0x1 >> 0\)
+	\}
+	return libc\.Uint8FromInt32\(libc\.BoolInt32\(v1 != 0\)\)
+\}`).ReplaceAllString(goCode, `func ts_subtree_visible(tls *libc.TLS, _self Subtree) (r uint8) {
 	// NULL check
 	ptr := *(*uintptr)(unsafe.Pointer(&_self))
 	if ptr == 0 {
@@ -552,8 +550,22 @@ const (
 		v1 = int32(*(*uint8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)) + 44)) & 0x1 >> 0)
 	}
 	return libc.Uint8FromInt32(libc.BoolInt32(v1 != 0))
-}`
-	replaceSubtreeNamed = `func ts_subtree_named(tls *libc.TLS, _self Subtree) (r uint8) {
+}`)
+
+	// Patch ts_subtree_named to check for NULL pointer
+	goCode = regexp.MustCompile(`func ts_subtree_named\(tls \*libc\.TLS, _self Subtree\) \(r uint8\) \{
+	bp := tls\.Alloc\(16\)
+	defer tls\.Free\(16\)
+	\*\(\*Subtree\)\(unsafe\.Pointer\(bp\)\) = _self
+	var v1 int32
+	_ = v1
+	if int32\(\*\(\*uint8\)\(unsafe\.Pointer\(bp \+ 0\)\)&0x1>>0\) != 0 \{
+		v1 = int32\(\*\(\*uint8\)\(unsafe\.Pointer\(bp \+ 0\)\) & 0x4 >> 2\)
+	\} else \{
+		v1 = int32\(\*\(\*uint8\)\(unsafe\.Pointer\(\*\(\*uintptr\)\(unsafe\.Pointer\(bp\)\) \+ 44\)\) & 0x2 >> 1\)
+	\}
+	return libc\.Uint8FromInt32\(libc\.BoolInt32\(v1 != 0\)\)
+\}`).ReplaceAllString(goCode, `func ts_subtree_named(tls *libc.TLS, _self Subtree) (r uint8) {
 	// NULL check
 	ptr := *(*uintptr)(unsafe.Pointer(&_self))
 	if ptr == 0 {
@@ -570,40 +582,7 @@ const (
 		v1 = int32(*(*uint8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)) + 44)) & 0x2 >> 1)
 	}
 	return libc.Uint8FromInt32(libc.BoolInt32(v1 != 0))
-}`
-)
-
-func postProcess(goCode, workDir string) string {
-	// Normalize temp workdir path so regenerated code is deterministic across runs.
-	workDirSlash := filepath.ToSlash(workDir)
-	goCode = strings.ReplaceAll(goCode, workDirSlash+"/", "./")
-	goCode = strings.ReplaceAll(goCode, workDirSlash, ".")
-	goCode = reTempDir.ReplaceAllString(goCode, "/tmp/$1")
-
-	// Fix assert types
-	goCode = reAssert.ReplaceAllString(goCode, replaceAssert)
-
-	// Remove negative padding (any number of tabs)
-	goCode = reNegativePadding.ReplaceAllString(goCode, "")
-
-	// Remove debug println statements from ccgo
-	goCode = reDebugPrintln1.ReplaceAllString(goCode, "")
-	goCode = reDebugPrintln2.ReplaceAllString(goCode, "")
-
-	// Patch ts_subtree_child_count to check for NULL pointer before dereferencing
-	goCode = reSubtreeChildCount.ReplaceAllString(goCode, replaceSubtreeChildCount)
-
-	// Patch ts_subtree_extra to check for NULL pointer
-	goCode = reSubtreeExtra.ReplaceAllString(goCode, replaceSubtreeExtra)
-
-	// Patch ts_subtree_symbol to check for NULL pointer
-	goCode = reSubtreeSymbol.ReplaceAllString(goCode, replaceSubtreeSymbol)
-
-	// Patch ts_subtree_visible to check for NULL pointer
-	goCode = reSubtreeVisible.ReplaceAllString(goCode, replaceSubtreeVisible)
-
-	// Patch ts_subtree_named to check for NULL pointer
-	goCode = reSubtreeNamed.ReplaceAllString(goCode, replaceSubtreeNamed)
+}`)
 
 	return goCode
 }
