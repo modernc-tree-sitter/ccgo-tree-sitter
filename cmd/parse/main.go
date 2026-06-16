@@ -13,10 +13,10 @@ import (
 )
 
 var Command = &cobra.Command{
-	Use:          "parse <language> <file>",
-	Short:        "Parse source files and print tree-sitter nodes",
-	Args:         cobra.ExactArgs(2),
-	SilenceUsage: true,
+	Use:           "parse <language> <file>",
+	Short:         "Parse source files and print tree-sitter nodes",
+	Args:          cobra.ExactArgs(2),
+	SilenceUsage:  true,
 	SilenceErrors: true,
 	RunE: func(_ *cobra.Command, args []string) error {
 		return run(args[0], args[1])

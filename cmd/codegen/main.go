@@ -30,7 +30,7 @@ var rootCmd = &cobra.Command{
 
 This tool uses ccgo to convert tree-sitter's C implementation into Go code,
 allowing you to use tree-sitter parsers natively in Go without CGO.`,
-	RunE: run,
+	RunE:          run,
 	SilenceErrors: true,
 }
 
