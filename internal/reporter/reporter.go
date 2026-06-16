@@ -2,7 +2,6 @@ package reporter
 
 import (
 	"fmt"
-	"log/slog"
 	"os"
 )
 
@@ -13,10 +12,7 @@ func HandleError(err error, contextMsg string) {
 		return
 	}
 
-	// Log with sufficient context
-	slog.Error("error occurred", "context", contextMsg, "error", err)
-
-	// Since we are writing CLI applications, output to stderr as a fallback
-	// This mirrors the prior scattered error handling behavior while centralizing it.
+	// Since we are writing CLI applications without Sentry right now, output to stderr
+	// This centralizes error handling, while keeping the output readable for the CLI
 	fmt.Fprintf(os.Stderr, "Error: %s: %v\n", contextMsg, err)
 }
