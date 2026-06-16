@@ -11,6 +11,7 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/lucasew/ccgo-tree-sitter/internal/reporter"
 	"github.com/spf13/cobra"
 )
 
@@ -30,6 +31,7 @@ var rootCmd = &cobra.Command{
 This tool uses ccgo to convert tree-sitter's C implementation into Go code,
 allowing you to use tree-sitter parsers natively in Go without CGO.`,
 	RunE: run,
+	SilenceErrors: true,
 }
 
 func env(key, defaultValue string) string {
@@ -47,6 +49,7 @@ func init() {
 
 func main() {
 	if err := rootCmd.Execute(); err != nil {
+		reporter.HandleError(err, "codegen failed")
 		os.Exit(1)
 	}
 }

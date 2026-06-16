@@ -1,0 +1,1 @@
+- 2024-05-18: [Medium - Ignored/Swallowed errors] Look for `os.Exit()` calls masking unlogged errors and `fmt.Fprintln(os.Stderr, err)` without robust logging; route through centralized error reporter.
