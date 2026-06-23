@@ -68,10 +68,11 @@ func run(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("failed to transpile core: %w", err)
 	}
 
-	grammars, err := filepath.Glob("third-party/tree-sitter-*")
+	units, err := discoverGrammarUnits("third-party/tree-sitter-*")
 	if err != nil {
 		return err
 	}
+	slog.Info("discovered grammar units", "count", len(units))
 
 	var summaryWriter io.Writer
 
@@ -90,16 +91,15 @@ func run(cmd *cobra.Command, args []string) error {
 	}
 
 	fmt.Fprintf(summaryWriter, "## Grammar Codegen Summary\n\n")
-	// Transpile grammars
-	for i, grammarPath := range grammars {
-		grammarName := extractGrammarName(grammarPath)
-		slog.Info("transpiling grammar", "index", i+1, "total", len(grammars), "grammar", grammarName, "path", grammarPath)
-		if err := transpiler.TranspileGrammar(grammarPath, OUTPUT_DIR+"/grammar"); err != nil {
-			slog.Warn("failed to transpile grammar, skipping", "grammar", grammarName, "path", grammarPath, "error", err)
-			fmt.Fprintf(summaryWriter, "- `%s/%s` `%s`: ❌\n", targetGOOS, targetGOARCH, grammarName)
+	// Transpile grammars (one unit per language name; monorepos may contribute multiple)
+	for i, unit := range units {
+		slog.Info("transpiling grammar", "index", i+1, "total", len(units), "grammar", unit.Name, "path", unit.Path, "priority", unit.Priority)
+		if err := transpiler.TranspileGrammar(unit.Path, unit.Name, OUTPUT_DIR+"/grammar"); err != nil {
+			slog.Warn("failed to transpile grammar, skipping", "grammar", unit.Name, "path", unit.Path, "error", err)
+			fmt.Fprintf(summaryWriter, "- `%s/%s` `%s`: ❌\n", targetGOOS, targetGOARCH, unit.Name)
 			continue
 		}
-		fmt.Fprintf(summaryWriter, "- `%s/%s` `%s`: ✅\n", targetGOOS, targetGOARCH, grammarName)
+		fmt.Fprintf(summaryWriter, "- `%s/%s` `%s`: ✅\n", targetGOOS, targetGOARCH, unit.Name)
 	}
 
 	slog.Info("updating languages registry in cmd/parse/languages.go")

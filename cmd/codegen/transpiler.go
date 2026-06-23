@@ -101,13 +101,14 @@ func (t *Transpiler) TranspileCore(outputDir string) error {
 	return nil
 }
 
-// TranspileGrammar transpiles a tree-sitter grammar into the target directory.
-// It parses the grammar source directory, optionally merges a scanner implementation
-// if present, delegates to ccgo for transpilation, and generates an API wrapper
-// to expose the grammar functions cleanly.
-func (t *Transpiler) TranspileGrammar(grammarPath, outputDir string) error {
-	// Get the clean grammar name (e.g., "lua" from "tree-sitter-lua")
-	grammarName := extractGrammarName(grammarPath)
+// TranspileGrammar transpiles a tree-sitter grammar unit into the target directory.
+// grammarPath is the unit root (parent of src/); grammarName is the package/registry id
+// (typically from tree_sitter_<name> in parser.c). If grammarName is empty, it is derived
+// from the unit path.
+func (t *Transpiler) TranspileGrammar(grammarPath, grammarName, outputDir string) error {
+	if grammarName == "" {
+		grammarName = extractGrammarName(grammarPath)
+	}
 
 	// Check parser.c exists
 	parserC := filepath.Join(grammarPath, "src", "parser.c")
@@ -269,6 +270,9 @@ func (t *Transpiler) transpileGrammarFile(grammarPath, inputC, outputGo, workDir
 		"-Drange=range_token",
 		inputC,
 		"-I", filepath.Join(grammarPath, "src"),
+		// Monorepo grammars (typescript, markdown) often include headers from a sibling common/
+		"-I", grammarPath,
+		"-I", filepath.Dir(grammarPath),
 		"-I", filepath.Join(t.TreeSitterPath, "lib/include"),
 		"-I", filepath.Join(t.TreeSitterPath, "lib/src"),
 		"-o", "-",
@@ -622,16 +626,4 @@ func (t *Transpiler) prepareWorkDir(kind, suffix string) (string, error) {
 		return "", err
 	}
 	return workDir, nil
-}
-
-func extractGrammarName(path string) string {
-	name := filepath.Base(path)
-	// Remove tree-sitter- prefix if present (12 characters)
-	prefix := "tree-sitter-"
-	if strings.HasPrefix(name, prefix) {
-		name = name[len(prefix):]
-	}
-	// Replace any remaining hyphens with underscores for valid Go identifiers
-	name = strings.ReplaceAll(name, "-", "_")
-	return name
 }
