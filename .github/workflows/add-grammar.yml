@@ -1,0 +1,117 @@
+name: Add Grammar Submodule
+
+on:
+  workflow_dispatch:
+    inputs:
+      repo_url:
+        description: "GitHub repository URL (e.g. https://github.com/tree-sitter/tree-sitter-kotlin)"
+        required: true
+        type: string
+      branch:
+        description: "Optional branch/tag/commit to pin the submodule to (leave empty for default branch)"
+        required: false
+        type: string
+        default: ""
+
+jobs:
+  add-grammar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Parse repo URL and add submodule
+        id: add
+        env:
+          REPO_URL: ${{ inputs.repo_url }}
+          BRANCH: ${{ inputs.branch }}
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Normalize URL: accept https://github.com/owner/repo(.git)?(/)? or owner/repo
+          url="${REPO_URL%%#*}"
+          url="${url%%\?*}"
+          url="${url%/}"
+          url="${url%.git}"
+
+          if [[ "$url" =~ ^https?://github\.com/([^/]+)/([^/]+)$ ]]; then
+            owner="${BASH_REMATCH[1]}"
+            repo="${BASH_REMATCH[2]}"
+          elif [[ "$url" =~ ^git@github\.com:([^/]+)/([^/]+)$ ]]; then
+            owner="${BASH_REMATCH[1]}"
+            repo="${BASH_REMATCH[2]}"
+            repo="${repo%.git}"
+          elif [[ "$url" =~ ^([^/]+)/([^/]+)$ ]]; then
+            owner="${BASH_REMATCH[1]}"
+            repo="${BASH_REMATCH[2]}"
+          else
+            echo "::error::Could not parse GitHub repo from: ${REPO_URL}"
+            echo "Expected formats: https://github.com/owner/repo, git@github.com:owner/repo.git, or owner/repo"
+            exit 1
+          fi
+
+          clone_url="https://github.com/${owner}/${repo}.git"
+          submodule_path="third-party/${repo}"
+
+          if [[ -d "$submodule_path" ]] || git config --file .gitmodules --get-regexp "path" 2>/dev/null | grep -qF "$submodule_path"; then
+            echo "::error::Submodule already exists at ${submodule_path}"
+            exit 1
+          fi
+
+          echo "Adding submodule: ${clone_url} -> ${submodule_path}"
+          if [[ -n "${BRANCH}" ]]; then
+            git submodule add -b "${BRANCH}" "${clone_url}" "${submodule_path}"
+          else
+            git submodule add "${clone_url}" "${submodule_path}"
+          fi
+
+          git submodule update --init --depth 1 "${submodule_path}"
+
+          # Verify it looks like a tree-sitter grammar (has parser.c somewhere under src/)
+          if ! find "${submodule_path}" -path '*/src/parser.c' -print -quit | grep -q .; then
+            echo "::warning::No src/parser.c found under ${submodule_path}; codegen may not discover this grammar."
+          fi
+
+          echo "repo_name=${repo}" >> "$GITHUB_OUTPUT"
+          echo "owner=${owner}" >> "$GITHUB_OUTPUT"
+          echo "submodule_path=${submodule_path}" >> "$GITHUB_OUTPUT"
+          echo "clone_url=${clone_url}" >> "$GITHUB_OUTPUT"
+          if [[ -n "${BRANCH}" ]]; then
+            echo "branch_ref=${BRANCH}" >> "$GITHUB_OUTPUT"
+          else
+            echo "branch_ref=(default branch)" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@c0f553fe549906ede9cf27b5156039d195d2ece0 # v8
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: add ${{ steps.add.outputs.repo_name }} grammar submodule"
+          title: "Add grammar: ${{ steps.add.outputs.repo_name }}"
+          body: |
+            Automated addition of a tree-sitter grammar submodule.
+
+            | | |
+            |---|---|
+            | **Repository** | [${{ steps.add.outputs.owner }}/${{ steps.add.outputs.repo_name }}](${{ steps.add.outputs.clone_url }}) |
+            | **Submodule path** | `${{ steps.add.outputs.submodule_path }}` |
+            | **Source input** | `${{ inputs.repo_url }}` |
+            | **Branch/ref** | `${{ steps.add.outputs.branch_ref }}` |
+
+            After merge, run the **Codegen and Test** workflow (or wait for the weekly schedule / push to `main`) to generate Go bindings under `grammar/`.
+
+            Triggered by @${{ github.actor }} via workflow_dispatch.
+          branch: "add-grammar/${{ steps.add.outputs.repo_name }}"
+          delete-branch: true
+          add-paths: |
+            .gitmodules
+            third-party/${{ steps.add.outputs.repo_name }}
+
