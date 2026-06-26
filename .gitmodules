@@ -96,6 +96,9 @@
 [submodule "third-party/tree-sitter-kotlin"]
 	path = third-party/tree-sitter-kotlin
 	url = https://github.com/fwcd/tree-sitter-kotlin.git
+[submodule "third-party/tree-sitter-glsl"]
+	path = third-party/tree-sitter-glsl
+	url = https://github.com/tree-sitter-grammars/tree-sitter-glsl.git
 [submodule "third-party/tree-sitter-commonlisp"]
 	path = third-party/tree-sitter-commonlisp
 	url = https://github.com/theHamsta/tree-sitter-commonlisp.git
