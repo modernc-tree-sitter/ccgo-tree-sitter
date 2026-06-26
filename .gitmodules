@@ -102,6 +102,9 @@
 [submodule "third-party/tree-sitter-scala"]
 	path = third-party/tree-sitter-scala
 	url = https://github.com/tree-sitter/tree-sitter-scala.git
+[submodule "third-party/tree-sitter-diff"]
+	path = third-party/tree-sitter-diff
+	url = https://github.com/tree-sitter-grammars/tree-sitter-diff.git
 [submodule "third-party/tree-sitter-csv"]
 	path = third-party/tree-sitter-csv
 	url = https://github.com/tree-sitter-grammars/tree-sitter-csv.git
