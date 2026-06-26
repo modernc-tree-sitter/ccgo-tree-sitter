@@ -159,6 +159,9 @@
 [submodule "third-party/tree-sitter-cairo"]
 	path = third-party/tree-sitter-cairo
 	url = https://github.com/tree-sitter-grammars/tree-sitter-cairo.git
+[submodule "third-party/tree-sitter-query"]
+	path = third-party/tree-sitter-query
+	url = https://github.com/tree-sitter-grammars/tree-sitter-query.git
 [submodule "third-party/tree-sitter-luap"]
 	path = third-party/tree-sitter-luap
 	url = https://github.com/tree-sitter-grammars/tree-sitter-luap.git
