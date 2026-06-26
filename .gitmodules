@@ -87,6 +87,9 @@
 [submodule "third-party/tree-sitter-dockerfile"]
 	path = third-party/tree-sitter-dockerfile
 	url = https://github.com/camdencheek/tree-sitter-dockerfile
+[submodule "third-party/tensorflow"]
+	path = third-party/tensorflow
+	url = https://github.com/tensorflow/tensorflow.git
 [submodule "third-party/django"]
 	path = third-party/django
 	url = https://github.com/django/django.git
