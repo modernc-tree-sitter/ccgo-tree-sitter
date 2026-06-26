@@ -87,6 +87,9 @@
 [submodule "third-party/tree-sitter-dockerfile"]
 	path = third-party/tree-sitter-dockerfile
 	url = https://github.com/camdencheek/tree-sitter-dockerfile
+[submodule "third-party/django"]
+	path = third-party/django
+	url = https://github.com/django/django.git
 [submodule "third-party/tree-sitter-kotlin"]
 	path = third-party/tree-sitter-kotlin
 	url = https://github.com/fwcd/tree-sitter-kotlin.git
