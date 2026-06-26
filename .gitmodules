@@ -96,6 +96,51 @@
 [submodule "third-party/tree-sitter-kotlin"]
 	path = third-party/tree-sitter-kotlin
 	url = https://github.com/fwcd/tree-sitter-kotlin.git
+[submodule "third-party/tree-sitter-bicep"]
+	path = third-party/tree-sitter-bicep
+	url = https://github.com/tree-sitter-grammars/tree-sitter-bicep.git
+[submodule "third-party/tree-sitter-arduino"]
+	path = third-party/tree-sitter-arduino
+	url = https://github.com/tree-sitter-grammars/tree-sitter-arduino.git
+[submodule "third-party/tree-sitter-cuda"]
+	path = third-party/tree-sitter-cuda
+	url = https://github.com/tree-sitter-grammars/tree-sitter-cuda.git
+[submodule "third-party/tree-sitter-glsl"]
+	path = third-party/tree-sitter-glsl
+	url = https://github.com/tree-sitter-grammars/tree-sitter-glsl.git
+[submodule "third-party/tree-sitter-commonlisp"]
+	path = third-party/tree-sitter-commonlisp
+	url = https://github.com/theHamsta/tree-sitter-commonlisp.git
+[submodule "third-party/tree-sitter-xml"]
+	path = third-party/tree-sitter-xml
+	url = https://github.com/tree-sitter-grammars/tree-sitter-xml.git
+[submodule "third-party/tree-sitter-vue"]
+	path = third-party/tree-sitter-vue
+	url = https://github.com/tree-sitter-grammars/tree-sitter-vue.git
+[submodule "third-party/tree-sitter-haskell"]
+	path = third-party/tree-sitter-haskell
+	url = https://github.com/tree-sitter/tree-sitter-haskell.git
+[submodule "third-party/tree-sitter-cmake"]
+	path = third-party/tree-sitter-cmake
+	url = https://github.com/uyha/tree-sitter-cmake.git
+[submodule "third-party/tree-sitter-swift"]
+	path = third-party/tree-sitter-swift
+	url = https://github.com/alex-pinkus/tree-sitter-swift.git
+[submodule "third-party/tree-sitter-zig"]
+	path = third-party/tree-sitter-zig
+	url = https://github.com/tree-sitter-grammars/tree-sitter-zig.git
+[submodule "third-party/tree-sitter-dart"]
+	path = third-party/tree-sitter-dart
+	url = https://github.com/UserNobody14/tree-sitter-dart.git
+[submodule "third-party/tree-sitter-solidity"]
+	path = third-party/tree-sitter-solidity
+	url = https://github.com/JoranHonig/tree-sitter-solidity.git
+[submodule "third-party/tree-sitter-astro"]
+	path = third-party/tree-sitter-astro
+	url = https://github.com/virchau13/tree-sitter-astro.git
+[submodule "third-party/tree-sitter-elixir"]
+	path = third-party/tree-sitter-elixir
+	url = https://github.com/elixir-lang/tree-sitter-elixir.git
 [submodule "third-party/tree-sitter-make"]
 	path = third-party/tree-sitter-make
 	url = https://github.com/tree-sitter-grammars/tree-sitter-make.git
@@ -105,3 +150,15 @@
 [submodule "third-party/tree-sitter-gitattributes"]
 	path = third-party/tree-sitter-gitattributes
 	url = https://github.com/tree-sitter-grammars/tree-sitter-gitattributes.git
+[submodule "third-party/tree-sitter-diff"]
+	path = third-party/tree-sitter-diff
+	url = https://github.com/tree-sitter-grammars/tree-sitter-diff.git
+[submodule "third-party/tree-sitter-csv"]
+	path = third-party/tree-sitter-csv
+	url = https://github.com/tree-sitter-grammars/tree-sitter-csv.git
+[submodule "third-party/tree-sitter-cairo"]
+	path = third-party/tree-sitter-cairo
+	url = https://github.com/tree-sitter-grammars/tree-sitter-cairo.git
+[submodule "third-party/tree-sitter-hare"]
+	path = third-party/tree-sitter-hare
+	url = https://github.com/tree-sitter-grammars/tree-sitter-hare.git
