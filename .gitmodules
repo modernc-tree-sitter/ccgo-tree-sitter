@@ -96,3 +96,6 @@
 [submodule "third-party/tree-sitter-kotlin"]
 	path = third-party/tree-sitter-kotlin
 	url = https://github.com/fwcd/tree-sitter-kotlin.git
+[submodule "third-party/tree-sitter-xml"]
+	path = third-party/tree-sitter-xml
+	url = https://github.com/tree-sitter-grammars/tree-sitter-xml.git
