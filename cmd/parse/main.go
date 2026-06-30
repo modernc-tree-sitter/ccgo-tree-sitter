@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/lucasew/ccgo-tree-sitter/grammar"
+	"github.com/lucasew/ccgo-tree-sitter/internal/reporter"
 	"github.com/spf13/cobra"
 )
 
@@ -16,6 +17,7 @@ var Command = &cobra.Command{
 	Short:        "Parse source files and print tree-sitter nodes",
 	Args:         cobra.ExactArgs(2),
 	SilenceUsage: true,
+	SilenceErrors: true,
 	RunE: func(_ *cobra.Command, args []string) error {
 		return run(args[0], args[1])
 	},
@@ -32,7 +34,7 @@ func init() {
 func main() {
 	Command.SetUsageTemplate(Command.UsageTemplate() + "\nSupported languages:\n" + supportedLanguages() + "\n")
 	if err := Command.Execute(); err != nil {
-		fmt.Fprintln(os.Stderr, err)
+		reporter.HandleError(err)
 		os.Exit(1)
 	}
 }

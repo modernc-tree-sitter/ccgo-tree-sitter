@@ -1,0 +1,1 @@
+- 2026-06-30: Replaced direct os.Exit(1) calls with centralized error reporting using SilenceErrors in Cobra.
