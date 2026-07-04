@@ -94,9 +94,11 @@ jobs:
           clang --version
           echo "host=$(go env GOOS)/$(go env GOARCH) target=${{ matrix.goos }}/${{ matrix.goarch }}"
 
-      - name: Test host packages
+      # cmd/parse blank-imports every grammar package, which only compile when
+      # core-{GOOS}-{GOARCH}.go exists for the host. Run those tests after codegen.
+      - name: Test codegen tool
         shell: bash
-        run: go test ./cmd/codegen/ ./cmd/parse/
+        run: go test ./cmd/codegen/
 
       - name: Codegen ${{ matrix.goos }}/${{ matrix.goarch }}
         shell: bash
