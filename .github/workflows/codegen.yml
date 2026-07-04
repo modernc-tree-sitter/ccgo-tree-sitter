@@ -5,14 +5,129 @@ on:
     branches:
       - main
   schedule:
-    - cron: '0 0 * * 6' # Weekly on Saturday at midnight
+    - cron: "0 0 * * 6" # Weekly on Saturday at midnight UTC
   workflow_dispatch:
+
+concurrency:
+  group: codegen-${{ github.workflow }}
+  cancel-in-progress: true
 
 jobs:
   codegen:
-    concurrency:
-      group: codegen-${{ github.workflow }}
-      cancel-in-progress: true
+    name: codegen (${{ matrix.goos }}/${{ matrix.goarch }})
+    runs-on: ${{ matrix.runner }}
+    continue-on-error: ${{ matrix.experimental }}
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Each runner transpiles only its native GOOS/GOARCH with host clang.
+          - runner: ubuntu-latest
+            goos: linux
+            goarch: amd64
+            task: codegen:linux-amd64
+            experimental: false
+          - runner: ubuntu-24.04-arm
+            goos: linux
+            goarch: arm64
+            task: codegen:linux-arm64
+            experimental: false
+          - runner: ubuntu-latest
+            goos: linux
+            goarch: 386
+            task: codegen:linux-386
+            experimental: true
+          - runner: macos-13
+            goos: darwin
+            goarch: amd64
+            task: codegen:darwin-amd64
+            experimental: false
+          - runner: macos-latest
+            goos: darwin
+            goarch: arm64
+            task: codegen:darwin-arm64
+            experimental: false
+          - runner: windows-latest
+            goos: windows
+            goarch: amd64
+            task: codegen:windows-amd64
+            experimental: false
+          - runner: windows-11-arm
+            goos: windows
+            goarch: arm64
+            task: codegen:windows-arm64
+            experimental: true
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+        with:
+          submodules: recursive
+
+      - name: Set up tools (mise)
+        uses: jdx/mise-action@6d1e696aa24c1aa1bcc1adea0212707c71ab78a8 # v3
+
+      - name: Install clang (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang
+          if [ "${{ matrix.goarch }}" = "386" ]; then
+            sudo apt-get install -y gcc-multilib g++-multilib libc6-dev-i386
+          fi
+
+      - name: Install clang (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          choco install llvm -y --no-progress
+          "C:\Program Files\LLVM\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+      - name: Verify preprocessor
+        shell: bash
+        run: |
+          command -v clang
+          clang --version
+          echo "host=$(go env GOOS)/$(go env GOARCH) target=${{ matrix.goos }}/${{ matrix.goarch }}"
+
+      - name: Test host packages
+        shell: bash
+        run: go test ./cmd/codegen/ ./cmd/parse/
+
+      - name: Codegen ${{ matrix.goos }}/${{ matrix.goarch }}
+        shell: bash
+        run: mise run "${{ matrix.task }}"
+
+      - name: Collect artifact
+        shell: bash
+        run: |
+          ./scripts/collect-codegen-artifact.sh \
+            "${{ runner.temp }}/codegen-out" \
+            "${{ matrix.goos }}" \
+            "${{ matrix.goarch }}"
+
+      - name: Upload codegen artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: codegen-${{ matrix.goos }}-${{ matrix.goarch }}
+          path: ${{ runner.temp }}/codegen-out/
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Test generated grammar on host
+        continue-on-error: ${{ matrix.experimental }}
+        shell: bash
+        env:
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+        run: go test ./grammar/ ./cmd/parse/
+
+  merge:
+    name: merge artifacts and open PR
+    needs: codegen
+    if: ${{ always() && !cancelled() }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -27,16 +142,44 @@ jobs:
       - name: Set up tools (mise)
         uses: jdx/mise-action@6d1e696aa24c1aa1bcc1adea0212707c71ab78a8 # v3
 
-      - name: Install system dependencies
+      - name: Download codegen artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: codegen-*
+          path: ${{ runner.temp }}/codegen-artifacts
+          merge-multiple: false
+
+      - name: List downloaded artifacts
+        run: find "${{ runner.temp }}/codegen-artifacts" -type f | LC_ALL=C sort
+
+      - name: Merge into working tree
         run: |
-          sudo apt-get update
-          sudo apt-get install -y clang
+          set -euo pipefail
+          arts="${{ runner.temp }}/codegen-artifacts"
+          if ! compgen -G "${arts}/*/" > /dev/null; then
+            echo "error: no codegen artifacts downloaded" >&2
+            exit 1
+          fi
+          ./scripts/merge-codegen-artifacts.sh "$arts"
+          {
+            echo "## Codegen matrix"
+            echo
+            for d in "$arts"/*/; do
+              name="$(basename "${d%/}")"
+              core="grammar/core-${name}.go"
+              if [[ -f "$core" ]]; then
+                count="$(find grammar -type f -name "grammar-${name}.go" | wc -l | tr -d ' ')"
+                echo "- \`${name//-/\/}\`: ✅ core + ${count} grammars"
+              else
+                echo "- \`${name//-/\/}\`: ❌ missing after merge"
+              fi
+            done
+            echo
+            echo "Experimental legs (\`linux/386\`, \`windows/arm64\`) may be absent when they fail."
+          } >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Run Go Tests
-        run: go test -v ./...
-
-      - name: Codegen
-        run: mise run codegen
+      - name: Test merged linux/amd64 tree
+        run: go test ./...
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@c0f553fe549906ede9cf27b5156039d195d2ece0 # v8
@@ -44,6 +187,15 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "chore: update generated grammars"
           title: "Update generated grammars"
-          body: "Automated update of tree-sitter grammars generated code."
-          branch: "codegen-update"
+          body: |
+            Automated multi-platform update of tree-sitter grammar bindings.
+
+            Each CI runner transpiled its **native** `GOOS`/`GOARCH` with host `clang`,
+            uploaded those sources, and this job merged them into `grammar/`.
+
+            See the workflow job summary for per-target status.
+          branch: codegen-update
           delete-branch: true
+          add-paths: |
+            grammar/**
+            cmd/parse/languages.go

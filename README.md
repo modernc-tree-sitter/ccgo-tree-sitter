@@ -5,49 +5,40 @@ Extremely experimental, but it can parse some stuff already.
 
 ## Codegen
 
-Regenerate checked-in `grammar/` sources with:
+Regenerate bindings for **this machine** (host `GOOS`/`GOARCH` only):
 
 ```bash
 mise run codegen
 ```
 
-That runs every `codegen:<goos>-<goarch>` task. One target only:
+Or one explicit triple:
 
 ```bash
 mise run codegen:darwin-arm64
-# or
 TARGET_GOOS=windows TARGET_GOARCH=amd64 go run ./cmd/codegen
 ```
 
+`mise run codegen:all` runs every configured task on the current host; that only
+works when headers/ABI match. Prefer the **CI matrix**, where each runner
+transpiles its own native triple and a merge job opens a PR.
+
 ### Target matrix
 
-| Task | `GOOS`/`GOARCH` | Checked in? | Status |
+| Task | `GOOS`/`GOARCH` | CI runner | Checked in? |
 | --- | --- | --- | --- |
-| `codegen:linux-amd64` | linux/amd64 | yes | working |
-| `codegen:linux-arm64` | linux/arm64 | yes | working |
-| `codegen:linux-386` | linux/386 (i386) | no | mise wired; ccgo emits `&(*T)(unsafe.Pointer(...))` that `gc` rejects on 32-bit |
-| `codegen:darwin-amd64` | darwin/amd64 | no | mise wired; blocked on target-correct preprocess (host glibc pulls `__ctype_b_loc` etc.) |
-| `codegen:darwin-arm64` | darwin/arm64 | no | same as darwin/amd64 |
-| `codegen:windows-amd64` | windows/amd64 | no | mise wired; blocked on target-correct preprocess (`windows.h` / no glibc shims in libc) |
-| `codegen:windows-arm64` | windows/arm64 | no | same as windows/amd64 |
+| `codegen:linux-amd64` | linux/amd64 | `ubuntu-latest` | yes |
+| `codegen:linux-arm64` | linux/arm64 | `ubuntu-24.04-arm` | yes |
+| `codegen:linux-386` | linux/386 (i386) | `ubuntu-latest` (experimental) | no |
+| `codegen:darwin-amd64` | darwin/amd64 | `macos-13` | no |
+| `codegen:darwin-arm64` | darwin/arm64 | `macos-latest` | no |
+| `codegen:windows-amd64` | windows/amd64 | `windows-latest` | no |
+| `codegen:windows-arm64` | windows/arm64 | `windows-11-arm` (experimental) | no |
 
 Outputs are `grammar/core-{GOOS}-{GOARCH}.go` and
 `grammar/<lang>/grammar-{GOOS}-{GOARCH}.go` with matching `//go:build` tags.
-Consumers select them automatically from `GOOS`/`GOARCH` (`CGO_ENABLED=0`).
-Until a target is regenerated, that `GOOS`/`GOARCH` simply has no sources.
+Consumers select them via `GOOS`/`GOARCH` (`CGO_ENABLED=0`).
 
-Next unblockers: preprocess against `modernc.org/libc` headers for the target
-(`-nostdinc` + ccgo’s isystem) or run codegen on native/sysrooted runners; fix
-32-bit address-of-pointer casts in generated code or patched ccgo.
-
-Preprocessing uses **clang** (`CC=clang`). Override with `CC` (e.g. `zig cc`) and
-`CFLAGS`. Both are parsed with
-[`shell.Fields`](https://pkg.go.dev/mvdan.cc/sh/v3/shell#Fields) (POSIX words,
-quotes, `$VAR`). After `-E`, codegen strips clang/glibc `_Float*` / `__float128`
-typedefs that ccgo rejects.
-
-By default tasks do **not** pass `--target`; host headers are preprocessed and
-ccgo applies the target ABI via `modernc.org/libc`. For stricter triples, set
-e.g. `CFLAGS=--target=x86_64-apple-darwin` **with** a matching sysroot
-(`-isysroot` / `-sysroot`). Runtime support requires a `modernc.org/libc` port
-for that pair.
+Preprocessing uses **clang** (`CC=clang`) on the runner that owns the triple.
+Override with `CC` / `CFLAGS` (parsed by
+[`shell.Fields`](https://pkg.go.dev/mvdan.cc/sh/v3/shell#Fields)). After `-E`,
+codegen strips clang/glibc `_Float*` / `__float128` typedefs that ccgo rejects.
