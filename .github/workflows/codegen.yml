@@ -8,8 +8,10 @@ on:
     - cron: "0 0 * * 6" # Weekly on Saturday at midnight UTC
   workflow_dispatch:
 
+# A new push to main (or a newer run on the same ref) cancels in-flight
+# matrix + merge jobs from the previous run.
 concurrency:
-  group: codegen-${{ github.workflow }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
