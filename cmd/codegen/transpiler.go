@@ -52,8 +52,9 @@ var (
 // preprocessorCmd builds the C preprocessor command from CC (default clang)
 // and optional CFLAGS. CC may be a multi-word launcher (e.g. "zig cc").
 // CC and CFLAGS are parsed with shell.Fields (POSIX word splitting, quotes,
-// and parameter expansion).
-func preprocessorCmd(args ...string) (*exec.Cmd, error) {
+// and parameter expansion). goos/goarch select default flags (e.g. MinGW
+// triples on Windows) injected before user CFLAGS.
+func preprocessorCmd(goos, goarch string, args ...string) (*exec.Cmd, error) {
 	ccFields, err := shell.Fields(env("CC", defaultPreprocessor), nil)
 	if err != nil {
 		return nil, fmt.Errorf("parse CC: %w", err)
@@ -66,13 +67,70 @@ func preprocessorCmd(args ...string) (*exec.Cmd, error) {
 		return nil, fmt.Errorf("parse CFLAGS: %w", err)
 	}
 	cmdArgs := append([]string{}, ccFields[1:]...)
+	cmdArgs = append(cmdArgs, defaultPreprocessorFlags(goos, goarch)...)
 	cmdArgs = append(cmdArgs, cflags...)
 	cmdArgs = append(cmdArgs, args...)
 	return exec.Command(ccFields[0], cmdArgs...), nil
 }
 
-// sanitizePreprocessedC removes compiler/glibc extension declarations that
-// survive -E with clang but are rejected by ccgo.
+// defaultPreprocessorFlags returns compiler flags so host -E output stays
+// within what ccgo can parse. No source rewriting here — prefer targets and
+// macros the preprocessor understands natively.
+func defaultPreprocessorFlags(goos, goarch string) []string {
+	switch goos {
+	case "windows":
+		// MSVC-oriented windows.h breaks ccgo. Drive clang at MinGW so we get
+		// GNU-compatible Win32 headers (and set MINGW_SYSROOT when needed).
+		flags := []string{"--target=" + mingwTriple(goarch)}
+		if sysroot := mingwSysroot(); sysroot != "" {
+			flags = append(flags, "--sysroot="+sysroot)
+		}
+		return flags
+	case "darwin":
+		// Drop Blocks and neutralize Apple nullability qualifiers via macros.
+		return []string{
+			"-fno-blocks",
+			"-D_Nonnull=",
+			"-D_Nullable=",
+			"-D_Null_unspecified=",
+		}
+	default:
+		return nil
+	}
+}
+
+func mingwTriple(goarch string) string {
+	switch goarch {
+	case "arm64":
+		return "aarch64-w64-mingw32"
+	case "386":
+		return "i686-w64-mingw32"
+	default:
+		return "x86_64-w64-mingw32"
+	}
+}
+
+func mingwSysroot() string {
+	if s := strings.TrimSpace(os.Getenv("MINGW_SYSROOT")); s != "" {
+		return s
+	}
+	for _, candidate := range []string{
+		`C:\msys64\mingw64`,
+		`C:\mingw64`,
+		`C:\ProgramData\mingw64\mingw64`,
+		`C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64`,
+		"/mingw64",
+		"/usr/x86_64-w64-mingw32",
+	} {
+		if st, err := os.Stat(filepath.Join(candidate, "include")); err == nil && st.IsDir() {
+			return candidate
+		}
+	}
+	return ""
+}
+
+// sanitizePreprocessedC removes clang/glibc interchange typedefs that survive
+// -E but are rejected by ccgo (Linux hosts).
 func sanitizePreprocessedC(src string) string {
 	return extensionFloatTypedefRe.ReplaceAllString(src, "")
 }
@@ -89,13 +147,12 @@ func sanitizePreprocessedFile(path string) error {
 	return os.WriteFile(path, []byte(sanitized), 0644)
 }
 
-func preprocessorIdentity() string {
-	cc := strings.TrimSpace(env("CC", defaultPreprocessor))
-	cflags := strings.TrimSpace(os.Getenv("CFLAGS"))
-	if cflags == "" {
-		return cc
+func preprocessorIdentity(goos, goarch string) string {
+	parts := append([]string{strings.TrimSpace(env("CC", defaultPreprocessor))}, defaultPreprocessorFlags(goos, goarch)...)
+	if cflags := strings.TrimSpace(os.Getenv("CFLAGS")); cflags != "" {
+		parts = append(parts, cflags)
 	}
-	return cc + " " + cflags
+	return strings.Join(parts, " ")
 }
 
 // TranspileCore transpiles the tree-sitter core library into the target directory.
@@ -285,7 +342,7 @@ func (t *Transpiler) preprocessCore(outputPath string) error {
 		"-o", "-",
 	}
 
-	cmd, err := preprocessorCmd(args...)
+	cmd, err := preprocessorCmd(t.GOOS, t.GOARCH, args...)
 	if err != nil {
 		f.Close()
 		return err
@@ -294,7 +351,7 @@ func (t *Transpiler) preprocessCore(outputPath string) error {
 	cmd.Stderr = os.Stderr
 	if err := cmd.Run(); err != nil {
 		f.Close()
-		return fmt.Errorf("preprocess core with %s: %w", preprocessorIdentity(), err)
+		return fmt.Errorf("preprocess core with %s: %w", preprocessorIdentity(t.GOOS, t.GOARCH), err)
 	}
 	if err := f.Close(); err != nil {
 		return err
@@ -352,7 +409,7 @@ func (t *Transpiler) transpileGrammarFile(grammarPath, inputC, outputGo, workDir
 		"-o", "-",
 	}
 
-	cmd, err := preprocessorCmd(args...)
+	cmd, err := preprocessorCmd(t.GOOS, t.GOARCH, args...)
 	if err != nil {
 		f.Close()
 		return err
@@ -361,7 +418,7 @@ func (t *Transpiler) transpileGrammarFile(grammarPath, inputC, outputGo, workDir
 	cmd.Stderr = os.Stderr
 	if err := cmd.Run(); err != nil {
 		f.Close()
-		return fmt.Errorf("preprocess grammar with %s: %w", preprocessorIdentity(), err)
+		return fmt.Errorf("preprocess grammar with %s: %w", preprocessorIdentity(t.GOOS, t.GOARCH), err)
 	}
 	if err := f.Close(); err != nil {
 		return err

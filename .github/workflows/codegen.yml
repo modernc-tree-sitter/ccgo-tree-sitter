@@ -41,11 +41,6 @@ jobs:
             goarch: 386
             task: codegen:linux-386
             experimental: true
-          - runner: macos-13
-            goos: darwin
-            goarch: amd64
-            task: codegen:darwin-amd64
-            experimental: false
           - runner: macos-latest
             goos: darwin
             goarch: arm64
@@ -80,12 +75,36 @@ jobs:
             sudo apt-get install -y gcc-multilib g++-multilib libc6-dev-i386
           fi
 
-      - name: Install clang (Windows)
+      - name: Install clang and MinGW (Windows)
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          choco install llvm -y --no-progress
+          choco install llvm mingw -y --no-progress
           "C:\Program Files\LLVM\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          $mingwCandidates = @(
+            "C:\ProgramData\mingw64\mingw64",
+            "C:\mingw64",
+            "C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64",
+            "C:\msys64\mingw64"
+          )
+          foreach ($root in $mingwCandidates) {
+            if (Test-Path (Join-Path $root "include")) {
+              "MINGW_SYSROOT=$root" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+              Join-Path $root "bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+              Write-Host "Using MINGW_SYSROOT=$root"
+              break
+            }
+          }
+          if (-not $env:MINGW_SYSROOT) {
+            Get-ChildItem -Path C:\ -Filter include -Directory -Recurse -ErrorAction SilentlyContinue |
+              Where-Object { $_.FullName -match 'mingw64\\include$' } |
+              Select-Object -First 1 |
+              ForEach-Object {
+                $root = Split-Path $_.FullName -Parent
+                "MINGW_SYSROOT=$root" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+                Write-Host "Discovered MINGW_SYSROOT=$root"
+              }
+          }
 
       - name: Verify preprocessor
         shell: bash
@@ -93,6 +112,19 @@ jobs:
           command -v clang
           clang --version
           echo "host=$(go env GOOS)/$(go env GOARCH) target=${{ matrix.goos }}/${{ matrix.goarch }}"
+          echo "MINGW_SYSROOT=${MINGW_SYSROOT:-}"
+          if [ "${{ matrix.goos }}" = "windows" ]; then
+            if [ "${{ matrix.goarch }}" = "arm64" ]; then
+              triple=aarch64-w64-mingw32
+            else
+              triple=x86_64-w64-mingw32
+            fi
+            sysroot_args=()
+            if [ -n "${MINGW_SYSROOT:-}" ]; then
+              sysroot_args=(--sysroot="$MINGW_SYSROOT")
+            fi
+            clang --target="$triple" "${sysroot_args[@]}" -dM -E -x c /dev/null | head -20
+          fi
 
       # cmd/parse blank-imports every grammar package, which only compile when
       # core-{GOOS}-{GOARCH}.go exists for the host. Run those tests after codegen.
@@ -194,8 +226,9 @@ jobs:
           body: |
             Automated multi-platform update of tree-sitter grammar bindings.
 
-            Each CI runner transpiled its **native** `GOOS`/`GOARCH` with host `clang`,
-            uploaded those sources, and this job merged them into `grammar/`.
+            Each CI runner transpiled its **native** `GOOS`/`GOARCH` with host `clang`
+            (MinGW triple on Windows), uploaded those sources, and this job merged
+            them into `grammar/`.
 
             See the workflow job summary for per-target status.
           branch: codegen-update

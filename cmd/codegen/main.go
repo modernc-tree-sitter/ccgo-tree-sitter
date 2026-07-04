@@ -31,9 +31,11 @@ This tool uses ccgo to convert tree-sitter's C implementation into Go code,
 allowing you to use tree-sitter parsers natively in Go without CGO.
 
 C sources are preprocessed with clang by default. Override with CC (may be a
-multi-word launcher such as "zig cc") and optional CFLAGS (for example
---target=aarch64-unknown-linux-gnu). CC and CFLAGS are parsed with
-mvdan.cc/sh/v3/shell.Fields (POSIX quoting and parameter expansion).`,
+multi-word launcher such as "zig cc") and optional CFLAGS. On Windows, clang is
+aimed at the MinGW triple (x86_64/aarch64-w64-mingw32) so headers stay
+GNU-compatible for ccgo; set MINGW_SYSROOT when the sysroot is non-default.
+On Darwin, -fno-blocks and empty nullability macros are injected. CC and CFLAGS
+are parsed with mvdan.cc/sh/v3/shell.Fields.`,
 	RunE: run,
 }
 
@@ -57,7 +59,7 @@ func main() {
 }
 
 func run(cmd *cobra.Command, args []string) error {
-	slog.Info("compiling for target", "GOOS", targetGOOS, "GOARCH", targetGOARCH, "CC", preprocessorIdentity())
+	slog.Info("compiling for target", "GOOS", targetGOOS, "GOARCH", targetGOARCH, "CC", preprocessorIdentity(targetGOOS, targetGOARCH))
 	// Create transpiler
 	transpiler := &Transpiler{
 		TreeSitterPath: TREE_SITTER_PATH,

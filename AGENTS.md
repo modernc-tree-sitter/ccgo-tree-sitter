@@ -5,3 +5,5 @@
   `mise run codegen` is **host-native only** (`scripts/codegen-host.sh`).
   Full multi-platform regen is `.github/workflows/codegen.yml`: each runner
   transpiles its own triple, uploads an artifact, and `merge` opens the PR.
+- Windows codegen uses the MinGW clang triple (`*-w64-mingw32`) and optional
+  `MINGW_SYSROOT` — do not add MSVC-header regex sanitizers.

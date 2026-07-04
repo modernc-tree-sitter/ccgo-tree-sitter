@@ -8,7 +8,7 @@ CC = "clang"
 
 # Per-target tasks. CI runs exactly one task per runner (native OS/arch).
 # Locally, `mise run codegen` runs only the host triple via scripts/codegen-host.sh.
-# GOARCH for 32-bit x86 is `386` (i386).
+# Windows tasks rely on clang --target=*-w64-mingw32 (see defaultPreprocessorFlags).
 
 [tasks."codegen:linux-amd64"]
 env = { TARGET_GOOS = "linux", TARGET_GOARCH = "amd64", CC = "clang" }
@@ -20,10 +20,6 @@ run = "go run -v ./cmd/codegen"
 
 [tasks."codegen:linux-386"]
 env = { TARGET_GOOS = "linux", TARGET_GOARCH = "386", CC = "clang" }
-run = "go run -v ./cmd/codegen"
-
-[tasks."codegen:darwin-amd64"]
-env = { TARGET_GOOS = "darwin", TARGET_GOARCH = "amd64", CC = "clang" }
 run = "go run -v ./cmd/codegen"
 
 [tasks."codegen:darwin-arm64"]
@@ -43,12 +39,11 @@ description = "Codegen for the host GOOS/GOARCH only"
 run = "bash ./scripts/codegen-host.sh"
 
 [tasks."codegen:all"]
-description = "Codegen every configured target (needs native headers per triple; prefer CI matrix)"
+description = "Codegen every configured target (prefer CI matrix)"
 depends = [
   "codegen:linux-amd64",
   "codegen:linux-arm64",
   "codegen:linux-386",
-  "codegen:darwin-amd64",
   "codegen:darwin-arm64",
   "codegen:windows-amd64",
   "codegen:windows-arm64",
