@@ -14,6 +14,7 @@ import (
 	"sync"
 
 	"modernc.org/ccgo/v4/lib"
+	"mvdan.cc/sh/v3/shell"
 )
 
 // Transpiler handles C to Go transpilation using ccgo.
@@ -32,6 +33,14 @@ type Transpiler struct {
 
 const (
 	deterministicTempRoot = "ccgo-tree-sitter-gen"
+	defaultPreprocessor   = "clang"
+)
+
+// extensionFloatTypedefRe matches glibc interchange-type typedefs that clang
+// emits from bits/floatn*.h. GCC omits them (builtins); ccgo cannot type-check
+// the clang forms (__float128, duplicate specifiers, __mode__ (__TC__), …).
+var extensionFloatTypedefRe = regexp.MustCompile(
+	`(?m)^typedef\s+[^;]*\b(_Float(16|32|32x|64|64x|128)|__float128|__cfloat128)\b[^;]*;\s*\n?`,
 )
 
 var (
@@ -39,6 +48,55 @@ var (
 	libcVersion     string
 	libcVersionErr  error
 )
+
+// preprocessorCmd builds the C preprocessor command from CC (default clang)
+// and optional CFLAGS. CC may be a multi-word launcher (e.g. "zig cc").
+// CC and CFLAGS are parsed with shell.Fields (POSIX word splitting, quotes,
+// and parameter expansion).
+func preprocessorCmd(args ...string) (*exec.Cmd, error) {
+	ccFields, err := shell.Fields(env("CC", defaultPreprocessor), nil)
+	if err != nil {
+		return nil, fmt.Errorf("parse CC: %w", err)
+	}
+	if len(ccFields) == 0 {
+		return nil, fmt.Errorf("CC is empty")
+	}
+	cflags, err := shell.Fields(os.Getenv("CFLAGS"), nil)
+	if err != nil {
+		return nil, fmt.Errorf("parse CFLAGS: %w", err)
+	}
+	cmdArgs := append([]string{}, ccFields[1:]...)
+	cmdArgs = append(cmdArgs, cflags...)
+	cmdArgs = append(cmdArgs, args...)
+	return exec.Command(ccFields[0], cmdArgs...), nil
+}
+
+// sanitizePreprocessedC removes compiler/glibc extension declarations that
+// survive -E with clang but are rejected by ccgo.
+func sanitizePreprocessedC(src string) string {
+	return extensionFloatTypedefRe.ReplaceAllString(src, "")
+}
+
+func sanitizePreprocessedFile(path string) error {
+	data, err := os.ReadFile(path)
+	if err != nil {
+		return err
+	}
+	sanitized := sanitizePreprocessedC(string(data))
+	if sanitized == string(data) {
+		return nil
+	}
+	return os.WriteFile(path, []byte(sanitized), 0644)
+}
+
+func preprocessorIdentity() string {
+	cc := strings.TrimSpace(env("CC", defaultPreprocessor))
+	cflags := strings.TrimSpace(os.Getenv("CFLAGS"))
+	if cflags == "" {
+		return cc
+	}
+	return cc + " " + cflags
+}
 
 // TranspileCore transpiles the tree-sitter core library into the target directory.
 // The flow consists of preprocessing C headers, generating a synthetic go.mod to satisfy
@@ -216,7 +274,6 @@ func (t *Transpiler) preprocessCore(outputPath string) error {
 	if err != nil {
 		return err
 	}
-	defer f.Close()
 
 	args := []string{
 		"-E", "-O0", "-fno-inline",
@@ -228,14 +285,31 @@ func (t *Transpiler) preprocessCore(outputPath string) error {
 		"-o", "-",
 	}
 
-	cmd := exec.Command("gcc", args...)
+	cmd, err := preprocessorCmd(args...)
+	if err != nil {
+		f.Close()
+		return err
+	}
 	cmd.Stdout = f
 	cmd.Stderr = os.Stderr
 	if err := cmd.Run(); err != nil {
+		f.Close()
+		return fmt.Errorf("preprocess core with %s: %w", preprocessorIdentity(), err)
+	}
+	if err := f.Close(); err != nil {
 		return err
 	}
+	if err := sanitizePreprocessedFile(outputPath); err != nil {
+		return fmt.Errorf("sanitize preprocessed core: %w", err)
+	}
 
-	// Add atomic stubs
+	f, err = os.OpenFile(outputPath, os.O_APPEND|os.O_WRONLY, 0644)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+
+	// Add atomic stubs for compiler builtins that ccgo doesn't handle natively.
 	stubs := "typedef unsigned int uint32_t;\n" +
 		"static inline uint32_t __atomic_add_fetch(volatile uint32_t *p, uint32_t v, int m) { *p += v; return *p; }\n" +
 		"static inline uint32_t __atomic_sub_fetch(volatile uint32_t *p, uint32_t v, int m) { *p -= v; return *p; }\n\n"
@@ -278,14 +352,23 @@ func (t *Transpiler) transpileGrammarFile(grammarPath, inputC, outputGo, workDir
 		"-o", "-",
 	}
 
-	cmd := exec.Command("gcc", args...)
+	cmd, err := preprocessorCmd(args...)
+	if err != nil {
+		f.Close()
+		return err
+	}
 	cmd.Stdout = f
 	cmd.Stderr = os.Stderr
 	if err := cmd.Run(); err != nil {
 		f.Close()
+		return fmt.Errorf("preprocess grammar with %s: %w", preprocessorIdentity(), err)
+	}
+	if err := f.Close(); err != nil {
 		return err
 	}
-	f.Close()
+	if err := sanitizePreprocessedFile(preprocessed); err != nil {
+		return fmt.Errorf("sanitize preprocessed grammar: %w", err)
+	}
 
 	// Setup go.mod if needed
 	goModPath := filepath.Join(workDir, "go.mod")

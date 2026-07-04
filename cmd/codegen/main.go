@@ -28,7 +28,12 @@ var rootCmd = &cobra.Command{
 	Long: `A tool to transpile tree-sitter core library and grammars from C to Go.
 
 This tool uses ccgo to convert tree-sitter's C implementation into Go code,
-allowing you to use tree-sitter parsers natively in Go without CGO.`,
+allowing you to use tree-sitter parsers natively in Go without CGO.
+
+C sources are preprocessed with clang by default. Override with CC (may be a
+multi-word launcher such as "zig cc") and optional CFLAGS (for example
+--target=aarch64-unknown-linux-gnu). CC and CFLAGS are parsed with
+mvdan.cc/sh/v3/shell.Fields (POSIX quoting and parameter expansion).`,
 	RunE: run,
 }
 
@@ -52,7 +57,7 @@ func main() {
 }
 
 func run(cmd *cobra.Command, args []string) error {
-	slog.Info("compiling for target", "GOOS", targetGOOS, "GOARCH", targetGOARCH)
+	slog.Info("compiling for target", "GOOS", targetGOOS, "GOARCH", targetGOARCH, "CC", preprocessorIdentity())
 	// Create transpiler
 	transpiler := &Transpiler{
 		TreeSitterPath: TREE_SITTER_PATH,

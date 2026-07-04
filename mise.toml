@@ -3,17 +3,22 @@ go = "1.26.0"
 uv = "0.9.28"
 "go:golang.org/x/tools/gopls" = "0.21.0"
 
+[env]
+CC = "clang"
+
 [tasks."codegen:linux-amd64"]
 env = {
   TARGET_GOOS = "linux",
-  TARGET_GOARCH = "amd64"
+  TARGET_GOARCH = "amd64",
+  CC = "clang"
 }
 run = "go run -v ./cmd/codegen"
 
 [tasks."codegen:linux-arm64"]
 env = {
   TARGET_GOOS = "linux",
-  TARGET_GOARCH = "arm64"
+  TARGET_GOARCH = "arm64",
+  CC = "clang"
 }
 run = "go run -v ./cmd/codegen"
 
