@@ -74,28 +74,49 @@ func preprocessorCmd(goos, goarch string, args ...string) (*exec.Cmd, error) {
 }
 
 // defaultPreprocessorFlags returns compiler flags so host -E output stays
-// within what ccgo can parse. No source rewriting here — prefer targets and
-// macros the preprocessor understands natively.
+// within what ccgo can parse. Prefer triples and macros over rewriting sources.
 func defaultPreprocessorFlags(goos, goarch string) []string {
 	switch goos {
 	case "windows":
-		// MSVC-oriented windows.h breaks ccgo. Drive clang at MinGW so we get
-		// GNU-compatible Win32 headers (and set MINGW_SYSROOT when needed).
-		flags := []string{"--target=" + mingwTriple(goarch)}
-		if sysroot := mingwSysroot(); sysroot != "" {
+		// MSVC windows.h breaks ccgo; MinGW headers are GNU-shaped. Strip
+		// attributes/extensions ccgo rejects (e.g. __attribute__((x))).
+		flags := append([]string{"--target=" + mingwTriple(goarch)}, ccgoFriendlyMacros()...)
+		if sysroot := mingwSysroot(goarch); sysroot != "" {
 			flags = append(flags, "--sysroot="+sysroot)
 		}
 		return flags
 	case "darwin":
-		// Drop Blocks and neutralize Apple nullability qualifiers via macros.
-		return []string{
-			"-fno-blocks",
+		// Blocks + availability(macos,introduced=10.13.4) leave tokens like
+		// 10.13.4 that ccgo parses as invalid floats. Neutralize via macros.
+		flags := append([]string{"-fno-blocks"}, ccgoFriendlyMacros()...)
+		flags = append(flags,
 			"-D_Nonnull=",
 			"-D_Nullable=",
 			"-D_Null_unspecified=",
-		}
+			"-DAPI_AVAILABLE(...)=",
+			"-DAPI_UNAVAILABLE(...)=",
+			"-DAPI_DEPRECATED(...)=",
+			"-DAPI_DEPRECATED_WITH_REPLACEMENT(...)=",
+			"-D__API_AVAILABLE(...)=",
+			"-D__API_UNAVAILABLE(...)=",
+			"-D__API_DEPRECATED(...)=",
+			"-D__API_DEPRECATED_WITH_REPLACEMENT(...)=",
+		)
+		return flags
 	default:
 		return nil
+	}
+}
+
+// ccgoFriendlyMacros erases GNU/clang syntax forms that survive -E but are not
+// in ccgo's grammar. Function-like #defines, not text rewriting.
+func ccgoFriendlyMacros() []string {
+	return []string{
+		"-D__attribute__(...)=",
+		"-D__extension__=",
+		"-D__declspec(...)=",
+		"-D__forceinline=static inline",
+		"-D__volatile__=volatile",
 	}
 }
 
@@ -110,23 +131,69 @@ func mingwTriple(goarch string) string {
 	}
 }
 
-func mingwSysroot() string {
+func mingwSysroot(goarch string) string {
 	if s := strings.TrimSpace(os.Getenv("MINGW_SYSROOT")); s != "" {
-		return s
+		// Trust an explicit amd64 sysroot; other arches must match the triple layout.
+		if goarch == "amd64" || goarch == "" {
+			return s
+		}
+		if mingwSysrootMatches(s, goarch) {
+			return s
+		}
+		return ""
 	}
-	for _, candidate := range []string{
-		`C:\msys64\mingw64`,
-		`C:\mingw64`,
-		`C:\ProgramData\mingw64\mingw64`,
-		`C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64`,
-		"/mingw64",
-		"/usr/x86_64-w64-mingw32",
-	} {
-		if st, err := os.Stat(filepath.Join(candidate, "include")); err == nil && st.IsDir() {
+	var candidates []string
+	switch goarch {
+	case "arm64":
+		candidates = []string{
+			`C:\llvm-mingw`,
+			`C:\msys64\clangarm64`,
+			"/usr/aarch64-w64-mingw32",
+		}
+	case "386":
+		candidates = []string{
+			`C:\msys64\mingw32`,
+			`C:\mingw32`,
+			"/usr/i686-w64-mingw32",
+		}
+	default:
+		candidates = []string{
+			`C:\msys64\mingw64`,
+			`C:\mingw64`,
+			`C:\ProgramData\mingw64\mingw64`,
+			`C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64`,
+			"/mingw64",
+			"/usr/x86_64-w64-mingw32",
+		}
+	}
+	for _, candidate := range candidates {
+		if mingwSysrootMatches(candidate, goarch) {
 			return candidate
 		}
 	}
 	return ""
+}
+
+func mingwSysrootMatches(root, goarch string) bool {
+	if st, err := os.Stat(filepath.Join(root, "include")); err != nil || !st.IsDir() {
+		return false
+	}
+	triple := mingwTriple(goarch)
+	// Accept plain mingw64 roots for amd64; require triple-specific layout otherwise.
+	if goarch == "amd64" || goarch == "" {
+		return true
+	}
+	if st, err := os.Stat(filepath.Join(root, triple)); err == nil && st.IsDir() {
+		return true
+	}
+	if st, err := os.Stat(filepath.Join(root, "lib", triple)); err == nil && st.IsDir() {
+		return true
+	}
+	// llvm-mingw uses <root>/include and <root>/aarch64-w64-mingw32
+	if st, err := os.Stat(filepath.Join(root, triple, "include")); err == nil && st.IsDir() {
+		return true
+	}
+	return false
 }
 
 // sanitizePreprocessedC removes clang/glibc interchange typedefs that survive

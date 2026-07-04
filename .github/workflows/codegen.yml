@@ -81,6 +81,11 @@ jobs:
         run: |
           choco install llvm mingw -y --no-progress
           "C:\Program Files\LLVM\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          # x86_64 MinGW sysroot only applies to windows/amd64. arm64 needs llvm-mingw.
+          if ("${{ matrix.goarch }}" -ne "amd64") {
+            Write-Host "Skipping MINGW_SYSROOT for arch ${{ matrix.goarch }}"
+            return
+          }
           $mingwCandidates = @(
             "C:\ProgramData\mingw64\mingw64",
             "C:\mingw64",
@@ -94,16 +99,6 @@ jobs:
               Write-Host "Using MINGW_SYSROOT=$root"
               break
             }
-          }
-          if (-not $env:MINGW_SYSROOT) {
-            Get-ChildItem -Path C:\ -Filter include -Directory -Recurse -ErrorAction SilentlyContinue |
-              Where-Object { $_.FullName -match 'mingw64\\include$' } |
-              Select-Object -First 1 |
-              ForEach-Object {
-                $root = Split-Path $_.FullName -Parent
-                "MINGW_SYSROOT=$root" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-                Write-Host "Discovered MINGW_SYSROOT=$root"
-              }
           }
 
       - name: Verify preprocessor
