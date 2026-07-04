@@ -7,8 +7,7 @@ uv = "0.9.28"
 CC = "clang"
 
 # Per-target tasks. CI runs exactly one task per runner (native OS/arch).
-# Locally, `mise run codegen` runs only the host triple via scripts/codegen-host.sh.
-# Windows tasks rely on clang --target=*-w64-mingw32 (see defaultPreprocessorFlags).
+# Windows uses MinGW gcc on PATH when CC is unset for that task.
 
 [tasks."codegen:linux-amd64"]
 env = { TARGET_GOOS = "linux", TARGET_GOARCH = "amd64", CC = "clang" }
@@ -27,11 +26,7 @@ env = { TARGET_GOOS = "darwin", TARGET_GOARCH = "arm64", CC = "clang" }
 run = "go run -v ./cmd/codegen"
 
 [tasks."codegen:windows-amd64"]
-env = { TARGET_GOOS = "windows", TARGET_GOARCH = "amd64", CC = "clang" }
-run = "go run -v ./cmd/codegen"
-
-[tasks."codegen:windows-arm64"]
-env = { TARGET_GOOS = "windows", TARGET_GOARCH = "arm64", CC = "clang" }
+env = { TARGET_GOOS = "windows", TARGET_GOARCH = "amd64" }
 run = "go run -v ./cmd/codegen"
 
 [tasks.codegen]
@@ -46,7 +41,6 @@ depends = [
   "codegen:linux-386",
   "codegen:darwin-arm64",
   "codegen:windows-amd64",
-  "codegen:windows-arm64",
 ]
 
 [tasks.install]

@@ -49,13 +49,10 @@ var (
 	libcVersionErr  error
 )
 
-// preprocessorCmd builds the C preprocessor command from CC (default clang)
-// and optional CFLAGS. CC may be a multi-word launcher (e.g. "zig cc").
-// CC and CFLAGS are parsed with shell.Fields (POSIX word splitting, quotes,
-// and parameter expansion). goos/goarch select default flags (e.g. MinGW
-// triples on Windows) injected before user CFLAGS.
+// preprocessorCmd builds the C preprocessor command from CC and optional CFLAGS.
+// On Windows, MinGW gcc is preferred over clang when present on PATH.
 func preprocessorCmd(goos, goarch string, args ...string) (*exec.Cmd, error) {
-	ccFields, err := shell.Fields(env("CC", defaultPreprocessor), nil)
+	ccFields, err := shell.Fields(resolveCC(goos, goarch), nil)
 	if err != nil {
 		return nil, fmt.Errorf("parse CC: %w", err)
 	}
@@ -67,29 +64,65 @@ func preprocessorCmd(goos, goarch string, args ...string) (*exec.Cmd, error) {
 		return nil, fmt.Errorf("parse CFLAGS: %w", err)
 	}
 	cmdArgs := append([]string{}, ccFields[1:]...)
-	cmdArgs = append(cmdArgs, defaultPreprocessorFlags(goos, goarch)...)
+	cmdArgs = append(cmdArgs, defaultPreprocessorFlags(goos, goarch, ccFields[0])...)
 	cmdArgs = append(cmdArgs, cflags...)
 	cmdArgs = append(cmdArgs, args...)
 	return exec.Command(ccFields[0], cmdArgs...), nil
 }
 
+func resolveCC(goos, goarch string) string {
+	cc := strings.TrimSpace(os.Getenv("CC"))
+	if goos == "windows" {
+		if mingw := lookupMingwGCC(goarch); mingw != "" {
+			if cc == "" || strings.Contains(filepath.Base(cc), "clang") {
+				return mingw
+			}
+		}
+	}
+	if cc != "" {
+		return cc
+	}
+	return defaultPreprocessor
+}
+
+// lookupMingwGCC returns the MinGW GCC driver on PATH so -E uses GNU headers
+// without clang rewriting __declspec through __attribute__.
+func lookupMingwGCC(goarch string) string {
+	for _, cand := range []string{mingwTriple(goarch) + "-gcc", "gcc"} {
+		if p, err := exec.LookPath(cand); err == nil {
+			return p
+		}
+	}
+	return ""
+}
+
 // defaultPreprocessorFlags returns compiler flags so host -E output stays
 // within what ccgo can parse. Prefer triples and macros over rewriting sources.
-func defaultPreprocessorFlags(goos, goarch string) []string {
+func defaultPreprocessorFlags(goos, goarch, ccBinary string) []string {
+	base := filepath.Base(ccBinary)
+	isClang := strings.Contains(base, "clang")
 	switch goos {
 	case "windows":
-		// MSVC windows.h breaks ccgo; MinGW headers are GNU-shaped. Strip
-		// attributes/extensions ccgo rejects (e.g. __attribute__((x))).
-		flags := append([]string{"--target=" + mingwTriple(goarch)}, ccgoFriendlyMacros()...)
-		if sysroot := mingwSysroot(goarch); sysroot != "" {
-			flags = append(flags, "--sysroot="+sysroot)
+		var flags []string
+		if isClang {
+			flags = append(flags, "--target="+mingwTriple(goarch))
+			if sysroot := mingwSysroot(goarch); sysroot != "" {
+				flags = append(flags, "--sysroot="+sysroot)
+			}
 		}
+		// Only erase extensions that headers will not redefine. Do NOT empty
+		// __attribute__: MinGW does `#define __declspec(a) __attribute__((a))`,
+		// which then leaves stray `(dllimport)` tokens in the preprocessed TU.
+		flags = append(flags, "-D__extension__=", "-D__forceinline=static inline")
 		return flags
 	case "darwin":
 		// Blocks + availability(macos,introduced=10.13.4) leave tokens like
 		// 10.13.4 that ccgo parses as invalid floats. Neutralize via macros.
-		flags := append([]string{"-fno-blocks"}, ccgoFriendlyMacros()...)
-		flags = append(flags,
+		// Alignment-16 neon structs are ignored later via ccgo flags.
+		return []string{
+			"-fno-blocks",
+			"-D__attribute__(...)=",
+			"-D__extension__=",
 			"-D_Nonnull=",
 			"-D_Nullable=",
 			"-D_Null_unspecified=",
@@ -101,23 +134,22 @@ func defaultPreprocessorFlags(goos, goarch string) []string {
 			"-D__API_UNAVAILABLE(...)=",
 			"-D__API_DEPRECATED(...)=",
 			"-D__API_DEPRECATED_WITH_REPLACEMENT(...)=",
-		)
-		return flags
+		}
 	default:
 		return nil
 	}
 }
 
-// ccgoFriendlyMacros erases GNU/clang syntax forms that survive -E but are not
-// in ccgo's grammar. Function-like #defines, not text rewriting.
-func ccgoFriendlyMacros() []string {
-	return []string{
-		"-D__attribute__(...)=",
-		"-D__extension__=",
-		"-D__declspec(...)=",
-		"-D__forceinline=static inline",
-		"-D__volatile__=volatile",
+func ccgoExtraArgs(goos string) []string {
+	args := []string{
+		"-ignore-unsupported-alignment",
+		"-ignore-unsupported-atomic-sizes",
+		"-ignore-vector-functions",
 	}
+	if goos == "windows" {
+		args = append(args, "-winapi-no-errno")
+	}
+	return args
 }
 
 func mingwTriple(goarch string) string {
@@ -215,7 +247,12 @@ func sanitizePreprocessedFile(path string) error {
 }
 
 func preprocessorIdentity(goos, goarch string) string {
-	parts := append([]string{strings.TrimSpace(env("CC", defaultPreprocessor))}, defaultPreprocessorFlags(goos, goarch)...)
+	cc := resolveCC(goos, goarch)
+	ccBin := cc
+	if fields, err := shell.Fields(cc, nil); err == nil && len(fields) > 0 {
+		ccBin = fields[0]
+	}
+	parts := append([]string{cc}, defaultPreprocessorFlags(goos, goarch, ccBin)...)
 	if cflags := strings.TrimSpace(os.Getenv("CFLAGS")); cflags != "" {
 		parts = append(parts, cflags)
 	}
@@ -515,7 +552,8 @@ func (t *Transpiler) runCcgo(workDir, inputPath, outputPath string) error {
 	if rel, err := filepath.Rel(workDir, outputPath); err == nil {
 		outputArg = rel
 	}
-	ccgoArgs := []string{"ccgo", inputArg, "-o", outputArg}
+	ccgoArgs := append([]string{"ccgo"}, ccgoExtraArgs(t.GOOS)...)
+	ccgoArgs = append(ccgoArgs, inputArg, "-o", outputArg)
 
 	// Change to work dir
 	origDir, err := os.Getwd()
