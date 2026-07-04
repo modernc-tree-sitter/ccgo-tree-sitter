@@ -6,20 +6,41 @@ uv = "0.9.28"
 [env]
 CC = "clang"
 
+# Checked-in outputs: grammar/core-{GOOS}-{GOARCH}.go and
+# grammar/<lang>/grammar-{GOOS}-{GOARCH}.go (//go:build GOOS && GOARCH).
+# `mise run codegen` runs every codegen:* task below.
+# GOARCH for 32-bit x86 is `386` (i386).
+#
+# Optional: set CFLAGS=--target=<triple> when you have matching headers/sysroot.
+# On a plain Linux host, omit it — clang -E uses host headers and ccgo still
+# emits the correct build tags / libc ABI for TARGET_GOOS/TARGET_GOARCH.
+
 [tasks."codegen:linux-amd64"]
-env = {
-  TARGET_GOOS = "linux",
-  TARGET_GOARCH = "amd64",
-  CC = "clang"
-}
+env = { TARGET_GOOS = "linux", TARGET_GOARCH = "amd64", CC = "clang" }
 run = "go run -v ./cmd/codegen"
 
 [tasks."codegen:linux-arm64"]
-env = {
-  TARGET_GOOS = "linux",
-  TARGET_GOARCH = "arm64",
-  CC = "clang"
-}
+env = { TARGET_GOOS = "linux", TARGET_GOARCH = "arm64", CC = "clang" }
+run = "go run -v ./cmd/codegen"
+
+[tasks."codegen:linux-386"]
+env = { TARGET_GOOS = "linux", TARGET_GOARCH = "386", CC = "clang" }
+run = "go run -v ./cmd/codegen"
+
+[tasks."codegen:darwin-amd64"]
+env = { TARGET_GOOS = "darwin", TARGET_GOARCH = "amd64", CC = "clang" }
+run = "go run -v ./cmd/codegen"
+
+[tasks."codegen:darwin-arm64"]
+env = { TARGET_GOOS = "darwin", TARGET_GOARCH = "arm64", CC = "clang" }
+run = "go run -v ./cmd/codegen"
+
+[tasks."codegen:windows-amd64"]
+env = { TARGET_GOOS = "windows", TARGET_GOARCH = "amd64", CC = "clang" }
+run = "go run -v ./cmd/codegen"
+
+[tasks."codegen:windows-arm64"]
+env = { TARGET_GOOS = "windows", TARGET_GOARCH = "arm64", CC = "clang" }
 run = "go run -v ./cmd/codegen"
 
 [tasks.codegen]
