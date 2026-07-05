@@ -5,7 +5,7 @@ go 1.25.0
 require (
 	github.com/spf13/cobra v1.10.2
 	modernc.org/ccgo/v4 v4.30.2
-	modernc.org/libc v1.67.6
+	modernc.org/libc v1.73.5
 	mvdan.cc/sh/v3 v3.13.1
 )
 
