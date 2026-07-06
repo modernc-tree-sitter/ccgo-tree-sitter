@@ -1,4 +1,4 @@
-// Code generated for linux/amd64 by 'ccgo preprocessed.c -o grammar.go', DO NOT EDIT.
+// Code generated for linux/amd64 by 'ccgo -ignore-unsupported-alignment -ignore-unsupported-atomic-sizes -ignore-vector-functions preprocessed.c -o grammar.go', DO NOT EDIT.
 
 //go:build linux && amd64
 
@@ -16,168 +16,80 @@ var _ unsafe.Pointer
 
 const _GNU_SOURCE = 1
 const _LP64 = 1
-const _STDC_PREDEF_H = 1
 const __ATOMIC_ACQUIRE = 2
 const __ATOMIC_ACQ_REL = 4
 const __ATOMIC_CONSUME = 1
-const __ATOMIC_HLE_ACQUIRE = 65536
-const __ATOMIC_HLE_RELEASE = 131072
 const __ATOMIC_RELAXED = 0
 const __ATOMIC_RELEASE = 3
 const __ATOMIC_SEQ_CST = 5
-const __BFLT16_DECIMAL_DIG__ = 4
-const __BFLT16_DENORM_MIN__ = "9.18354961579912115600575419704879436e-41B"
-const __BFLT16_DIG__ = 2
-const __BFLT16_EPSILON__ = "7.81250000000000000000000000000000000e-3B"
-const __BFLT16_HAS_DENORM__ = 1
-const __BFLT16_HAS_INFINITY__ = 1
-const __BFLT16_HAS_QUIET_NAN__ = 1
-const __BFLT16_IS_IEC_60559__ = 0
-const __BFLT16_MANT_DIG__ = 8
-const __BFLT16_MAX_10_EXP__ = 38
-const __BFLT16_MAX_EXP__ = 128
-const __BFLT16_MAX__ = "3.38953138925153547590470800371487867e+38B"
-const __BFLT16_MIN__ = "1.17549435082228750796873653722224568e-38B"
-const __BFLT16_NORM_MAX__ = "3.38953138925153547590470800371487867e+38B"
 const __BIGGEST_ALIGNMENT__ = 16
+const __BITINT_MAXWIDTH__ = 8388608
+const __BOOL_WIDTH__ = 8
 const __BYTE_ORDER__ = "__ORDER_LITTLE_ENDIAN__"
 const __CCGO__ = 1
-const __CET__ = 3
 const __CHAR_BIT__ = 8
+const __CLANG_ATOMIC_BOOL_LOCK_FREE = 2
+const __CLANG_ATOMIC_CHAR16_T_LOCK_FREE = 2
+const __CLANG_ATOMIC_CHAR32_T_LOCK_FREE = 2
+const __CLANG_ATOMIC_CHAR_LOCK_FREE = 2
+const __CLANG_ATOMIC_INT_LOCK_FREE = 2
+const __CLANG_ATOMIC_LLONG_LOCK_FREE = 2
+const __CLANG_ATOMIC_LONG_LOCK_FREE = 2
+const __CLANG_ATOMIC_POINTER_LOCK_FREE = 2
+const __CLANG_ATOMIC_SHORT_LOCK_FREE = 2
+const __CLANG_ATOMIC_WCHAR_T_LOCK_FREE = 2
+const __CONSTANT_CFSTRINGS__ = 1
 const __DBL_DECIMAL_DIG__ = 17
+const __DBL_DENORM_MIN__ = 4.9406564584124654e-324
 const __DBL_DIG__ = 15
+const __DBL_EPSILON__ = 2.2204460492503131e-16
 const __DBL_HAS_DENORM__ = 1
 const __DBL_HAS_INFINITY__ = 1
 const __DBL_HAS_QUIET_NAN__ = 1
-const __DBL_IS_IEC_60559__ = 1
 const __DBL_MANT_DIG__ = 53
 const __DBL_MAX_10_EXP__ = 308
 const __DBL_MAX_EXP__ = 1024
-const __DEC128_EPSILON__ = 1e-33
-const __DEC128_MANT_DIG__ = 34
-const __DEC128_MAX_EXP__ = 6145
-const __DEC128_MAX__ = "9.999999999999999999999999999999999E6144"
-const __DEC128_MIN__ = 1e-6143
-const __DEC128_SUBNORMAL_MIN__ = 0.000000000000000000000000000000001e-6143
-const __DEC32_EPSILON__ = 1e-6
-const __DEC32_MANT_DIG__ = 7
-const __DEC32_MAX_EXP__ = 97
-const __DEC32_MAX__ = 9.999999e96
-const __DEC32_MIN__ = 1e-95
-const __DEC32_SUBNORMAL_MIN__ = 0.000001e-95
-const __DEC64_EPSILON__ = 1e-15
-const __DEC64_MANT_DIG__ = 16
-const __DEC64_MAX_EXP__ = 385
-const __DEC64_MAX__ = "9.999999999999999E384"
-const __DEC64_MIN__ = 1e-383
-const __DEC64_SUBNORMAL_MIN__ = 0.000000000000001e-383
-const __DECIMAL_BID_FORMAT__ = 1
-const __DECIMAL_DIG__ = 17
-const __DEC_EVAL_METHOD__ = 2
+const __DBL_MAX__ = 1.7976931348623157e+308
+const __DBL_MIN__ = 2.2250738585072014e-308
+const __DECIMAL_DIG__ = "__LDBL_DECIMAL_DIG__"
 const __ELF__ = 1
 const __FINITE_MATH_ONLY__ = 0
-const __FLOAT_WORD_ORDER__ = "__ORDER_LITTLE_ENDIAN__"
-const __FLT128_DECIMAL_DIG__ = 36
-const __FLT128_DENORM_MIN__ = 6.47517511943802511092443895822764655e-4966
-const __FLT128_DIG__ = 33
-const __FLT128_EPSILON__ = 1.92592994438723585305597794258492732e-34
-const __FLT128_HAS_DENORM__ = 1
-const __FLT128_HAS_INFINITY__ = 1
-const __FLT128_HAS_QUIET_NAN__ = 1
-const __FLT128_IS_IEC_60559__ = 1
-const __FLT128_MANT_DIG__ = 113
-const __FLT128_MAX_10_EXP__ = 4932
-const __FLT128_MAX_EXP__ = 16384
-const __FLT128_MAX__ = "1.18973149535723176508575932662800702e+4932"
-const __FLT128_MIN__ = 3.36210314311209350626267781732175260e-4932
-const __FLT128_NORM_MAX__ = "1.18973149535723176508575932662800702e+4932"
+const __FLOAT128__ = 1
 const __FLT16_DECIMAL_DIG__ = 5
-const __FLT16_DENORM_MIN__ = 5.96046447753906250000000000000000000e-8
+const __FLT16_DENORM_MIN__ = 5.9604644775390625e-8
 const __FLT16_DIG__ = 3
-const __FLT16_EPSILON__ = 9.76562500000000000000000000000000000e-4
+const __FLT16_EPSILON__ = 9.765625e-4
 const __FLT16_HAS_DENORM__ = 1
 const __FLT16_HAS_INFINITY__ = 1
 const __FLT16_HAS_QUIET_NAN__ = 1
-const __FLT16_IS_IEC_60559__ = 1
 const __FLT16_MANT_DIG__ = 11
 const __FLT16_MAX_10_EXP__ = 4
 const __FLT16_MAX_EXP__ = 16
-const __FLT16_MAX__ = 6.55040000000000000000000000000000000e+4
-const __FLT16_MIN__ = 6.10351562500000000000000000000000000e-5
-const __FLT16_NORM_MAX__ = 6.55040000000000000000000000000000000e+4
-const __FLT32X_DECIMAL_DIG__ = 17
-const __FLT32X_DENORM_MIN__ = 4.94065645841246544176568792868221372e-324
-const __FLT32X_DIG__ = 15
-const __FLT32X_EPSILON__ = 2.22044604925031308084726333618164062e-16
-const __FLT32X_HAS_DENORM__ = 1
-const __FLT32X_HAS_INFINITY__ = 1
-const __FLT32X_HAS_QUIET_NAN__ = 1
-const __FLT32X_IS_IEC_60559__ = 1
-const __FLT32X_MANT_DIG__ = 53
-const __FLT32X_MAX_10_EXP__ = 308
-const __FLT32X_MAX_EXP__ = 1024
-const __FLT32X_MAX__ = 1.79769313486231570814527423731704357e+308
-const __FLT32X_MIN__ = 2.22507385850720138309023271733240406e-308
-const __FLT32X_NORM_MAX__ = 1.79769313486231570814527423731704357e+308
-const __FLT32_DECIMAL_DIG__ = 9
-const __FLT32_DENORM_MIN__ = 1.40129846432481707092372958328991613e-45
-const __FLT32_DIG__ = 6
-const __FLT32_EPSILON__ = 1.19209289550781250000000000000000000e-7
-const __FLT32_HAS_DENORM__ = 1
-const __FLT32_HAS_INFINITY__ = 1
-const __FLT32_HAS_QUIET_NAN__ = 1
-const __FLT32_IS_IEC_60559__ = 1
-const __FLT32_MANT_DIG__ = 24
-const __FLT32_MAX_10_EXP__ = 38
-const __FLT32_MAX_EXP__ = 128
-const __FLT32_MAX__ = 3.40282346638528859811704183484516925e+38
-const __FLT32_MIN__ = 1.17549435082228750796873653722224568e-38
-const __FLT32_NORM_MAX__ = 3.40282346638528859811704183484516925e+38
-const __FLT64X_DECIMAL_DIG__ = 36
-const __FLT64X_DENORM_MIN__ = 6.47517511943802511092443895822764655e-4966
-const __FLT64X_DIG__ = 33
-const __FLT64X_EPSILON__ = 1.92592994438723585305597794258492732e-34
-const __FLT64X_HAS_DENORM__ = 1
-const __FLT64X_HAS_INFINITY__ = 1
-const __FLT64X_HAS_QUIET_NAN__ = 1
-const __FLT64X_IS_IEC_60559__ = 1
-const __FLT64X_MANT_DIG__ = 113
-const __FLT64X_MAX_10_EXP__ = 4932
-const __FLT64X_MAX_EXP__ = 16384
-const __FLT64X_MAX__ = "1.18973149535723176508575932662800702e+4932"
-const __FLT64X_MIN__ = 3.36210314311209350626267781732175260e-4932
-const __FLT64X_NORM_MAX__ = "1.18973149535723176508575932662800702e+4932"
-const __FLT64_DECIMAL_DIG__ = 17
-const __FLT64_DENORM_MIN__ = 4.94065645841246544176568792868221372e-324
-const __FLT64_DIG__ = 15
-const __FLT64_EPSILON__ = 2.22044604925031308084726333618164062e-16
-const __FLT64_HAS_DENORM__ = 1
-const __FLT64_HAS_INFINITY__ = 1
-const __FLT64_HAS_QUIET_NAN__ = 1
-const __FLT64_IS_IEC_60559__ = 1
-const __FLT64_MANT_DIG__ = 53
-const __FLT64_MAX_10_EXP__ = 308
-const __FLT64_MAX_EXP__ = 1024
-const __FLT64_MAX__ = 1.79769313486231570814527423731704357e+308
-const __FLT64_MIN__ = 2.22507385850720138309023271733240406e-308
-const __FLT64_NORM_MAX__ = 1.79769313486231570814527423731704357e+308
+const __FLT16_MAX__ = 6.5504e+4
+const __FLT16_MIN__ = 6.103515625e-5
 const __FLT_DECIMAL_DIG__ = 9
-const __FLT_DENORM_MIN__ = 1.40129846432481707092372958328991613e-45
+const __FLT_DENORM_MIN__ = 1.40129846e-45
 const __FLT_DIG__ = 6
-const __FLT_EPSILON__ = 1.19209289550781250000000000000000000e-7
-const __FLT_EVAL_METHOD_TS_18661_3__ = 0
-const __FLT_EVAL_METHOD__ = 0
+const __FLT_EPSILON__ = 1.19209290e-7
 const __FLT_HAS_DENORM__ = 1
 const __FLT_HAS_INFINITY__ = 1
 const __FLT_HAS_QUIET_NAN__ = 1
-const __FLT_IS_IEC_60559__ = 1
 const __FLT_MANT_DIG__ = 24
 const __FLT_MAX_10_EXP__ = 38
 const __FLT_MAX_EXP__ = 128
-const __FLT_MAX__ = 3.40282346638528859811704183484516925e+38
-const __FLT_MIN__ = 1.17549435082228750796873653722224568e-38
-const __FLT_NORM_MAX__ = 3.40282346638528859811704183484516925e+38
+const __FLT_MAX__ = 3.40282347e+38
+const __FLT_MIN__ = 1.17549435e-38
 const __FLT_RADIX__ = 2
+const __FPCLASS_NEGINF = 0x0004
+const __FPCLASS_NEGNORMAL = 0x0008
+const __FPCLASS_NEGSUBNORMAL = 0x0010
+const __FPCLASS_NEGZERO = 0x0020
+const __FPCLASS_POSINF = 0x0200
+const __FPCLASS_POSNORMAL = 0x0100
+const __FPCLASS_POSSUBNORMAL = 0x0080
+const __FPCLASS_POSZERO = 0x0040
+const __FPCLASS_QNAN = 0x0002
+const __FPCLASS_SNAN = 0x0001
 const __FUNCTION__ = "__func__"
 const __FXSR__ = 1
 const __GCC_ASM_FLAG_OUTPUTS__ = 1
@@ -192,95 +104,131 @@ const __GCC_ATOMIC_POINTER_LOCK_FREE = 2
 const __GCC_ATOMIC_SHORT_LOCK_FREE = 2
 const __GCC_ATOMIC_TEST_AND_SET_TRUEVAL = 1
 const __GCC_ATOMIC_WCHAR_T_LOCK_FREE = 2
-const __GCC_CONSTRUCTIVE_SIZE = 64
-const __GCC_DESTRUCTIVE_SIZE = 64
 const __GCC_HAVE_DWARF2_CFI_ASM = 1
 const __GCC_HAVE_SYNC_COMPARE_AND_SWAP_1 = 1
 const __GCC_HAVE_SYNC_COMPARE_AND_SWAP_2 = 1
 const __GCC_HAVE_SYNC_COMPARE_AND_SWAP_4 = 1
 const __GCC_HAVE_SYNC_COMPARE_AND_SWAP_8 = 1
-const __GCC_IEC_559 = 2
-const __GCC_IEC_559_COMPLEX = 2
-const __GNUC_EXECUTION_CHARSET_NAME = "UTF-8"
-const __GNUC_MINOR__ = 3
-const __GNUC_PATCHLEVEL__ = 0
+const __GNUC_MINOR__ = 2
+const __GNUC_PATCHLEVEL__ = 1
 const __GNUC_STDC_INLINE__ = 1
-const __GNUC_WIDE_EXECUTION_CHARSET_NAME = "UTF-32LE"
-const __GNUC__ = 13
-const __GXX_ABI_VERSION = 1018
-const __HAVE_SPECULATION_SAFE_VALUE = 1
-const __INT16_MAX__ = 0x7fff
-const __INT32_MAX__ = 0x7fffffff
+const __GNUC__ = 4
+const __GXX_ABI_VERSION = 1002
+const __INT16_FMTd__ = "hd"
+const __INT16_FMTi__ = "hi"
+const __INT16_MAX__ = 32767
+const __INT16_TYPE__ = "short"
+const __INT32_FMTd__ = "d"
+const __INT32_FMTi__ = "i"
+const __INT32_MAX__ = 2147483647
 const __INT32_TYPE__ = "int"
-const __INT64_MAX__ = 0x7fffffffffffffff
-const __INT8_MAX__ = 0x7f
-const __INTMAX_MAX__ = 0x7fffffffffffffff
+const __INT64_C_SUFFIX__ = "L"
+const __INT64_FMTd__ = "ld"
+const __INT64_FMTi__ = "li"
+const __INT64_MAX__ = 9223372036854775807
+const __INT8_FMTd__ = "hhd"
+const __INT8_FMTi__ = "hhi"
+const __INT8_MAX__ = 127
+const __INTMAX_C_SUFFIX__ = "L"
+const __INTMAX_FMTd__ = "ld"
+const __INTMAX_FMTi__ = "li"
+const __INTMAX_MAX__ = 9223372036854775807
 const __INTMAX_WIDTH__ = 64
-const __INTPTR_MAX__ = 0x7fffffffffffffff
+const __INTPTR_FMTd__ = "ld"
+const __INTPTR_FMTi__ = "li"
+const __INTPTR_MAX__ = 9223372036854775807
 const __INTPTR_WIDTH__ = 64
-const __INT_FAST16_MAX__ = 0x7fffffffffffffff
-const __INT_FAST16_WIDTH__ = 64
-const __INT_FAST32_MAX__ = 0x7fffffffffffffff
-const __INT_FAST32_WIDTH__ = 64
-const __INT_FAST64_MAX__ = 0x7fffffffffffffff
+const __INT_FAST16_FMTd__ = "hd"
+const __INT_FAST16_FMTi__ = "hi"
+const __INT_FAST16_MAX__ = 32767
+const __INT_FAST16_TYPE__ = "short"
+const __INT_FAST16_WIDTH__ = 16
+const __INT_FAST32_FMTd__ = "d"
+const __INT_FAST32_FMTi__ = "i"
+const __INT_FAST32_MAX__ = 2147483647
+const __INT_FAST32_TYPE__ = "int"
+const __INT_FAST32_WIDTH__ = 32
+const __INT_FAST64_FMTd__ = "ld"
+const __INT_FAST64_FMTi__ = "li"
+const __INT_FAST64_MAX__ = 9223372036854775807
 const __INT_FAST64_WIDTH__ = 64
-const __INT_FAST8_MAX__ = 0x7f
+const __INT_FAST8_FMTd__ = "hhd"
+const __INT_FAST8_FMTi__ = "hhi"
+const __INT_FAST8_MAX__ = 127
 const __INT_FAST8_WIDTH__ = 8
-const __INT_LEAST16_MAX__ = 0x7fff
+const __INT_LEAST16_FMTd__ = "hd"
+const __INT_LEAST16_FMTi__ = "hi"
+const __INT_LEAST16_MAX__ = 32767
+const __INT_LEAST16_TYPE__ = "short"
 const __INT_LEAST16_WIDTH__ = 16
-const __INT_LEAST32_MAX__ = 0x7fffffff
+const __INT_LEAST32_FMTd__ = "d"
+const __INT_LEAST32_FMTi__ = "i"
+const __INT_LEAST32_MAX__ = 2147483647
 const __INT_LEAST32_TYPE__ = "int"
 const __INT_LEAST32_WIDTH__ = 32
-const __INT_LEAST64_MAX__ = 0x7fffffffffffffff
+const __INT_LEAST64_FMTd__ = "ld"
+const __INT_LEAST64_FMTi__ = "li"
+const __INT_LEAST64_MAX__ = 9223372036854775807
 const __INT_LEAST64_WIDTH__ = 64
-const __INT_LEAST8_MAX__ = 0x7f
+const __INT_LEAST8_FMTd__ = "hhd"
+const __INT_LEAST8_FMTi__ = "hhi"
+const __INT_LEAST8_MAX__ = 127
 const __INT_LEAST8_WIDTH__ = 8
-const __INT_MAX__ = 0x7fffffff
+const __INT_MAX__ = 2147483647
 const __INT_WIDTH__ = 32
 const __LDBL_DECIMAL_DIG__ = 17
-const __LDBL_DENORM_MIN__ = 4.94065645841246544176568792868221372e-324
+const __LDBL_DENORM_MIN__ = 4.9406564584124654e-324
 const __LDBL_DIG__ = 15
-const __LDBL_EPSILON__ = 2.22044604925031308084726333618164062e-16
+const __LDBL_EPSILON__ = 2.2204460492503131e-16
 const __LDBL_HAS_DENORM__ = 1
 const __LDBL_HAS_INFINITY__ = 1
 const __LDBL_HAS_QUIET_NAN__ = 1
-const __LDBL_IS_IEC_60559__ = 1
 const __LDBL_MANT_DIG__ = 53
 const __LDBL_MAX_10_EXP__ = 308
 const __LDBL_MAX_EXP__ = 1024
-const __LDBL_MAX__ = 1.79769313486231570814527423731704357e+308
-const __LDBL_MIN__ = 2.22507385850720138309023271733240406e-308
-const __LDBL_NORM_MAX__ = 1.79769313486231570814527423731704357e+308
-const __LONG_DOUBLE_64__ = 1
-const __LONG_LONG_MAX__ = 0x7fffffffffffffff
-const __LONG_LONG_WIDTH__ = 64
-const __LONG_MAX__ = 0x7fffffffffffffff
+const __LDBL_MAX__ = 1.7976931348623157e+308
+const __LDBL_MIN__ = 2.2250738585072014e-308
+const __LITTLE_ENDIAN__ = 1
+const __LLONG_WIDTH__ = 64
+const __LONG_LONG_MAX__ = 9223372036854775807
+const __LONG_MAX__ = 9223372036854775807
 const __LONG_WIDTH__ = 64
 const __LP64__ = 1
-const __MMX_WITH_SSE__ = 1
+const __MEMORY_SCOPE_DEVICE = 1
+const __MEMORY_SCOPE_SINGLE = 4
+const __MEMORY_SCOPE_SYSTEM = 0
+const __MEMORY_SCOPE_WRKGRP = 2
+const __MEMORY_SCOPE_WVFRNT = 3
 const __MMX__ = 1
 const __NO_INLINE__ = 1
+const __NO_MATH_INLINES = 1
+const __OBJC_BOOL_IS_BOOL = 0
+const __OPENCL_MEMORY_SCOPE_ALL_SVM_DEVICES = 3
+const __OPENCL_MEMORY_SCOPE_DEVICE = 2
+const __OPENCL_MEMORY_SCOPE_SUB_GROUP = 4
+const __OPENCL_MEMORY_SCOPE_WORK_GROUP = 1
+const __OPENCL_MEMORY_SCOPE_WORK_ITEM = 0
 const __ORDER_BIG_ENDIAN__ = 4321
 const __ORDER_LITTLE_ENDIAN__ = 1234
 const __ORDER_PDP_ENDIAN__ = 3412
 const __PIC__ = 2
 const __PIE__ = 2
+const __POINTER_WIDTH__ = 64
 const __PRAGMA_REDEFINE_EXTNAME = 1
 const __PRETTY_FUNCTION__ = "__func__"
-const __PTRDIFF_MAX__ = 0x7fffffffffffffff
+const __PTRDIFF_FMTd__ = "ld"
+const __PTRDIFF_FMTi__ = "li"
+const __PTRDIFF_MAX__ = 9223372036854775807
 const __PTRDIFF_WIDTH__ = 64
-const __SCHAR_MAX__ = 0x7f
-const __SCHAR_WIDTH__ = 8
+const __SCHAR_MAX__ = 127
 const __SEG_FS = 1
 const __SEG_GS = 1
-const __SHRT_MAX__ = 0x7fff
+const __SHRT_MAX__ = 32767
 const __SHRT_WIDTH__ = 16
-const __SIG_ATOMIC_MAX__ = 0x7fffffff
-const __SIG_ATOMIC_TYPE__ = "int"
+const __SIG_ATOMIC_MAX__ = 2147483647
 const __SIG_ATOMIC_WIDTH__ = 32
 const __SIZEOF_DOUBLE__ = 8
 const __SIZEOF_FLOAT128__ = 16
-const __SIZEOF_FLOAT80__ = 16
 const __SIZEOF_FLOAT__ = 4
 const __SIZEOF_INT128__ = 16
 const __SIZEOF_INT__ = 4
@@ -293,55 +241,123 @@ const __SIZEOF_SHORT__ = 2
 const __SIZEOF_SIZE_T__ = 8
 const __SIZEOF_WCHAR_T__ = 4
 const __SIZEOF_WINT_T__ = 4
-const __SIZE_MAX__ = 0xffffffffffffffff
+const __SIZE_FMTX__ = "lX"
+const __SIZE_FMTo__ = "lo"
+const __SIZE_FMTu__ = "lu"
+const __SIZE_FMTx__ = "lx"
+const __SIZE_MAX__ = 18446744073709551615
 const __SIZE_WIDTH__ = 64
 const __SSE2_MATH__ = 1
 const __SSE2__ = 1
 const __SSE_MATH__ = 1
 const __SSE__ = 1
-const __SSP_STRONG__ = 3
 const __STDC_HOSTED__ = 1
-const __STDC_IEC_559_COMPLEX__ = 1
-const __STDC_IEC_559__ = 1
-const __STDC_IEC_60559_BFP__ = 201404
-const __STDC_IEC_60559_COMPLEX__ = 201404
-const __STDC_ISO_10646__ = 201706
 const __STDC_UTF_16__ = 1
 const __STDC_UTF_32__ = 1
 const __STDC_VERSION__ = 201710
 const __STDC__ = 1
-const __UINT16_MAX__ = 0xffff
-const __UINT32_MAX__ = 0xffffffff
-const __UINT64_MAX__ = 0xffffffffffffffff
-const __UINT8_MAX__ = 0xff
-const __UINTMAX_MAX__ = 0xffffffffffffffff
-const __UINTPTR_MAX__ = 0xffffffffffffffff
-const __UINT_FAST16_MAX__ = 0xffffffffffffffff
-const __UINT_FAST32_MAX__ = 0xffffffffffffffff
-const __UINT_FAST64_MAX__ = 0xffffffffffffffff
-const __UINT_FAST8_MAX__ = 0xff
-const __UINT_LEAST16_MAX__ = 0xffff
-const __UINT_LEAST32_MAX__ = 0xffffffff
-const __UINT_LEAST64_MAX__ = 0xffffffffffffffff
-const __UINT_LEAST8_MAX__ = 0xff
-const __VERSION__ = "13.3.0"
-const __WCHAR_MAX__ = 0x7fffffff
+const __UINT16_FMTX__ = "hX"
+const __UINT16_FMTo__ = "ho"
+const __UINT16_FMTu__ = "hu"
+const __UINT16_FMTx__ = "hx"
+const __UINT16_MAX__ = 65535
+const __UINT32_C_SUFFIX__ = "U"
+const __UINT32_FMTX__ = "X"
+const __UINT32_FMTo__ = "o"
+const __UINT32_FMTu__ = "u"
+const __UINT32_FMTx__ = "x"
+const __UINT32_MAX__ = 4294967295
+const __UINT64_C_SUFFIX__ = "UL"
+const __UINT64_FMTX__ = "lX"
+const __UINT64_FMTo__ = "lo"
+const __UINT64_FMTu__ = "lu"
+const __UINT64_FMTx__ = "lx"
+const __UINT64_MAX__ = 18446744073709551615
+const __UINT8_FMTX__ = "hhX"
+const __UINT8_FMTo__ = "hho"
+const __UINT8_FMTu__ = "hhu"
+const __UINT8_FMTx__ = "hhx"
+const __UINT8_MAX__ = 255
+const __UINTMAX_C_SUFFIX__ = "UL"
+const __UINTMAX_FMTX__ = "lX"
+const __UINTMAX_FMTo__ = "lo"
+const __UINTMAX_FMTu__ = "lu"
+const __UINTMAX_FMTx__ = "lx"
+const __UINTMAX_MAX__ = 18446744073709551615
+const __UINTMAX_WIDTH__ = 64
+const __UINTPTR_FMTX__ = "lX"
+const __UINTPTR_FMTo__ = "lo"
+const __UINTPTR_FMTu__ = "lu"
+const __UINTPTR_FMTx__ = "lx"
+const __UINTPTR_MAX__ = 18446744073709551615
+const __UINTPTR_WIDTH__ = 64
+const __UINT_FAST16_FMTX__ = "hX"
+const __UINT_FAST16_FMTo__ = "ho"
+const __UINT_FAST16_FMTu__ = "hu"
+const __UINT_FAST16_FMTx__ = "hx"
+const __UINT_FAST16_MAX__ = 65535
+const __UINT_FAST32_FMTX__ = "X"
+const __UINT_FAST32_FMTo__ = "o"
+const __UINT_FAST32_FMTu__ = "u"
+const __UINT_FAST32_FMTx__ = "x"
+const __UINT_FAST32_MAX__ = 4294967295
+const __UINT_FAST64_FMTX__ = "lX"
+const __UINT_FAST64_FMTo__ = "lo"
+const __UINT_FAST64_FMTu__ = "lu"
+const __UINT_FAST64_FMTx__ = "lx"
+const __UINT_FAST64_MAX__ = 18446744073709551615
+const __UINT_FAST8_FMTX__ = "hhX"
+const __UINT_FAST8_FMTo__ = "hho"
+const __UINT_FAST8_FMTu__ = "hhu"
+const __UINT_FAST8_FMTx__ = "hhx"
+const __UINT_FAST8_MAX__ = 255
+const __UINT_LEAST16_FMTX__ = "hX"
+const __UINT_LEAST16_FMTo__ = "ho"
+const __UINT_LEAST16_FMTu__ = "hu"
+const __UINT_LEAST16_FMTx__ = "hx"
+const __UINT_LEAST16_MAX__ = 65535
+const __UINT_LEAST32_FMTX__ = "X"
+const __UINT_LEAST32_FMTo__ = "o"
+const __UINT_LEAST32_FMTu__ = "u"
+const __UINT_LEAST32_FMTx__ = "x"
+const __UINT_LEAST32_MAX__ = 4294967295
+const __UINT_LEAST64_FMTX__ = "lX"
+const __UINT_LEAST64_FMTo__ = "lo"
+const __UINT_LEAST64_FMTu__ = "lu"
+const __UINT_LEAST64_FMTx__ = "lx"
+const __UINT_LEAST64_MAX__ = 18446744073709551615
+const __UINT_LEAST8_FMTX__ = "hhX"
+const __UINT_LEAST8_FMTo__ = "hho"
+const __UINT_LEAST8_FMTu__ = "hhu"
+const __UINT_LEAST8_FMTx__ = "hhx"
+const __UINT_LEAST8_MAX__ = 255
+const __VERSION__ = "Ubuntu Clang 18.1.3 (1ubuntu1)"
+const __WCHAR_MAX__ = 2147483647
 const __WCHAR_TYPE__ = "int"
 const __WCHAR_WIDTH__ = 32
-const __WINT_MAX__ = 0xffffffff
-const __WINT_MIN__ = 0
+const __WINT_MAX__ = 4294967295
+const __WINT_UNSIGNED__ = 1
 const __WINT_WIDTH__ = 32
 const __amd64 = 1
 const __amd64__ = 1
+const __clang__ = 1
+const __clang_literal_encoding__ = "UTF-8"
+const __clang_major__ = 18
+const __clang_minor__ = 1
+const __clang_patchlevel__ = 3
+const __clang_version__ = "18.1.3 (1ubuntu1)"
+const __clang_wide_literal_encoding__ = "UTF-32"
 const __code_model_small__ = 1
 const __gnu_linux__ = 1
 const __k8 = 1
 const __k8__ = 1
 const __linux = 1
 const __linux__ = 1
+const __llvm__ = 1
 const __pic__ = 2
 const __pie__ = 2
 const __restrict_arr = "restrict"
+const __tune_k8__ = 1
 const __unix = 1
 const __unix__ = 1
 const __x86_64 = 1
@@ -629,15 +645,15 @@ type u_int64_t = uint64
 type register_t = int32
 
 func __bswap_16(tls *libc.TLS, __bsx __uint16_t) (r __uint16_t) {
-	return libc.X__builtin_bswap16(tls, __bsx)
+	return libc.Uint16FromInt32(libc.Int32FromUint16(__bsx)>>libc.Int32FromInt32(8)&libc.Int32FromInt32(0xff) | libc.Int32FromUint16(__bsx)&libc.Int32FromInt32(0xff)<<libc.Int32FromInt32(8))
 }
 
 func __bswap_32(tls *libc.TLS, __bsx __uint32_t) (r __uint32_t) {
-	return libc.X__builtin_bswap32(tls, __bsx)
+	return __bsx&libc.Uint32FromUint32(0xff000000)>>libc.Int32FromInt32(24) | __bsx&libc.Uint32FromUint32(0x00ff0000)>>libc.Int32FromInt32(8) | __bsx&libc.Uint32FromUint32(0x0000ff00)<<libc.Int32FromInt32(8) | __bsx&libc.Uint32FromUint32(0x000000ff)<<libc.Int32FromInt32(24)
 }
 
 func __bswap_64(tls *libc.TLS, __bsx __uint64_t) (r __uint64_t) {
-	return libc.X__builtin_bswap64(tls, __bsx)
+	return uint64(__bsx&libc.Uint64FromUint64(0xff00000000000000)>>libc.Int32FromInt32(56) | __bsx&libc.Uint64FromUint64(0x00ff000000000000)>>libc.Int32FromInt32(40) | __bsx&libc.Uint64FromUint64(0x0000ff0000000000)>>libc.Int32FromInt32(24) | __bsx&libc.Uint64FromUint64(0x000000ff00000000)>>libc.Int32FromInt32(8) | __bsx&libc.Uint64FromUint64(0x00000000ff000000)<<libc.Int32FromInt32(8) | __bsx&libc.Uint64FromUint64(0x0000000000ff0000)<<libc.Int32FromInt32(24) | __bsx&libc.Uint64FromUint64(0x000000000000ff00)<<libc.Int32FromInt32(40) | __bsx&libc.Uint64FromUint64(0x00000000000000ff)<<libc.Int32FromInt32(56))
 }
 
 func __uint16_identity(tls *libc.TLS, __x __uint16_t) (r __uint16_t) {
@@ -1387,8 +1403,8 @@ func tree_sitter_cairo_external_scanner_deserialize(tls *libc.TLS, payload uintp
 	if length > uint32(0) {
 		_ = libc.Uint64FromInt64(4)
 		{
-			if !(uint64(8) == uint64(length) && libc.Bool(__ccgo_ts+110 != 0)) {
-				libc.X__assert_fail(tls, __ccgo_ts+136, __ccgo_ts+97, int32(232), uintptr(unsafe.Pointer(&__func__1)))
+			if !(uint64(8) == uint64(length) && libc.Bool(__ccgo_ts+108 != 0)) {
+				libc.X__assert_fail(tls, __ccgo_ts+134, __ccgo_ts+97, int32(232), uintptr(unsafe.Pointer(&__func__1)))
 			}
 		}
 		libc.Xmemcpy(tls, scanner, buffer, uint64(8))
@@ -1721,320 +1737,320 @@ const alias_sym_type = 312
 const alias_sym_type_identifier = 313
 
 var ts_symbol_names = [314]uintptr{
-	0:   __ccgo_ts + 193,
-	1:   __ccgo_ts + 197,
-	2:   __ccgo_ts + 208,
-	3:   __ccgo_ts + 213,
-	4:   __ccgo_ts + 220,
-	5:   __ccgo_ts + 222,
-	6:   __ccgo_ts + 224,
-	7:   __ccgo_ts + 226,
-	8:   __ccgo_ts + 229,
-	9:   __ccgo_ts + 235,
-	10:  __ccgo_ts + 237,
-	11:  __ccgo_ts + 247,
-	12:  __ccgo_ts + 253,
-	13:  __ccgo_ts + 255,
-	14:  __ccgo_ts + 265,
-	15:  __ccgo_ts + 267,
-	16:  __ccgo_ts + 269,
-	17:  __ccgo_ts + 276,
-	18:  __ccgo_ts + 281,
-	19:  __ccgo_ts + 284,
-	20:  __ccgo_ts + 193,
-	21:  __ccgo_ts + 286,
-	22:  __ccgo_ts + 299,
-	23:  __ccgo_ts + 306,
-	24:  __ccgo_ts + 320,
-	25:  __ccgo_ts + 323,
-	26:  __ccgo_ts + 327,
-	27:  __ccgo_ts + 333,
-	28:  __ccgo_ts + 339,
-	29:  __ccgo_ts + 347,
-	30:  __ccgo_ts + 350,
-	31:  __ccgo_ts + 353,
-	32:  __ccgo_ts + 357,
-	33:  __ccgo_ts + 361,
-	34:  __ccgo_ts + 365,
-	35:  __ccgo_ts + 368,
-	36:  __ccgo_ts + 371,
-	37:  __ccgo_ts + 380,
-	38:  __ccgo_ts + 383,
-	39:  __ccgo_ts + 386,
-	40:  __ccgo_ts + 396,
-	41:  __ccgo_ts + 401,
-	42:  __ccgo_ts + 406,
-	43:  __ccgo_ts + 413,
-	44:  __ccgo_ts + 418,
-	45:  __ccgo_ts + 429,
-	46:  __ccgo_ts + 431,
-	47:  __ccgo_ts + 434,
-	48:  __ccgo_ts + 436,
-	49:  __ccgo_ts + 438,
-	50:  __ccgo_ts + 442,
-	51:  __ccgo_ts + 444,
-	52:  __ccgo_ts + 446,
-	53:  __ccgo_ts + 450,
-	54:  __ccgo_ts + 457,
-	55:  __ccgo_ts + 470,
-	56:  __ccgo_ts + 477,
-	57:  __ccgo_ts + 480,
-	58:  __ccgo_ts + 483,
-	59:  __ccgo_ts + 486,
-	60:  __ccgo_ts + 488,
-	61:  __ccgo_ts + 490,
-	62:  __ccgo_ts + 492,
-	63:  __ccgo_ts + 497,
-	64:  __ccgo_ts + 502,
-	65:  __ccgo_ts + 509,
-	66:  __ccgo_ts + 511,
-	67:  __ccgo_ts + 513,
-	68:  __ccgo_ts + 521,
-	69:  __ccgo_ts + 525,
-	70:  __ccgo_ts + 532,
-	71:  __ccgo_ts + 537,
-	72:  __ccgo_ts + 540,
-	73:  __ccgo_ts + 543,
-	74:  __ccgo_ts + 545,
-	75:  __ccgo_ts + 549,
-	76:  __ccgo_ts + 554,
-	77:  __ccgo_ts + 564,
-	78:  __ccgo_ts + 572,
-	79:  __ccgo_ts + 576,
-	80:  __ccgo_ts + 580,
-	81:  __ccgo_ts + 585,
-	82:  __ccgo_ts + 588,
-	83:  __ccgo_ts + 594,
-	84:  __ccgo_ts + 594,
-	85:  __ccgo_ts + 594,
-	86:  __ccgo_ts + 594,
-	87:  __ccgo_ts + 594,
-	88:  __ccgo_ts + 594,
-	89:  __ccgo_ts + 594,
-	90:  __ccgo_ts + 594,
-	91:  __ccgo_ts + 594,
-	92:  __ccgo_ts + 594,
-	93:  __ccgo_ts + 594,
-	94:  __ccgo_ts + 594,
-	95:  __ccgo_ts + 594,
-	96:  __ccgo_ts + 594,
-	97:  __ccgo_ts + 594,
-	98:  __ccgo_ts + 594,
-	99:  __ccgo_ts + 594,
-	100: __ccgo_ts + 594,
-	101: __ccgo_ts + 594,
-	102: __ccgo_ts + 594,
-	103: __ccgo_ts + 609,
-	104: __ccgo_ts + 611,
-	105: __ccgo_ts + 613,
-	106: __ccgo_ts + 619,
-	107: __ccgo_ts + 622,
-	108: __ccgo_ts + 627,
-	109: __ccgo_ts + 629,
-	110: __ccgo_ts + 632,
-	111: __ccgo_ts + 634,
-	112: __ccgo_ts + 636,
-	113: __ccgo_ts + 639,
-	114: __ccgo_ts + 642,
-	115: __ccgo_ts + 644,
-	116: __ccgo_ts + 609,
-	117: __ccgo_ts + 646,
-	118: __ccgo_ts + 649,
-	119: __ccgo_ts + 652,
-	120: __ccgo_ts + 655,
-	121: __ccgo_ts + 658,
-	122: __ccgo_ts + 660,
-	123: __ccgo_ts + 663,
-	124: __ccgo_ts + 666,
-	125: __ccgo_ts + 669,
-	126: __ccgo_ts + 672,
-	127: __ccgo_ts + 675,
-	128: __ccgo_ts + 678,
-	129: __ccgo_ts + 681,
-	130: __ccgo_ts + 685,
-	131: __ccgo_ts + 689,
-	132: __ccgo_ts + 457,
-	133: __ccgo_ts + 691,
-	134: __ccgo_ts + 696,
-	135: __ccgo_ts + 702,
-	136: __ccgo_ts + 707,
-	137: __ccgo_ts + 717,
-	138: __ccgo_ts + 726,
-	139: __ccgo_ts + 734,
-	140: __ccgo_ts + 747,
-	141: __ccgo_ts + 760,
-	142: __ccgo_ts + 779,
-	143: __ccgo_ts + 796,
-	144: __ccgo_ts + 809,
-	145: __ccgo_ts + 824,
-	146: __ccgo_ts + 840,
-	147: __ccgo_ts + 858,
-	148: __ccgo_ts + 873,
-	149: __ccgo_ts + 894,
-	150: __ccgo_ts + 904,
-	151: __ccgo_ts + 925,
-	152: __ccgo_ts + 943,
-	153: __ccgo_ts + 963,
-	154: __ccgo_ts + 982,
-	155: __ccgo_ts + 992,
-	156: __ccgo_ts + 286,
-	157: __ccgo_ts + 1013,
-	158: __ccgo_ts + 1030,
-	159: __ccgo_ts + 1054,
-	160: __ccgo_ts + 1066,
-	161: __ccgo_ts + 1088,
-	162: __ccgo_ts + 1110,
-	163: __ccgo_ts + 1131,
-	164: __ccgo_ts + 1143,
-	165: __ccgo_ts + 1158,
-	166: __ccgo_ts + 1171,
-	167: __ccgo_ts + 1184,
-	168: __ccgo_ts + 1202,
-	169: __ccgo_ts + 1211,
-	170: __ccgo_ts + 1229,
-	171: __ccgo_ts + 1241,
-	172: __ccgo_ts + 1256,
-	173: __ccgo_ts + 1262,
-	174: __ccgo_ts + 1282,
-	175: __ccgo_ts + 1295,
-	176: __ccgo_ts + 1310,
-	177: __ccgo_ts + 1327,
-	178: __ccgo_ts + 1348,
-	179: __ccgo_ts + 1361,
-	180: __ccgo_ts + 1374,
-	181: __ccgo_ts + 1385,
-	182: __ccgo_ts + 1399,
-	183: __ccgo_ts + 1410,
-	184: __ccgo_ts + 1430,
-	185: __ccgo_ts + 1447,
-	186: __ccgo_ts + 1465,
-	187: __ccgo_ts + 1487,
-	188: __ccgo_ts + 1503,
-	189: __ccgo_ts + 1508,
-	190: __ccgo_ts + 1520,
-	191: __ccgo_ts + 1529,
-	192: __ccgo_ts + 1546,
-	193: __ccgo_ts + 1567,
-	194: __ccgo_ts + 1585,
-	195: __ccgo_ts + 1601,
-	196: __ccgo_ts + 1618,
-	197: __ccgo_ts + 1634,
-	198: __ccgo_ts + 1647,
-	199: __ccgo_ts + 1664,
-	200: __ccgo_ts + 1681,
-	201: __ccgo_ts + 1693,
-	202: __ccgo_ts + 1704,
-	203: __ccgo_ts + 1723,
-	204: __ccgo_ts + 1739,
-	205: __ccgo_ts + 1761,
-	206: __ccgo_ts + 1773,
-	207: __ccgo_ts + 1789,
-	208: __ccgo_ts + 1798,
-	209: __ccgo_ts + 1812,
-	210: __ccgo_ts + 1838,
-	211: __ccgo_ts + 1853,
-	212: __ccgo_ts + 1873,
-	213: __ccgo_ts + 1882,
-	214: __ccgo_ts + 1894,
-	215: __ccgo_ts + 1904,
-	216: __ccgo_ts + 1922,
-	217: __ccgo_ts + 1935,
-	218: __ccgo_ts + 1958,
-	219: __ccgo_ts + 1976,
-	220: __ccgo_ts + 1987,
-	221: __ccgo_ts + 1997,
-	222: __ccgo_ts + 943,
-	223: __ccgo_ts + 2003,
-	224: __ccgo_ts + 2023,
-	225: __ccgo_ts + 2042,
-	226: __ccgo_ts + 2052,
-	227: __ccgo_ts + 2062,
-	228: __ccgo_ts + 2073,
-	229: __ccgo_ts + 2089,
-	230: __ccgo_ts + 2106,
-	231: __ccgo_ts + 2120,
-	232: __ccgo_ts + 2128,
-	233: __ccgo_ts + 2145,
-	234: __ccgo_ts + 2145,
-	235: __ccgo_ts + 2158,
-	236: __ccgo_ts + 1374,
-	237: __ccgo_ts + 2173,
-	238: __ccgo_ts + 2183,
-	239: __ccgo_ts + 992,
-	240: __ccgo_ts + 2197,
-	241: __ccgo_ts + 2217,
-	242: __ccgo_ts + 2235,
-	243: __ccgo_ts + 2249,
-	244: __ccgo_ts + 2261,
-	245: __ccgo_ts + 2278,
-	246: __ccgo_ts + 2290,
-	247: __ccgo_ts + 2290,
-	248: __ccgo_ts + 2300,
-	249: __ccgo_ts + 2314,
-	250: __ccgo_ts + 2330,
-	251: __ccgo_ts + 2344,
-	252: __ccgo_ts + 2353,
-	253: __ccgo_ts + 2367,
-	254: __ccgo_ts + 2388,
-	255: __ccgo_ts + 2403,
-	256: __ccgo_ts + 1430,
-	257: __ccgo_ts + 1447,
-	258: __ccgo_ts + 1465,
-	259: __ccgo_ts + 2417,
-	260: __ccgo_ts + 2448,
-	261: __ccgo_ts + 1618,
-	262: __ccgo_ts + 2463,
-	263: __ccgo_ts + 2480,
-	264: __ccgo_ts + 2497,
-	265: __ccgo_ts + 1601,
-	266: __ccgo_ts + 2522,
-	267: __ccgo_ts + 2538,
-	268: __ccgo_ts + 2556,
-	269: __ccgo_ts + 2579,
-	270: __ccgo_ts + 2607,
-	271: __ccgo_ts + 2625,
-	272: __ccgo_ts + 2648,
-	273: __ccgo_ts + 2661,
-	274: __ccgo_ts + 2677,
-	275: __ccgo_ts + 2704,
-	276: __ccgo_ts + 2713,
-	277: __ccgo_ts + 2730,
-	278: __ccgo_ts + 2748,
-	279: __ccgo_ts + 2771,
-	280: __ccgo_ts + 2779,
-	281: __ccgo_ts + 2800,
-	282: __ccgo_ts + 2821,
-	283: __ccgo_ts + 2842,
-	284: __ccgo_ts + 2868,
-	285: __ccgo_ts + 2906,
-	286: __ccgo_ts + 2941,
-	287: __ccgo_ts + 2978,
-	288: __ccgo_ts + 3010,
-	289: __ccgo_ts + 3038,
-	290: __ccgo_ts + 3058,
-	291: __ccgo_ts + 3083,
-	292: __ccgo_ts + 3116,
-	293: __ccgo_ts + 3136,
-	294: __ccgo_ts + 3153,
-	295: __ccgo_ts + 3181,
-	296: __ccgo_ts + 3207,
-	297: __ccgo_ts + 3233,
-	298: __ccgo_ts + 3264,
-	299: __ccgo_ts + 3278,
-	300: __ccgo_ts + 3306,
-	301: __ccgo_ts + 3338,
-	302: __ccgo_ts + 3366,
-	303: __ccgo_ts + 3386,
-	304: __ccgo_ts + 3408,
-	305: __ccgo_ts + 3431,
-	306: __ccgo_ts + 3464,
-	307: __ccgo_ts + 3498,
-	308: __ccgo_ts + 3529,
-	309: __ccgo_ts + 3553,
-	310: __ccgo_ts + 3570,
-	311: __ccgo_ts + 3582,
-	312: __ccgo_ts + 532,
-	313: __ccgo_ts + 3609,
+	0:   __ccgo_ts + 191,
+	1:   __ccgo_ts + 195,
+	2:   __ccgo_ts + 206,
+	3:   __ccgo_ts + 211,
+	4:   __ccgo_ts + 218,
+	5:   __ccgo_ts + 220,
+	6:   __ccgo_ts + 222,
+	7:   __ccgo_ts + 224,
+	8:   __ccgo_ts + 227,
+	9:   __ccgo_ts + 233,
+	10:  __ccgo_ts + 235,
+	11:  __ccgo_ts + 245,
+	12:  __ccgo_ts + 251,
+	13:  __ccgo_ts + 253,
+	14:  __ccgo_ts + 263,
+	15:  __ccgo_ts + 265,
+	16:  __ccgo_ts + 267,
+	17:  __ccgo_ts + 274,
+	18:  __ccgo_ts + 279,
+	19:  __ccgo_ts + 282,
+	20:  __ccgo_ts + 191,
+	21:  __ccgo_ts + 284,
+	22:  __ccgo_ts + 297,
+	23:  __ccgo_ts + 304,
+	24:  __ccgo_ts + 318,
+	25:  __ccgo_ts + 321,
+	26:  __ccgo_ts + 325,
+	27:  __ccgo_ts + 331,
+	28:  __ccgo_ts + 337,
+	29:  __ccgo_ts + 345,
+	30:  __ccgo_ts + 348,
+	31:  __ccgo_ts + 351,
+	32:  __ccgo_ts + 355,
+	33:  __ccgo_ts + 359,
+	34:  __ccgo_ts + 363,
+	35:  __ccgo_ts + 366,
+	36:  __ccgo_ts + 369,
+	37:  __ccgo_ts + 378,
+	38:  __ccgo_ts + 381,
+	39:  __ccgo_ts + 384,
+	40:  __ccgo_ts + 394,
+	41:  __ccgo_ts + 399,
+	42:  __ccgo_ts + 404,
+	43:  __ccgo_ts + 411,
+	44:  __ccgo_ts + 416,
+	45:  __ccgo_ts + 427,
+	46:  __ccgo_ts + 429,
+	47:  __ccgo_ts + 432,
+	48:  __ccgo_ts + 434,
+	49:  __ccgo_ts + 436,
+	50:  __ccgo_ts + 440,
+	51:  __ccgo_ts + 442,
+	52:  __ccgo_ts + 444,
+	53:  __ccgo_ts + 448,
+	54:  __ccgo_ts + 455,
+	55:  __ccgo_ts + 468,
+	56:  __ccgo_ts + 475,
+	57:  __ccgo_ts + 478,
+	58:  __ccgo_ts + 481,
+	59:  __ccgo_ts + 484,
+	60:  __ccgo_ts + 486,
+	61:  __ccgo_ts + 488,
+	62:  __ccgo_ts + 490,
+	63:  __ccgo_ts + 495,
+	64:  __ccgo_ts + 500,
+	65:  __ccgo_ts + 507,
+	66:  __ccgo_ts + 509,
+	67:  __ccgo_ts + 511,
+	68:  __ccgo_ts + 519,
+	69:  __ccgo_ts + 523,
+	70:  __ccgo_ts + 530,
+	71:  __ccgo_ts + 535,
+	72:  __ccgo_ts + 538,
+	73:  __ccgo_ts + 541,
+	74:  __ccgo_ts + 543,
+	75:  __ccgo_ts + 547,
+	76:  __ccgo_ts + 552,
+	77:  __ccgo_ts + 562,
+	78:  __ccgo_ts + 570,
+	79:  __ccgo_ts + 574,
+	80:  __ccgo_ts + 578,
+	81:  __ccgo_ts + 583,
+	82:  __ccgo_ts + 586,
+	83:  __ccgo_ts + 592,
+	84:  __ccgo_ts + 592,
+	85:  __ccgo_ts + 592,
+	86:  __ccgo_ts + 592,
+	87:  __ccgo_ts + 592,
+	88:  __ccgo_ts + 592,
+	89:  __ccgo_ts + 592,
+	90:  __ccgo_ts + 592,
+	91:  __ccgo_ts + 592,
+	92:  __ccgo_ts + 592,
+	93:  __ccgo_ts + 592,
+	94:  __ccgo_ts + 592,
+	95:  __ccgo_ts + 592,
+	96:  __ccgo_ts + 592,
+	97:  __ccgo_ts + 592,
+	98:  __ccgo_ts + 592,
+	99:  __ccgo_ts + 592,
+	100: __ccgo_ts + 592,
+	101: __ccgo_ts + 592,
+	102: __ccgo_ts + 592,
+	103: __ccgo_ts + 607,
+	104: __ccgo_ts + 609,
+	105: __ccgo_ts + 611,
+	106: __ccgo_ts + 617,
+	107: __ccgo_ts + 620,
+	108: __ccgo_ts + 625,
+	109: __ccgo_ts + 627,
+	110: __ccgo_ts + 630,
+	111: __ccgo_ts + 632,
+	112: __ccgo_ts + 634,
+	113: __ccgo_ts + 637,
+	114: __ccgo_ts + 640,
+	115: __ccgo_ts + 642,
+	116: __ccgo_ts + 607,
+	117: __ccgo_ts + 644,
+	118: __ccgo_ts + 647,
+	119: __ccgo_ts + 650,
+	120: __ccgo_ts + 653,
+	121: __ccgo_ts + 656,
+	122: __ccgo_ts + 658,
+	123: __ccgo_ts + 661,
+	124: __ccgo_ts + 664,
+	125: __ccgo_ts + 667,
+	126: __ccgo_ts + 670,
+	127: __ccgo_ts + 673,
+	128: __ccgo_ts + 676,
+	129: __ccgo_ts + 679,
+	130: __ccgo_ts + 683,
+	131: __ccgo_ts + 687,
+	132: __ccgo_ts + 455,
+	133: __ccgo_ts + 689,
+	134: __ccgo_ts + 694,
+	135: __ccgo_ts + 700,
+	136: __ccgo_ts + 705,
+	137: __ccgo_ts + 715,
+	138: __ccgo_ts + 724,
+	139: __ccgo_ts + 732,
+	140: __ccgo_ts + 745,
+	141: __ccgo_ts + 758,
+	142: __ccgo_ts + 777,
+	143: __ccgo_ts + 794,
+	144: __ccgo_ts + 807,
+	145: __ccgo_ts + 822,
+	146: __ccgo_ts + 838,
+	147: __ccgo_ts + 856,
+	148: __ccgo_ts + 871,
+	149: __ccgo_ts + 892,
+	150: __ccgo_ts + 902,
+	151: __ccgo_ts + 923,
+	152: __ccgo_ts + 941,
+	153: __ccgo_ts + 961,
+	154: __ccgo_ts + 980,
+	155: __ccgo_ts + 990,
+	156: __ccgo_ts + 284,
+	157: __ccgo_ts + 1011,
+	158: __ccgo_ts + 1028,
+	159: __ccgo_ts + 1052,
+	160: __ccgo_ts + 1064,
+	161: __ccgo_ts + 1086,
+	162: __ccgo_ts + 1108,
+	163: __ccgo_ts + 1129,
+	164: __ccgo_ts + 1141,
+	165: __ccgo_ts + 1156,
+	166: __ccgo_ts + 1169,
+	167: __ccgo_ts + 1182,
+	168: __ccgo_ts + 1200,
+	169: __ccgo_ts + 1209,
+	170: __ccgo_ts + 1227,
+	171: __ccgo_ts + 1239,
+	172: __ccgo_ts + 1254,
+	173: __ccgo_ts + 1260,
+	174: __ccgo_ts + 1280,
+	175: __ccgo_ts + 1293,
+	176: __ccgo_ts + 1308,
+	177: __ccgo_ts + 1325,
+	178: __ccgo_ts + 1346,
+	179: __ccgo_ts + 1359,
+	180: __ccgo_ts + 1372,
+	181: __ccgo_ts + 1383,
+	182: __ccgo_ts + 1397,
+	183: __ccgo_ts + 1408,
+	184: __ccgo_ts + 1428,
+	185: __ccgo_ts + 1445,
+	186: __ccgo_ts + 1463,
+	187: __ccgo_ts + 1485,
+	188: __ccgo_ts + 1501,
+	189: __ccgo_ts + 1506,
+	190: __ccgo_ts + 1518,
+	191: __ccgo_ts + 1527,
+	192: __ccgo_ts + 1544,
+	193: __ccgo_ts + 1565,
+	194: __ccgo_ts + 1583,
+	195: __ccgo_ts + 1599,
+	196: __ccgo_ts + 1616,
+	197: __ccgo_ts + 1632,
+	198: __ccgo_ts + 1645,
+	199: __ccgo_ts + 1662,
+	200: __ccgo_ts + 1679,
+	201: __ccgo_ts + 1691,
+	202: __ccgo_ts + 1702,
+	203: __ccgo_ts + 1721,
+	204: __ccgo_ts + 1737,
+	205: __ccgo_ts + 1759,
+	206: __ccgo_ts + 1771,
+	207: __ccgo_ts + 1787,
+	208: __ccgo_ts + 1796,
+	209: __ccgo_ts + 1810,
+	210: __ccgo_ts + 1836,
+	211: __ccgo_ts + 1851,
+	212: __ccgo_ts + 1871,
+	213: __ccgo_ts + 1880,
+	214: __ccgo_ts + 1892,
+	215: __ccgo_ts + 1902,
+	216: __ccgo_ts + 1920,
+	217: __ccgo_ts + 1933,
+	218: __ccgo_ts + 1956,
+	219: __ccgo_ts + 1974,
+	220: __ccgo_ts + 1985,
+	221: __ccgo_ts + 1995,
+	222: __ccgo_ts + 941,
+	223: __ccgo_ts + 2001,
+	224: __ccgo_ts + 2021,
+	225: __ccgo_ts + 2040,
+	226: __ccgo_ts + 2050,
+	227: __ccgo_ts + 2060,
+	228: __ccgo_ts + 2071,
+	229: __ccgo_ts + 2087,
+	230: __ccgo_ts + 2104,
+	231: __ccgo_ts + 2118,
+	232: __ccgo_ts + 2126,
+	233: __ccgo_ts + 2143,
+	234: __ccgo_ts + 2143,
+	235: __ccgo_ts + 2156,
+	236: __ccgo_ts + 1372,
+	237: __ccgo_ts + 2171,
+	238: __ccgo_ts + 2181,
+	239: __ccgo_ts + 990,
+	240: __ccgo_ts + 2195,
+	241: __ccgo_ts + 2215,
+	242: __ccgo_ts + 2233,
+	243: __ccgo_ts + 2247,
+	244: __ccgo_ts + 2259,
+	245: __ccgo_ts + 2276,
+	246: __ccgo_ts + 2288,
+	247: __ccgo_ts + 2288,
+	248: __ccgo_ts + 2298,
+	249: __ccgo_ts + 2312,
+	250: __ccgo_ts + 2328,
+	251: __ccgo_ts + 2342,
+	252: __ccgo_ts + 2351,
+	253: __ccgo_ts + 2365,
+	254: __ccgo_ts + 2386,
+	255: __ccgo_ts + 2401,
+	256: __ccgo_ts + 1428,
+	257: __ccgo_ts + 1445,
+	258: __ccgo_ts + 1463,
+	259: __ccgo_ts + 2415,
+	260: __ccgo_ts + 2446,
+	261: __ccgo_ts + 1616,
+	262: __ccgo_ts + 2461,
+	263: __ccgo_ts + 2478,
+	264: __ccgo_ts + 2495,
+	265: __ccgo_ts + 1599,
+	266: __ccgo_ts + 2520,
+	267: __ccgo_ts + 2536,
+	268: __ccgo_ts + 2554,
+	269: __ccgo_ts + 2577,
+	270: __ccgo_ts + 2605,
+	271: __ccgo_ts + 2623,
+	272: __ccgo_ts + 2646,
+	273: __ccgo_ts + 2659,
+	274: __ccgo_ts + 2675,
+	275: __ccgo_ts + 2702,
+	276: __ccgo_ts + 2711,
+	277: __ccgo_ts + 2728,
+	278: __ccgo_ts + 2746,
+	279: __ccgo_ts + 2769,
+	280: __ccgo_ts + 2777,
+	281: __ccgo_ts + 2798,
+	282: __ccgo_ts + 2819,
+	283: __ccgo_ts + 2840,
+	284: __ccgo_ts + 2866,
+	285: __ccgo_ts + 2904,
+	286: __ccgo_ts + 2939,
+	287: __ccgo_ts + 2976,
+	288: __ccgo_ts + 3008,
+	289: __ccgo_ts + 3036,
+	290: __ccgo_ts + 3056,
+	291: __ccgo_ts + 3081,
+	292: __ccgo_ts + 3114,
+	293: __ccgo_ts + 3134,
+	294: __ccgo_ts + 3151,
+	295: __ccgo_ts + 3179,
+	296: __ccgo_ts + 3205,
+	297: __ccgo_ts + 3231,
+	298: __ccgo_ts + 3262,
+	299: __ccgo_ts + 3276,
+	300: __ccgo_ts + 3304,
+	301: __ccgo_ts + 3336,
+	302: __ccgo_ts + 3364,
+	303: __ccgo_ts + 3384,
+	304: __ccgo_ts + 3406,
+	305: __ccgo_ts + 3429,
+	306: __ccgo_ts + 3462,
+	307: __ccgo_ts + 3496,
+	308: __ccgo_ts + 3527,
+	309: __ccgo_ts + 3551,
+	310: __ccgo_ts + 3568,
+	311: __ccgo_ts + 3580,
+	312: __ccgo_ts + 530,
+	313: __ccgo_ts + 3607,
 }
 
 var ts_symbol_map = [314]TSSymbol{
@@ -3433,30 +3449,30 @@ const field_value = 24
 
 var ts_field_names = [25]uintptr{
 	0:  libc.UintptrFromInt32(0),
-	1:  __ccgo_ts + 3625,
-	2:  __ccgo_ts + 3631,
-	3:  __ccgo_ts + 3643,
-	4:  __ccgo_ts + 3652,
-	5:  __ccgo_ts + 3657,
-	6:  __ccgo_ts + 3664,
-	7:  __ccgo_ts + 3674,
-	8:  __ccgo_ts + 3686,
-	9:  __ccgo_ts + 3697,
-	10: __ccgo_ts + 3703,
-	11: __ccgo_ts + 3712,
-	12: __ccgo_ts + 3717,
-	13: __ccgo_ts + 3722,
-	14: __ccgo_ts + 3734,
-	15: __ccgo_ts + 3739,
-	16: __ccgo_ts + 3747,
-	17: __ccgo_ts + 3756,
-	18: __ccgo_ts + 3761,
-	19: __ccgo_ts + 3769,
-	20: __ccgo_ts + 3777,
-	21: __ccgo_ts + 588,
-	22: __ccgo_ts + 532,
-	23: __ccgo_ts + 2661,
-	24: __ccgo_ts + 3783,
+	1:  __ccgo_ts + 3623,
+	2:  __ccgo_ts + 3629,
+	3:  __ccgo_ts + 3641,
+	4:  __ccgo_ts + 3650,
+	5:  __ccgo_ts + 3655,
+	6:  __ccgo_ts + 3662,
+	7:  __ccgo_ts + 3672,
+	8:  __ccgo_ts + 3684,
+	9:  __ccgo_ts + 3695,
+	10: __ccgo_ts + 3701,
+	11: __ccgo_ts + 3710,
+	12: __ccgo_ts + 3715,
+	13: __ccgo_ts + 3720,
+	14: __ccgo_ts + 3732,
+	15: __ccgo_ts + 3737,
+	16: __ccgo_ts + 3745,
+	17: __ccgo_ts + 3754,
+	18: __ccgo_ts + 3759,
+	19: __ccgo_ts + 3767,
+	20: __ccgo_ts + 3775,
+	21: __ccgo_ts + 586,
+	22: __ccgo_ts + 530,
+	23: __ccgo_ts + 2659,
+	24: __ccgo_ts + 3781,
 }
 
 var ts_field_map_slices = [114]TSFieldMapSlice{
@@ -160366,4 +160382,4 @@ func __ccgo_fp(f interface{}) uintptr {
 
 var __ccgo_ts = (*reflect.StringHeader)(unsafe.Pointer(&__ccgo_ts1)).Data
 
-var __ccgo_ts1 = "Failed to allocate memory for scanner\x00scanner != NULL && \"Failed to allocate memory for scanner\"\x00./combined.c\x00sizeof(Scanner) != length\x00sizeof(Scanner) == length && \"sizeof(Scanner) != length\"\x00end\x00identifier\x00from\x00import\x00(\x00)\x00,\x00as\x00using\x00=\x00%builtins\x00%lang\x00@\x00namespace\x00{\x00}\x00struct\x00func\x00->\x00:\x00alloc_locals\x00assert\x00static_assert\x00==\x00let\x00const\x00local\x00tempvar\x00ap\x00++\x00jmp\x00rel\x00abs\x00if\x00!=\x00inst_ret\x00+=\x00dw\x00with_attr\x00else\x00with\x00return\x00felt\x00codeoffset\x00*\x00**\x00&\x00-\x00new\x00+\x00/\x00and\x00string\x00short_string\x00nondet\x00%{\x00%}\x00fp\x00[\x00]\x00.\x00cast\x00call\x00number\x00;\x00\n\x00comment\x00use\x00extern\x00type\x00::\x00fn\x00#\x00mod\x00enum\x00implicits\x00nopanic\x00ref\x00mut\x00impl\x00of\x00trait\x00primitive_type\x00<\x00>\x00match\x00=>\x00loop\x00_\x00..\x00!\x00~\x00&&\x00||\x00|\x00^\x00<=\x00>=\x00<<\x00>>\x00%\x00-=\x00*=\x00/=\x00%=\x00&=\x00|=\x00^=\x00<<=\x00>>=\x00?\x00true\x00false\x00self\x00code_line\x00_failure\x00program\x00cairo_0_file\x00cairo_1_file\x00_cairo_0_statement\x00import_statement\x00_import_list\x00aliased_import\x00type_definition\x00builtin_directive\x00lang_directive\x00decorated_definition\x00decorator\x00namespace_definition\x00struct_definition\x00function_definition\x00implicit_arguments\x00arguments\x00expression_statement\x00assert_statement\x00static_assert_statement\x00let_binding\x00const_var_declaration\x00local_var_declaration\x00temp_var_declaration\x00instruction\x00inst_assert_eq\x00inst_jmp_rel\x00inst_jmp_abs\x00inst_jmp_to_label\x00inst_jnz\x00inst_jnz_to_label\x00inst_add_ap\x00inst_data_word\x00label\x00attribute_statement\x00if_statement\x00with_statement\x00return_statement\x00_non_identifier_type\x00builtin_type\x00pointer_type\x00tuple_type\x00_cairo_0_type\x00named_type\x00_cairo_0_expression\x00unary_expression\x00binary_expression\x00assignment_expression\x00hint_expression\x00hint\x00python_code\x00register\x00deref_expression\x00subscript_expression\x00member_expression\x00cast_expression\x00tuple_expression\x00call_expression\x00_ref_binding\x00call_instruction\x00typed_identifier\x00dotted_name\x00_separator\x00_cairo_1_statement\x00use_declaration\x00extern_type_statement\x00_use_clause\x00scoped_use_list\x00use_list\x00use_as_clause\x00extern_function_statement\x00attribute_item\x00attribute_arguments\x00mod_item\x00struct_item\x00enum_item\x00enum_variant_list\x00enum_variant\x00field_declaration_list\x00field_declaration\x00const_item\x00type_item\x00block\x00_function_signature\x00function_signature\x00parameter\x00impl_item\x00trait_item\x00let_declaration\x00declaration_list\x00_cairo_1_type\x00at_type\x00generic_function\x00generic_type\x00type_arguments\x00unit_type\x00abstract_type\x00_cairo_1_expression\x00return_expression\x00if_expression\x00else_clause\x00match_expression\x00match_block\x00match_arm\x00match_pattern\x00loop_expression\x00at_expression\x00_pattern\x00tuple_pattern\x00tuple_struct_pattern\x00struct_pattern\x00field_pattern\x00compound_assignment_expression\x00try_expression\x00index_expression\x00field_expression\x00parenthesized_expression\x00unit_expression\x00struct_expression\x00field_initializer_list\x00shorthand_field_initializer\x00field_initializer\x00base_field_initializer\x00trait_bounds\x00type_parameters\x00constrained_type_parameter\x00_literal\x00_literal_pattern\x00scoped_identifier\x00scoped_type_identifier\x00boolean\x00cairo_0_file_repeat1\x00cairo_1_file_repeat1\x00_import_list_repeat1\x00builtin_directive_repeat1\x00_cairo_0_decorated_definition_repeat1\x00_cairo_0_struct_definition_repeat1\x00_cairo_0_attribute_statement_repeat1\x00_cairo_0_with_statement_repeat1\x00_cairo_0_tuple_type_repeat1\x00python_code_repeat1\x00tuple_expression_repeat1\x00_cairo_0_call_expression_repeat1\x00dotted_name_repeat1\x00use_list_repeat1\x00attribute_arguments_repeat1\x00enum_variant_list_repeat1\x00enum_variant_list_repeat2\x00field_declaration_list_repeat1\x00block_repeat1\x00_function_signature_repeat1\x00_cairo_1_type_arguments_repeat1\x00_cairo_1_tuple_type_repeat1\x00match_block_repeat1\x00tuple_pattern_repeat1\x00struct_pattern_repeat1\x00_cairo_1_call_expression_repeat1\x00_cairo_1_tuple_expression_repeat1\x00field_initializer_list_repeat1\x00type_parameters_repeat1\x00field_identifier\x00return_type\x00shorthand_field_identifier\x00type_identifier\x00alias\x00alternative\x00argument\x00body\x00bounds\x00condition\x00consequence\x00definition\x00field\x00function\x00left\x00list\x00module_name\x00name\x00operand\x00operator\x00path\x00pattern\x00returns\x00right\x00value\x00"
+var __ccgo_ts1 = "Failed to allocate memory for scanner\x00scanner != NULL && \"Failed to allocate memory for scanner\"\x00combined.c\x00sizeof(Scanner) != length\x00sizeof(Scanner) == length && \"sizeof(Scanner) != length\"\x00end\x00identifier\x00from\x00import\x00(\x00)\x00,\x00as\x00using\x00=\x00%builtins\x00%lang\x00@\x00namespace\x00{\x00}\x00struct\x00func\x00->\x00:\x00alloc_locals\x00assert\x00static_assert\x00==\x00let\x00const\x00local\x00tempvar\x00ap\x00++\x00jmp\x00rel\x00abs\x00if\x00!=\x00inst_ret\x00+=\x00dw\x00with_attr\x00else\x00with\x00return\x00felt\x00codeoffset\x00*\x00**\x00&\x00-\x00new\x00+\x00/\x00and\x00string\x00short_string\x00nondet\x00%{\x00%}\x00fp\x00[\x00]\x00.\x00cast\x00call\x00number\x00;\x00\n\x00comment\x00use\x00extern\x00type\x00::\x00fn\x00#\x00mod\x00enum\x00implicits\x00nopanic\x00ref\x00mut\x00impl\x00of\x00trait\x00primitive_type\x00<\x00>\x00match\x00=>\x00loop\x00_\x00..\x00!\x00~\x00&&\x00||\x00|\x00^\x00<=\x00>=\x00<<\x00>>\x00%\x00-=\x00*=\x00/=\x00%=\x00&=\x00|=\x00^=\x00<<=\x00>>=\x00?\x00true\x00false\x00self\x00code_line\x00_failure\x00program\x00cairo_0_file\x00cairo_1_file\x00_cairo_0_statement\x00import_statement\x00_import_list\x00aliased_import\x00type_definition\x00builtin_directive\x00lang_directive\x00decorated_definition\x00decorator\x00namespace_definition\x00struct_definition\x00function_definition\x00implicit_arguments\x00arguments\x00expression_statement\x00assert_statement\x00static_assert_statement\x00let_binding\x00const_var_declaration\x00local_var_declaration\x00temp_var_declaration\x00instruction\x00inst_assert_eq\x00inst_jmp_rel\x00inst_jmp_abs\x00inst_jmp_to_label\x00inst_jnz\x00inst_jnz_to_label\x00inst_add_ap\x00inst_data_word\x00label\x00attribute_statement\x00if_statement\x00with_statement\x00return_statement\x00_non_identifier_type\x00builtin_type\x00pointer_type\x00tuple_type\x00_cairo_0_type\x00named_type\x00_cairo_0_expression\x00unary_expression\x00binary_expression\x00assignment_expression\x00hint_expression\x00hint\x00python_code\x00register\x00deref_expression\x00subscript_expression\x00member_expression\x00cast_expression\x00tuple_expression\x00call_expression\x00_ref_binding\x00call_instruction\x00typed_identifier\x00dotted_name\x00_separator\x00_cairo_1_statement\x00use_declaration\x00extern_type_statement\x00_use_clause\x00scoped_use_list\x00use_list\x00use_as_clause\x00extern_function_statement\x00attribute_item\x00attribute_arguments\x00mod_item\x00struct_item\x00enum_item\x00enum_variant_list\x00enum_variant\x00field_declaration_list\x00field_declaration\x00const_item\x00type_item\x00block\x00_function_signature\x00function_signature\x00parameter\x00impl_item\x00trait_item\x00let_declaration\x00declaration_list\x00_cairo_1_type\x00at_type\x00generic_function\x00generic_type\x00type_arguments\x00unit_type\x00abstract_type\x00_cairo_1_expression\x00return_expression\x00if_expression\x00else_clause\x00match_expression\x00match_block\x00match_arm\x00match_pattern\x00loop_expression\x00at_expression\x00_pattern\x00tuple_pattern\x00tuple_struct_pattern\x00struct_pattern\x00field_pattern\x00compound_assignment_expression\x00try_expression\x00index_expression\x00field_expression\x00parenthesized_expression\x00unit_expression\x00struct_expression\x00field_initializer_list\x00shorthand_field_initializer\x00field_initializer\x00base_field_initializer\x00trait_bounds\x00type_parameters\x00constrained_type_parameter\x00_literal\x00_literal_pattern\x00scoped_identifier\x00scoped_type_identifier\x00boolean\x00cairo_0_file_repeat1\x00cairo_1_file_repeat1\x00_import_list_repeat1\x00builtin_directive_repeat1\x00_cairo_0_decorated_definition_repeat1\x00_cairo_0_struct_definition_repeat1\x00_cairo_0_attribute_statement_repeat1\x00_cairo_0_with_statement_repeat1\x00_cairo_0_tuple_type_repeat1\x00python_code_repeat1\x00tuple_expression_repeat1\x00_cairo_0_call_expression_repeat1\x00dotted_name_repeat1\x00use_list_repeat1\x00attribute_arguments_repeat1\x00enum_variant_list_repeat1\x00enum_variant_list_repeat2\x00field_declaration_list_repeat1\x00block_repeat1\x00_function_signature_repeat1\x00_cairo_1_type_arguments_repeat1\x00_cairo_1_tuple_type_repeat1\x00match_block_repeat1\x00tuple_pattern_repeat1\x00struct_pattern_repeat1\x00_cairo_1_call_expression_repeat1\x00_cairo_1_tuple_expression_repeat1\x00field_initializer_list_repeat1\x00type_parameters_repeat1\x00field_identifier\x00return_type\x00shorthand_field_identifier\x00type_identifier\x00alias\x00alternative\x00argument\x00body\x00bounds\x00condition\x00consequence\x00definition\x00field\x00function\x00left\x00list\x00module_name\x00name\x00operand\x00operator\x00path\x00pattern\x00returns\x00right\x00value\x00"
