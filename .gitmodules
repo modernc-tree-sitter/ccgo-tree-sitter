@@ -1,11 +1,11 @@
 [submodule "third-party/ccgo"]
 	path = third-party/ccgo
-	url = https://github.com/lucasew/CONTRIB-ccgo
+	url = https://github.com/modernc-tree-sitter/ccgo
 	branch = feat/tree-sitter
 [submodule "third-party/tree-sitter"]
 	path = third-party/tree-sitter
-	url = https://github.com/lucasew/CONTRIB-tree-sitter
-	branch = fix/explicit-cast
+	url = https://github.com/tree-sitter/tree-sitter
+	branch = master
 [submodule "third-party/tree-sitter-lua"]
 	path = third-party/tree-sitter-lua
 	url = https://github.com/tree-sitter-grammars/tree-sitter-lua
@@ -189,3 +189,7 @@
 [submodule "third-party/tree-sitter-hare"]
 	path = third-party/tree-sitter-hare
 	url = https://github.com/tree-sitter-grammars/tree-sitter-hare.git
+[submodule "third-party/libc"]
+	path = third-party/libc
+	url = https://github.com/modernc-tree-sitter/libc
+	branch = feat/tree-sitter

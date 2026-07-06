@@ -37,3 +37,5 @@ require (
 replace modernc.org/ccgo/v4 => ./third-party/ccgo/v4
 
 replace modernc.org/ccgo/v3 => ./third-party/ccgo/v3
+
+replace modernc.org/libc => ./third-party/libc
