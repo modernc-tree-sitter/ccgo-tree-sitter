@@ -87,12 +87,37 @@ func TestPreprocessorCmdWindowsMingwGccFlags(t *testing.T) {
 		t.Fatal(err)
 	}
 	for _, a := range cmd.Args {
-		if strings.HasPrefix(a, "--target=") || strings.Contains(a, "__attribute__") || strings.Contains(a, "__declspec") {
-			t.Fatalf("unexpected flag %q in %v", a, cmd.Args)
+		if strings.HasPrefix(a, "--target=") {
+			t.Fatalf("unexpected clang target flag %q in mingw gcc args %v", a, cmd.Args)
 		}
 	}
-	if !slices.Contains(cmd.Args, "-D__extension__=") {
-		t.Fatalf("missing __extension__ erase in %v", cmd.Args)
+	for _, flag := range []string{
+		"-D__extension__=",
+		"-D__attribute__(...)=",
+		"-D__declspec(x)=",
+		"-D__stdcall=",
+		"-D__cdecl=",
+	} {
+		if !slices.Contains(cmd.Args, flag) {
+			t.Fatalf("missing %q in %v", flag, cmd.Args)
+		}
+	}
+}
+
+func TestSanitizePreprocessedCStripsMingwJunk(t *testing.T) {
+	in := "int x __attribute__((dllimport));\n" +
+		"void f(void) __asm__(\"foo\");\n" +
+		"void g(void) __asm__ __volatile__ (\"lock bts{q %[Offset],%[Base] | %[Base],%[Offset]}\" : [old] \"=@ccc\" (old), [Base] \"+m\" (*Base) : [Offset] \"J\" \"r\" (Offset) : \"memory\" );\n" +
+		"__declspec(dllexport) int y;\n" +
+		"typedef float _Float32 f32;\n"
+	out := sanitizePreprocessedC(in)
+	for _, junk := range []string{"__attribute__", "__asm__", "__declspec", "_Float32", "__volatile__"} {
+		if strings.Contains(out, junk) {
+			t.Fatalf("sanitize left %q in %q", junk, out)
+		}
+	}
+	if !strings.Contains(out, "int x") || !strings.Contains(out, "void f(void)") || !strings.Contains(out, "void g(void)") || !strings.Contains(out, "int y") {
+		t.Fatalf("sanitize removed declarations: %q", out)
 	}
 }
 
@@ -152,6 +177,9 @@ func TestPreprocessorCmdWindowsClangKeepsTarget(t *testing.T) {
 	}
 	if !slices.Contains(cmd.Args, "--target=x86_64-w64-mingw32") {
 		t.Fatalf("args=%v", cmd.Args)
+	}
+	if !slices.Contains(cmd.Args, "-D__attribute__(...)=") {
+		t.Fatalf("missing attribute erase in clang-mingw args %v", cmd.Args)
 	}
 }
 

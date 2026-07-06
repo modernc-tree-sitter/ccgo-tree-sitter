@@ -44,10 +44,50 @@ var extensionFloatTypedefRe = regexp.MustCompile(
 )
 
 var (
+	mingwAsmStartRe  = regexp.MustCompile(`__asm(?:__)?(?:\s+__(?:volatile)__|\s+volatile)?\s*\(`)
+	mingwAttrStartRe = regexp.MustCompile(`__(?:attribute|declspec)(?:__)?\s*\(`)
+
 	libcVersionOnce sync.Once
 	libcVersion     string
 	libcVersionErr  error
 )
+
+// stripBalancedCalls removes each match of startRe through its balanced "(...)".
+func stripBalancedCalls(src string, startRe *regexp.Regexp) string {
+	var b strings.Builder
+	b.Grow(len(src))
+	i := 0
+	for i < len(src) {
+		loc := startRe.FindStringIndex(src[i:])
+		if loc == nil {
+			b.WriteString(src[i:])
+			break
+		}
+		start := i + loc[0]
+		open := i + loc[1] - 1
+		b.WriteString(src[i:start])
+		depth := 0
+		j := open
+		for j < len(src) {
+			switch src[j] {
+			case '(':
+				depth++
+			case ')':
+				depth--
+				if depth == 0 {
+					j++
+					i = j
+					goto next
+				}
+			}
+			j++
+		}
+		b.WriteString(src[start:])
+		return b.String()
+	next:
+	}
+	return b.String()
+}
 
 // preprocessorCmd builds the C preprocessor command from CC and optional CFLAGS.
 // On Windows, MinGW gcc is preferred over clang when present on PATH.
@@ -152,10 +192,24 @@ func defaultPreprocessorFlags(goos, goarch, ccBinary string) []string {
 				flags = append(flags, "--sysroot="+sysroot)
 			}
 		}
-		// Only erase extensions that headers will not redefine. Do NOT empty
-		// __attribute__: MinGW does `#define __declspec(a) __attribute__((a))`,
-		// which then leaves stray `(dllimport)` tokens in the preprocessed TU.
-		flags = append(flags, "-D__extension__=", "-D__forceinline=static inline")
+		// Erase GNU/MinGW extensions ccgo cannot parse. Empty __attribute__
+		// on the command line so headers' `#define __declspec(a) __attribute__((a))`
+		// expands to nothing (not stray `(dllimport)` tokens). Calling-convention
+		// keywords similarly survive -E as junk identifiers.
+		flags = append(flags,
+			"-D__extension__=",
+			"-D__forceinline=static inline",
+			"-D__attribute__(...)=",
+			"-D__declspec(x)=",
+			"-D__cdecl=",
+			"-D__stdcall=",
+			"-D__fastcall=",
+			"-D__thiscall=",
+			"-D_cdecl=",
+			"-D__restrict=",
+			"-D__restrict__=",
+			"-D__MINGW_EXTENSION=",
+		)
 		return flags
 	case "darwin":
 		// Blocks + availability(macos,introduced=10.13.4) leave tokens like
@@ -272,10 +326,12 @@ func mingwSysrootMatches(root, goarch string) bool {
 	return false
 }
 
-// sanitizePreprocessedC removes clang/glibc interchange typedefs that survive
-// -E but are rejected by ccgo (Linux hosts).
+// sanitizePreprocessedC removes constructs that survive -E but are rejected by ccgo.
 func sanitizePreprocessedC(src string) string {
-	return extensionFloatTypedefRe.ReplaceAllString(src, "")
+	src = extensionFloatTypedefRe.ReplaceAllString(src, "")
+	src = stripBalancedCalls(src, mingwAsmStartRe)
+	src = stripBalancedCalls(src, mingwAttrStartRe)
+	return src
 }
 
 func sanitizePreprocessedFile(path string) error {
@@ -514,9 +570,9 @@ func (t *Transpiler) preprocessCore(outputPath string) error {
 	defer f.Close()
 
 	// Add atomic stubs for compiler builtins that ccgo doesn't handle natively.
-	stubs := "typedef unsigned int uint32_t;\n" +
-		"static inline uint32_t __atomic_add_fetch(volatile uint32_t *p, uint32_t v, int m) { *p += v; return *p; }\n" +
-		"static inline uint32_t __atomic_sub_fetch(volatile uint32_t *p, uint32_t v, int m) { *p -= v; return *p; }\n\n"
+	// Use unsigned int (not uint32_t) to avoid clashing with windows headers.
+	stubs := "\nstatic inline unsigned int __atomic_add_fetch(volatile unsigned int *p, unsigned int v, int m) { *p += v; return *p; }\n" +
+		"static inline unsigned int __atomic_sub_fetch(volatile unsigned int *p, unsigned int v, int m) { *p -= v; return *p; }\n"
 	_, err = fmt.Fprint(f, stubs)
 	return err
 }
