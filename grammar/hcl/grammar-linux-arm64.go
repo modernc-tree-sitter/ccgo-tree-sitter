@@ -1,4 +1,4 @@
-// Code generated for linux/arm64 by 'ccgo preprocessed.c -o grammar.go', DO NOT EDIT.
+// Code generated for linux/arm64 by 'ccgo -ignore-unsupported-alignment -ignore-unsupported-atomic-sizes -ignore-vector-functions preprocessed.c -o grammar.go', DO NOT EDIT.
 
 //go:build linux && arm64
 
@@ -16,170 +16,109 @@ var _ unsafe.Pointer
 
 const _GNU_SOURCE = 1
 const _LP64 = 1
-const _STDC_PREDEF_H = 1
+const __AARCH64EL__ = 1
+const __AARCH64_CMODEL_SMALL__ = 1
+const __ARM_64BIT_STATE = 1
+const __ARM_ACLE = 200
+const __ARM_ALIGN_MAX_STACK_PWR = 4
+const __ARM_ARCH = 8
+const __ARM_ARCH_ISA_A64 = 1
+const __ARM_ARCH_PROFILE = 'A'
+const __ARM_FEATURE_CLZ = 1
+const __ARM_FEATURE_DIRECTED_ROUNDING = 1
+const __ARM_FEATURE_DIV = 1
+const __ARM_FEATURE_FMA = 1
+const __ARM_FEATURE_IDIV = 1
+const __ARM_FEATURE_LDREX = 0xF
+const __ARM_FEATURE_NUMERIC_MAXMIN = 1
+const __ARM_FEATURE_UNALIGNED = 1
+const __ARM_FP = 0xE
+const __ARM_FP16_ARGS = 1
+const __ARM_FP16_FORMAT_IEEE = 1
+const __ARM_NEON = 1
+const __ARM_NEON_FP = 0xE
+const __ARM_PCS_AAPCS64 = 1
+const __ARM_SIZEOF_MINIMAL_ENUM = 4
+const __ARM_SIZEOF_WCHAR_T = 4
+const __ARM_STATE_ZA = 1
+const __ARM_STATE_ZT0 = 1
 const __ATOMIC_ACQUIRE = 2
 const __ATOMIC_ACQ_REL = 4
 const __ATOMIC_CONSUME = 1
-const __ATOMIC_HLE_ACQUIRE = 65536
-const __ATOMIC_HLE_RELEASE = 131072
 const __ATOMIC_RELAXED = 0
 const __ATOMIC_RELEASE = 3
 const __ATOMIC_SEQ_CST = 5
-const __BFLT16_DECIMAL_DIG__ = 4
-const __BFLT16_DENORM_MIN__ = "9.18354961579912115600575419704879436e-41B"
-const __BFLT16_DIG__ = 2
-const __BFLT16_EPSILON__ = "7.81250000000000000000000000000000000e-3B"
-const __BFLT16_HAS_DENORM__ = 1
-const __BFLT16_HAS_INFINITY__ = 1
-const __BFLT16_HAS_QUIET_NAN__ = 1
-const __BFLT16_IS_IEC_60559__ = 0
-const __BFLT16_MANT_DIG__ = 8
-const __BFLT16_MAX_10_EXP__ = 38
-const __BFLT16_MAX_EXP__ = 128
-const __BFLT16_MAX__ = "3.38953138925153547590470800371487867e+38B"
-const __BFLT16_MIN__ = "1.17549435082228750796873653722224568e-38B"
-const __BFLT16_NORM_MAX__ = "3.38953138925153547590470800371487867e+38B"
 const __BIGGEST_ALIGNMENT__ = 16
+const __BITINT_MAXWIDTH__ = 128
+const __BOOL_WIDTH__ = 8
 const __BYTE_ORDER__ = "__ORDER_LITTLE_ENDIAN__"
 const __CCGO__ = 1
-const __CET__ = 3
 const __CHAR_BIT__ = 8
+const __CHAR_UNSIGNED__ = 1
+const __CLANG_ATOMIC_BOOL_LOCK_FREE = 2
+const __CLANG_ATOMIC_CHAR16_T_LOCK_FREE = 2
+const __CLANG_ATOMIC_CHAR32_T_LOCK_FREE = 2
+const __CLANG_ATOMIC_CHAR_LOCK_FREE = 2
+const __CLANG_ATOMIC_INT_LOCK_FREE = 2
+const __CLANG_ATOMIC_LLONG_LOCK_FREE = 2
+const __CLANG_ATOMIC_LONG_LOCK_FREE = 2
+const __CLANG_ATOMIC_POINTER_LOCK_FREE = 2
+const __CLANG_ATOMIC_SHORT_LOCK_FREE = 2
+const __CLANG_ATOMIC_WCHAR_T_LOCK_FREE = 2
+const __CONSTANT_CFSTRINGS__ = 1
 const __DBL_DECIMAL_DIG__ = 17
+const __DBL_DENORM_MIN__ = 4.9406564584124654e-324
 const __DBL_DIG__ = 15
+const __DBL_EPSILON__ = 2.2204460492503131e-16
 const __DBL_HAS_DENORM__ = 1
 const __DBL_HAS_INFINITY__ = 1
 const __DBL_HAS_QUIET_NAN__ = 1
-const __DBL_IS_IEC_60559__ = 1
 const __DBL_MANT_DIG__ = 53
 const __DBL_MAX_10_EXP__ = 308
 const __DBL_MAX_EXP__ = 1024
-const __DEC128_EPSILON__ = 1e-33
-const __DEC128_MANT_DIG__ = 34
-const __DEC128_MAX_EXP__ = 6145
-const __DEC128_MAX__ = "9.999999999999999999999999999999999E6144"
-const __DEC128_MIN__ = 1e-6143
-const __DEC128_SUBNORMAL_MIN__ = 0.000000000000000000000000000000001e-6143
-const __DEC32_EPSILON__ = 1e-6
-const __DEC32_MANT_DIG__ = 7
-const __DEC32_MAX_EXP__ = 97
-const __DEC32_MAX__ = 9.999999e96
-const __DEC32_MIN__ = 1e-95
-const __DEC32_SUBNORMAL_MIN__ = 0.000001e-95
-const __DEC64_EPSILON__ = 1e-15
-const __DEC64_MANT_DIG__ = 16
-const __DEC64_MAX_EXP__ = 385
-const __DEC64_MAX__ = "9.999999999999999E384"
-const __DEC64_MIN__ = 1e-383
-const __DEC64_SUBNORMAL_MIN__ = 0.000000000000001e-383
-const __DECIMAL_BID_FORMAT__ = 1
-const __DECIMAL_DIG__ = 21
-const __DEC_EVAL_METHOD__ = 2
+const __DBL_MAX__ = 1.7976931348623157e+308
+const __DBL_MIN__ = 2.2250738585072014e-308
+const __DECIMAL_DIG__ = "__LDBL_DECIMAL_DIG__"
 const __ELF__ = 1
 const __FINITE_MATH_ONLY__ = 0
-const __FLOAT_WORD_ORDER__ = "__ORDER_LITTLE_ENDIAN__"
-const __FLT128_DECIMAL_DIG__ = 36
-const __FLT128_DENORM_MIN__ = 6.47517511943802511092443895822764655e-4966
-const __FLT128_DIG__ = 33
-const __FLT128_EPSILON__ = 1.92592994438723585305597794258492732e-34
-const __FLT128_HAS_DENORM__ = 1
-const __FLT128_HAS_INFINITY__ = 1
-const __FLT128_HAS_QUIET_NAN__ = 1
-const __FLT128_IS_IEC_60559__ = 1
-const __FLT128_MANT_DIG__ = 113
-const __FLT128_MAX_10_EXP__ = 4932
-const __FLT128_MAX_EXP__ = 16384
-const __FLT128_MAX__ = "1.18973149535723176508575932662800702e+4932"
-const __FLT128_MIN__ = 3.36210314311209350626267781732175260e-4932
-const __FLT128_NORM_MAX__ = "1.18973149535723176508575932662800702e+4932"
 const __FLT16_DECIMAL_DIG__ = 5
-const __FLT16_DENORM_MIN__ = 5.96046447753906250000000000000000000e-8
+const __FLT16_DENORM_MIN__ = 5.9604644775390625e-8
 const __FLT16_DIG__ = 3
-const __FLT16_EPSILON__ = 9.76562500000000000000000000000000000e-4
+const __FLT16_EPSILON__ = 9.765625e-4
 const __FLT16_HAS_DENORM__ = 1
 const __FLT16_HAS_INFINITY__ = 1
 const __FLT16_HAS_QUIET_NAN__ = 1
-const __FLT16_IS_IEC_60559__ = 1
 const __FLT16_MANT_DIG__ = 11
 const __FLT16_MAX_10_EXP__ = 4
 const __FLT16_MAX_EXP__ = 16
-const __FLT16_MAX__ = 6.55040000000000000000000000000000000e+4
-const __FLT16_MIN__ = 6.10351562500000000000000000000000000e-5
-const __FLT16_NORM_MAX__ = 6.55040000000000000000000000000000000e+4
-const __FLT32X_DECIMAL_DIG__ = 17
-const __FLT32X_DENORM_MIN__ = 4.94065645841246544176568792868221372e-324
-const __FLT32X_DIG__ = 15
-const __FLT32X_EPSILON__ = 2.22044604925031308084726333618164062e-16
-const __FLT32X_HAS_DENORM__ = 1
-const __FLT32X_HAS_INFINITY__ = 1
-const __FLT32X_HAS_QUIET_NAN__ = 1
-const __FLT32X_IS_IEC_60559__ = 1
-const __FLT32X_MANT_DIG__ = 53
-const __FLT32X_MAX_10_EXP__ = 308
-const __FLT32X_MAX_EXP__ = 1024
-const __FLT32X_MAX__ = 1.79769313486231570814527423731704357e+308
-const __FLT32X_MIN__ = 2.22507385850720138309023271733240406e-308
-const __FLT32X_NORM_MAX__ = 1.79769313486231570814527423731704357e+308
-const __FLT32_DECIMAL_DIG__ = 9
-const __FLT32_DENORM_MIN__ = 1.40129846432481707092372958328991613e-45
-const __FLT32_DIG__ = 6
-const __FLT32_EPSILON__ = 1.19209289550781250000000000000000000e-7
-const __FLT32_HAS_DENORM__ = 1
-const __FLT32_HAS_INFINITY__ = 1
-const __FLT32_HAS_QUIET_NAN__ = 1
-const __FLT32_IS_IEC_60559__ = 1
-const __FLT32_MANT_DIG__ = 24
-const __FLT32_MAX_10_EXP__ = 38
-const __FLT32_MAX_EXP__ = 128
-const __FLT32_MAX__ = 3.40282346638528859811704183484516925e+38
-const __FLT32_MIN__ = 1.17549435082228750796873653722224568e-38
-const __FLT32_NORM_MAX__ = 3.40282346638528859811704183484516925e+38
-const __FLT64X_DECIMAL_DIG__ = 21
-const __FLT64X_DENORM_MIN__ = 3.64519953188247460252840593361941982e-4951
-const __FLT64X_DIG__ = 18
-const __FLT64X_EPSILON__ = 1.08420217248550443400745280086994171e-19
-const __FLT64X_HAS_DENORM__ = 1
-const __FLT64X_HAS_INFINITY__ = 1
-const __FLT64X_HAS_QUIET_NAN__ = 1
-const __FLT64X_IS_IEC_60559__ = 1
-const __FLT64X_MANT_DIG__ = 64
-const __FLT64X_MAX_10_EXP__ = 4932
-const __FLT64X_MAX_EXP__ = 16384
-const __FLT64X_MAX__ = "1.18973149535723176502126385303097021e+4932"
-const __FLT64X_MIN__ = 3.36210314311209350626267781732175260e-4932
-const __FLT64X_NORM_MAX__ = "1.18973149535723176502126385303097021e+4932"
-const __FLT64_DECIMAL_DIG__ = 17
-const __FLT64_DENORM_MIN__ = 4.94065645841246544176568792868221372e-324
-const __FLT64_DIG__ = 15
-const __FLT64_EPSILON__ = 2.22044604925031308084726333618164062e-16
-const __FLT64_HAS_DENORM__ = 1
-const __FLT64_HAS_INFINITY__ = 1
-const __FLT64_HAS_QUIET_NAN__ = 1
-const __FLT64_IS_IEC_60559__ = 1
-const __FLT64_MANT_DIG__ = 53
-const __FLT64_MAX_10_EXP__ = 308
-const __FLT64_MAX_EXP__ = 1024
-const __FLT64_MAX__ = 1.79769313486231570814527423731704357e+308
-const __FLT64_MIN__ = 2.22507385850720138309023271733240406e-308
-const __FLT64_NORM_MAX__ = 1.79769313486231570814527423731704357e+308
+const __FLT16_MAX__ = 6.5504e+4
+const __FLT16_MIN__ = 6.103515625e-5
 const __FLT_DECIMAL_DIG__ = 9
-const __FLT_DENORM_MIN__ = 1.40129846432481707092372958328991613e-45
+const __FLT_DENORM_MIN__ = 1.40129846e-45
 const __FLT_DIG__ = 6
-const __FLT_EPSILON__ = 1.19209289550781250000000000000000000e-7
-const __FLT_EVAL_METHOD_TS_18661_3__ = 0
-const __FLT_EVAL_METHOD__ = 0
+const __FLT_EPSILON__ = 1.19209290e-7
 const __FLT_HAS_DENORM__ = 1
 const __FLT_HAS_INFINITY__ = 1
 const __FLT_HAS_QUIET_NAN__ = 1
-const __FLT_IS_IEC_60559__ = 1
 const __FLT_MANT_DIG__ = 24
 const __FLT_MAX_10_EXP__ = 38
 const __FLT_MAX_EXP__ = 128
-const __FLT_MAX__ = 3.40282346638528859811704183484516925e+38
-const __FLT_MIN__ = 1.17549435082228750796873653722224568e-38
-const __FLT_NORM_MAX__ = 3.40282346638528859811704183484516925e+38
+const __FLT_MAX__ = 3.40282347e+38
+const __FLT_MIN__ = 1.17549435e-38
 const __FLT_RADIX__ = 2
+const __FPCLASS_NEGINF = 0x0004
+const __FPCLASS_NEGNORMAL = 0x0008
+const __FPCLASS_NEGSUBNORMAL = 0x0010
+const __FPCLASS_NEGZERO = 0x0020
+const __FPCLASS_POSINF = 0x0200
+const __FPCLASS_POSNORMAL = 0x0100
+const __FPCLASS_POSSUBNORMAL = 0x0080
+const __FPCLASS_POSZERO = 0x0040
+const __FPCLASS_QNAN = 0x0002
+const __FPCLASS_SNAN = 0x0001
+const __FP_FAST_FMA = 1
+const __FP_FAST_FMAF = 1
 const __FUNCTION__ = "__func__"
-const __FXSR__ = 1
 const __GCC_ASM_FLAG_OUTPUTS__ = 1
 const __GCC_ATOMIC_BOOL_LOCK_FREE = 2
 const __GCC_ATOMIC_CHAR16_T_LOCK_FREE = 2
@@ -192,94 +131,127 @@ const __GCC_ATOMIC_POINTER_LOCK_FREE = 2
 const __GCC_ATOMIC_SHORT_LOCK_FREE = 2
 const __GCC_ATOMIC_TEST_AND_SET_TRUEVAL = 1
 const __GCC_ATOMIC_WCHAR_T_LOCK_FREE = 2
-const __GCC_CONSTRUCTIVE_SIZE = 64
-const __GCC_DESTRUCTIVE_SIZE = 64
 const __GCC_HAVE_DWARF2_CFI_ASM = 1
 const __GCC_HAVE_SYNC_COMPARE_AND_SWAP_1 = 1
+const __GCC_HAVE_SYNC_COMPARE_AND_SWAP_16 = 1
 const __GCC_HAVE_SYNC_COMPARE_AND_SWAP_2 = 1
 const __GCC_HAVE_SYNC_COMPARE_AND_SWAP_4 = 1
 const __GCC_HAVE_SYNC_COMPARE_AND_SWAP_8 = 1
-const __GCC_IEC_559 = 2
-const __GCC_IEC_559_COMPLEX = 2
-const __GNUC_EXECUTION_CHARSET_NAME = "UTF-8"
-const __GNUC_MINOR__ = 3
-const __GNUC_PATCHLEVEL__ = 0
+const __GNUC_MINOR__ = 2
+const __GNUC_PATCHLEVEL__ = 1
 const __GNUC_STDC_INLINE__ = 1
-const __GNUC_WIDE_EXECUTION_CHARSET_NAME = "UTF-32LE"
-const __GNUC__ = 13
-const __GXX_ABI_VERSION = 1018
-const __HAVE_SPECULATION_SAFE_VALUE = 1
-const __INT16_MAX__ = 0x7fff
-const __INT32_MAX__ = 0x7fffffff
+const __GNUC__ = 4
+const __GXX_ABI_VERSION = 1002
+const __INT16_FMTd__ = "hd"
+const __INT16_FMTi__ = "hi"
+const __INT16_MAX__ = 32767
+const __INT16_TYPE__ = "short"
+const __INT32_FMTd__ = "d"
+const __INT32_FMTi__ = "i"
+const __INT32_MAX__ = 2147483647
 const __INT32_TYPE__ = "int"
-const __INT64_MAX__ = 0x7fffffffffffffff
-const __INT8_MAX__ = 0x7f
-const __INTMAX_MAX__ = 0x7fffffffffffffff
+const __INT64_C_SUFFIX__ = "L"
+const __INT64_FMTd__ = "ld"
+const __INT64_FMTi__ = "li"
+const __INT64_MAX__ = 9223372036854775807
+const __INT8_FMTd__ = "hhd"
+const __INT8_FMTi__ = "hhi"
+const __INT8_MAX__ = 127
+const __INTMAX_C_SUFFIX__ = "L"
+const __INTMAX_FMTd__ = "ld"
+const __INTMAX_FMTi__ = "li"
+const __INTMAX_MAX__ = 9223372036854775807
 const __INTMAX_WIDTH__ = 64
-const __INTPTR_MAX__ = 0x7fffffffffffffff
+const __INTPTR_FMTd__ = "ld"
+const __INTPTR_FMTi__ = "li"
+const __INTPTR_MAX__ = 9223372036854775807
 const __INTPTR_WIDTH__ = 64
-const __INT_FAST16_MAX__ = 0x7fffffffffffffff
-const __INT_FAST16_WIDTH__ = 64
-const __INT_FAST32_MAX__ = 0x7fffffffffffffff
-const __INT_FAST32_WIDTH__ = 64
-const __INT_FAST64_MAX__ = 0x7fffffffffffffff
+const __INT_FAST16_FMTd__ = "hd"
+const __INT_FAST16_FMTi__ = "hi"
+const __INT_FAST16_MAX__ = 32767
+const __INT_FAST16_TYPE__ = "short"
+const __INT_FAST16_WIDTH__ = 16
+const __INT_FAST32_FMTd__ = "d"
+const __INT_FAST32_FMTi__ = "i"
+const __INT_FAST32_MAX__ = 2147483647
+const __INT_FAST32_TYPE__ = "int"
+const __INT_FAST32_WIDTH__ = 32
+const __INT_FAST64_FMTd__ = "ld"
+const __INT_FAST64_FMTi__ = "li"
+const __INT_FAST64_MAX__ = 9223372036854775807
 const __INT_FAST64_WIDTH__ = 64
-const __INT_FAST8_MAX__ = 0x7f
+const __INT_FAST8_FMTd__ = "hhd"
+const __INT_FAST8_FMTi__ = "hhi"
+const __INT_FAST8_MAX__ = 127
 const __INT_FAST8_WIDTH__ = 8
-const __INT_LEAST16_MAX__ = 0x7fff
+const __INT_LEAST16_FMTd__ = "hd"
+const __INT_LEAST16_FMTi__ = "hi"
+const __INT_LEAST16_MAX__ = 32767
+const __INT_LEAST16_TYPE__ = "short"
 const __INT_LEAST16_WIDTH__ = 16
-const __INT_LEAST32_MAX__ = 0x7fffffff
+const __INT_LEAST32_FMTd__ = "d"
+const __INT_LEAST32_FMTi__ = "i"
+const __INT_LEAST32_MAX__ = 2147483647
 const __INT_LEAST32_TYPE__ = "int"
 const __INT_LEAST32_WIDTH__ = 32
-const __INT_LEAST64_MAX__ = 0x7fffffffffffffff
+const __INT_LEAST64_FMTd__ = "ld"
+const __INT_LEAST64_FMTi__ = "li"
+const __INT_LEAST64_MAX__ = 9223372036854775807
 const __INT_LEAST64_WIDTH__ = 64
-const __INT_LEAST8_MAX__ = 0x7f
+const __INT_LEAST8_FMTd__ = "hhd"
+const __INT_LEAST8_FMTi__ = "hhi"
+const __INT_LEAST8_MAX__ = 127
 const __INT_LEAST8_WIDTH__ = 8
-const __INT_MAX__ = 0x7fffffff
+const __INT_MAX__ = 2147483647
 const __INT_WIDTH__ = 32
-const __LDBL_DECIMAL_DIG__ = 21
-const __LDBL_DENORM_MIN__ = 3.64519953188247460252840593361941982e-4951
-const __LDBL_DIG__ = 18
-const __LDBL_EPSILON__ = 1.08420217248550443400745280086994171e-19
+const __LDBL_DECIMAL_DIG__ = 36
+const __LDBL_DENORM_MIN__ = 6.47517511943802511092443895822764655e-4966
+const __LDBL_DIG__ = 33
+const __LDBL_EPSILON__ = 1.92592994438723585305597794258492732e-34
 const __LDBL_HAS_DENORM__ = 1
 const __LDBL_HAS_INFINITY__ = 1
 const __LDBL_HAS_QUIET_NAN__ = 1
-const __LDBL_IS_IEC_60559__ = 1
-const __LDBL_MANT_DIG__ = 64
+const __LDBL_MANT_DIG__ = 113
 const __LDBL_MAX_10_EXP__ = 4932
 const __LDBL_MAX_EXP__ = 16384
-const __LDBL_MAX__ = "1.18973149535723176502126385303097021e+4932"
+const __LDBL_MAX__ = "1.18973149535723176508575932662800702e+4932"
 const __LDBL_MIN__ = 3.36210314311209350626267781732175260e-4932
-const __LDBL_NORM_MAX__ = "1.18973149535723176502126385303097021e+4932"
-const __LONG_LONG_MAX__ = 0x7fffffffffffffff
-const __LONG_LONG_WIDTH__ = 64
-const __LONG_MAX__ = 0x7fffffffffffffff
+const __LITTLE_ENDIAN__ = 1
+const __LLONG_WIDTH__ = 64
+const __LONG_LONG_MAX__ = 9223372036854775807
+const __LONG_MAX__ = 9223372036854775807
 const __LONG_WIDTH__ = 64
 const __LP64__ = 1
-const __MMX_WITH_SSE__ = 1
-const __MMX__ = 1
+const __MEMORY_SCOPE_DEVICE = 1
+const __MEMORY_SCOPE_SINGLE = 4
+const __MEMORY_SCOPE_SYSTEM = 0
+const __MEMORY_SCOPE_WRKGRP = 2
+const __MEMORY_SCOPE_WVFRNT = 3
 const __NO_INLINE__ = 1
+const __OBJC_BOOL_IS_BOOL = 0
+const __OPENCL_MEMORY_SCOPE_ALL_SVM_DEVICES = 3
+const __OPENCL_MEMORY_SCOPE_DEVICE = 2
+const __OPENCL_MEMORY_SCOPE_SUB_GROUP = 4
+const __OPENCL_MEMORY_SCOPE_WORK_GROUP = 1
+const __OPENCL_MEMORY_SCOPE_WORK_ITEM = 0
 const __ORDER_BIG_ENDIAN__ = 4321
 const __ORDER_LITTLE_ENDIAN__ = 1234
 const __ORDER_PDP_ENDIAN__ = 3412
 const __PIC__ = 2
 const __PIE__ = 2
+const __POINTER_WIDTH__ = 64
 const __PRAGMA_REDEFINE_EXTNAME = 1
 const __PRETTY_FUNCTION__ = "__func__"
-const __PTRDIFF_MAX__ = 0x7fffffffffffffff
+const __PTRDIFF_FMTd__ = "ld"
+const __PTRDIFF_FMTi__ = "li"
+const __PTRDIFF_MAX__ = 9223372036854775807
 const __PTRDIFF_WIDTH__ = 64
-const __SCHAR_MAX__ = 0x7f
-const __SCHAR_WIDTH__ = 8
-const __SEG_FS = 1
-const __SEG_GS = 1
-const __SHRT_MAX__ = 0x7fff
+const __SCHAR_MAX__ = 127
+const __SHRT_MAX__ = 32767
 const __SHRT_WIDTH__ = 16
-const __SIG_ATOMIC_MAX__ = 0x7fffffff
-const __SIG_ATOMIC_TYPE__ = "int"
+const __SIG_ATOMIC_MAX__ = 2147483647
 const __SIG_ATOMIC_WIDTH__ = 32
 const __SIZEOF_DOUBLE__ = 8
-const __SIZEOF_FLOAT128__ = 16
-const __SIZEOF_FLOAT80__ = 16
 const __SIZEOF_FLOAT__ = 4
 const __SIZEOF_INT128__ = 16
 const __SIZEOF_INT__ = 4
@@ -292,59 +264,116 @@ const __SIZEOF_SHORT__ = 2
 const __SIZEOF_SIZE_T__ = 8
 const __SIZEOF_WCHAR_T__ = 4
 const __SIZEOF_WINT_T__ = 4
-const __SIZE_MAX__ = 0xffffffffffffffff
+const __SIZE_FMTX__ = "lX"
+const __SIZE_FMTo__ = "lo"
+const __SIZE_FMTu__ = "lu"
+const __SIZE_FMTx__ = "lx"
+const __SIZE_MAX__ = 18446744073709551615
 const __SIZE_WIDTH__ = 64
-const __SSE2_MATH__ = 1
-const __SSE2__ = 1
-const __SSE_MATH__ = 1
-const __SSE__ = 1
-const __SSP_STRONG__ = 3
 const __STDC_HOSTED__ = 1
-const __STDC_IEC_559_COMPLEX__ = 1
-const __STDC_IEC_559__ = 1
-const __STDC_IEC_60559_BFP__ = 201404
-const __STDC_IEC_60559_COMPLEX__ = 201404
-const __STDC_ISO_10646__ = 201706
 const __STDC_UTF_16__ = 1
 const __STDC_UTF_32__ = 1
 const __STDC_VERSION__ = 201710
 const __STDC__ = 1
-const __UINT16_MAX__ = 0xffff
-const __UINT32_MAX__ = 0xffffffff
-const __UINT64_MAX__ = 0xffffffffffffffff
-const __UINT8_MAX__ = 0xff
-const __UINTMAX_MAX__ = 0xffffffffffffffff
-const __UINTPTR_MAX__ = 0xffffffffffffffff
-const __UINT_FAST16_MAX__ = 0xffffffffffffffff
-const __UINT_FAST32_MAX__ = 0xffffffffffffffff
-const __UINT_FAST64_MAX__ = 0xffffffffffffffff
-const __UINT_FAST8_MAX__ = 0xff
-const __UINT_LEAST16_MAX__ = 0xffff
-const __UINT_LEAST32_MAX__ = 0xffffffff
-const __UINT_LEAST64_MAX__ = 0xffffffffffffffff
-const __UINT_LEAST8_MAX__ = 0xff
-const __VERSION__ = "13.3.0"
-const __WCHAR_MAX__ = 0x7fffffff
-const __WCHAR_TYPE__ = "int"
+const __UINT16_FMTX__ = "hX"
+const __UINT16_FMTo__ = "ho"
+const __UINT16_FMTu__ = "hu"
+const __UINT16_FMTx__ = "hx"
+const __UINT16_MAX__ = 65535
+const __UINT32_C_SUFFIX__ = "U"
+const __UINT32_FMTX__ = "X"
+const __UINT32_FMTo__ = "o"
+const __UINT32_FMTu__ = "u"
+const __UINT32_FMTx__ = "x"
+const __UINT32_MAX__ = 4294967295
+const __UINT64_C_SUFFIX__ = "UL"
+const __UINT64_FMTX__ = "lX"
+const __UINT64_FMTo__ = "lo"
+const __UINT64_FMTu__ = "lu"
+const __UINT64_FMTx__ = "lx"
+const __UINT64_MAX__ = 18446744073709551615
+const __UINT8_FMTX__ = "hhX"
+const __UINT8_FMTo__ = "hho"
+const __UINT8_FMTu__ = "hhu"
+const __UINT8_FMTx__ = "hhx"
+const __UINT8_MAX__ = 255
+const __UINTMAX_C_SUFFIX__ = "UL"
+const __UINTMAX_FMTX__ = "lX"
+const __UINTMAX_FMTo__ = "lo"
+const __UINTMAX_FMTu__ = "lu"
+const __UINTMAX_FMTx__ = "lx"
+const __UINTMAX_MAX__ = 18446744073709551615
+const __UINTMAX_WIDTH__ = 64
+const __UINTPTR_FMTX__ = "lX"
+const __UINTPTR_FMTo__ = "lo"
+const __UINTPTR_FMTu__ = "lu"
+const __UINTPTR_FMTx__ = "lx"
+const __UINTPTR_MAX__ = 18446744073709551615
+const __UINTPTR_WIDTH__ = 64
+const __UINT_FAST16_FMTX__ = "hX"
+const __UINT_FAST16_FMTo__ = "ho"
+const __UINT_FAST16_FMTu__ = "hu"
+const __UINT_FAST16_FMTx__ = "hx"
+const __UINT_FAST16_MAX__ = 65535
+const __UINT_FAST32_FMTX__ = "X"
+const __UINT_FAST32_FMTo__ = "o"
+const __UINT_FAST32_FMTu__ = "u"
+const __UINT_FAST32_FMTx__ = "x"
+const __UINT_FAST32_MAX__ = 4294967295
+const __UINT_FAST64_FMTX__ = "lX"
+const __UINT_FAST64_FMTo__ = "lo"
+const __UINT_FAST64_FMTu__ = "lu"
+const __UINT_FAST64_FMTx__ = "lx"
+const __UINT_FAST64_MAX__ = 18446744073709551615
+const __UINT_FAST8_FMTX__ = "hhX"
+const __UINT_FAST8_FMTo__ = "hho"
+const __UINT_FAST8_FMTu__ = "hhu"
+const __UINT_FAST8_FMTx__ = "hhx"
+const __UINT_FAST8_MAX__ = 255
+const __UINT_LEAST16_FMTX__ = "hX"
+const __UINT_LEAST16_FMTo__ = "ho"
+const __UINT_LEAST16_FMTu__ = "hu"
+const __UINT_LEAST16_FMTx__ = "hx"
+const __UINT_LEAST16_MAX__ = 65535
+const __UINT_LEAST32_FMTX__ = "X"
+const __UINT_LEAST32_FMTo__ = "o"
+const __UINT_LEAST32_FMTu__ = "u"
+const __UINT_LEAST32_FMTx__ = "x"
+const __UINT_LEAST32_MAX__ = 4294967295
+const __UINT_LEAST64_FMTX__ = "lX"
+const __UINT_LEAST64_FMTo__ = "lo"
+const __UINT_LEAST64_FMTu__ = "lu"
+const __UINT_LEAST64_FMTx__ = "lx"
+const __UINT_LEAST64_MAX__ = 18446744073709551615
+const __UINT_LEAST8_FMTX__ = "hhX"
+const __UINT_LEAST8_FMTo__ = "hho"
+const __UINT_LEAST8_FMTu__ = "hhu"
+const __UINT_LEAST8_FMTx__ = "hhx"
+const __UINT_LEAST8_MAX__ = 255
+const __VERSION__ = "Ubuntu Clang 18.1.3 (1ubuntu1)"
+const __WCHAR_MAX__ = 4294967295
+const __WCHAR_UNSIGNED__ = 1
 const __WCHAR_WIDTH__ = 32
-const __WINT_MAX__ = 0xffffffff
-const __WINT_MIN__ = 0
+const __WINT_MAX__ = 4294967295
+const __WINT_UNSIGNED__ = 1
 const __WINT_WIDTH__ = 32
-const __amd64 = 1
-const __amd64__ = 1
-const __code_model_small__ = 1
+const __aarch64__ = 1
+const __clang__ = 1
+const __clang_literal_encoding__ = "UTF-8"
+const __clang_major__ = 18
+const __clang_minor__ = 1
+const __clang_patchlevel__ = 3
+const __clang_version__ = "18.1.3 (1ubuntu1)"
+const __clang_wide_literal_encoding__ = "UTF-32"
 const __gnu_linux__ = 1
-const __k8 = 1
-const __k8__ = 1
 const __linux = 1
 const __linux__ = 1
+const __llvm__ = 1
 const __pic__ = 2
 const __pie__ = 2
 const __restrict_arr = "restrict"
 const __unix = 1
 const __unix__ = 1
-const __x86_64 = 1
-const __x86_64__ = 1
 const linux = 1
 const unix = 1
 
@@ -352,7 +381,7 @@ type __builtin_va_list = uintptr
 
 type __predefined_size_t = uint64
 
-type __predefined_wchar_t = int32
+type __predefined_wchar_t = uint32
 
 type __predefined_ptrdiff_t = int64
 
@@ -420,7 +449,7 @@ type __ino64_t = uint64
 
 type __mode_t = uint32
 
-type __nlink_t = uint64
+type __nlink_t = uint32
 
 type __off_t = int64
 
@@ -456,7 +485,7 @@ type __clockid_t = int32
 
 type __timer_t = uintptr
 
-type __blksize_t = int64
+type __blksize_t = int32
 
 type __blkcnt_t = int64
 
@@ -696,7 +725,7 @@ type intmax_t = int64
 
 type uintmax_t = uint64
 
-type wchar_t = int32
+type wchar_t = uint32
 
 type div_t = struct {
 	Fquot int32
@@ -739,7 +768,7 @@ type gid_t = uint32
 
 type mode_t = uint32
 
-type nlink_t = uint64
+type nlink_t = uint32
 
 type uid_t = uint32
 
@@ -778,15 +807,15 @@ type u_int64_t = uint64
 type register_t = int32
 
 func __bswap_16(tls *libc.TLS, __bsx __uint16_t) (r __uint16_t) {
-	return libc.X__builtin_bswap16(tls, __bsx)
+	return libc.Uint16FromInt32(libc.Int32FromUint16(__bsx)>>libc.Int32FromInt32(8)&libc.Int32FromInt32(0xff) | libc.Int32FromUint16(__bsx)&libc.Int32FromInt32(0xff)<<libc.Int32FromInt32(8))
 }
 
 func __bswap_32(tls *libc.TLS, __bsx __uint32_t) (r __uint32_t) {
-	return libc.X__builtin_bswap32(tls, __bsx)
+	return __bsx&libc.Uint32FromUint32(0xff000000)>>libc.Int32FromInt32(24) | __bsx&libc.Uint32FromUint32(0x00ff0000)>>libc.Int32FromInt32(8) | __bsx&libc.Uint32FromUint32(0x0000ff00)<<libc.Int32FromInt32(8) | __bsx&libc.Uint32FromUint32(0x000000ff)<<libc.Int32FromInt32(24)
 }
 
 func __bswap_64(tls *libc.TLS, __bsx __uint64_t) (r __uint64_t) {
-	return libc.X__builtin_bswap64(tls, __bsx)
+	return uint64(__bsx&libc.Uint64FromUint64(0xff00000000000000)>>libc.Int32FromInt32(56) | __bsx&libc.Uint64FromUint64(0x00ff000000000000)>>libc.Int32FromInt32(40) | __bsx&libc.Uint64FromUint64(0x0000ff0000000000)>>libc.Int32FromInt32(24) | __bsx&libc.Uint64FromUint64(0x000000ff00000000)>>libc.Int32FromInt32(8) | __bsx&libc.Uint64FromUint64(0x00000000ff000000)<<libc.Int32FromInt32(8) | __bsx&libc.Uint64FromUint64(0x0000000000ff0000)<<libc.Int32FromInt32(24) | __bsx&libc.Uint64FromUint64(0x000000000000ff00)<<libc.Int32FromInt32(40) | __bsx&libc.Uint64FromUint64(0x00000000000000ff)<<libc.Int32FromInt32(56))
 }
 
 func __uint16_identity(tls *libc.TLS, __x __uint16_t) (r __uint16_t) {
@@ -829,7 +858,7 @@ type fd_set = struct {
 
 type fd_mask = int64
 
-type blksize_t = int64
+type blksize_t = int32
 
 type blkcnt_t = int64
 
@@ -859,14 +888,13 @@ type __pthread_slist_t = struct {
 type __pthread_internal_slist = __pthread_slist_t
 
 type __pthread_mutex_s = struct {
-	F__lock    int32
-	F__count   uint32
-	F__owner   int32
-	F__nusers  uint32
-	F__kind    int32
-	F__spins   int16
-	F__elision int16
-	F__list    __pthread_list_t
+	F__lock   int32
+	F__count  uint32
+	F__owner  int32
+	F__nusers uint32
+	F__kind   int32
+	F__spins  int32
+	F__list   __pthread_list_t
 }
 
 type __pthread_rwlock_arch_t = struct {
@@ -878,8 +906,7 @@ type __pthread_rwlock_arch_t = struct {
 	F__pad4          uint32
 	F__cur_writer    int32
 	F__shared        int32
-	F__rwelision     int8
-	F__pad1          [7]uint8
+	F__pad1          uint64
 	F__pad2          uint64
 	F__flags         uint32
 }
@@ -906,12 +933,12 @@ type pthread_t = uint64
 
 type pthread_mutexattr_t = struct {
 	F__align [0]int32
-	F__size  [4]uint8
+	F__size  [8]uint8
 }
 
 type pthread_condattr_t = struct {
 	F__align [0]int32
-	F__size  [4]uint8
+	F__size  [8]uint8
 }
 
 type pthread_key_t = uint32
@@ -920,13 +947,14 @@ type pthread_once_t = int32
 
 type pthread_attr_t = struct {
 	F__align [0]int64
-	F__size  [56]uint8
+	F__size  [64]uint8
 }
 
 type pthread_mutex_t = struct {
-	F__size  [0][40]uint8
-	F__align [0]int64
-	F__data  __pthread_mutex_s
+	F__size      [0][48]uint8
+	F__align     [0]int64
+	F__data      __pthread_mutex_s
+	F__ccgo_pad3 [8]byte
 }
 
 type pthread_cond_t = struct {
@@ -955,7 +983,7 @@ type pthread_barrier_t = struct {
 
 type pthread_barrierattr_t = struct {
 	F__align [0]int32
-	F__size  [4]uint8
+	F__size  [8]uint8
 }
 
 type random_data = struct {
@@ -1230,7 +1258,7 @@ func serialize(tls *libc.TLS, scanner uintptr, buf uintptr) (r uint32) {
 	var size uint32
 	_, _, _ = context, i, size
 	size = uint32(0)
-	if (*Scanner)(unsafe.Pointer(scanner)).Fcontext_stack.Flen1 > uint32(0x7f) {
+	if (*Scanner)(unsafe.Pointer(scanner)).Fcontext_stack.Flen1 > libc.Uint32FromInt32(libc.Int32FromInt32(127)*libc.Int32FromInt32(2)+libc.Int32FromInt32(1)) {
 		return uint32(0)
 	}
 	libc.Xmemcpy(tls, buf+uintptr(size), scanner, uint64(4))
@@ -1244,7 +1272,7 @@ func serialize(tls *libc.TLS, scanner uintptr, buf uintptr) (r uint32) {
 		if uint64(size)+uint64(4)+uint64(4)+uint64((*Context)(unsafe.Pointer(context)).Fheredoc_identifier.Flen1) >= uint64(1024) {
 			return uint32(0)
 		}
-		if (*Context)(unsafe.Pointer(context)).Fheredoc_identifier.Flen1 > uint32(0x7f) {
+		if (*Context)(unsafe.Pointer(context)).Fheredoc_identifier.Flen1 > libc.Uint32FromInt32(libc.Int32FromInt32(127)*libc.Int32FromInt32(2)+libc.Int32FromInt32(1)) {
 			return uint32(0)
 		}
 		libc.Xmemcpy(tls, buf+uintptr(size), context, uint64(4))
@@ -1336,7 +1364,7 @@ func deserialize(tls *libc.TLS, scanner uintptr, buffer uintptr, length uint32) 
 			_ = libc.Uint64FromInt64(4)
 			{
 				if !((*Scanner)(unsafe.Pointer(scanner)).Fcontext_stack.Fdata != libc.UintptrFromInt32(0)) {
-					libc.X__assert_fail(tls, __ccgo_ts+25, __ccgo_ts+12, int32(177), uintptr(unsafe.Pointer(&__func__)))
+					libc.X__assert_fail(tls, __ccgo_ts+23, __ccgo_ts+12, int32(177), uintptr(unsafe.Pointer(&__func__)))
 				}
 			}
 			if libc.Uint32FromInt32(libc.Int32FromInt32(16)) > (*Scanner)(unsafe.Pointer(scanner)).Fcontext_stack.Flen1*uint32(2) {
@@ -1358,7 +1386,7 @@ func deserialize(tls *libc.TLS, scanner uintptr, buffer uintptr, length uint32) 
 	_ = libc.Uint64FromInt64(4)
 	{
 		if !(size == length) {
-			libc.X__assert_fail(tls, __ccgo_ts+65, __ccgo_ts+12, int32(179), uintptr(unsafe.Pointer(&__func__)))
+			libc.X__assert_fail(tls, __ccgo_ts+63, __ccgo_ts+12, int32(179), uintptr(unsafe.Pointer(&__func__)))
 		}
 	}
 }
@@ -1467,7 +1495,7 @@ func scan(tls *libc.TLS, scanner uintptr, lexer uintptr, valid_symbols uintptr) 
 			_ = libc.Uint64FromInt64(4)
 			{
 				if !((*Scanner)(unsafe.Pointer(scanner)).Fcontext_stack.Fdata != libc.UintptrFromInt32(0)) {
-					libc.X__assert_fail(tls, __ccgo_ts+25, __ccgo_ts+12, int32(251), uintptr(unsafe.Pointer(&__func__1)))
+					libc.X__assert_fail(tls, __ccgo_ts+23, __ccgo_ts+12, int32(251), uintptr(unsafe.Pointer(&__func__1)))
 				}
 			}
 			if libc.Uint32FromInt32(libc.Int32FromInt32(16)) > (*Scanner)(unsafe.Pointer(scanner)).Fcontext_stack.Flen1*uint32(2) {
@@ -1513,7 +1541,7 @@ func scan(tls *libc.TLS, scanner uintptr, lexer uintptr, valid_symbols uintptr) 
 				_ = libc.Uint64FromInt64(4)
 				{
 					if !((*Scanner)(unsafe.Pointer(scanner)).Fcontext_stack.Fdata != libc.UintptrFromInt32(0)) {
-						libc.X__assert_fail(tls, __ccgo_ts+25, __ccgo_ts+12, int32(267), uintptr(unsafe.Pointer(&__func__1)))
+						libc.X__assert_fail(tls, __ccgo_ts+23, __ccgo_ts+12, int32(267), uintptr(unsafe.Pointer(&__func__1)))
 					}
 				}
 				if libc.Uint32FromInt32(libc.Int32FromInt32(16)) > (*Scanner)(unsafe.Pointer(scanner)).Fcontext_stack.Flen1*uint32(2) {
@@ -1567,7 +1595,7 @@ func scan(tls *libc.TLS, scanner uintptr, lexer uintptr, valid_symbols uintptr) 
 				_ = libc.Uint64FromInt64(4)
 				{
 					if !((*Scanner)(unsafe.Pointer(scanner)).Fcontext_stack.Fdata != libc.UintptrFromInt32(0)) {
-						libc.X__assert_fail(tls, __ccgo_ts+25, __ccgo_ts+12, int32(293), uintptr(unsafe.Pointer(&__func__1)))
+						libc.X__assert_fail(tls, __ccgo_ts+23, __ccgo_ts+12, int32(293), uintptr(unsafe.Pointer(&__func__1)))
 					}
 				}
 				if libc.Uint32FromInt32(libc.Int32FromInt32(16)) > (*Scanner)(unsafe.Pointer(scanner)).Fcontext_stack.Flen1*uint32(2) {
@@ -1654,7 +1682,7 @@ func scan(tls *libc.TLS, scanner uintptr, lexer uintptr, valid_symbols uintptr) 
 			_ = libc.Uint64FromInt64(4)
 			{
 				if !((*Scanner)(unsafe.Pointer(scanner)).Fcontext_stack.Fdata != libc.UintptrFromInt32(0)) {
-					libc.X__assert_fail(tls, __ccgo_ts+25, __ccgo_ts+12, int32(322), uintptr(unsafe.Pointer(&__func__1)))
+					libc.X__assert_fail(tls, __ccgo_ts+23, __ccgo_ts+12, int32(322), uintptr(unsafe.Pointer(&__func__1)))
 				}
 			}
 			if libc.Uint32FromInt32(libc.Int32FromInt32(16)) > (*Scanner)(unsafe.Pointer(scanner)).Fcontext_stack.Flen1*uint32(2) {
@@ -1965,127 +1993,127 @@ const aux_sym_attr_splat_repeat1 = 119
 const aux_sym_template_literal_repeat1 = 120
 
 var ts_symbol_names = [121]uintptr{
-	0:   __ccgo_ts + 80,
-	1:   __ccgo_ts + 84,
-	2:   __ccgo_ts + 86,
-	3:   __ccgo_ts + 88,
-	4:   __ccgo_ts + 90,
-	5:   __ccgo_ts + 101,
-	6:   __ccgo_ts + 103,
-	7:   __ccgo_ts + 105,
-	8:   __ccgo_ts + 124,
-	9:   __ccgo_ts + 143,
-	10:  __ccgo_ts + 148,
-	11:  __ccgo_ts + 154,
-	12:  __ccgo_ts + 163,
-	13:  __ccgo_ts + 165,
-	14:  __ccgo_ts + 167,
-	15:  __ccgo_ts + 169,
-	16:  __ccgo_ts + 171,
-	17:  __ccgo_ts + 173,
-	18:  __ccgo_ts + 193,
-	19:  __ccgo_ts + 196,
-	20:  __ccgo_ts + 200,
-	21:  __ccgo_ts + 203,
-	22:  __ccgo_ts + 207,
-	23:  __ccgo_ts + 210,
-	24:  __ccgo_ts + 213,
-	25:  __ccgo_ts + 222,
-	26:  __ccgo_ts + 224,
-	27:  __ccgo_ts + 226,
-	28:  __ccgo_ts + 228,
-	29:  __ccgo_ts + 230,
-	30:  __ccgo_ts + 232,
-	31:  __ccgo_ts + 234,
-	32:  __ccgo_ts + 236,
-	33:  __ccgo_ts + 238,
-	34:  __ccgo_ts + 241,
-	35:  __ccgo_ts + 243,
-	36:  __ccgo_ts + 246,
-	37:  __ccgo_ts + 249,
-	38:  __ccgo_ts + 252,
-	39:  __ccgo_ts + 255,
-	40:  __ccgo_ts + 258,
-	41:  __ccgo_ts + 261,
-	42:  __ccgo_ts + 265,
-	43:  __ccgo_ts + 278,
-	44:  __ccgo_ts + 285,
-	45:  __ccgo_ts + 290,
-	46:  __ccgo_ts + 296,
-	47:  __ccgo_ts + 304,
-	48:  __ccgo_ts + 316,
-	49:  __ccgo_ts + 338,
-	50:  __ccgo_ts + 358,
-	51:  __ccgo_ts + 382,
-	52:  __ccgo_ts + 411,
-	53:  __ccgo_ts + 438,
-	54:  __ccgo_ts + 463,
-	55:  __ccgo_ts + 486,
-	56:  __ccgo_ts + 505,
-	57:  __ccgo_ts + 517,
-	58:  __ccgo_ts + 522,
-	59:  __ccgo_ts + 532,
-	60:  __ccgo_ts + 538,
-	61:  __ccgo_ts + 550,
-	62:  __ccgo_ts + 560,
-	63:  __ccgo_ts + 571,
-	64:  __ccgo_ts + 582,
-	65:  __ccgo_ts + 596,
-	66:  __ccgo_ts + 608,
-	67:  __ccgo_ts + 617,
-	68:  __ccgo_ts + 628,
-	69:  __ccgo_ts + 645,
-	70:  __ccgo_ts + 652,
-	71:  __ccgo_ts + 658,
-	72:  __ccgo_ts + 670,
-	73:  __ccgo_ts + 680,
-	74:  __ccgo_ts + 693,
-	75:  __ccgo_ts + 700,
-	76:  __ccgo_ts + 713,
-	77:  __ccgo_ts + 724,
-	78:  __ccgo_ts + 738,
-	79:  __ccgo_ts + 750,
-	80:  __ccgo_ts + 756,
-	81:  __ccgo_ts + 766,
-	82:  __ccgo_ts + 779,
-	83:  __ccgo_ts + 788,
-	84:  __ccgo_ts + 794,
-	85:  __ccgo_ts + 805,
-	86:  __ccgo_ts + 816,
-	87:  __ccgo_ts + 825,
-	88:  __ccgo_ts + 840,
-	89:  __ccgo_ts + 856,
-	90:  __ccgo_ts + 866,
-	91:  __ccgo_ts + 875,
-	92:  __ccgo_ts + 889,
-	93:  __ccgo_ts + 903,
-	94:  __ccgo_ts + 924,
-	95:  __ccgo_ts + 943,
-	96:  __ccgo_ts + 962,
-	97:  __ccgo_ts + 974,
-	98:  __ccgo_ts + 984,
-	99:  __ccgo_ts + 1000,
-	100: __ccgo_ts + 1017,
-	101: __ccgo_ts + 1031,
-	102: __ccgo_ts + 1047,
-	103: __ccgo_ts + 1064,
-	104: __ccgo_ts + 1078,
-	105: __ccgo_ts + 1088,
-	106: __ccgo_ts + 1105,
-	107: __ccgo_ts + 1128,
-	108: __ccgo_ts + 1147,
-	109: __ccgo_ts + 1160,
-	110: __ccgo_ts + 1179,
-	111: __ccgo_ts + 1196,
-	112: __ccgo_ts + 1208,
-	113: __ccgo_ts + 1226,
-	114: __ccgo_ts + 1246,
-	115: __ccgo_ts + 1262,
-	116: __ccgo_ts + 1275,
-	117: __ccgo_ts + 1289,
-	118: __ccgo_ts + 1310,
-	119: __ccgo_ts + 1332,
-	120: __ccgo_ts + 1351,
+	0:   __ccgo_ts + 78,
+	1:   __ccgo_ts + 82,
+	2:   __ccgo_ts + 84,
+	3:   __ccgo_ts + 86,
+	4:   __ccgo_ts + 88,
+	5:   __ccgo_ts + 99,
+	6:   __ccgo_ts + 101,
+	7:   __ccgo_ts + 103,
+	8:   __ccgo_ts + 122,
+	9:   __ccgo_ts + 141,
+	10:  __ccgo_ts + 146,
+	11:  __ccgo_ts + 152,
+	12:  __ccgo_ts + 161,
+	13:  __ccgo_ts + 163,
+	14:  __ccgo_ts + 165,
+	15:  __ccgo_ts + 167,
+	16:  __ccgo_ts + 169,
+	17:  __ccgo_ts + 171,
+	18:  __ccgo_ts + 191,
+	19:  __ccgo_ts + 194,
+	20:  __ccgo_ts + 198,
+	21:  __ccgo_ts + 201,
+	22:  __ccgo_ts + 205,
+	23:  __ccgo_ts + 208,
+	24:  __ccgo_ts + 211,
+	25:  __ccgo_ts + 220,
+	26:  __ccgo_ts + 222,
+	27:  __ccgo_ts + 224,
+	28:  __ccgo_ts + 226,
+	29:  __ccgo_ts + 228,
+	30:  __ccgo_ts + 230,
+	31:  __ccgo_ts + 232,
+	32:  __ccgo_ts + 234,
+	33:  __ccgo_ts + 236,
+	34:  __ccgo_ts + 239,
+	35:  __ccgo_ts + 241,
+	36:  __ccgo_ts + 244,
+	37:  __ccgo_ts + 247,
+	38:  __ccgo_ts + 250,
+	39:  __ccgo_ts + 253,
+	40:  __ccgo_ts + 256,
+	41:  __ccgo_ts + 259,
+	42:  __ccgo_ts + 263,
+	43:  __ccgo_ts + 276,
+	44:  __ccgo_ts + 283,
+	45:  __ccgo_ts + 288,
+	46:  __ccgo_ts + 294,
+	47:  __ccgo_ts + 302,
+	48:  __ccgo_ts + 314,
+	49:  __ccgo_ts + 336,
+	50:  __ccgo_ts + 356,
+	51:  __ccgo_ts + 380,
+	52:  __ccgo_ts + 409,
+	53:  __ccgo_ts + 436,
+	54:  __ccgo_ts + 461,
+	55:  __ccgo_ts + 484,
+	56:  __ccgo_ts + 503,
+	57:  __ccgo_ts + 515,
+	58:  __ccgo_ts + 520,
+	59:  __ccgo_ts + 530,
+	60:  __ccgo_ts + 536,
+	61:  __ccgo_ts + 548,
+	62:  __ccgo_ts + 558,
+	63:  __ccgo_ts + 569,
+	64:  __ccgo_ts + 580,
+	65:  __ccgo_ts + 594,
+	66:  __ccgo_ts + 606,
+	67:  __ccgo_ts + 615,
+	68:  __ccgo_ts + 626,
+	69:  __ccgo_ts + 643,
+	70:  __ccgo_ts + 650,
+	71:  __ccgo_ts + 656,
+	72:  __ccgo_ts + 668,
+	73:  __ccgo_ts + 678,
+	74:  __ccgo_ts + 691,
+	75:  __ccgo_ts + 698,
+	76:  __ccgo_ts + 711,
+	77:  __ccgo_ts + 722,
+	78:  __ccgo_ts + 736,
+	79:  __ccgo_ts + 748,
+	80:  __ccgo_ts + 754,
+	81:  __ccgo_ts + 764,
+	82:  __ccgo_ts + 777,
+	83:  __ccgo_ts + 786,
+	84:  __ccgo_ts + 792,
+	85:  __ccgo_ts + 803,
+	86:  __ccgo_ts + 814,
+	87:  __ccgo_ts + 823,
+	88:  __ccgo_ts + 838,
+	89:  __ccgo_ts + 854,
+	90:  __ccgo_ts + 864,
+	91:  __ccgo_ts + 873,
+	92:  __ccgo_ts + 887,
+	93:  __ccgo_ts + 901,
+	94:  __ccgo_ts + 922,
+	95:  __ccgo_ts + 941,
+	96:  __ccgo_ts + 960,
+	97:  __ccgo_ts + 972,
+	98:  __ccgo_ts + 982,
+	99:  __ccgo_ts + 998,
+	100: __ccgo_ts + 1015,
+	101: __ccgo_ts + 1029,
+	102: __ccgo_ts + 1045,
+	103: __ccgo_ts + 1062,
+	104: __ccgo_ts + 1076,
+	105: __ccgo_ts + 1086,
+	106: __ccgo_ts + 1103,
+	107: __ccgo_ts + 1126,
+	108: __ccgo_ts + 1145,
+	109: __ccgo_ts + 1158,
+	110: __ccgo_ts + 1177,
+	111: __ccgo_ts + 1194,
+	112: __ccgo_ts + 1206,
+	113: __ccgo_ts + 1224,
+	114: __ccgo_ts + 1244,
+	115: __ccgo_ts + 1260,
+	116: __ccgo_ts + 1273,
+	117: __ccgo_ts + 1287,
+	118: __ccgo_ts + 1308,
+	119: __ccgo_ts + 1330,
+	120: __ccgo_ts + 1349,
 }
 
 var ts_symbol_map = [121]TSSymbol{
@@ -2628,8 +2656,8 @@ const field_val = 2
 
 var ts_field_names = [3]uintptr{
 	0: libc.UintptrFromInt32(0),
-	1: __ccgo_ts + 1376,
-	2: __ccgo_ts + 1380,
+	1: __ccgo_ts + 1374,
+	2: __ccgo_ts + 1378,
 }
 
 var ts_field_map_slices = [2]TSMapSlice{
@@ -53627,7 +53655,7 @@ var language = TSLanguage{
 		Fsymbol_map: uintptr(unsafe.Pointer(&ts_external_scanner_symbol_map)),
 	},
 	Fprimary_state_ids: uintptr(unsafe.Pointer(&ts_primary_state_ids)),
-	Fname:              __ccgo_ts + 1384,
+	Fname:              __ccgo_ts + 1382,
 	Fmetadata: TSLanguageMetadata{
 		Fmajor_version: uint8(1),
 		Fminor_version: uint8(2),
@@ -53651,4 +53679,4 @@ func __ccgo_fp(f interface{}) uintptr {
 
 var __ccgo_ts = (*reflect.StringHeader)(unsafe.Pointer(&__ccgo_ts1)).Data
 
-var __ccgo_ts1 = "tmp != NULL\x00./combined.c\x00((scanner->context_stack)).data != NULL\x00size == length\x00end\x00=\x00{\x00}\x00identifier\x00(\x00)\x00numeric_lit_token1\x00numeric_lit_token2\x00true\x00false\x00null_lit\x00,\x00[\x00]\x00:\x00.\x00legacy_index_token1\x00.*\x00[*]\x00=>\x00for\x00in\x00if\x00ellipsis\x00?\x00-\x00!\x00*\x00/\x00%\x00+\x00>\x00>=\x00<\x00<=\x00==\x00!=\x00&&\x00||\x00<<\x00<<-\x00strip_marker\x00endfor\x00else\x00endif\x00comment\x00_whitespace\x00quoted_template_start\x00quoted_template_end\x00_template_literal_chunk\x00template_interpolation_start\x00template_interpolation_end\x00template_directive_start\x00template_directive_end\x00heredoc_identifier\x00config_file\x00body\x00attribute\x00block\x00block_start\x00block_end\x00expression\x00_expr_term\x00literal_value\x00numeric_lit\x00bool_lit\x00string_lit\x00collection_value\x00_comma\x00tuple\x00tuple_start\x00tuple_end\x00_tuple_elems\x00object\x00object_start\x00object_end\x00_object_elems\x00object_elem\x00index\x00new_index\x00legacy_index\x00get_attr\x00splat\x00attr_splat\x00full_splat\x00for_expr\x00for_tuple_expr\x00for_object_expr\x00for_intro\x00for_cond\x00variable_expr\x00function_call\x00_function_call_start\x00_function_call_end\x00function_arguments\x00conditional\x00operation\x00unary_operation\x00binary_operation\x00template_expr\x00quoted_template\x00heredoc_template\x00heredoc_start\x00_template\x00template_literal\x00template_interpolation\x00template_directive\x00template_for\x00template_for_start\x00template_for_end\x00template_if\x00template_if_intro\x00template_else_intro\x00template_if_end\x00body_repeat1\x00block_repeat1\x00_tuple_elems_repeat1\x00_object_elems_repeat1\x00attr_splat_repeat1\x00template_literal_repeat1\x00key\x00val\x00hcl\x00"
+var __ccgo_ts1 = "tmp != NULL\x00combined.c\x00((scanner->context_stack)).data != NULL\x00size == length\x00end\x00=\x00{\x00}\x00identifier\x00(\x00)\x00numeric_lit_token1\x00numeric_lit_token2\x00true\x00false\x00null_lit\x00,\x00[\x00]\x00:\x00.\x00legacy_index_token1\x00.*\x00[*]\x00=>\x00for\x00in\x00if\x00ellipsis\x00?\x00-\x00!\x00*\x00/\x00%\x00+\x00>\x00>=\x00<\x00<=\x00==\x00!=\x00&&\x00||\x00<<\x00<<-\x00strip_marker\x00endfor\x00else\x00endif\x00comment\x00_whitespace\x00quoted_template_start\x00quoted_template_end\x00_template_literal_chunk\x00template_interpolation_start\x00template_interpolation_end\x00template_directive_start\x00template_directive_end\x00heredoc_identifier\x00config_file\x00body\x00attribute\x00block\x00block_start\x00block_end\x00expression\x00_expr_term\x00literal_value\x00numeric_lit\x00bool_lit\x00string_lit\x00collection_value\x00_comma\x00tuple\x00tuple_start\x00tuple_end\x00_tuple_elems\x00object\x00object_start\x00object_end\x00_object_elems\x00object_elem\x00index\x00new_index\x00legacy_index\x00get_attr\x00splat\x00attr_splat\x00full_splat\x00for_expr\x00for_tuple_expr\x00for_object_expr\x00for_intro\x00for_cond\x00variable_expr\x00function_call\x00_function_call_start\x00_function_call_end\x00function_arguments\x00conditional\x00operation\x00unary_operation\x00binary_operation\x00template_expr\x00quoted_template\x00heredoc_template\x00heredoc_start\x00_template\x00template_literal\x00template_interpolation\x00template_directive\x00template_for\x00template_for_start\x00template_for_end\x00template_if\x00template_if_intro\x00template_else_intro\x00template_if_end\x00body_repeat1\x00block_repeat1\x00_tuple_elems_repeat1\x00_object_elems_repeat1\x00attr_splat_repeat1\x00template_literal_repeat1\x00key\x00val\x00hcl\x00"

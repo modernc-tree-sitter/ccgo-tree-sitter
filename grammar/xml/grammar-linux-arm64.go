@@ -1,4 +1,4 @@
-// Code generated for linux/arm64 by 'ccgo preprocessed.c -o grammar.go', DO NOT EDIT.
+// Code generated for linux/arm64 by 'ccgo -ignore-unsupported-alignment -ignore-unsupported-atomic-sizes -ignore-vector-functions preprocessed.c -o grammar.go', DO NOT EDIT.
 
 //go:build linux && arm64
 
@@ -16,170 +16,109 @@ var _ unsafe.Pointer
 
 const _GNU_SOURCE = 1
 const _LP64 = 1
-const _STDC_PREDEF_H = 1
+const __AARCH64EL__ = 1
+const __AARCH64_CMODEL_SMALL__ = 1
+const __ARM_64BIT_STATE = 1
+const __ARM_ACLE = 200
+const __ARM_ALIGN_MAX_STACK_PWR = 4
+const __ARM_ARCH = 8
+const __ARM_ARCH_ISA_A64 = 1
+const __ARM_ARCH_PROFILE = 'A'
+const __ARM_FEATURE_CLZ = 1
+const __ARM_FEATURE_DIRECTED_ROUNDING = 1
+const __ARM_FEATURE_DIV = 1
+const __ARM_FEATURE_FMA = 1
+const __ARM_FEATURE_IDIV = 1
+const __ARM_FEATURE_LDREX = 0xF
+const __ARM_FEATURE_NUMERIC_MAXMIN = 1
+const __ARM_FEATURE_UNALIGNED = 1
+const __ARM_FP = 0xE
+const __ARM_FP16_ARGS = 1
+const __ARM_FP16_FORMAT_IEEE = 1
+const __ARM_NEON = 1
+const __ARM_NEON_FP = 0xE
+const __ARM_PCS_AAPCS64 = 1
+const __ARM_SIZEOF_MINIMAL_ENUM = 4
+const __ARM_SIZEOF_WCHAR_T = 4
+const __ARM_STATE_ZA = 1
+const __ARM_STATE_ZT0 = 1
 const __ATOMIC_ACQUIRE = 2
 const __ATOMIC_ACQ_REL = 4
 const __ATOMIC_CONSUME = 1
-const __ATOMIC_HLE_ACQUIRE = 65536
-const __ATOMIC_HLE_RELEASE = 131072
 const __ATOMIC_RELAXED = 0
 const __ATOMIC_RELEASE = 3
 const __ATOMIC_SEQ_CST = 5
-const __BFLT16_DECIMAL_DIG__ = 4
-const __BFLT16_DENORM_MIN__ = "9.18354961579912115600575419704879436e-41B"
-const __BFLT16_DIG__ = 2
-const __BFLT16_EPSILON__ = "7.81250000000000000000000000000000000e-3B"
-const __BFLT16_HAS_DENORM__ = 1
-const __BFLT16_HAS_INFINITY__ = 1
-const __BFLT16_HAS_QUIET_NAN__ = 1
-const __BFLT16_IS_IEC_60559__ = 0
-const __BFLT16_MANT_DIG__ = 8
-const __BFLT16_MAX_10_EXP__ = 38
-const __BFLT16_MAX_EXP__ = 128
-const __BFLT16_MAX__ = "3.38953138925153547590470800371487867e+38B"
-const __BFLT16_MIN__ = "1.17549435082228750796873653722224568e-38B"
-const __BFLT16_NORM_MAX__ = "3.38953138925153547590470800371487867e+38B"
 const __BIGGEST_ALIGNMENT__ = 16
+const __BITINT_MAXWIDTH__ = 128
+const __BOOL_WIDTH__ = 8
 const __BYTE_ORDER__ = "__ORDER_LITTLE_ENDIAN__"
 const __CCGO__ = 1
-const __CET__ = 3
 const __CHAR_BIT__ = 8
+const __CHAR_UNSIGNED__ = 1
+const __CLANG_ATOMIC_BOOL_LOCK_FREE = 2
+const __CLANG_ATOMIC_CHAR16_T_LOCK_FREE = 2
+const __CLANG_ATOMIC_CHAR32_T_LOCK_FREE = 2
+const __CLANG_ATOMIC_CHAR_LOCK_FREE = 2
+const __CLANG_ATOMIC_INT_LOCK_FREE = 2
+const __CLANG_ATOMIC_LLONG_LOCK_FREE = 2
+const __CLANG_ATOMIC_LONG_LOCK_FREE = 2
+const __CLANG_ATOMIC_POINTER_LOCK_FREE = 2
+const __CLANG_ATOMIC_SHORT_LOCK_FREE = 2
+const __CLANG_ATOMIC_WCHAR_T_LOCK_FREE = 2
+const __CONSTANT_CFSTRINGS__ = 1
 const __DBL_DECIMAL_DIG__ = 17
+const __DBL_DENORM_MIN__ = 4.9406564584124654e-324
 const __DBL_DIG__ = 15
+const __DBL_EPSILON__ = 2.2204460492503131e-16
 const __DBL_HAS_DENORM__ = 1
 const __DBL_HAS_INFINITY__ = 1
 const __DBL_HAS_QUIET_NAN__ = 1
-const __DBL_IS_IEC_60559__ = 1
 const __DBL_MANT_DIG__ = 53
 const __DBL_MAX_10_EXP__ = 308
 const __DBL_MAX_EXP__ = 1024
-const __DEC128_EPSILON__ = 1e-33
-const __DEC128_MANT_DIG__ = 34
-const __DEC128_MAX_EXP__ = 6145
-const __DEC128_MAX__ = "9.999999999999999999999999999999999E6144"
-const __DEC128_MIN__ = 1e-6143
-const __DEC128_SUBNORMAL_MIN__ = 0.000000000000000000000000000000001e-6143
-const __DEC32_EPSILON__ = 1e-6
-const __DEC32_MANT_DIG__ = 7
-const __DEC32_MAX_EXP__ = 97
-const __DEC32_MAX__ = 9.999999e96
-const __DEC32_MIN__ = 1e-95
-const __DEC32_SUBNORMAL_MIN__ = 0.000001e-95
-const __DEC64_EPSILON__ = 1e-15
-const __DEC64_MANT_DIG__ = 16
-const __DEC64_MAX_EXP__ = 385
-const __DEC64_MAX__ = "9.999999999999999E384"
-const __DEC64_MIN__ = 1e-383
-const __DEC64_SUBNORMAL_MIN__ = 0.000000000000001e-383
-const __DECIMAL_BID_FORMAT__ = 1
-const __DECIMAL_DIG__ = 21
-const __DEC_EVAL_METHOD__ = 2
+const __DBL_MAX__ = 1.7976931348623157e+308
+const __DBL_MIN__ = 2.2250738585072014e-308
+const __DECIMAL_DIG__ = "__LDBL_DECIMAL_DIG__"
 const __ELF__ = 1
 const __FINITE_MATH_ONLY__ = 0
-const __FLOAT_WORD_ORDER__ = "__ORDER_LITTLE_ENDIAN__"
-const __FLT128_DECIMAL_DIG__ = 36
-const __FLT128_DENORM_MIN__ = 6.47517511943802511092443895822764655e-4966
-const __FLT128_DIG__ = 33
-const __FLT128_EPSILON__ = 1.92592994438723585305597794258492732e-34
-const __FLT128_HAS_DENORM__ = 1
-const __FLT128_HAS_INFINITY__ = 1
-const __FLT128_HAS_QUIET_NAN__ = 1
-const __FLT128_IS_IEC_60559__ = 1
-const __FLT128_MANT_DIG__ = 113
-const __FLT128_MAX_10_EXP__ = 4932
-const __FLT128_MAX_EXP__ = 16384
-const __FLT128_MAX__ = "1.18973149535723176508575932662800702e+4932"
-const __FLT128_MIN__ = 3.36210314311209350626267781732175260e-4932
-const __FLT128_NORM_MAX__ = "1.18973149535723176508575932662800702e+4932"
 const __FLT16_DECIMAL_DIG__ = 5
-const __FLT16_DENORM_MIN__ = 5.96046447753906250000000000000000000e-8
+const __FLT16_DENORM_MIN__ = 5.9604644775390625e-8
 const __FLT16_DIG__ = 3
-const __FLT16_EPSILON__ = 9.76562500000000000000000000000000000e-4
+const __FLT16_EPSILON__ = 9.765625e-4
 const __FLT16_HAS_DENORM__ = 1
 const __FLT16_HAS_INFINITY__ = 1
 const __FLT16_HAS_QUIET_NAN__ = 1
-const __FLT16_IS_IEC_60559__ = 1
 const __FLT16_MANT_DIG__ = 11
 const __FLT16_MAX_10_EXP__ = 4
 const __FLT16_MAX_EXP__ = 16
-const __FLT16_MAX__ = 6.55040000000000000000000000000000000e+4
-const __FLT16_MIN__ = 6.10351562500000000000000000000000000e-5
-const __FLT16_NORM_MAX__ = 6.55040000000000000000000000000000000e+4
-const __FLT32X_DECIMAL_DIG__ = 17
-const __FLT32X_DENORM_MIN__ = 4.94065645841246544176568792868221372e-324
-const __FLT32X_DIG__ = 15
-const __FLT32X_EPSILON__ = 2.22044604925031308084726333618164062e-16
-const __FLT32X_HAS_DENORM__ = 1
-const __FLT32X_HAS_INFINITY__ = 1
-const __FLT32X_HAS_QUIET_NAN__ = 1
-const __FLT32X_IS_IEC_60559__ = 1
-const __FLT32X_MANT_DIG__ = 53
-const __FLT32X_MAX_10_EXP__ = 308
-const __FLT32X_MAX_EXP__ = 1024
-const __FLT32X_MAX__ = 1.79769313486231570814527423731704357e+308
-const __FLT32X_MIN__ = 2.22507385850720138309023271733240406e-308
-const __FLT32X_NORM_MAX__ = 1.79769313486231570814527423731704357e+308
-const __FLT32_DECIMAL_DIG__ = 9
-const __FLT32_DENORM_MIN__ = 1.40129846432481707092372958328991613e-45
-const __FLT32_DIG__ = 6
-const __FLT32_EPSILON__ = 1.19209289550781250000000000000000000e-7
-const __FLT32_HAS_DENORM__ = 1
-const __FLT32_HAS_INFINITY__ = 1
-const __FLT32_HAS_QUIET_NAN__ = 1
-const __FLT32_IS_IEC_60559__ = 1
-const __FLT32_MANT_DIG__ = 24
-const __FLT32_MAX_10_EXP__ = 38
-const __FLT32_MAX_EXP__ = 128
-const __FLT32_MAX__ = 3.40282346638528859811704183484516925e+38
-const __FLT32_MIN__ = 1.17549435082228750796873653722224568e-38
-const __FLT32_NORM_MAX__ = 3.40282346638528859811704183484516925e+38
-const __FLT64X_DECIMAL_DIG__ = 21
-const __FLT64X_DENORM_MIN__ = 3.64519953188247460252840593361941982e-4951
-const __FLT64X_DIG__ = 18
-const __FLT64X_EPSILON__ = 1.08420217248550443400745280086994171e-19
-const __FLT64X_HAS_DENORM__ = 1
-const __FLT64X_HAS_INFINITY__ = 1
-const __FLT64X_HAS_QUIET_NAN__ = 1
-const __FLT64X_IS_IEC_60559__ = 1
-const __FLT64X_MANT_DIG__ = 64
-const __FLT64X_MAX_10_EXP__ = 4932
-const __FLT64X_MAX_EXP__ = 16384
-const __FLT64X_MAX__ = "1.18973149535723176502126385303097021e+4932"
-const __FLT64X_MIN__ = 3.36210314311209350626267781732175260e-4932
-const __FLT64X_NORM_MAX__ = "1.18973149535723176502126385303097021e+4932"
-const __FLT64_DECIMAL_DIG__ = 17
-const __FLT64_DENORM_MIN__ = 4.94065645841246544176568792868221372e-324
-const __FLT64_DIG__ = 15
-const __FLT64_EPSILON__ = 2.22044604925031308084726333618164062e-16
-const __FLT64_HAS_DENORM__ = 1
-const __FLT64_HAS_INFINITY__ = 1
-const __FLT64_HAS_QUIET_NAN__ = 1
-const __FLT64_IS_IEC_60559__ = 1
-const __FLT64_MANT_DIG__ = 53
-const __FLT64_MAX_10_EXP__ = 308
-const __FLT64_MAX_EXP__ = 1024
-const __FLT64_MAX__ = 1.79769313486231570814527423731704357e+308
-const __FLT64_MIN__ = 2.22507385850720138309023271733240406e-308
-const __FLT64_NORM_MAX__ = 1.79769313486231570814527423731704357e+308
+const __FLT16_MAX__ = 6.5504e+4
+const __FLT16_MIN__ = 6.103515625e-5
 const __FLT_DECIMAL_DIG__ = 9
-const __FLT_DENORM_MIN__ = 1.40129846432481707092372958328991613e-45
+const __FLT_DENORM_MIN__ = 1.40129846e-45
 const __FLT_DIG__ = 6
-const __FLT_EPSILON__ = 1.19209289550781250000000000000000000e-7
-const __FLT_EVAL_METHOD_TS_18661_3__ = 0
-const __FLT_EVAL_METHOD__ = 0
+const __FLT_EPSILON__ = 1.19209290e-7
 const __FLT_HAS_DENORM__ = 1
 const __FLT_HAS_INFINITY__ = 1
 const __FLT_HAS_QUIET_NAN__ = 1
-const __FLT_IS_IEC_60559__ = 1
 const __FLT_MANT_DIG__ = 24
 const __FLT_MAX_10_EXP__ = 38
 const __FLT_MAX_EXP__ = 128
-const __FLT_MAX__ = 3.40282346638528859811704183484516925e+38
-const __FLT_MIN__ = 1.17549435082228750796873653722224568e-38
-const __FLT_NORM_MAX__ = 3.40282346638528859811704183484516925e+38
+const __FLT_MAX__ = 3.40282347e+38
+const __FLT_MIN__ = 1.17549435e-38
 const __FLT_RADIX__ = 2
+const __FPCLASS_NEGINF = 0x0004
+const __FPCLASS_NEGNORMAL = 0x0008
+const __FPCLASS_NEGSUBNORMAL = 0x0010
+const __FPCLASS_NEGZERO = 0x0020
+const __FPCLASS_POSINF = 0x0200
+const __FPCLASS_POSNORMAL = 0x0100
+const __FPCLASS_POSSUBNORMAL = 0x0080
+const __FPCLASS_POSZERO = 0x0040
+const __FPCLASS_QNAN = 0x0002
+const __FPCLASS_SNAN = 0x0001
+const __FP_FAST_FMA = 1
+const __FP_FAST_FMAF = 1
 const __FUNCTION__ = "__func__"
-const __FXSR__ = 1
 const __GCC_ASM_FLAG_OUTPUTS__ = 1
 const __GCC_ATOMIC_BOOL_LOCK_FREE = 2
 const __GCC_ATOMIC_CHAR16_T_LOCK_FREE = 2
@@ -192,94 +131,127 @@ const __GCC_ATOMIC_POINTER_LOCK_FREE = 2
 const __GCC_ATOMIC_SHORT_LOCK_FREE = 2
 const __GCC_ATOMIC_TEST_AND_SET_TRUEVAL = 1
 const __GCC_ATOMIC_WCHAR_T_LOCK_FREE = 2
-const __GCC_CONSTRUCTIVE_SIZE = 64
-const __GCC_DESTRUCTIVE_SIZE = 64
 const __GCC_HAVE_DWARF2_CFI_ASM = 1
 const __GCC_HAVE_SYNC_COMPARE_AND_SWAP_1 = 1
+const __GCC_HAVE_SYNC_COMPARE_AND_SWAP_16 = 1
 const __GCC_HAVE_SYNC_COMPARE_AND_SWAP_2 = 1
 const __GCC_HAVE_SYNC_COMPARE_AND_SWAP_4 = 1
 const __GCC_HAVE_SYNC_COMPARE_AND_SWAP_8 = 1
-const __GCC_IEC_559 = 2
-const __GCC_IEC_559_COMPLEX = 2
-const __GNUC_EXECUTION_CHARSET_NAME = "UTF-8"
-const __GNUC_MINOR__ = 3
-const __GNUC_PATCHLEVEL__ = 0
+const __GNUC_MINOR__ = 2
+const __GNUC_PATCHLEVEL__ = 1
 const __GNUC_STDC_INLINE__ = 1
-const __GNUC_WIDE_EXECUTION_CHARSET_NAME = "UTF-32LE"
-const __GNUC__ = 13
-const __GXX_ABI_VERSION = 1018
-const __HAVE_SPECULATION_SAFE_VALUE = 1
-const __INT16_MAX__ = 0x7fff
-const __INT32_MAX__ = 0x7fffffff
+const __GNUC__ = 4
+const __GXX_ABI_VERSION = 1002
+const __INT16_FMTd__ = "hd"
+const __INT16_FMTi__ = "hi"
+const __INT16_MAX__ = 32767
+const __INT16_TYPE__ = "short"
+const __INT32_FMTd__ = "d"
+const __INT32_FMTi__ = "i"
+const __INT32_MAX__ = 2147483647
 const __INT32_TYPE__ = "int"
-const __INT64_MAX__ = 0x7fffffffffffffff
-const __INT8_MAX__ = 0x7f
-const __INTMAX_MAX__ = 0x7fffffffffffffff
+const __INT64_C_SUFFIX__ = "L"
+const __INT64_FMTd__ = "ld"
+const __INT64_FMTi__ = "li"
+const __INT64_MAX__ = 9223372036854775807
+const __INT8_FMTd__ = "hhd"
+const __INT8_FMTi__ = "hhi"
+const __INT8_MAX__ = 127
+const __INTMAX_C_SUFFIX__ = "L"
+const __INTMAX_FMTd__ = "ld"
+const __INTMAX_FMTi__ = "li"
+const __INTMAX_MAX__ = 9223372036854775807
 const __INTMAX_WIDTH__ = 64
-const __INTPTR_MAX__ = 0x7fffffffffffffff
+const __INTPTR_FMTd__ = "ld"
+const __INTPTR_FMTi__ = "li"
+const __INTPTR_MAX__ = 9223372036854775807
 const __INTPTR_WIDTH__ = 64
-const __INT_FAST16_MAX__ = 0x7fffffffffffffff
-const __INT_FAST16_WIDTH__ = 64
-const __INT_FAST32_MAX__ = 0x7fffffffffffffff
-const __INT_FAST32_WIDTH__ = 64
-const __INT_FAST64_MAX__ = 0x7fffffffffffffff
+const __INT_FAST16_FMTd__ = "hd"
+const __INT_FAST16_FMTi__ = "hi"
+const __INT_FAST16_MAX__ = 32767
+const __INT_FAST16_TYPE__ = "short"
+const __INT_FAST16_WIDTH__ = 16
+const __INT_FAST32_FMTd__ = "d"
+const __INT_FAST32_FMTi__ = "i"
+const __INT_FAST32_MAX__ = 2147483647
+const __INT_FAST32_TYPE__ = "int"
+const __INT_FAST32_WIDTH__ = 32
+const __INT_FAST64_FMTd__ = "ld"
+const __INT_FAST64_FMTi__ = "li"
+const __INT_FAST64_MAX__ = 9223372036854775807
 const __INT_FAST64_WIDTH__ = 64
-const __INT_FAST8_MAX__ = 0x7f
+const __INT_FAST8_FMTd__ = "hhd"
+const __INT_FAST8_FMTi__ = "hhi"
+const __INT_FAST8_MAX__ = 127
 const __INT_FAST8_WIDTH__ = 8
-const __INT_LEAST16_MAX__ = 0x7fff
+const __INT_LEAST16_FMTd__ = "hd"
+const __INT_LEAST16_FMTi__ = "hi"
+const __INT_LEAST16_MAX__ = 32767
+const __INT_LEAST16_TYPE__ = "short"
 const __INT_LEAST16_WIDTH__ = 16
-const __INT_LEAST32_MAX__ = 0x7fffffff
+const __INT_LEAST32_FMTd__ = "d"
+const __INT_LEAST32_FMTi__ = "i"
+const __INT_LEAST32_MAX__ = 2147483647
 const __INT_LEAST32_TYPE__ = "int"
 const __INT_LEAST32_WIDTH__ = 32
-const __INT_LEAST64_MAX__ = 0x7fffffffffffffff
+const __INT_LEAST64_FMTd__ = "ld"
+const __INT_LEAST64_FMTi__ = "li"
+const __INT_LEAST64_MAX__ = 9223372036854775807
 const __INT_LEAST64_WIDTH__ = 64
-const __INT_LEAST8_MAX__ = 0x7f
+const __INT_LEAST8_FMTd__ = "hhd"
+const __INT_LEAST8_FMTi__ = "hhi"
+const __INT_LEAST8_MAX__ = 127
 const __INT_LEAST8_WIDTH__ = 8
-const __INT_MAX__ = 0x7fffffff
+const __INT_MAX__ = 2147483647
 const __INT_WIDTH__ = 32
-const __LDBL_DECIMAL_DIG__ = 21
-const __LDBL_DENORM_MIN__ = 3.64519953188247460252840593361941982e-4951
-const __LDBL_DIG__ = 18
-const __LDBL_EPSILON__ = 1.08420217248550443400745280086994171e-19
+const __LDBL_DECIMAL_DIG__ = 36
+const __LDBL_DENORM_MIN__ = 6.47517511943802511092443895822764655e-4966
+const __LDBL_DIG__ = 33
+const __LDBL_EPSILON__ = 1.92592994438723585305597794258492732e-34
 const __LDBL_HAS_DENORM__ = 1
 const __LDBL_HAS_INFINITY__ = 1
 const __LDBL_HAS_QUIET_NAN__ = 1
-const __LDBL_IS_IEC_60559__ = 1
-const __LDBL_MANT_DIG__ = 64
+const __LDBL_MANT_DIG__ = 113
 const __LDBL_MAX_10_EXP__ = 4932
 const __LDBL_MAX_EXP__ = 16384
-const __LDBL_MAX__ = "1.18973149535723176502126385303097021e+4932"
+const __LDBL_MAX__ = "1.18973149535723176508575932662800702e+4932"
 const __LDBL_MIN__ = 3.36210314311209350626267781732175260e-4932
-const __LDBL_NORM_MAX__ = "1.18973149535723176502126385303097021e+4932"
-const __LONG_LONG_MAX__ = 0x7fffffffffffffff
-const __LONG_LONG_WIDTH__ = 64
-const __LONG_MAX__ = 0x7fffffffffffffff
+const __LITTLE_ENDIAN__ = 1
+const __LLONG_WIDTH__ = 64
+const __LONG_LONG_MAX__ = 9223372036854775807
+const __LONG_MAX__ = 9223372036854775807
 const __LONG_WIDTH__ = 64
 const __LP64__ = 1
-const __MMX_WITH_SSE__ = 1
-const __MMX__ = 1
+const __MEMORY_SCOPE_DEVICE = 1
+const __MEMORY_SCOPE_SINGLE = 4
+const __MEMORY_SCOPE_SYSTEM = 0
+const __MEMORY_SCOPE_WRKGRP = 2
+const __MEMORY_SCOPE_WVFRNT = 3
 const __NO_INLINE__ = 1
+const __OBJC_BOOL_IS_BOOL = 0
+const __OPENCL_MEMORY_SCOPE_ALL_SVM_DEVICES = 3
+const __OPENCL_MEMORY_SCOPE_DEVICE = 2
+const __OPENCL_MEMORY_SCOPE_SUB_GROUP = 4
+const __OPENCL_MEMORY_SCOPE_WORK_GROUP = 1
+const __OPENCL_MEMORY_SCOPE_WORK_ITEM = 0
 const __ORDER_BIG_ENDIAN__ = 4321
 const __ORDER_LITTLE_ENDIAN__ = 1234
 const __ORDER_PDP_ENDIAN__ = 3412
 const __PIC__ = 2
 const __PIE__ = 2
+const __POINTER_WIDTH__ = 64
 const __PRAGMA_REDEFINE_EXTNAME = 1
 const __PRETTY_FUNCTION__ = "__func__"
-const __PTRDIFF_MAX__ = 0x7fffffffffffffff
+const __PTRDIFF_FMTd__ = "ld"
+const __PTRDIFF_FMTi__ = "li"
+const __PTRDIFF_MAX__ = 9223372036854775807
 const __PTRDIFF_WIDTH__ = 64
-const __SCHAR_MAX__ = 0x7f
-const __SCHAR_WIDTH__ = 8
-const __SEG_FS = 1
-const __SEG_GS = 1
-const __SHRT_MAX__ = 0x7fff
+const __SCHAR_MAX__ = 127
+const __SHRT_MAX__ = 32767
 const __SHRT_WIDTH__ = 16
-const __SIG_ATOMIC_MAX__ = 0x7fffffff
-const __SIG_ATOMIC_TYPE__ = "int"
+const __SIG_ATOMIC_MAX__ = 2147483647
 const __SIG_ATOMIC_WIDTH__ = 32
 const __SIZEOF_DOUBLE__ = 8
-const __SIZEOF_FLOAT128__ = 16
-const __SIZEOF_FLOAT80__ = 16
 const __SIZEOF_FLOAT__ = 4
 const __SIZEOF_INT128__ = 16
 const __SIZEOF_INT__ = 4
@@ -292,59 +264,116 @@ const __SIZEOF_SHORT__ = 2
 const __SIZEOF_SIZE_T__ = 8
 const __SIZEOF_WCHAR_T__ = 4
 const __SIZEOF_WINT_T__ = 4
-const __SIZE_MAX__ = 0xffffffffffffffff
+const __SIZE_FMTX__ = "lX"
+const __SIZE_FMTo__ = "lo"
+const __SIZE_FMTu__ = "lu"
+const __SIZE_FMTx__ = "lx"
+const __SIZE_MAX__ = 18446744073709551615
 const __SIZE_WIDTH__ = 64
-const __SSE2_MATH__ = 1
-const __SSE2__ = 1
-const __SSE_MATH__ = 1
-const __SSE__ = 1
-const __SSP_STRONG__ = 3
 const __STDC_HOSTED__ = 1
-const __STDC_IEC_559_COMPLEX__ = 1
-const __STDC_IEC_559__ = 1
-const __STDC_IEC_60559_BFP__ = 201404
-const __STDC_IEC_60559_COMPLEX__ = 201404
-const __STDC_ISO_10646__ = 201706
 const __STDC_UTF_16__ = 1
 const __STDC_UTF_32__ = 1
 const __STDC_VERSION__ = 201710
 const __STDC__ = 1
-const __UINT16_MAX__ = 0xffff
-const __UINT32_MAX__ = 0xffffffff
-const __UINT64_MAX__ = 0xffffffffffffffff
-const __UINT8_MAX__ = 0xff
-const __UINTMAX_MAX__ = 0xffffffffffffffff
-const __UINTPTR_MAX__ = 0xffffffffffffffff
-const __UINT_FAST16_MAX__ = 0xffffffffffffffff
-const __UINT_FAST32_MAX__ = 0xffffffffffffffff
-const __UINT_FAST64_MAX__ = 0xffffffffffffffff
-const __UINT_FAST8_MAX__ = 0xff
-const __UINT_LEAST16_MAX__ = 0xffff
-const __UINT_LEAST32_MAX__ = 0xffffffff
-const __UINT_LEAST64_MAX__ = 0xffffffffffffffff
-const __UINT_LEAST8_MAX__ = 0xff
-const __VERSION__ = "13.3.0"
-const __WCHAR_MAX__ = 0x7fffffff
-const __WCHAR_TYPE__ = "int"
+const __UINT16_FMTX__ = "hX"
+const __UINT16_FMTo__ = "ho"
+const __UINT16_FMTu__ = "hu"
+const __UINT16_FMTx__ = "hx"
+const __UINT16_MAX__ = 65535
+const __UINT32_C_SUFFIX__ = "U"
+const __UINT32_FMTX__ = "X"
+const __UINT32_FMTo__ = "o"
+const __UINT32_FMTu__ = "u"
+const __UINT32_FMTx__ = "x"
+const __UINT32_MAX__ = 4294967295
+const __UINT64_C_SUFFIX__ = "UL"
+const __UINT64_FMTX__ = "lX"
+const __UINT64_FMTo__ = "lo"
+const __UINT64_FMTu__ = "lu"
+const __UINT64_FMTx__ = "lx"
+const __UINT64_MAX__ = 18446744073709551615
+const __UINT8_FMTX__ = "hhX"
+const __UINT8_FMTo__ = "hho"
+const __UINT8_FMTu__ = "hhu"
+const __UINT8_FMTx__ = "hhx"
+const __UINT8_MAX__ = 255
+const __UINTMAX_C_SUFFIX__ = "UL"
+const __UINTMAX_FMTX__ = "lX"
+const __UINTMAX_FMTo__ = "lo"
+const __UINTMAX_FMTu__ = "lu"
+const __UINTMAX_FMTx__ = "lx"
+const __UINTMAX_MAX__ = 18446744073709551615
+const __UINTMAX_WIDTH__ = 64
+const __UINTPTR_FMTX__ = "lX"
+const __UINTPTR_FMTo__ = "lo"
+const __UINTPTR_FMTu__ = "lu"
+const __UINTPTR_FMTx__ = "lx"
+const __UINTPTR_MAX__ = 18446744073709551615
+const __UINTPTR_WIDTH__ = 64
+const __UINT_FAST16_FMTX__ = "hX"
+const __UINT_FAST16_FMTo__ = "ho"
+const __UINT_FAST16_FMTu__ = "hu"
+const __UINT_FAST16_FMTx__ = "hx"
+const __UINT_FAST16_MAX__ = 65535
+const __UINT_FAST32_FMTX__ = "X"
+const __UINT_FAST32_FMTo__ = "o"
+const __UINT_FAST32_FMTu__ = "u"
+const __UINT_FAST32_FMTx__ = "x"
+const __UINT_FAST32_MAX__ = 4294967295
+const __UINT_FAST64_FMTX__ = "lX"
+const __UINT_FAST64_FMTo__ = "lo"
+const __UINT_FAST64_FMTu__ = "lu"
+const __UINT_FAST64_FMTx__ = "lx"
+const __UINT_FAST64_MAX__ = 18446744073709551615
+const __UINT_FAST8_FMTX__ = "hhX"
+const __UINT_FAST8_FMTo__ = "hho"
+const __UINT_FAST8_FMTu__ = "hhu"
+const __UINT_FAST8_FMTx__ = "hhx"
+const __UINT_FAST8_MAX__ = 255
+const __UINT_LEAST16_FMTX__ = "hX"
+const __UINT_LEAST16_FMTo__ = "ho"
+const __UINT_LEAST16_FMTu__ = "hu"
+const __UINT_LEAST16_FMTx__ = "hx"
+const __UINT_LEAST16_MAX__ = 65535
+const __UINT_LEAST32_FMTX__ = "X"
+const __UINT_LEAST32_FMTo__ = "o"
+const __UINT_LEAST32_FMTu__ = "u"
+const __UINT_LEAST32_FMTx__ = "x"
+const __UINT_LEAST32_MAX__ = 4294967295
+const __UINT_LEAST64_FMTX__ = "lX"
+const __UINT_LEAST64_FMTo__ = "lo"
+const __UINT_LEAST64_FMTu__ = "lu"
+const __UINT_LEAST64_FMTx__ = "lx"
+const __UINT_LEAST64_MAX__ = 18446744073709551615
+const __UINT_LEAST8_FMTX__ = "hhX"
+const __UINT_LEAST8_FMTo__ = "hho"
+const __UINT_LEAST8_FMTu__ = "hhu"
+const __UINT_LEAST8_FMTx__ = "hhx"
+const __UINT_LEAST8_MAX__ = 255
+const __VERSION__ = "Ubuntu Clang 18.1.3 (1ubuntu1)"
+const __WCHAR_MAX__ = 4294967295
+const __WCHAR_UNSIGNED__ = 1
 const __WCHAR_WIDTH__ = 32
-const __WINT_MAX__ = 0xffffffff
-const __WINT_MIN__ = 0
+const __WINT_MAX__ = 4294967295
+const __WINT_UNSIGNED__ = 1
 const __WINT_WIDTH__ = 32
-const __amd64 = 1
-const __amd64__ = 1
-const __code_model_small__ = 1
+const __aarch64__ = 1
+const __clang__ = 1
+const __clang_literal_encoding__ = "UTF-8"
+const __clang_major__ = 18
+const __clang_minor__ = 1
+const __clang_patchlevel__ = 3
+const __clang_version__ = "18.1.3 (1ubuntu1)"
+const __clang_wide_literal_encoding__ = "UTF-32"
 const __gnu_linux__ = 1
-const __k8 = 1
-const __k8__ = 1
 const __linux = 1
 const __linux__ = 1
+const __llvm__ = 1
 const __pic__ = 2
 const __pie__ = 2
 const __restrict_arr = "restrict"
 const __unix = 1
 const __unix__ = 1
-const __x86_64 = 1
-const __x86_64__ = 1
 const linux = 1
 const unix = 1
 
@@ -352,7 +381,7 @@ type __builtin_va_list = uintptr
 
 type __predefined_size_t = uint64
 
-type __predefined_wchar_t = int32
+type __predefined_wchar_t = uint32
 
 type __predefined_ptrdiff_t = int64
 
@@ -416,7 +445,7 @@ type __ino64_t = uint64
 
 type __mode_t = uint32
 
-type __nlink_t = uint64
+type __nlink_t = uint32
 
 type __off_t = int64
 
@@ -452,7 +481,7 @@ type __clockid_t = int32
 
 type __timer_t = uintptr
 
-type __blksize_t = int64
+type __blksize_t = int32
 
 type __blkcnt_t = int64
 
@@ -542,7 +571,7 @@ type uintmax_t = uint64
 
 type size_t = uint64
 
-type wchar_t = int32
+type wchar_t = uint32
 
 type div_t = struct {
 	Fquot int32
@@ -585,7 +614,7 @@ type gid_t = uint32
 
 type mode_t = uint32
 
-type nlink_t = uint64
+type nlink_t = uint32
 
 type uid_t = uint32
 
@@ -628,15 +657,15 @@ type u_int64_t = uint64
 type register_t = int32
 
 func __bswap_16(tls *libc.TLS, __bsx __uint16_t) (r __uint16_t) {
-	return libc.X__builtin_bswap16(tls, __bsx)
+	return libc.Uint16FromInt32(libc.Int32FromUint16(__bsx)>>libc.Int32FromInt32(8)&libc.Int32FromInt32(0xff) | libc.Int32FromUint16(__bsx)&libc.Int32FromInt32(0xff)<<libc.Int32FromInt32(8))
 }
 
 func __bswap_32(tls *libc.TLS, __bsx __uint32_t) (r __uint32_t) {
-	return libc.X__builtin_bswap32(tls, __bsx)
+	return __bsx&libc.Uint32FromUint32(0xff000000)>>libc.Int32FromInt32(24) | __bsx&libc.Uint32FromUint32(0x00ff0000)>>libc.Int32FromInt32(8) | __bsx&libc.Uint32FromUint32(0x0000ff00)<<libc.Int32FromInt32(8) | __bsx&libc.Uint32FromUint32(0x000000ff)<<libc.Int32FromInt32(24)
 }
 
 func __bswap_64(tls *libc.TLS, __bsx __uint64_t) (r __uint64_t) {
-	return libc.X__builtin_bswap64(tls, __bsx)
+	return uint64(__bsx&libc.Uint64FromUint64(0xff00000000000000)>>libc.Int32FromInt32(56) | __bsx&libc.Uint64FromUint64(0x00ff000000000000)>>libc.Int32FromInt32(40) | __bsx&libc.Uint64FromUint64(0x0000ff0000000000)>>libc.Int32FromInt32(24) | __bsx&libc.Uint64FromUint64(0x000000ff00000000)>>libc.Int32FromInt32(8) | __bsx&libc.Uint64FromUint64(0x00000000ff000000)<<libc.Int32FromInt32(8) | __bsx&libc.Uint64FromUint64(0x0000000000ff0000)<<libc.Int32FromInt32(24) | __bsx&libc.Uint64FromUint64(0x000000000000ff00)<<libc.Int32FromInt32(40) | __bsx&libc.Uint64FromUint64(0x00000000000000ff)<<libc.Int32FromInt32(56))
 }
 
 func __uint16_identity(tls *libc.TLS, __x __uint16_t) (r __uint16_t) {
@@ -679,7 +708,7 @@ type fd_set = struct {
 
 type fd_mask = int64
 
-type blksize_t = int64
+type blksize_t = int32
 
 type blkcnt_t = int64
 
@@ -709,14 +738,13 @@ type __pthread_slist_t = struct {
 type __pthread_internal_slist = __pthread_slist_t
 
 type __pthread_mutex_s = struct {
-	F__lock    int32
-	F__count   uint32
-	F__owner   int32
-	F__nusers  uint32
-	F__kind    int32
-	F__spins   int16
-	F__elision int16
-	F__list    __pthread_list_t
+	F__lock   int32
+	F__count  uint32
+	F__owner  int32
+	F__nusers uint32
+	F__kind   int32
+	F__spins  int32
+	F__list   __pthread_list_t
 }
 
 type __pthread_rwlock_arch_t = struct {
@@ -728,8 +756,7 @@ type __pthread_rwlock_arch_t = struct {
 	F__pad4          uint32
 	F__cur_writer    int32
 	F__shared        int32
-	F__rwelision     int8
-	F__pad1          [7]uint8
+	F__pad1          uint64
 	F__pad2          uint64
 	F__flags         uint32
 }
@@ -756,12 +783,12 @@ type pthread_t = uint64
 
 type pthread_mutexattr_t = struct {
 	F__align [0]int32
-	F__size  [4]uint8
+	F__size  [8]uint8
 }
 
 type pthread_condattr_t = struct {
 	F__align [0]int32
-	F__size  [4]uint8
+	F__size  [8]uint8
 }
 
 type pthread_key_t = uint32
@@ -770,13 +797,14 @@ type pthread_once_t = int32
 
 type pthread_attr_t = struct {
 	F__align [0]int64
-	F__size  [56]uint8
+	F__size  [64]uint8
 }
 
 type pthread_mutex_t = struct {
-	F__size  [0][40]uint8
-	F__align [0]int64
-	F__data  __pthread_mutex_s
+	F__size      [0][48]uint8
+	F__align     [0]int64
+	F__data      __pthread_mutex_s
+	F__ccgo_pad3 [8]byte
 }
 
 type pthread_cond_t = struct {
@@ -805,7 +833,7 @@ type pthread_barrier_t = struct {
 
 type pthread_barrierattr_t = struct {
 	F__align [0]int32
-	F__size  [4]uint8
+	F__size  [8]uint8
 }
 
 type random_data = struct {
@@ -1049,11 +1077,11 @@ func advance(tls *libc.TLS, lexer uintptr) {
 }
 
 func is_valid_name_char(tls *libc.TLS, chr wchar_t) (r uint8) {
-	return libc.BoolUint8(libc.Xiswalnum(tls, libc.Uint32FromInt32(chr)) != 0 || chr == int32('_') || chr == int32(':') || chr == int32('.') || chr == int32('-') || chr == int32(0xB7))
+	return libc.BoolUint8(libc.Xiswalnum(tls, chr) != 0 || chr == uint32('_') || chr == uint32(':') || chr == uint32('.') || chr == uint32('-') || chr == uint32(0xB7))
 }
 
 func is_valid_name_start_char(tls *libc.TLS, chr wchar_t) (r uint8) {
-	return libc.BoolUint8(libc.Xiswalpha(tls, libc.Uint32FromInt32(chr)) != 0 || chr == int32('_') || chr == int32(':'))
+	return libc.BoolUint8(libc.Xiswalpha(tls, chr) != 0 || chr == uint32('_') || chr == uint32(':'))
 }
 
 func check_word(tls *libc.TLS, lexer uintptr, word uintptr, length uint32) (r uint8) {
@@ -1082,7 +1110,7 @@ func scan_pi_target(tls *libc.TLS, lexer uintptr, valid_symbols uintptr) (r uint
 	_, _, _ = advanced_once, found_x_first, last_char_hyphen
 	advanced_once = libc.BoolUint8(0 != 0)
 	found_x_first = libc.BoolUint8(0 != 0)
-	if is_valid_name_start_char(tls, (*TSLexer)(unsafe.Pointer(lexer)).Flookahead) != 0 {
+	if is_valid_name_start_char(tls, libc.Uint32FromInt32((*TSLexer)(unsafe.Pointer(lexer)).Flookahead)) != 0 {
 		if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('x') || (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('X') {
 			found_x_first = libc.BoolUint8(1 != 0)
 			(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
@@ -1091,12 +1119,12 @@ func scan_pi_target(tls *libc.TLS, lexer uintptr, valid_symbols uintptr) (r uint
 		advance(tls, lexer)
 	}
 	if advanced_once != 0 {
-		for is_valid_name_char(tls, (*TSLexer)(unsafe.Pointer(lexer)).Flookahead) != 0 {
+		for is_valid_name_char(tls, libc.Uint32FromInt32((*TSLexer)(unsafe.Pointer(lexer)).Flookahead)) != 0 {
 			if found_x_first != 0 && ((*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('m') || (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('M')) {
 				advance(tls, lexer)
 				if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('l') || (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('L') {
 					advance(tls, lexer)
-					if is_valid_name_char(tls, (*TSLexer)(unsafe.Pointer(lexer)).Flookahead) != 0 {
+					if is_valid_name_char(tls, libc.Uint32FromInt32((*TSLexer)(unsafe.Pointer(lexer)).Flookahead)) != 0 {
 						found_x_first = libc.BoolUint8(0 != 0)
 						last_char_hyphen = libc.BoolUint8((*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('-'))
 						advance(tls, lexer)
@@ -1446,7 +1474,7 @@ func scan_tag_name(tls *libc.TLS, lexer uintptr) (r String) {
 	var _ /* tag_name at bp+0 */ String
 	_, _ = v1, v2
 	*(*String)(unsafe.Pointer(bp)) = String{}
-	if is_valid_name_start_char(tls, (*TSLexer)(unsafe.Pointer(lexer)).Flookahead) != 0 {
+	if is_valid_name_start_char(tls, libc.Uint32FromInt32((*TSLexer)(unsafe.Pointer(lexer)).Flookahead)) != 0 {
 		_array__grow(tls, bp, uint32(1), libc.Uint64FromInt64(1))
 		v2 = bp + 8
 		v1 = *(*uint32_t)(unsafe.Pointer(v2))
@@ -1454,7 +1482,7 @@ func scan_tag_name(tls *libc.TLS, lexer uintptr) (r String) {
 		*(*uint8)(unsafe.Pointer((*String)(unsafe.Pointer(bp)).Fcontents + uintptr(v1))) = libc.Uint8FromInt32((*TSLexer)(unsafe.Pointer(lexer)).Flookahead)
 		advance(tls, lexer)
 	}
-	for is_valid_name_char(tls, (*TSLexer)(unsafe.Pointer(lexer)).Flookahead) != 0 {
+	for is_valid_name_char(tls, libc.Uint32FromInt32((*TSLexer)(unsafe.Pointer(lexer)).Flookahead)) != 0 {
 		_array__grow(tls, bp, uint32(1), libc.Uint64FromInt64(1))
 		v2 = bp + 8
 		v1 = *(*uint32_t)(unsafe.Pointer(v2))
@@ -1679,7 +1707,7 @@ func tree_sitter_xml_external_scanner_destroy(tls *libc.TLS, payload uintptr) {
 		_ = libc.Uint64FromInt64(4)
 		{
 			if !(i < (*Vector)(unsafe.Pointer(tags)).Fsize) {
-				libc.X__assert_fail(tls, __ccgo_ts+171, __ccgo_ts+158, int32(200), uintptr(unsafe.Pointer(&__func__3)))
+				libc.X__assert_fail(tls, __ccgo_ts+169, __ccgo_ts+158, int32(200), uintptr(unsafe.Pointer(&__func__3)))
 			}
 		}
 		_array__delete(tls, (*Vector)(unsafe.Pointer(tags)).Fcontents+uintptr(i)*16)
@@ -1721,7 +1749,7 @@ func tree_sitter_xml_external_scanner_serialize(tls *libc.TLS, payload uintptr, 
 		_ = libc.Uint64FromInt64(4)
 		{
 			if !(*(*uint32_t)(unsafe.Pointer(bp + 4)) < (*Vector)(unsafe.Pointer(tags)).Fsize) {
-				libc.X__assert_fail(tls, __ccgo_ts+200, __ccgo_ts+158, int32(215), uintptr(unsafe.Pointer(&__func__4)))
+				libc.X__assert_fail(tls, __ccgo_ts+198, __ccgo_ts+158, int32(215), uintptr(unsafe.Pointer(&__func__4)))
 			}
 		}
 		tag = (*Vector)(unsafe.Pointer(tags)).Fcontents + uintptr(*(*uint32_t)(unsafe.Pointer(bp + 4)))*16
@@ -1771,7 +1799,7 @@ func tree_sitter_xml_external_scanner_deserialize(tls *libc.TLS, payload uintptr
 		_ = libc.Uint64FromInt64(4)
 		{
 			if !(i < (*Vector)(unsafe.Pointer(tags)).Fsize) {
-				libc.X__assert_fail(tls, __ccgo_ts+171, __ccgo_ts+158, int32(239), uintptr(unsafe.Pointer(&__func__5)))
+				libc.X__assert_fail(tls, __ccgo_ts+169, __ccgo_ts+158, int32(239), uintptr(unsafe.Pointer(&__func__5)))
 			}
 		}
 		_array__delete(tls, (*Vector)(unsafe.Pointer(tags)).Fcontents+uintptr(i)*16)
@@ -1984,149 +2012,149 @@ const aux_sym_EntityValue_repeat1 = 141
 const aux_sym_EntityValue_repeat2 = 142
 
 var ts_symbol_names = [143]uintptr{
-	0:   __ccgo_ts + 248,
-	1:   __ccgo_ts + 252,
-	2:   __ccgo_ts + 257,
-	3:   __ccgo_ts + 260,
-	4:   __ccgo_ts + 264,
-	5:   __ccgo_ts + 267,
-	6:   __ccgo_ts + 278,
-	7:   __ccgo_ts + 280,
-	8:   __ccgo_ts + 284,
-	9:   __ccgo_ts + 287,
-	10:  __ccgo_ts + 289,
-	11:  __ccgo_ts + 292,
-	12:  __ccgo_ts + 300,
-	13:  __ccgo_ts + 302,
-	14:  __ccgo_ts + 304,
-	15:  __ccgo_ts + 306,
-	16:  __ccgo_ts + 308,
-	17:  __ccgo_ts + 311,
-	18:  __ccgo_ts + 314,
-	19:  __ccgo_ts + 318,
-	20:  __ccgo_ts + 322,
-	21:  __ccgo_ts + 328,
-	22:  __ccgo_ts + 343,
-	23:  __ccgo_ts + 353,
-	24:  __ccgo_ts + 375,
-	25:  __ccgo_ts + 397,
-	26:  __ccgo_ts + 405,
-	27:  __ccgo_ts + 411,
-	28:  __ccgo_ts + 415,
-	29:  __ccgo_ts + 417,
-	30:  __ccgo_ts + 425,
-	31:  __ccgo_ts + 427,
-	32:  __ccgo_ts + 429,
-	33:  __ccgo_ts + 431,
-	34:  __ccgo_ts + 433,
-	35:  __ccgo_ts + 435,
-	36:  __ccgo_ts + 437,
-	37:  __ccgo_ts + 445,
-	38:  __ccgo_ts + 459,
-	39:  __ccgo_ts + 468,
-	40:  __ccgo_ts + 478,
-	41:  __ccgo_ts + 487,
-	42:  __ccgo_ts + 494,
-	43:  __ccgo_ts + 501,
-	44:  __ccgo_ts + 503,
-	45:  __ccgo_ts + 522,
-	46:  __ccgo_ts + 541,
-	47:  __ccgo_ts + 547,
-	48:  __ccgo_ts + 549,
-	49:  __ccgo_ts + 552,
-	50:  __ccgo_ts + 560,
-	51:  __ccgo_ts + 562,
-	52:  __ccgo_ts + 565,
-	53:  __ccgo_ts + 580,
-	54:  __ccgo_ts + 584,
-	55:  __ccgo_ts + 599,
-	56:  __ccgo_ts + 606,
-	57:  __ccgo_ts + 613,
-	58:  __ccgo_ts + 613,
-	59:  __ccgo_ts + 617,
-	60:  __ccgo_ts + 637,
-	61:  __ccgo_ts + 657,
-	62:  __ccgo_ts + 665,
-	63:  __ccgo_ts + 676,
-	64:  __ccgo_ts + 685,
-	65:  __ccgo_ts + 693,
-	66:  __ccgo_ts + 695,
-	67:  __ccgo_ts + 704,
-	68:  __ccgo_ts + 716,
-	69:  __ccgo_ts + 724,
-	70:  __ccgo_ts + 733,
-	71:  __ccgo_ts + 252,
-	72:  __ccgo_ts + 252,
-	73:  __ccgo_ts + 739,
-	74:  __ccgo_ts + 759,
-	75:  __ccgo_ts + 768,
-	76:  __ccgo_ts + 775,
-	77:  __ccgo_ts + 781,
-	78:  __ccgo_ts + 789,
-	79:  __ccgo_ts + 797,
-	80:  __ccgo_ts + 809,
-	81:  __ccgo_ts + 820,
-	82:  __ccgo_ts + 828,
-	83:  __ccgo_ts + 841,
-	84:  __ccgo_ts + 851,
-	85:  __ccgo_ts + 856,
-	86:  __ccgo_ts + 861,
-	87:  __ccgo_ts + 869,
-	88:  __ccgo_ts + 876,
-	89:  __ccgo_ts + 884,
-	90:  __ccgo_ts + 897,
-	91:  __ccgo_ts + 908,
-	92:  __ccgo_ts + 918,
-	93:  __ccgo_ts + 933,
-	94:  __ccgo_ts + 945,
-	95:  __ccgo_ts + 954,
-	96:  __ccgo_ts + 966,
-	97:  __ccgo_ts + 978,
-	98:  __ccgo_ts + 984,
-	99:  __ccgo_ts + 993,
-	100: __ccgo_ts + 997,
-	101: __ccgo_ts + 1005,
-	102: __ccgo_ts + 1017,
-	103: __ccgo_ts + 1024,
-	104: __ccgo_ts + 1033,
-	105: __ccgo_ts + 1044,
-	106: __ccgo_ts + 1060,
-	107: __ccgo_ts + 1073,
-	108: __ccgo_ts + 1085,
-	109: __ccgo_ts + 1097,
-	110: __ccgo_ts + 1109,
-	111: __ccgo_ts + 1116,
-	112: __ccgo_ts + 1123,
-	113: __ccgo_ts + 1135,
-	114: __ccgo_ts + 1145,
-	115: __ccgo_ts + 1158,
-	116: __ccgo_ts + 1170,
-	117: __ccgo_ts + 1181,
-	118: __ccgo_ts + 1191,
-	119: __ccgo_ts + 1199,
-	120: __ccgo_ts + 1208,
-	121: __ccgo_ts + 1219,
-	122: __ccgo_ts + 1228,
-	123: __ccgo_ts + 1242,
-	124: __ccgo_ts + 1255,
-	125: __ccgo_ts + 1268,
-	126: __ccgo_ts + 1282,
-	127: __ccgo_ts + 1285,
-	128: __ccgo_ts + 1289,
-	129: __ccgo_ts + 1306,
-	130: __ccgo_ts + 1327,
-	131: __ccgo_ts + 1343,
-	132: __ccgo_ts + 1364,
-	133: __ccgo_ts + 1387,
-	134: __ccgo_ts + 1410,
-	135: __ccgo_ts + 1424,
-	136: __ccgo_ts + 1438,
-	137: __ccgo_ts + 1454,
-	138: __ccgo_ts + 1470,
-	139: __ccgo_ts + 1490,
-	140: __ccgo_ts + 1511,
-	141: __ccgo_ts + 1531,
-	142: __ccgo_ts + 1551,
+	0:   __ccgo_ts + 246,
+	1:   __ccgo_ts + 250,
+	2:   __ccgo_ts + 255,
+	3:   __ccgo_ts + 258,
+	4:   __ccgo_ts + 262,
+	5:   __ccgo_ts + 265,
+	6:   __ccgo_ts + 276,
+	7:   __ccgo_ts + 278,
+	8:   __ccgo_ts + 282,
+	9:   __ccgo_ts + 285,
+	10:  __ccgo_ts + 287,
+	11:  __ccgo_ts + 290,
+	12:  __ccgo_ts + 298,
+	13:  __ccgo_ts + 300,
+	14:  __ccgo_ts + 302,
+	15:  __ccgo_ts + 304,
+	16:  __ccgo_ts + 306,
+	17:  __ccgo_ts + 309,
+	18:  __ccgo_ts + 312,
+	19:  __ccgo_ts + 316,
+	20:  __ccgo_ts + 320,
+	21:  __ccgo_ts + 326,
+	22:  __ccgo_ts + 341,
+	23:  __ccgo_ts + 351,
+	24:  __ccgo_ts + 373,
+	25:  __ccgo_ts + 395,
+	26:  __ccgo_ts + 403,
+	27:  __ccgo_ts + 409,
+	28:  __ccgo_ts + 413,
+	29:  __ccgo_ts + 415,
+	30:  __ccgo_ts + 423,
+	31:  __ccgo_ts + 425,
+	32:  __ccgo_ts + 427,
+	33:  __ccgo_ts + 429,
+	34:  __ccgo_ts + 431,
+	35:  __ccgo_ts + 433,
+	36:  __ccgo_ts + 435,
+	37:  __ccgo_ts + 443,
+	38:  __ccgo_ts + 457,
+	39:  __ccgo_ts + 466,
+	40:  __ccgo_ts + 476,
+	41:  __ccgo_ts + 485,
+	42:  __ccgo_ts + 492,
+	43:  __ccgo_ts + 499,
+	44:  __ccgo_ts + 501,
+	45:  __ccgo_ts + 520,
+	46:  __ccgo_ts + 539,
+	47:  __ccgo_ts + 545,
+	48:  __ccgo_ts + 547,
+	49:  __ccgo_ts + 550,
+	50:  __ccgo_ts + 558,
+	51:  __ccgo_ts + 560,
+	52:  __ccgo_ts + 563,
+	53:  __ccgo_ts + 578,
+	54:  __ccgo_ts + 582,
+	55:  __ccgo_ts + 597,
+	56:  __ccgo_ts + 604,
+	57:  __ccgo_ts + 611,
+	58:  __ccgo_ts + 611,
+	59:  __ccgo_ts + 615,
+	60:  __ccgo_ts + 635,
+	61:  __ccgo_ts + 655,
+	62:  __ccgo_ts + 663,
+	63:  __ccgo_ts + 674,
+	64:  __ccgo_ts + 683,
+	65:  __ccgo_ts + 691,
+	66:  __ccgo_ts + 693,
+	67:  __ccgo_ts + 702,
+	68:  __ccgo_ts + 714,
+	69:  __ccgo_ts + 722,
+	70:  __ccgo_ts + 731,
+	71:  __ccgo_ts + 250,
+	72:  __ccgo_ts + 250,
+	73:  __ccgo_ts + 737,
+	74:  __ccgo_ts + 757,
+	75:  __ccgo_ts + 766,
+	76:  __ccgo_ts + 773,
+	77:  __ccgo_ts + 779,
+	78:  __ccgo_ts + 787,
+	79:  __ccgo_ts + 795,
+	80:  __ccgo_ts + 807,
+	81:  __ccgo_ts + 818,
+	82:  __ccgo_ts + 826,
+	83:  __ccgo_ts + 839,
+	84:  __ccgo_ts + 849,
+	85:  __ccgo_ts + 854,
+	86:  __ccgo_ts + 859,
+	87:  __ccgo_ts + 867,
+	88:  __ccgo_ts + 874,
+	89:  __ccgo_ts + 882,
+	90:  __ccgo_ts + 895,
+	91:  __ccgo_ts + 906,
+	92:  __ccgo_ts + 916,
+	93:  __ccgo_ts + 931,
+	94:  __ccgo_ts + 943,
+	95:  __ccgo_ts + 952,
+	96:  __ccgo_ts + 964,
+	97:  __ccgo_ts + 976,
+	98:  __ccgo_ts + 982,
+	99:  __ccgo_ts + 991,
+	100: __ccgo_ts + 995,
+	101: __ccgo_ts + 1003,
+	102: __ccgo_ts + 1015,
+	103: __ccgo_ts + 1022,
+	104: __ccgo_ts + 1031,
+	105: __ccgo_ts + 1042,
+	106: __ccgo_ts + 1058,
+	107: __ccgo_ts + 1071,
+	108: __ccgo_ts + 1083,
+	109: __ccgo_ts + 1095,
+	110: __ccgo_ts + 1107,
+	111: __ccgo_ts + 1114,
+	112: __ccgo_ts + 1121,
+	113: __ccgo_ts + 1133,
+	114: __ccgo_ts + 1143,
+	115: __ccgo_ts + 1156,
+	116: __ccgo_ts + 1168,
+	117: __ccgo_ts + 1179,
+	118: __ccgo_ts + 1189,
+	119: __ccgo_ts + 1197,
+	120: __ccgo_ts + 1206,
+	121: __ccgo_ts + 1217,
+	122: __ccgo_ts + 1226,
+	123: __ccgo_ts + 1240,
+	124: __ccgo_ts + 1253,
+	125: __ccgo_ts + 1266,
+	126: __ccgo_ts + 1280,
+	127: __ccgo_ts + 1283,
+	128: __ccgo_ts + 1287,
+	129: __ccgo_ts + 1304,
+	130: __ccgo_ts + 1325,
+	131: __ccgo_ts + 1341,
+	132: __ccgo_ts + 1362,
+	133: __ccgo_ts + 1385,
+	134: __ccgo_ts + 1408,
+	135: __ccgo_ts + 1422,
+	136: __ccgo_ts + 1436,
+	137: __ccgo_ts + 1452,
+	138: __ccgo_ts + 1468,
+	139: __ccgo_ts + 1488,
+	140: __ccgo_ts + 1509,
+	141: __ccgo_ts + 1529,
+	142: __ccgo_ts + 1549,
 }
 
 var ts_symbol_map = [143]TSSymbol{
@@ -2723,8 +2751,8 @@ const field_root = 2
 
 var ts_field_names = [3]uintptr{
 	0: libc.UintptrFromInt32(0),
-	1: __ccgo_ts + 861,
-	2: __ccgo_ts + 1571,
+	1: __ccgo_ts + 859,
+	2: __ccgo_ts + 1569,
 }
 
 var ts_field_map_slices = [5]TSMapSlice{
@@ -30433,4 +30461,4 @@ func __ccgo_fp(f interface{}) uintptr {
 
 var __ccgo_ts = (*reflect.StringHeader)(unsafe.Pointer(&__ccgo_ts1)).Data
 
-var __ccgo_ts1 = "model\x00stylesheet\x00index < self->size\x00third-party/tree-sitter-xml/xml/src/tree_sitter/array.h\x00old_end <= self->size\x00(uint32_t)((tags)->size - 1) < (tags)->size\x00./combined.c\x00(uint32_t)(i) < (tags)->size\x00(uint32_t)(serialized_tag_count) < (tags)->size\x00end\x00Name\x00<?\x00xml\x00?>\x00standalone\x00'\x00yes\x00no\x00\"\x00<!\x00DOCTYPE\x00[\x00]\x00>\x00<\x00/>\x00</\x00]]>\x00<![\x00CDATA\x00xml-stylesheet\x00xml-model\x00PseudoAttValue_token1\x00PseudoAttValue_token2\x00ELEMENT\x00EMPTY\x00ANY\x00(\x00#PCDATA\x00|\x00)\x00*\x00?\x00+\x00,\x00ATTLIST\x00TokenizedType\x00NOTATION\x00#REQUIRED\x00#IMPLIED\x00#FIXED\x00ENTITY\x00%\x00EntityValue_token1\x00EntityValue_token2\x00NDATA\x00;\x00_S\x00Nmtoken\x00&\x00&#\x00CharRef_token1\x00&#x\x00CharRef_token2\x00SYSTEM\x00PUBLIC\x00URI\x00PubidLiteral_token1\x00PubidLiteral_token2\x00version\x00VersionNum\x00encoding\x00EncName\x00=\x00PITarget\x00_pi_content\x00Comment\x00CharData\x00CData\x00_erroneous_end_name\x00document\x00prolog\x00_Misc\x00XMLDecl\x00_SDDecl\x00doctypedecl\x00_intSubset\x00element\x00EmptyElemTag\x00Attribute\x00STag\x00ETag\x00content\x00CDSect\x00CDStart\x00StyleSheetPI\x00XmlModelPI\x00PseudoAtt\x00PseudoAttValue\x00_markupdecl\x00_DeclSep\x00elementdecl\x00contentspec\x00Mixed\x00children\x00_cp\x00_choice\x00AttlistDecl\x00AttDef\x00_AttType\x00StringType\x00_EnumeratedType\x00NotationType\x00Enumeration\x00DefaultDecl\x00_EntityDecl\x00GEDecl\x00PEDecl\x00EntityValue\x00NDataDecl\x00NotationDecl\x00PEReference\x00_Reference\x00EntityRef\x00CharRef\x00AttValue\x00ExternalID\x00PublicID\x00SystemLiteral\x00PubidLiteral\x00_VersionInfo\x00_EncodingDecl\x00PI\x00_Eq\x00document_repeat1\x00EmptyElemTag_repeat1\x00content_repeat1\x00StyleSheetPI_repeat1\x00PseudoAttValue_repeat1\x00PseudoAttValue_repeat2\x00Mixed_repeat1\x00Mixed_repeat2\x00_choice_repeat1\x00_choice_repeat2\x00AttlistDecl_repeat1\x00NotationType_repeat1\x00Enumeration_repeat1\x00EntityValue_repeat1\x00EntityValue_repeat2\x00root\x00"
+var __ccgo_ts1 = "model\x00stylesheet\x00index < self->size\x00third-party/tree-sitter-xml/xml/src/tree_sitter/array.h\x00old_end <= self->size\x00(uint32_t)((tags)->size - 1) < (tags)->size\x00combined.c\x00(uint32_t)(i) < (tags)->size\x00(uint32_t)(serialized_tag_count) < (tags)->size\x00end\x00Name\x00<?\x00xml\x00?>\x00standalone\x00'\x00yes\x00no\x00\"\x00<!\x00DOCTYPE\x00[\x00]\x00>\x00<\x00/>\x00</\x00]]>\x00<![\x00CDATA\x00xml-stylesheet\x00xml-model\x00PseudoAttValue_token1\x00PseudoAttValue_token2\x00ELEMENT\x00EMPTY\x00ANY\x00(\x00#PCDATA\x00|\x00)\x00*\x00?\x00+\x00,\x00ATTLIST\x00TokenizedType\x00NOTATION\x00#REQUIRED\x00#IMPLIED\x00#FIXED\x00ENTITY\x00%\x00EntityValue_token1\x00EntityValue_token2\x00NDATA\x00;\x00_S\x00Nmtoken\x00&\x00&#\x00CharRef_token1\x00&#x\x00CharRef_token2\x00SYSTEM\x00PUBLIC\x00URI\x00PubidLiteral_token1\x00PubidLiteral_token2\x00version\x00VersionNum\x00encoding\x00EncName\x00=\x00PITarget\x00_pi_content\x00Comment\x00CharData\x00CData\x00_erroneous_end_name\x00document\x00prolog\x00_Misc\x00XMLDecl\x00_SDDecl\x00doctypedecl\x00_intSubset\x00element\x00EmptyElemTag\x00Attribute\x00STag\x00ETag\x00content\x00CDSect\x00CDStart\x00StyleSheetPI\x00XmlModelPI\x00PseudoAtt\x00PseudoAttValue\x00_markupdecl\x00_DeclSep\x00elementdecl\x00contentspec\x00Mixed\x00children\x00_cp\x00_choice\x00AttlistDecl\x00AttDef\x00_AttType\x00StringType\x00_EnumeratedType\x00NotationType\x00Enumeration\x00DefaultDecl\x00_EntityDecl\x00GEDecl\x00PEDecl\x00EntityValue\x00NDataDecl\x00NotationDecl\x00PEReference\x00_Reference\x00EntityRef\x00CharRef\x00AttValue\x00ExternalID\x00PublicID\x00SystemLiteral\x00PubidLiteral\x00_VersionInfo\x00_EncodingDecl\x00PI\x00_Eq\x00document_repeat1\x00EmptyElemTag_repeat1\x00content_repeat1\x00StyleSheetPI_repeat1\x00PseudoAttValue_repeat1\x00PseudoAttValue_repeat2\x00Mixed_repeat1\x00Mixed_repeat2\x00_choice_repeat1\x00_choice_repeat2\x00AttlistDecl_repeat1\x00NotationType_repeat1\x00Enumeration_repeat1\x00EntityValue_repeat1\x00EntityValue_repeat2\x00root\x00"

@@ -1,4 +1,4 @@
-// Code generated for linux/386 by 'ccgo preprocessed.c -o grammar.go', DO NOT EDIT.
+// Code generated for linux/386 by 'ccgo -ignore-unsupported-alignment -ignore-unsupported-atomic-sizes -ignore-vector-functions preprocessed.c -o grammar.go', DO NOT EDIT.
 
 //go:build linux && 386
 
@@ -25,7 +25,7 @@ const __ATOMIC_RELEASE = 3
 const __ATOMIC_SEQ_CST = 5
 const __BIGGEST_ALIGNMENT__ = 16
 const __BITINT_MAXWIDTH__ = 8388608
-const __BOOL_WIDTH__ = 1
+const __BOOL_WIDTH__ = 8
 const __BYTE_ORDER__ = "__ORDER_LITTLE_ENDIAN__"
 const __CCGO__ = 1
 const __CHAR_BIT__ = 8
@@ -52,7 +52,6 @@ const __DBL_MAX_10_EXP__ = 308
 const __DBL_MAX_EXP__ = 1024
 const __DBL_MAX__ = 1.7976931348623157e+308
 const __DBL_MIN__ = 2.2250738585072014e-308
-const __DBL_NORM_MAX__ = 1.7976931348623157e+308
 const __DECIMAL_DIG__ = "__LDBL_DECIMAL_DIG__"
 const __ELF__ = 1
 const __FINITE_MATH_ONLY__ = 0
@@ -69,7 +68,6 @@ const __FLT16_MAX_10_EXP__ = 4
 const __FLT16_MAX_EXP__ = 16
 const __FLT16_MAX__ = 6.5504e+4
 const __FLT16_MIN__ = 6.103515625e-5
-const __FLT16_NORM_MAX__ = 6.5504e+4
 const __FLT_DECIMAL_DIG__ = 9
 const __FLT_DENORM_MIN__ = 1.40129846e-45
 const __FLT_DIG__ = 6
@@ -82,7 +80,6 @@ const __FLT_MAX_10_EXP__ = 38
 const __FLT_MAX_EXP__ = 128
 const __FLT_MAX__ = 3.40282347e+38
 const __FLT_MIN__ = 1.17549435e-38
-const __FLT_NORM_MAX__ = 3.40282347e+38
 const __FLT_RADIX__ = 2
 const __FPCLASS_NEGINF = 0x0004
 const __FPCLASS_NEGNORMAL = 0x0008
@@ -108,8 +105,6 @@ const __GCC_ATOMIC_POINTER_LOCK_FREE = 2
 const __GCC_ATOMIC_SHORT_LOCK_FREE = 2
 const __GCC_ATOMIC_TEST_AND_SET_TRUEVAL = 1
 const __GCC_ATOMIC_WCHAR_T_LOCK_FREE = 2
-const __GCC_CONSTRUCTIVE_SIZE = 64
-const __GCC_DESTRUCTIVE_SIZE = 64
 const __GCC_HAVE_DWARF2_CFI_ASM = 1
 const __GCC_HAVE_SYNC_COMPARE_AND_SWAP_1 = 1
 const __GCC_HAVE_SYNC_COMPARE_AND_SWAP_2 = 1
@@ -194,7 +189,6 @@ const __LDBL_MAX_10_EXP__ = 308
 const __LDBL_MAX_EXP__ = 1024
 const __LDBL_MAX__ = 1.7976931348623157e+308
 const __LDBL_MIN__ = 2.2250738585072014e-308
-const __LDBL_NORM_MAX__ = 1.7976931348623157e+308
 const __LITTLE_ENDIAN__ = 1
 const __LLONG_WIDTH__ = 64
 const __LONG_LONG_MAX__ = 9223372036854775807
@@ -258,9 +252,6 @@ const __SSE2_MATH__ = 1
 const __SSE2__ = 1
 const __SSE_MATH__ = 1
 const __SSE__ = 1
-const __STDC_EMBED_EMPTY__ = 2
-const __STDC_EMBED_FOUND__ = 1
-const __STDC_EMBED_NOT_FOUND__ = 0
 const __STDC_HOSTED__ = 1
 const __STDC_UTF_16__ = 1
 const __STDC_UTF_32__ = 1
@@ -341,7 +332,7 @@ const __UINT_LEAST8_FMTo__ = "hho"
 const __UINT_LEAST8_FMTu__ = "hhu"
 const __UINT_LEAST8_FMTx__ = "hhx"
 const __UINT_LEAST8_MAX__ = 255
-const __VERSION__ = "Clang 21.1.8"
+const __VERSION__ = "Ubuntu Clang 18.1.3 (1ubuntu1)"
 const __WCHAR_MAX__ = 2147483647
 const __WCHAR_TYPE__ = "int"
 const __WCHAR_WIDTH__ = 32
@@ -352,10 +343,10 @@ const __amd64 = 1
 const __amd64__ = 1
 const __clang__ = 1
 const __clang_literal_encoding__ = "UTF-8"
-const __clang_major__ = 21
+const __clang_major__ = 18
 const __clang_minor__ = 1
-const __clang_patchlevel__ = 8
-const __clang_version__ = "21.1.8 "
+const __clang_patchlevel__ = 3
+const __clang_version__ = "18.1.3 (1ubuntu1)"
 const __clang_wide_literal_encoding__ = "UTF-32"
 const __code_model_small__ = 1
 const __gnu_linux__ = 1
@@ -538,108 +529,99 @@ type __fpos64_t = struct {
 type _G_fpos64_t = __fpos64_t
 
 type _IO_FILE = struct {
-	F_flags           int32
-	F_IO_read_ptr     uintptr
-	F_IO_read_end     uintptr
-	F_IO_read_base    uintptr
-	F_IO_write_base   uintptr
-	F_IO_write_ptr    uintptr
-	F_IO_write_end    uintptr
-	F_IO_buf_base     uintptr
-	F_IO_buf_end      uintptr
-	F_IO_save_base    uintptr
-	F_IO_backup_base  uintptr
-	F_IO_save_end     uintptr
-	F_markers         uintptr
-	F_chain           uintptr
-	F_fileno          int32
-	F__ccgo60         uint32
-	F_short_backupbuf [1]int8
-	F_old_offset      __off_t
-	F_cur_column      uint16
-	F_vtable_offset   int8
-	F_shortbuf        [1]int8
-	F_lock            uintptr
-	F_offset          __off64_t
-	F_codecvt         uintptr
-	F_wide_data       uintptr
-	F_freeres_list    uintptr
-	F_freeres_buf     uintptr
-	F_prevchain       uintptr
-	F_mode            int32
-	F_unused3         int32
-	F_total_written   __uint64_t
-	F_unused2         [28]int8
+	F_flags          int32
+	F_IO_read_ptr    uintptr
+	F_IO_read_end    uintptr
+	F_IO_read_base   uintptr
+	F_IO_write_base  uintptr
+	F_IO_write_ptr   uintptr
+	F_IO_write_end   uintptr
+	F_IO_buf_base    uintptr
+	F_IO_buf_end     uintptr
+	F_IO_save_base   uintptr
+	F_IO_backup_base uintptr
+	F_IO_save_end    uintptr
+	F_markers        uintptr
+	F_chain          uintptr
+	F_fileno         int32
+	F_flags2         int32
+	F_old_offset     __off_t
+	F_cur_column     uint16
+	F_vtable_offset  int8
+	F_shortbuf       [1]int8
+	F_lock           uintptr
+	F_offset         __off64_t
+	F_codecvt        uintptr
+	F_wide_data      uintptr
+	F_freeres_list   uintptr
+	F_freeres_buf    uintptr
+	F__pad5          size_t
+	F_mode           int32
+	F_unused2        [40]int8
 }
 
 type __FILE = struct {
-	F_flags           int32
-	F_IO_read_ptr     uintptr
-	F_IO_read_end     uintptr
-	F_IO_read_base    uintptr
-	F_IO_write_base   uintptr
-	F_IO_write_ptr    uintptr
-	F_IO_write_end    uintptr
-	F_IO_buf_base     uintptr
-	F_IO_buf_end      uintptr
-	F_IO_save_base    uintptr
-	F_IO_backup_base  uintptr
-	F_IO_save_end     uintptr
-	F_markers         uintptr
-	F_chain           uintptr
-	F_fileno          int32
-	F__ccgo60         uint32
-	F_short_backupbuf [1]int8
-	F_old_offset      __off_t
-	F_cur_column      uint16
-	F_vtable_offset   int8
-	F_shortbuf        [1]int8
-	F_lock            uintptr
-	F_offset          __off64_t
-	F_codecvt         uintptr
-	F_wide_data       uintptr
-	F_freeres_list    uintptr
-	F_freeres_buf     uintptr
-	F_prevchain       uintptr
-	F_mode            int32
-	F_unused3         int32
-	F_total_written   __uint64_t
-	F_unused2         [28]int8
+	F_flags          int32
+	F_IO_read_ptr    uintptr
+	F_IO_read_end    uintptr
+	F_IO_read_base   uintptr
+	F_IO_write_base  uintptr
+	F_IO_write_ptr   uintptr
+	F_IO_write_end   uintptr
+	F_IO_buf_base    uintptr
+	F_IO_buf_end     uintptr
+	F_IO_save_base   uintptr
+	F_IO_backup_base uintptr
+	F_IO_save_end    uintptr
+	F_markers        uintptr
+	F_chain          uintptr
+	F_fileno         int32
+	F_flags2         int32
+	F_old_offset     __off_t
+	F_cur_column     uint16
+	F_vtable_offset  int8
+	F_shortbuf       [1]int8
+	F_lock           uintptr
+	F_offset         __off64_t
+	F_codecvt        uintptr
+	F_wide_data      uintptr
+	F_freeres_list   uintptr
+	F_freeres_buf    uintptr
+	F__pad5          size_t
+	F_mode           int32
+	F_unused2        [40]int8
 }
 
 type FILE = struct {
-	F_flags           int32
-	F_IO_read_ptr     uintptr
-	F_IO_read_end     uintptr
-	F_IO_read_base    uintptr
-	F_IO_write_base   uintptr
-	F_IO_write_ptr    uintptr
-	F_IO_write_end    uintptr
-	F_IO_buf_base     uintptr
-	F_IO_buf_end      uintptr
-	F_IO_save_base    uintptr
-	F_IO_backup_base  uintptr
-	F_IO_save_end     uintptr
-	F_markers         uintptr
-	F_chain           uintptr
-	F_fileno          int32
-	F__ccgo60         uint32
-	F_short_backupbuf [1]int8
-	F_old_offset      __off_t
-	F_cur_column      uint16
-	F_vtable_offset   int8
-	F_shortbuf        [1]int8
-	F_lock            uintptr
-	F_offset          __off64_t
-	F_codecvt         uintptr
-	F_wide_data       uintptr
-	F_freeres_list    uintptr
-	F_freeres_buf     uintptr
-	F_prevchain       uintptr
-	F_mode            int32
-	F_unused3         int32
-	F_total_written   __uint64_t
-	F_unused2         [28]int8
+	F_flags          int32
+	F_IO_read_ptr    uintptr
+	F_IO_read_end    uintptr
+	F_IO_read_base   uintptr
+	F_IO_write_base  uintptr
+	F_IO_write_ptr   uintptr
+	F_IO_write_end   uintptr
+	F_IO_buf_base    uintptr
+	F_IO_buf_end     uintptr
+	F_IO_save_base   uintptr
+	F_IO_backup_base uintptr
+	F_IO_save_end    uintptr
+	F_markers        uintptr
+	F_chain          uintptr
+	F_fileno         int32
+	F_flags2         int32
+	F_old_offset     __off_t
+	F_cur_column     uint16
+	F_vtable_offset  int8
+	F_shortbuf       [1]int8
+	F_lock           uintptr
+	F_offset         __off64_t
+	F_codecvt        uintptr
+	F_wide_data      uintptr
+	F_freeres_list   uintptr
+	F_freeres_buf    uintptr
+	F__pad5          size_t
+	F_mode           int32
+	F_unused2        [40]int8
 }
 
 type _IO_lock_t = struct{}
@@ -921,14 +903,13 @@ type __pthread_rwlock_arch_t = struct {
 }
 
 type __pthread_cond_s = struct {
-	F__wseq                 __atomic_wide_counter
-	F__g1_start             __atomic_wide_counter
-	F__g_size               [2]uint32
-	F__g1_orig_size         uint32
-	F__wrefs                uint32
-	F__g_signals            [2]uint32
-	F__unused_initialized_1 uint32
-	F__unused_initialized_2 uint32
+	F__wseq         __atomic_wide_counter
+	F__g1_start     __atomic_wide_counter
+	F__g_refs       [2]uint32
+	F__g_size       [2]uint32
+	F__g1_orig_size uint32
+	F__wrefs        uint32
+	F__g_signals    [2]uint32
 }
 
 type __tss_t = uint32
