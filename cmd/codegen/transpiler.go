@@ -189,7 +189,9 @@ func ccgoExtraArgs(goos string) []string {
 		"-ignore-vector-functions",
 	}
 	if goos == "windows" {
-		args = append(args, "-winapi-no-errno")
+		// Registered in ccgo as Opt("-winapi-no-errno"); modernc.org/opt
+		// strips one leading '-', so callers must pass the double-dash form.
+		args = append(args, "--winapi-no-errno")
 	}
 	return args
 }

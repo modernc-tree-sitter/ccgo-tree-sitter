@@ -205,7 +205,10 @@ func TestCcgoExtraArgs(t *testing.T) {
 	if !slices.Contains(ccgoExtraArgs("darwin"), "-ignore-unsupported-alignment") {
 		t.Fatal(ccgoExtraArgs("darwin"))
 	}
-	if !slices.Contains(ccgoExtraArgs("windows"), "-winapi-no-errno") {
+	if !slices.Contains(ccgoExtraArgs("windows"), "--winapi-no-errno") {
 		t.Fatal(ccgoExtraArgs("windows"))
+	}
+	if slices.Contains(ccgoExtraArgs("windows"), "-winapi-no-errno") {
+		t.Fatal("single-dash -winapi-no-errno is rejected by ccgo opt parser")
 	}
 }
