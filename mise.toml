@@ -1,6 +1,6 @@
 [tools]
 go = "1.26.4"
-uv = "0.9.28"
+uv = "0.11.26"
 "go:golang.org/x/tools/gopls" = "0.22.0"
 
 [env]
