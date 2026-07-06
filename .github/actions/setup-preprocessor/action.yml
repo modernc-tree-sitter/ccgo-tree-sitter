@@ -1,0 +1,41 @@
+name: Setup preprocessor
+description: Install clang (Linux) or MinGW gcc -E (Windows) for native codegen
+inputs:
+  goos:
+    description: Target GOOS (must match the runner host)
+    required: true
+  goarch:
+    description: Target GOARCH (must match the runner host)
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Install clang (Linux)
+      if: inputs.goos == 'linux'
+      shell: bash
+      run: ./scripts/ci/install-preprocessor-linux.sh "${{ inputs.goarch }}"
+
+    - name: Install MinGW (Windows)
+      if: inputs.goos == 'windows'
+      shell: pwsh
+      run: ./scripts/ci/install-mingw.ps1 -Goarch "${{ inputs.goarch }}"
+
+    - name: Verify preprocessor
+      shell: bash
+      run: |
+        set -euo pipefail
+        echo "host=$(go env GOOS)/$(go env GOARCH) target=${{ inputs.goos }}/${{ inputs.goarch }}"
+        echo "CC=${CC:-}"
+        echo "MINGW_SYSROOT=${MINGW_SYSROOT:-}"
+        if [ "${{ inputs.goos }}" = "windows" ]; then
+          command -v gcc || command -v aarch64-w64-mingw32-gcc || command -v x86_64-w64-mingw32-gcc
+          cc_bin="${CC:-}"
+          if [ -z "$cc_bin" ]; then
+            cc_bin="$(command -v aarch64-w64-mingw32-gcc || command -v x86_64-w64-mingw32-gcc || command -v gcc)"
+          fi
+          "$cc_bin" --version
+          "$cc_bin" -dM -E -x c /dev/null | head -20
+        else
+          command -v clang
+          clang --version
+        fi

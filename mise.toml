@@ -21,12 +21,20 @@ run = "go run -v ./cmd/codegen"
 env = { TARGET_GOOS = "linux", TARGET_GOARCH = "386", CC = "clang" }
 run = "go run -v ./cmd/codegen"
 
+[tasks."codegen:darwin-amd64"]
+env = { TARGET_GOOS = "darwin", TARGET_GOARCH = "amd64", CC = "clang" }
+run = "go run -v ./cmd/codegen"
+
 [tasks."codegen:darwin-arm64"]
 env = { TARGET_GOOS = "darwin", TARGET_GOARCH = "arm64", CC = "clang" }
 run = "go run -v ./cmd/codegen"
 
 [tasks."codegen:windows-amd64"]
 env = { TARGET_GOOS = "windows", TARGET_GOARCH = "amd64" }
+run = "go run -v ./cmd/codegen"
+
+[tasks."codegen:windows-arm64"]
+env = { TARGET_GOOS = "windows", TARGET_GOARCH = "arm64" }
 run = "go run -v ./cmd/codegen"
 
 [tasks.codegen]
@@ -39,9 +47,16 @@ depends = [
   "codegen:linux-amd64",
   "codegen:linux-arm64",
   "codegen:linux-386",
+  "codegen:darwin-amd64",
   "codegen:darwin-arm64",
   "codegen:windows-amd64",
+  "codegen:windows-arm64",
 ]
 
 [tasks.install]
 run = "go get -v ./..."
+
+[tasks.test]
+description = "Run unit tests against host grammars (pure Go, no CGO)"
+env = { CGO_ENABLED = "0" }
+run = "go test ./..."

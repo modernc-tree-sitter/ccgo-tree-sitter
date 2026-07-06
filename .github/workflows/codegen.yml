@@ -25,7 +25,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # Each runner transpiles only its native GOOS/GOARCH with host clang.
+          # Each runner transpiles only its native GOOS/GOARCH with host clang
+          # (MinGW gcc -E on Windows).
           - runner: ubuntu-latest
             goos: linux
             goarch: amd64
@@ -41,6 +42,12 @@ jobs:
             goarch: 386
             task: codegen:linux-386
             experimental: true
+            host_goarch: amd64
+          - runner: macos-15-intel
+            goos: darwin
+            goarch: amd64
+            task: codegen:darwin-amd64
+            experimental: true
           - runner: macos-latest
             goos: darwin
             goarch: arm64
@@ -51,6 +58,11 @@ jobs:
             goarch: amd64
             task: codegen:windows-amd64
             experimental: false
+          - runner: windows-11-arm
+            goos: windows
+            goarch: arm64
+            task: codegen:windows-arm64
+            experimental: true
 
     steps:
       - name: Checkout code
@@ -61,61 +73,32 @@ jobs:
       - name: Set up tools (mise)
         uses: jdx/mise-action@e6a8b3978addb5a52f2b4cd9d91eafa7f0ab959d # v4
 
-      - name: Install clang (Linux)
-        if: runner.os == 'Linux'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y clang
-          if [ "${{ matrix.goarch }}" = "386" ]; then
-            sudo apt-get install -y gcc-multilib g++-multilib libc6-dev-i386
-          fi
+      - name: Setup preprocessor
+        uses: ./.github/actions/setup-preprocessor
+        with:
+          goos: ${{ matrix.goos }}
+          goarch: ${{ matrix.goarch }}
 
-      - name: Install MinGW (Windows)
-        if: runner.os == 'Windows'
-        shell: pwsh
-        run: |
-          choco install mingw -y --no-progress
-          $mingwCandidates = @(
-            "C:\ProgramData\mingw64\mingw64",
-            "C:\mingw64",
-            "C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64",
-            "C:\msys64\mingw64"
-          )
-          $found = $false
-          foreach ($root in $mingwCandidates) {
-            $bin = Join-Path $root "bin"
-            $gcc = Join-Path $bin "gcc.exe"
-            if (Test-Path $gcc) {
-              $bin | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-              "MINGW_SYSROOT=$root" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-              "CC=$gcc" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-              Write-Host "Using MinGW gcc=$gcc sysroot=$root"
-              $found = $true
-              break
-            }
-          }
-          if (-not $found) { throw "MinGW gcc.exe not found" }
-          & (Join-Path $bin "gcc.exe") --version
-
-      - name: Verify preprocessor
+      - name: Verify runner can build target
         shell: bash
         run: |
-          echo "host=$(go env GOOS)/$(go env GOARCH) target=${{ matrix.goos }}/${{ matrix.goarch }}"
-          echo "CC=${CC:-}"
-          echo "MINGW_SYSROOT=${MINGW_SYSROOT:-}"
-          if [ "${{ matrix.goos }}" = "windows" ]; then
-            command -v gcc
-            gcc --version
-            gcc -dM -E -x c /dev/null | head -20
-          else
-            command -v clang
-            clang --version
+          set -euo pipefail
+          host_goos="$(go env GOOS)"
+          host_goarch="$(go env GOARCH)"
+          want_goos="${{ matrix.goos }}"
+          want_goarch="${{ matrix.goarch }}"
+          expect_host_goarch="${{ matrix.host_goarch }}"
+          if [ -z "$expect_host_goarch" ] || [ "$expect_host_goarch" = "null" ]; then
+            expect_host_goarch="${{ matrix.goarch }}"
           fi
+          echo "host=${host_goos}/${host_goarch} target=${want_goos}/${want_goarch} expect_host_goarch=${expect_host_goarch}"
+          test "$host_goos" = "$want_goos"
+          test "$host_goarch" = "$expect_host_goarch"
 
-      # cmd/parse blank-imports every grammar package, which only compile when
-      # core-{GOOS}-{GOARCH}.go exists for the host. Run those tests after codegen.
       - name: Test codegen tool
         shell: bash
+        env:
+          CGO_ENABLED: "0"
         run: go test ./cmd/codegen/
 
       - name: Codegen ${{ matrix.goos }}/${{ matrix.goarch }}
@@ -138,13 +121,16 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
-      - name: Test generated grammar on host
+      # cmd/parse blank-imports every grammar package, which only compile when
+      # core-{GOOS}-{GOARCH}.go exists for the target triple.
+      - name: Test generated grammar on target
         continue-on-error: ${{ matrix.experimental }}
         shell: bash
         env:
+          CGO_ENABLED: "0"
           GOOS: ${{ matrix.goos }}
           GOARCH: ${{ matrix.goarch }}
-        run: go test ./grammar/ ./cmd/parse/
+        run: go test ./...
 
   merge:
     name: merge artifacts and open PR
@@ -197,11 +183,11 @@ jobs:
               fi
             done
             echo
-            echo "Experimental legs (\`linux/386\`, \`windows/arm64\`) may be absent when they fail."
+            echo "Experimental legs (\`linux/386\`, \`darwin/amd64\`, \`windows/arm64\`) may be absent when they fail."
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Test merged linux/amd64 tree
-        run: go test ./...
+        run: mise run test
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8
