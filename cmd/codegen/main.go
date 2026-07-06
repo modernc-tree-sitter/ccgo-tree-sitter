@@ -31,11 +31,11 @@ This tool uses ccgo to convert tree-sitter's C implementation into Go code,
 allowing you to use tree-sitter parsers natively in Go without CGO.
 
 C sources are preprocessed with clang by default. Override with CC (may be a
-multi-word launcher such as "zig cc") and optional CFLAGS. On Windows, clang is
-aimed at the MinGW triple (x86_64/aarch64-w64-mingw32) so headers stay
-GNU-compatible for ccgo; set MINGW_SYSROOT when the sysroot is non-default.
-On Darwin, -fno-blocks and empty nullability macros are injected. CC and CFLAGS
-are parsed with mvdan.cc/sh/v3/shell.Fields.`,
+multi-word launcher such as "zig cc") and optional CFLAGS. On Windows, MinGW
+gcc on PATH is preferred over clang; absolute Windows CC paths keep backslashes
+(not treated as shell escapes). Set MINGW_SYSROOT when the sysroot is
+non-default. On Darwin, -fno-blocks and empty nullability macros are injected.
+Unix-style CC/CFLAGS values are parsed with mvdan.cc/sh/v3/shell.Fields.`,
 	RunE: run,
 }
 

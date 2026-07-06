@@ -52,14 +52,14 @@ var (
 // preprocessorCmd builds the C preprocessor command from CC and optional CFLAGS.
 // On Windows, MinGW gcc is preferred over clang when present on PATH.
 func preprocessorCmd(goos, goarch string, args ...string) (*exec.Cmd, error) {
-	ccFields, err := shell.Fields(resolveCC(goos, goarch), nil)
+	ccFields, err := splitCompilerEnv(resolveCC(goos, goarch))
 	if err != nil {
 		return nil, fmt.Errorf("parse CC: %w", err)
 	}
 	if len(ccFields) == 0 {
 		return nil, fmt.Errorf("CC is empty")
 	}
-	cflags, err := shell.Fields(os.Getenv("CFLAGS"), nil)
+	cflags, err := splitCompilerEnv(os.Getenv("CFLAGS"))
 	if err != nil {
 		return nil, fmt.Errorf("parse CFLAGS: %w", err)
 	}
@@ -68,6 +68,48 @@ func preprocessorCmd(goos, goarch string, args ...string) (*exec.Cmd, error) {
 	cmdArgs = append(cmdArgs, cflags...)
 	cmdArgs = append(cmdArgs, args...)
 	return exec.Command(ccFields[0], cmdArgs...), nil
+}
+
+// splitCompilerEnv splits CC/CFLAGS. mvdan.cc/sh treats \ as an escape, which
+// turns Windows paths like C:\mingw64\bin\gcc.exe into C:mingw64bingcc.exe.
+// Keep drive/UNC paths intact (split on ".exe" when args follow).
+func splitCompilerEnv(val string) ([]string, error) {
+	val = strings.TrimSpace(val)
+	if val == "" {
+		return nil, nil
+	}
+	if isWindowsCmdPath(val) {
+		return splitWindowsCompilerEnv(val)
+	}
+	return shell.Fields(val, nil)
+}
+
+func isWindowsCmdPath(s string) bool {
+	if strings.HasPrefix(s, `\\`) {
+		return true
+	}
+	return len(s) >= 3 && s[1] == ':' && (s[2] == '\\' || s[2] == '/')
+}
+
+func splitWindowsCompilerEnv(val string) ([]string, error) {
+	lower := strings.ToLower(val)
+	if i := strings.Index(lower, ".exe"); i >= 0 {
+		exe := val[:i+len(".exe")]
+		rest := strings.TrimSpace(val[i+len(".exe"):])
+		fields := []string{exe}
+		if rest == "" {
+			return fields, nil
+		}
+		extra, err := shell.Fields(rest, nil)
+		if err != nil {
+			return nil, err
+		}
+		return append(fields, extra...), nil
+	}
+	if !strings.ContainsAny(val, " \t") {
+		return []string{val}, nil
+	}
+	return shell.Fields(filepath.ToSlash(val), nil)
 }
 
 func resolveCC(goos, goarch string) string {
@@ -247,12 +289,11 @@ func sanitizePreprocessedFile(path string) error {
 }
 
 func preprocessorIdentity(goos, goarch string) string {
-	cc := resolveCC(goos, goarch)
-	ccBin := cc
-	if fields, err := shell.Fields(cc, nil); err == nil && len(fields) > 0 {
-		ccBin = fields[0]
+	ccFields, err := splitCompilerEnv(resolveCC(goos, goarch))
+	if err != nil || len(ccFields) == 0 {
+		ccFields = []string{resolveCC(goos, goarch)}
 	}
-	parts := append([]string{cc}, defaultPreprocessorFlags(goos, goarch, ccBin)...)
+	parts := append(append([]string{}, ccFields...), defaultPreprocessorFlags(goos, goarch, ccFields[0])...)
 	if cflags := strings.TrimSpace(os.Getenv("CFLAGS")); cflags != "" {
 		parts = append(parts, cflags)
 	}

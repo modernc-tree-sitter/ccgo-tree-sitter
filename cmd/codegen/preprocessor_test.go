@@ -96,6 +96,49 @@ func TestPreprocessorCmdWindowsMingwGccFlags(t *testing.T) {
 	}
 }
 
+func TestSplitCompilerEnvWindowsPathKeepsBackslashes(t *testing.T) {
+	const cc = `C:\mingw64\bin\x86_64-w64-mingw32-gcc.exe`
+	got, err := splitCompilerEnv(cc)
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := []string{cc}
+	if !slices.Equal(got, want) {
+		t.Fatalf("splitCompilerEnv(%q)=%q, want %q", cc, got, want)
+	}
+}
+
+func TestSplitCompilerEnvWindowsPathWithArgs(t *testing.T) {
+	const cc = `C:\mingw64\bin\gcc.exe -DFOO=1`
+	got, err := splitCompilerEnv(cc)
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := []string{`C:\mingw64\bin\gcc.exe`, "-DFOO=1"}
+	if !slices.Equal(got, want) {
+		t.Fatalf("splitCompilerEnv(%q)=%q, want %q", cc, got, want)
+	}
+}
+
+func TestPreprocessorCmdWindowsBackslashCC(t *testing.T) {
+	const cc = `C:\mingw64\bin\x86_64-w64-mingw32-gcc.exe`
+	t.Setenv("CC", cc)
+	t.Setenv("PATH", "/nonexistent")
+	os.Unsetenv("CFLAGS")
+	os.Unsetenv("MINGW_SYSROOT")
+
+	cmd, err := preprocessorCmd("windows", "amd64", "-E", "x.c")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if cmd.Path != cc && cmd.Args[0] != cc {
+		t.Fatalf("Path=%q Args[0]=%q, want %q", cmd.Path, cmd.Args[0], cc)
+	}
+	if strings.Contains(cmd.Args[0], `C:mingw64`) {
+		t.Fatalf("backslashes were eaten: %q", cmd.Args[0])
+	}
+}
+
 func TestPreprocessorCmdWindowsClangKeepsTarget(t *testing.T) {
 	// Force clang by pointing CC at a clang path with no mingw gcc on PATH.
 	t.Setenv("CC", "clang")
