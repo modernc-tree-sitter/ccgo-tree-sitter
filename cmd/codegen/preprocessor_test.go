@@ -97,6 +97,11 @@ func TestPreprocessorCmdWindowsMingwGccFlags(t *testing.T) {
 		"-D__declspec(x)=",
 		"-D__stdcall=",
 		"-D__cdecl=",
+		"-D_X86INTRIN_H_INCLUDED",
+		"-D_IMMINTRIN_H_INCLUDED",
+		"-D_EMMINTRIN_H_INCLUDED",
+		"-D_XMMINTRIN_H_INCLUDED",
+		"-D_MMINTRIN_H_INCLUDED",
 	} {
 		if !slices.Contains(cmd.Args, flag) {
 			t.Fatalf("missing %q in %v", flag, cmd.Args)
@@ -109,7 +114,8 @@ func TestSanitizePreprocessedCStripsMingwJunk(t *testing.T) {
 		"void f(void) __asm__(\"foo\");\n" +
 		"void g(void) __asm__ __volatile__ (\"lock bts{q %[Offset],%[Base] | %[Base],%[Offset]}\" : [old] \"=@ccc\" (old), [Base] \"+m\" (*Base) : [Offset] \"J\" \"r\" (Offset) : \"memory\" );\n" +
 		"__declspec(dllexport) int y;\n" +
-		"typedef float _Float32 f32;\n"
+		"typedef float _Float32 f32;\n" +
+		`# 42 "D:\a\ccgo-tree-sitter\third-party\tree-sitter\lib\include\tree_sitter\api.h"` + "\n"
 	out := sanitizePreprocessedC(in)
 	for _, junk := range []string{"__attribute__", "__asm__", "__declspec", "_Float32", "__volatile__"} {
 		if strings.Contains(out, junk) {
@@ -118,6 +124,24 @@ func TestSanitizePreprocessedCStripsMingwJunk(t *testing.T) {
 	}
 	if !strings.Contains(out, "int x") || !strings.Contains(out, "void f(void)") || !strings.Contains(out, "void g(void)") || !strings.Contains(out, "int y") {
 		t.Fatalf("sanitize removed declarations: %q", out)
+	}
+	if strings.Contains(out, `\a\`) || strings.Contains(out, `D:\`) {
+		t.Fatalf("line directive still has backslashes: %q", out)
+	}
+	if !strings.Contains(out, `D:/a/ccgo-tree-sitter/`) {
+		t.Fatalf("expected forward-slash line path, got %q", out)
+	}
+}
+
+func TestSanitizeFixesWindowsLineDirectiveEscapes(t *testing.T) {
+	// \a is bell in C strings; must not remain inside #line paths.
+	in := "# 1 \"D:\\a\\work\\api.h\"\nint x;\n"
+	out := fixLineDirectivePaths(in)
+	if strings.Contains(out, `\`) {
+		t.Fatalf("backslash remains: %q", out)
+	}
+	if !strings.Contains(out, `D:/a/work/api.h`) {
+		t.Fatalf("got %q", out)
 	}
 }
 
@@ -238,5 +262,46 @@ func TestCcgoExtraArgs(t *testing.T) {
 	}
 	if slices.Contains(ccgoExtraArgs("windows"), "-winapi-no-errno") {
 		t.Fatal("single-dash -winapi-no-errno is rejected by ccgo opt parser")
+	}
+	if !slices.Contains(ccgoExtraArgs("windows"), "-ignore-link-errors") {
+		t.Fatal(ccgoExtraArgs("windows"))
+	}
+	if slices.Contains(ccgoExtraArgs("linux"), "-ignore-link-errors") {
+		t.Fatal("ignore-link-errors is windows-only")
+	}
+}
+
+func TestPostProcessWindowsLibcCalls(t *testing.T) {
+	in := "//go:build windows && amd64\n\npackage grammar\n\n" +
+		"func f(tls *libc.TLS) {\n" +
+		"\tiqlibc.__builtin_vsnprintf(tls, 0, 0, 0, 0)\n" +
+		"\tv1 = strnlen(tls, _src, _count)\n" +
+		"\t_ = iswctype(tls, uint16(1), uint16(8))\n" +
+		"\t_ = _sync_fetch_and_add(tls, p, v)\n" +
+		"\t_ = towupper(tls, uint16('a'))\n" +
+		"\tlibc.X__builtin_ia32_sfence(tls)\n" +
+		"}\n"
+	out := postProcessWindowsLibcCalls(in)
+	for _, want := range []string{
+		"libc.X__builtin_vsnprintf(",
+		"libc.Xstrnlen(",
+		"libc.Xiswctype(",
+		"libc.X__sync_fetch_and_add(",
+		"libc.Xtowupper(",
+		"libc.X__sync_synchronize(",
+	} {
+		if !strings.Contains(out, want) {
+			t.Fatalf("missing %q in\n%s", want, out)
+		}
+	}
+	for _, junk := range []string{"iqlibc.", "\tstrnlen(", " iswctype(", " _sync_fetch_and_add(", " towupper(", "__builtin_ia32_sfence"} {
+		if strings.Contains(out, junk) {
+			t.Fatalf("left junk %q in\n%s", junk, out)
+		}
+	}
+	// Non-windows sources must be untouched.
+	linux := "package grammar\nfunc f() { strnlen(tls, 0, 0) }\n"
+	if got := postProcessWindowsLibcCalls(linux); got != linux {
+		t.Fatalf("rewrote non-windows source: %q", got)
 	}
 }

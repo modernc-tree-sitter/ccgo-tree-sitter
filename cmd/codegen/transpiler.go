@@ -46,6 +46,8 @@ var extensionFloatTypedefRe = regexp.MustCompile(
 var (
 	mingwAsmStartRe  = regexp.MustCompile(`__asm(?:__)?(?:\s+__(?:volatile)__|\s+volatile)?\s*\(`)
 	mingwAttrStartRe = regexp.MustCompile(`__(?:attribute|declspec)(?:__)?\s*\(`)
+	// # 123 "C:\path\file.h"  — backslashes are C string escapes and corrupt the parser.
+	lineDirectiveRe = regexp.MustCompile(`(?m)^(#\s*\d+\s*")([^"]*)(".*)`)
 
 	libcVersionOnce sync.Once
 	libcVersion     string
@@ -196,6 +198,11 @@ func defaultPreprocessorFlags(goos, goarch, ccBinary string) []string {
 		// on the command line so headers' `#define __declspec(a) __attribute__((a))`
 		// expands to nothing (not stray `(dllimport)` tokens). Calling-convention
 		// keywords similarly survive -E as junk identifiers.
+		//
+		// winnt.h pulls <x86intrin.h> and <emmintrin.h> (SSE/AVX vector junk
+		// with __builtin_ia32_* that ccgo cannot type-check). tree-sitter only
+		// needs Interlocked* from windows.h (psdk_inc/intrin-impl.h, earlier).
+		// Pre-define include guards so those SIMD headers stay empty.
 		flags = append(flags,
 			"-D__extension__=",
 			"-D__forceinline=static inline",
@@ -209,6 +216,14 @@ func defaultPreprocessorFlags(goos, goarch, ccBinary string) []string {
 			"-D__restrict=",
 			"-D__restrict__=",
 			"-D__MINGW_EXTENSION=",
+			"-D_X86INTRIN_H_INCLUDED",
+			"-D_X86GPRINTRIN_H_INCLUDED",
+			"-D_IMMINTRIN_H_INCLUDED",
+			"-D_MMINTRIN_H_INCLUDED",
+			"-D_XMMINTRIN_H_INCLUDED",
+			"-D_EMMINTRIN_H_INCLUDED",
+			"-D_PMMINTRIN_H_INCLUDED",
+			"-D_MM3DNOW_H_INCLUDED",
 		)
 		return flags
 	case "darwin":
@@ -246,6 +261,12 @@ func ccgoExtraArgs(goos string) []string {
 		// Registered in ccgo as Opt("-winapi-no-errno"); modernc.org/opt
 		// strips one leading '-', so callers must pass the double-dash form.
 		args = append(args, "--winapi-no-errno")
+		// MinGW windows.h pulls many CRT/API decls tree-sitter never calls.
+		// Without this, link fails on symbols modernc.org/libc does not export
+		// (e.g. MapViewOfFileNuma2) even though used paths only need Interlocked*
+		// and a few CRT helpers that libc does provide. postProcessWindows
+		// rewrites remaining bare/iqlibc names to libc.X*.
+		args = append(args, "-ignore-link-errors")
 	}
 	return args
 }
@@ -328,10 +349,24 @@ func mingwSysrootMatches(root, goarch string) bool {
 
 // sanitizePreprocessedC removes constructs that survive -E but are rejected by ccgo.
 func sanitizePreprocessedC(src string) string {
+	src = fixLineDirectivePaths(src)
 	src = extensionFloatTypedefRe.ReplaceAllString(src, "")
 	src = stripBalancedCalls(src, mingwAsmStartRe)
 	src = stripBalancedCalls(src, mingwAttrStartRe)
 	return src
+}
+
+// fixLineDirectivePaths rewrites backslashes in #line file paths to forward
+// slashes. On Windows, gcc -E emits # 12 "D:\a\foo.h"; the C parser then
+// treats \a as an escape and reports bogus syntax errors far from the cause.
+func fixLineDirectivePaths(src string) string {
+	return lineDirectiveRe.ReplaceAllStringFunc(src, func(m string) string {
+		parts := lineDirectiveRe.FindStringSubmatch(m)
+		if len(parts) != 4 {
+			return m
+		}
+		return parts[1] + strings.ReplaceAll(parts[2], `\`, `/`) + parts[3]
+	})
 }
 
 func sanitizePreprocessedFile(path string) error {
@@ -536,7 +571,9 @@ func (t *Transpiler) preprocessCore(outputPath string) error {
 	}
 
 	args := []string{
-		"-E", "-O0", "-fno-inline",
+		// gnu11: GCC 15+ defaults to C23 where bool is a keyword; ccgo only
+		// knows _Bool (via stdbool macros under C11/gnu11).
+		"-E", "-O0", "-fno-inline", "-std=gnu11",
 		"-ffile-prefix-map=" + filepath.ToSlash(workDir) + "=.",
 		"-fmacro-prefix-map=" + filepath.ToSlash(workDir) + "=.",
 		filepath.Join(t.TreeSitterPath, "lib/src/lib.c"),
@@ -586,7 +623,7 @@ func (t *Transpiler) transpileGrammarFile(grammarPath, inputC, outputGo, workDir
 	}
 
 	args := []string{
-		"-E", "-O0", "-fno-inline",
+		"-E", "-O0", "-fno-inline", "-std=gnu11",
 		"-ffile-prefix-map=" + filepath.ToSlash(workDir) + "=.",
 		"-fmacro-prefix-map=" + filepath.ToSlash(workDir) + "=.",
 		"-Dfunc=func_token",
@@ -778,6 +815,11 @@ func postProcess(goCode, workDir string) string {
 	goCode = strings.ReplaceAll(goCode, workDirSlash, ".")
 	goCode = regexp.MustCompile(`/tmp/(grammar-gen|tree-sitter-gen)-\d+`).ReplaceAllString(goCode, "/tmp/$1")
 
+	// Windows + -ignore-link-errors leaves unresolved C names as bare Go
+	// identifiers, and builtins as iqlibc.* (import-qualifier tag without a
+	// matching import). Map them to modernc.org/libc exports.
+	goCode = postProcessWindowsLibcCalls(goCode)
+
 	// Fix assert types
 	goCode = regexp.MustCompile(`libc\.X__assert_fail\(tls, ([^,]*), ([^,]*), uint32\((\d+)\)`).
 		ReplaceAllString(goCode, `libc.X__assert_fail(tls, $1, $2, int32($3)`)
@@ -949,6 +991,78 @@ func postProcess(goCode, workDir string) string {
 	return libc.Uint8FromInt32(libc.BoolInt32(v1 != 0))
 }`)
 
+	return goCode
+}
+
+// postProcessWindowsLibcCalls rewrites names left unresolved by ccgo's
+// -ignore-link-errors path into modernc.org/libc calls.
+//
+// Patterns:
+//   - iqlibc.FOO  → libc.XFOO  (builtin path uses import-qualifier tag "iq")
+//   - bare CRT names used by MinGW headers / tree-sitter → libc.X*
+func postProcessWindowsLibcCalls(goCode string) string {
+	if !strings.Contains(goCode, "//go:build windows") && !strings.Contains(goCode, "WIN32 = 1") {
+		return goCode
+	}
+	// Builtins and other symbols that were attributed to the libc import
+	// qualifier without an actual import alias.
+	goCode = strings.ReplaceAll(goCode, "iqlibc.", "libc.X")
+	// Accidental double package prefix from a bad --prefix-undefined experiment.
+	goCode = strings.ReplaceAll(goCode, "libc.Xlibc.X", "libc.X")
+
+	// Bare C identifiers that should call into libc. Word-boundary via
+	// negative lookbehind for letters/digits/underscore and selector dots.
+	// Only rewrite call sites (name followed by '(').
+	bareToLibc := []string{
+		"__mingw_vswprintf",
+		"__mingw_strtof",
+		"__mingw_wcstod",
+		"__mingw_wcstof",
+		"_mingw_vswprintf",
+		"_mingw_strtof",
+		"_mingw_wcstod",
+		"_mingw_wcstof",
+		"strnlen",
+		"wcsnlen",
+		"iswctype",
+		"iswspace",
+		"iswalnum",
+		"fdopen",
+		"_fdopen",
+		"_get_osfhandle",
+		"_open_osfhandle",
+		// ccgo rawName of __sync_* often drops one leading '_'.
+		"__sync_fetch_and_and",
+		"__sync_fetch_and_or",
+		"__sync_fetch_and_xor",
+		"__sync_fetch_and_add",
+		"__sync_lock_test_and_set",
+		"_sync_fetch_and_and",
+		"_sync_fetch_and_or",
+		"_sync_fetch_and_xor",
+		"_sync_fetch_and_add",
+		"_sync_lock_test_and_set",
+		"_sync_val_compare_and_swapUintptr",
+		"__sync_val_compare_and_swapUintptr",
+		"MapViewOfFileNuma2",
+		"open_osfhandle",
+		"get_osfhandle",
+		"towupper",
+		"towlower",
+	}
+	for _, name := range bareToLibc {
+		// Avoid rewriting already-qualified libc.Xname or definitions.
+		re := regexp.MustCompile(`([^.\w])` + regexp.QuoteMeta(name) + `\(`)
+		goCode = re.ReplaceAllString(goCode, `${1}libc.X`+name+`(`)
+		// Start-of-line calls (rare).
+		re2 := regexp.MustCompile(`(?m)^` + regexp.QuoteMeta(name) + `\(`)
+		goCode = re2.ReplaceAllString(goCode, `libc.X`+name+`(`)
+	}
+	// Normalize single-underscore forms to the double-underscore libc exports.
+	goCode = strings.ReplaceAll(goCode, "libc.X_mingw_", "libc.X__mingw_")
+	goCode = strings.ReplaceAll(goCode, "libc.X_sync_", "libc.X__sync_")
+	// MinGW MemoryBarrier/__faststorefence → portable fence.
+	goCode = strings.ReplaceAll(goCode, "libc.X__builtin_ia32_sfence(", "libc.X__sync_synchronize(")
 	return goCode
 }
 
