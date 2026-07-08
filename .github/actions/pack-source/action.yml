@@ -1,0 +1,30 @@
+name: Pack source workspace
+description: >
+  Tar the repository worktree without .git (or nested submodule .git)
+  for upload as a shared CI artifact. Uses gzip for runner portability.
+inputs:
+  path:
+    description: Directory to pack (default GITHUB_WORKSPACE)
+    required: false
+    default: ${{ github.workspace }}
+  output:
+    description: Output tarball path
+    required: false
+    default: ${{ runner.temp }}/source-workspace.tar.gz
+runs:
+  using: composite
+  steps:
+    - name: Pack worktree (no .git)
+      shell: bash
+      env:
+        SRC: ${{ inputs.path }}
+        OUT: ${{ inputs.output }}
+      run: |
+        set -euo pipefail
+        mkdir -p "$(dirname "$OUT")"
+        # Exclude every path component named .git (root + submodule metadata).
+        tar -C "$SRC" \
+          --exclude='.git' \
+          -czf "$OUT" .
+        ls -lh "$OUT"
+        echo "Packed $(du -h "$OUT" | cut -f1) from $SRC"

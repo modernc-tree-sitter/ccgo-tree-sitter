@@ -1,0 +1,57 @@
+name: Restore source workspace
+description: >
+  Download the source-workspace artifact and extract it into GITHUB_WORKSPACE
+  (or a given path). Matrix jobs use this instead of actions/checkout.
+inputs:
+  path:
+    description: Directory to extract into
+    required: false
+    default: ${{ github.workspace }}
+  artifact-name:
+    description: Artifact name uploaded by prepare
+    required: false
+    default: source-workspace
+runs:
+  using: composite
+  steps:
+    - name: Download source artifact
+      uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+      with:
+        name: ${{ inputs.artifact-name }}
+        path: ${{ runner.temp }}/source-artifact
+
+    - name: Extract into workspace
+      shell: bash
+      env:
+        DEST: ${{ inputs.path }}
+        ART: ${{ runner.temp }}/source-artifact
+      run: |
+        set -euo pipefail
+        mkdir -p "$DEST"
+        shopt -s nullglob
+        archive=""
+        for f in "$ART"/*.tar.gz "$ART"/*.tgz "$ART"/*; do
+          [ -f "$f" ] || continue
+          case "$f" in
+            *.tar.gz|*.tgz) archive="$f"; break ;;
+          esac
+        done
+        if [ -z "$archive" ]; then
+          # single-file artifact may lack extension in some edge cases
+          if [ -f "$ART/source-workspace.tar.gz" ]; then
+            archive="$ART/source-workspace.tar.gz"
+          fi
+        fi
+        if [ -z "${archive:-}" ] || [ ! -f "$archive" ]; then
+          echo "error: no source tarball in $ART" >&2
+          find "$ART" -type f | head -50 >&2 || true
+          exit 1
+        fi
+        echo "extracting $archive -> $DEST"
+        tar -C "$DEST" -xzf "$archive"
+        if [ ! -f "$DEST/go.mod" ]; then
+          echo "error: go.mod missing after extract in $DEST" >&2
+          ls -la "$DEST" >&2 || true
+          exit 1
+        fi
+        echo "restored source at $DEST ($(du -sh "$DEST" | cut -f1))"

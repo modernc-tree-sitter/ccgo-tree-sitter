@@ -25,7 +25,8 @@ for d in "${dirs[@]}"; do
   cp -a "$d/grammar/." grammar/
   merged=$((merged + 1))
   if [[ -f "$d/cmd/parse/languages.go" ]]; then
-    if [[ "$name" == "linux-amd64" || -z "$preferred_registry" ]]; then
+    # Artifact dirs may be named linux-amd64 or codegen-linux-amd64.
+    if [[ "$name" == "linux-amd64" || "$name" == "codegen-linux-amd64" || -z "$preferred_registry" ]]; then
       preferred_registry="$d/cmd/parse/languages.go"
       preferred_name="$name"
     fi
