@@ -394,9 +394,8 @@ func preprocessorIdentity(goos, goarch string) string {
 }
 
 // TranspileCore transpiles the tree-sitter core library into the target directory.
-// The flow consists of preprocessing C headers, generating a synthetic go.mod to satisfy
-// ccgo dependencies, executing ccgo on the unified C files, and finally post-processing
-// to fix deterministic paths and perform AST patching for CGO-free pointers.
+// Sources are fed to ccgo directly (ccgo's own preprocessor + NewConfig via CC);
+// host-specific -D flags keep MinGW/Darwin headers within what ccgo can parse.
 func (t *Transpiler) TranspileCore(outputDir string) error {
 	tmpDir, err := t.prepareWorkDir("tree-sitter-core", "")
 	if err != nil {
@@ -408,20 +407,28 @@ func (t *Transpiler) TranspileCore(outputDir string) error {
 		slog.Info("keeping temp dir", "path", tmpDir)
 	}
 
-	// Preprocess
-	coreComplete := filepath.Join(tmpDir, "core_complete.c")
-	if err := t.preprocessCore(coreComplete); err != nil {
-		return fmt.Errorf("preprocess failed: %w", err)
-	}
-
 	// Setup go.mod
 	if err := setupGoMod(tmpDir); err != nil {
 		return fmt.Errorf("go.mod setup failed: %w", err)
 	}
 
-	// Transpile
+	libSrc := filepath.Join(t.TreeSitterPath, "lib/src")
+	libC, err := filepath.Abs(filepath.Join(libSrc, "lib.c"))
+	if err != nil {
+		return err
+	}
+	stubsH, err := writeAtomicStubsHeader(tmpDir)
+	if err != nil {
+		return err
+	}
+
+	// Transpile: ccgo resolves #includes (including system headers) itself.
 	coreGo := filepath.Join(tmpDir, "core.go")
-	if err := t.runCcgo(tmpDir, coreComplete, coreGo); err != nil {
+	includes := []string{
+		filepath.Join(t.TreeSitterPath, "lib/include"),
+		libSrc,
+	}
+	if err := t.runCcgo(tmpDir, []string{libC}, coreGo, includes, nil, stubsH); err != nil {
 		return fmt.Errorf("ccgo failed: %w", err)
 	}
 
@@ -563,69 +570,10 @@ func combineFiles(inputs []string, output string) error {
 	return nil
 }
 
-func (t *Transpiler) preprocessCore(outputPath string) error {
-	workDir := filepath.Dir(outputPath)
-	f, err := os.Create(outputPath)
-	if err != nil {
-		return err
-	}
-
-	args := []string{
-		// gnu11: GCC 15+ defaults to C23 where bool is a keyword; ccgo only
-		// knows _Bool (via stdbool macros under C11/gnu11).
-		"-E", "-O0", "-fno-inline", "-std=gnu11",
-		"-ffile-prefix-map=" + filepath.ToSlash(workDir) + "=.",
-		"-fmacro-prefix-map=" + filepath.ToSlash(workDir) + "=.",
-		filepath.Join(t.TreeSitterPath, "lib/src/lib.c"),
-		"-I", filepath.Join(t.TreeSitterPath, "lib/include"),
-		"-I", filepath.Join(t.TreeSitterPath, "lib/src"),
-		"-o", "-",
-	}
-
-	cmd, err := preprocessorCmd(t.GOOS, t.GOARCH, args...)
-	if err != nil {
-		f.Close()
-		return err
-	}
-	cmd.Stdout = f
-	cmd.Stderr = os.Stderr
-	if err := cmd.Run(); err != nil {
-		f.Close()
-		return fmt.Errorf("preprocess core with %s: %w", preprocessorIdentity(t.GOOS, t.GOARCH), err)
-	}
-	if err := f.Close(); err != nil {
-		return err
-	}
-	if err := sanitizePreprocessedFile(outputPath); err != nil {
-		return fmt.Errorf("sanitize preprocessed core: %w", err)
-	}
-
-	f, err = os.OpenFile(outputPath, os.O_APPEND|os.O_WRONLY, 0644)
-	if err != nil {
-		return err
-	}
-	defer f.Close()
-
-	// Add atomic stubs for compiler builtins that ccgo doesn't handle natively.
-	// Use unsigned int (not uint32_t) to avoid clashing with windows headers.
-	stubs := "\nstatic inline unsigned int __atomic_add_fetch(volatile unsigned int *p, unsigned int v, int m) { *p += v; return *p; }\n" +
-		"static inline unsigned int __atomic_sub_fetch(volatile unsigned int *p, unsigned int v, int m) { *p -= v; return *p; }\n"
-	_, err = fmt.Fprint(f, stubs)
-	return err
-}
-
-func (t *Transpiler) transpileGrammarFile(grammarPath, inputC, outputGo, workDir string) error {
-	// Preprocess
-	preprocessed := filepath.Join(workDir, "preprocessed.c")
-	f, err := os.Create(preprocessed)
-	if err != nil {
-		return err
-	}
-
-	args := []string{
-		"-E", "-O0", "-fno-inline", "-std=gnu11",
-		"-ffile-prefix-map=" + filepath.ToSlash(workDir) + "=.",
-		"-fmacro-prefix-map=" + filepath.ToSlash(workDir) + "=.",
+// goKeywordDefines renames C identifiers that collide with Go keywords in
+// grammar sources (tree-sitter token names).
+func goKeywordDefines() []string {
+	return []string{
 		"-Dfunc=func_token",
 		"-Dinterface=interface_token",
 		"-Dselect=select_token",
@@ -639,59 +587,95 @@ func (t *Transpiler) transpileGrammarFile(grammarPath, inputC, outputGo, workDir
 		"-Ddefer=defer_token",
 		"-Dfallthrough=fallthrough_token",
 		"-Drange=range_token",
-		inputC,
-		"-I", filepath.Join(grammarPath, "src"),
-		// Monorepo grammars (typescript, markdown) often include headers from a sibling common/
-		"-I", grammarPath,
-		"-I", filepath.Dir(grammarPath),
-		"-I", filepath.Join(t.TreeSitterPath, "lib/include"),
-		"-I", filepath.Join(t.TreeSitterPath, "lib/src"),
-		"-o", "-",
 	}
-
-	cmd, err := preprocessorCmd(t.GOOS, t.GOARCH, args...)
-	if err != nil {
-		f.Close()
-		return err
-	}
-	cmd.Stdout = f
-	cmd.Stderr = os.Stderr
-	if err := cmd.Run(); err != nil {
-		f.Close()
-		return fmt.Errorf("preprocess grammar with %s: %w", preprocessorIdentity(t.GOOS, t.GOARCH), err)
-	}
-	if err := f.Close(); err != nil {
-		return err
-	}
-	if err := sanitizePreprocessedFile(preprocessed); err != nil {
-		return fmt.Errorf("sanitize preprocessed grammar: %w", err)
-	}
-
-	// Setup go.mod if needed
-	goModPath := filepath.Join(workDir, "go.mod")
-	if _, err := os.Stat(goModPath); os.IsNotExist(err) {
-		if err := setupGoMod(workDir); err != nil {
-			return err
-		}
-	}
-
-	// Transpile
-	return t.runCcgo(workDir, preprocessed, outputGo)
 }
 
-func (t *Transpiler) runCcgo(workDir, inputPath, outputPath string) error {
-	inputArg := inputPath
-	if rel, err := filepath.Rel(workDir, inputPath); err == nil {
-		inputArg = rel
+// hostDefinesForCcgo returns -D flags for the target OS so ccgo's preprocessor
+// sees the same header-softening macros we used to inject via external -E.
+func hostDefinesForCcgo(goos, goarch string) []string {
+	cc := resolveCC(goos, goarch)
+	var out []string
+	for _, f := range defaultPreprocessorFlags(goos, goarch, cc) {
+		if strings.HasPrefix(f, "-D") {
+			out = append(out, f)
+		}
 	}
+	return out
+}
+
+// writeAtomicStubsHeader writes static inline __atomic_* helpers forced into
+// every TU via ccgo -include (separate .c static inlines are not visible).
+func writeAtomicStubsHeader(dir string) (string, error) {
+	path := filepath.Join(dir, "atomic_stubs.h")
+	const src = "" +
+		"#ifndef CCGO_TREE_SITTER_ATOMIC_STUBS_H\n" +
+		"#define CCGO_TREE_SITTER_ATOMIC_STUBS_H\n" +
+		"static inline unsigned int __atomic_add_fetch(volatile unsigned int *p, unsigned int v, int m) { (void)m; *p += v; return *p; }\n" +
+		"static inline unsigned int __atomic_sub_fetch(volatile unsigned int *p, unsigned int v, int m) { (void)m; *p -= v; return *p; }\n" +
+		"#endif\n"
+	if err := os.WriteFile(path, []byte(src), 0644); err != nil {
+		return "", err
+	}
+	return path, nil
+}
+
+func (t *Transpiler) transpileGrammarFile(grammarPath, inputC, outputGo, workDir string) error {
+	if err := setupGoMod(workDir); err != nil {
+		return err
+	}
+
+	inputAbs, err := filepath.Abs(inputC)
+	if err != nil {
+		return err
+	}
+	includes := []string{
+		filepath.Join(grammarPath, "src"),
+		// Monorepo grammars (typescript, markdown) often include headers from a sibling common/
+		grammarPath,
+		filepath.Dir(grammarPath),
+		filepath.Join(t.TreeSitterPath, "lib/include"),
+		filepath.Join(t.TreeSitterPath, "lib/src"),
+	}
+	return t.runCcgo(workDir, []string{inputAbs}, outputGo, includes, goKeywordDefines(), "")
+}
+
+// runCcgo invokes ccgo on raw C sources. ccgo runs its own preprocessor using
+// CC (via NewConfig) for system includes/predefines; we pass -I/-D/-std.
+// forceInclude, if non-empty, is passed as -include (forced header).
+func (t *Transpiler) runCcgo(workDir string, sources []string, outputPath string, includes, extraDefines []string, forceInclude string) error {
 	outputArg := outputPath
 	if rel, err := filepath.Rel(workDir, outputPath); err == nil {
 		outputArg = rel
 	}
-	ccgoArgs := append([]string{"ccgo"}, ccgoExtraArgs(t.GOOS)...)
-	ccgoArgs = append(ccgoArgs, inputArg, "-o", outputArg)
 
-	// Change to work dir
+	ccgoArgs := append([]string{"ccgo"}, ccgoExtraArgs(t.GOOS)...)
+	// gnu11: GCC 15+ defaults to C23 where bool is a keyword; ccgo uses _Bool.
+	ccgoArgs = append(ccgoArgs, "-std=gnu11", "-O0")
+	ccgoArgs = append(ccgoArgs, hostDefinesForCcgo(t.GOOS, t.GOARCH)...)
+	ccgoArgs = append(ccgoArgs, extraDefines...)
+	if forceInclude != "" {
+		incArg := forceInclude
+		if rel, err := filepath.Rel(workDir, forceInclude); err == nil {
+			incArg = rel
+		}
+		ccgoArgs = append(ccgoArgs, "-include", incArg)
+	}
+	for _, inc := range includes {
+		abs, err := filepath.Abs(inc)
+		if err != nil {
+			return err
+		}
+		ccgoArgs = append(ccgoArgs, "-I", abs)
+	}
+	for _, src := range sources {
+		arg := src
+		if rel, err := filepath.Rel(workDir, src); err == nil && !strings.HasPrefix(rel, "..") {
+			arg = rel
+		}
+		ccgoArgs = append(ccgoArgs, arg)
+	}
+	ccgoArgs = append(ccgoArgs, "-o", outputArg)
+
 	origDir, err := os.Getwd()
 	if err != nil {
 		return err
@@ -701,18 +685,32 @@ func (t *Transpiler) runCcgo(workDir, inputPath, outputPath string) error {
 	}
 	defer os.Chdir(origDir)
 
-	// Isolate and call ccgo
-	err = runCcgoIsolated(t.GOOS, t.GOARCH, ccgoArgs)
+	// NewConfig probes CC for predefines and system include paths.
+	cc := resolveCC(t.GOOS, t.GOARCH)
+	// NewConfig expects a single executable name/path (not multi-word).
+	if fields, err := splitCompilerEnv(cc); err == nil && len(fields) > 0 {
+		cc = fields[0]
+	}
+	prevCC, hadCC := os.LookupEnv("CC")
+	if err := os.Setenv("CC", cc); err != nil {
+		return err
+	}
+	defer func() {
+		if hadCC {
+			_ = os.Setenv("CC", prevCC)
+		} else {
+			_ = os.Unsetenv("CC")
+		}
+	}()
 
-	// If file was generated, ignore validation errors
+	err = runCcgoIsolated(t.GOOS, t.GOARCH, ccgoArgs)
 	if err != nil {
 		if _, statErr := os.Stat(outputPath); statErr == nil {
-			// File exists, ccgo succeeded even if validation failed
+			// File exists: ccgo often still writes output with -ignore-link-errors.
 			return nil
 		}
 		return err
 	}
-
 	return nil
 }
 

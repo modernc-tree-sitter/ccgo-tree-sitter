@@ -30,12 +30,11 @@ var rootCmd = &cobra.Command{
 This tool uses ccgo to convert tree-sitter's C implementation into Go code,
 allowing you to use tree-sitter parsers natively in Go without CGO.
 
-C sources are preprocessed with clang by default. Override with CC (may be a
-multi-word launcher such as "zig cc") and optional CFLAGS. On Windows, MinGW
-gcc on PATH is preferred over clang; absolute Windows CC paths keep backslashes
-(not treated as shell escapes). Set MINGW_SYSROOT when the sysroot is
-non-default. On Darwin, -fno-blocks and empty nullability macros are injected.
-Unix-style CC/CFLAGS values are parsed with mvdan.cc/sh/v3/shell.Fields.`,
+ccgo preprocesses and compiles C sources itself (via modernc.org/cc and host
+CC from NewConfig). CC selects the probe compiler (clang by default; on
+Windows, MinGW gcc on PATH is preferred). Host-specific -D flags soften
+MinGW/Darwin headers. Optional CFLAGS still affect the CC probe when set.
+Unix-style multi-word CC values are parsed with mvdan.cc/sh/v3/shell.Fields.`,
 	RunE: run,
 }
 
