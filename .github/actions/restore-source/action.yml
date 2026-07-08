@@ -36,19 +36,37 @@ runs:
             *.tar.gz|*.tgz) archive="$f"; break ;;
           esac
         done
-        if [ -z "$archive" ]; then
-          # single-file artifact may lack extension in some edge cases
-          if [ -f "$ART/source-workspace.tar.gz" ]; then
-            archive="$ART/source-workspace.tar.gz"
-          fi
+        if [ -z "$archive" ] && [ -f "$ART/source-workspace.tar.gz" ]; then
+          archive="$ART/source-workspace.tar.gz"
         fi
         if [ -z "${archive:-}" ] || [ ! -f "$archive" ]; then
           echo "error: no source tarball in $ART" >&2
           find "$ART" -type f | head -50 >&2 || true
           exit 1
         fi
-        echo "extracting $archive -> $DEST"
-        tar -C "$DEST" -xzf "$archive"
+
+        # GNU tar treats "D:\path" as remote host "D". Prefer MSYS paths and
+        # always pass --force-local on Windows runners.
+        tar_path() {
+          if command -v cygpath >/dev/null 2>&1; then
+            cygpath -u "$1"
+          else
+            case "$1" in
+              [A-Za-z]:*)
+                local drive
+                drive="$(printf '%s' "${1:0:1}" | tr '[:upper:]' '[:lower:]')"
+                printf '/%s%s\n' "$drive" "$(printf '%s' "${1:2}" | sed 's|\\|/|g')"
+                ;;
+              *)
+                printf '%s\n' "$1" | sed 's|\\|/|g'
+                ;;
+            esac
+          fi
+        }
+        dest_u="$(tar_path "$DEST")"
+        arch_u="$(tar_path "$archive")"
+        echo "extracting $arch_u -> $dest_u"
+        tar --force-local -C "$dest_u" -xzf "$arch_u"
         if [ ! -f "$DEST/go.mod" ]; then
           echo "error: go.mod missing after extract in $DEST" >&2
           ls -la "$DEST" >&2 || true
