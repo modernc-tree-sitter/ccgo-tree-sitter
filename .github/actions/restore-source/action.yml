@@ -45,8 +45,8 @@ runs:
           exit 1
         fi
 
-        # GNU tar treats "D:\path" as remote host "D". Prefer MSYS paths and
-        # always pass --force-local on Windows runners.
+        # Windows Git Bash: GNU tar treats "D:\path" as remote host "D".
+        # Prefer MSYS paths; only GNU tar supports --force-local (not BSD tar on macOS).
         tar_path() {
           if command -v cygpath >/dev/null 2>&1; then
             cygpath -u "$1"
@@ -63,10 +63,19 @@ runs:
             esac
           fi
         }
+
         dest_u="$(tar_path "$DEST")"
         arch_u="$(tar_path "$archive")"
         echo "extracting $arch_u -> $dest_u"
-        tar --force-local -C "$dest_u" -xzf "$arch_u"
+
+        tar_args=(-C "$dest_u" -xzf "$arch_u")
+        # GNU tar only (Linux/Windows Git Bash). BSD tar on macOS rejects this.
+        if tar --help 2>&1 | grep -q -- '--force-local'; then
+          tar_args=(--force-local "${tar_args[@]}")
+        fi
+
+        tar "${tar_args[@]}"
+
         if [ ! -f "$DEST/go.mod" ]; then
           echo "error: go.mod missing after extract in $DEST" >&2
           ls -la "$DEST" >&2 || true
