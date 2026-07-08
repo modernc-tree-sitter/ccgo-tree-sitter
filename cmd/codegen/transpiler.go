@@ -542,6 +542,9 @@ func (t *Transpiler) TranspileGrammar(grammarPath, grammarName, outputDir string
 		if apiErr != nil {
 			return fmt.Errorf("failed to generate API: %w", apiErr)
 		}
+		if err := writeLangGoMod(outputDir, grammarName); err != nil {
+			return fmt.Errorf("failed to write grammar go.mod: %w", err)
+		}
 	}
 
 	return nil

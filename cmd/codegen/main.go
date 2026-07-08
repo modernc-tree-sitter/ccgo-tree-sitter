@@ -49,12 +49,39 @@ func init() {
 	rootCmd.Flags().StringVar(&targetGOOS, "goos", env("TARGET_GOOS", runtime.GOOS), "Target GOOS for generated code")
 	rootCmd.Flags().StringVar(&targetGOARCH, "goarch", env("TARGET_GOARCH", runtime.GOARCH), "Target GOARCH for generated code")
 	rootCmd.Flags().BoolVarP(&keepTemp, "keep-temp", "k", false, "Keep temporary files for debugging")
+
+	modulesCmd := &cobra.Command{
+		Use:   "modules",
+		Short: "Write nested go.mod files and go.work for grammar packages",
+		Long: `Write grammar/go.mod, grammar/<lang>/go.mod (with local replace
+directives), and go.work. Optionally run go work sync / go mod tidy.
+
+Does not transpile C sources.`,
+		RunE: runModules,
+	}
+	modulesCmd.Flags().Bool("tidy", false, "Run go work sync and go mod tidy for each module")
+	rootCmd.AddCommand(modulesCmd)
 }
 
 func main() {
 	if err := rootCmd.Execute(); err != nil {
 		os.Exit(1)
 	}
+}
+
+func runModules(cmd *cobra.Command, args []string) error {
+	tidy, _ := cmd.Flags().GetBool("tidy")
+	slog.Info("writing grammar modules", "dir", OUTPUT_DIR, "tidy", tidy)
+	if err := ensureGrammarModules(OUTPUT_DIR); err != nil {
+		return err
+	}
+	if tidy {
+		slog.Info("tidying workspace modules")
+		if err := tidyGrammarModules(OUTPUT_DIR); err != nil {
+			return err
+		}
+	}
+	return nil
 }
 
 func run(cmd *cobra.Command, args []string) error {
@@ -72,6 +99,9 @@ func run(cmd *cobra.Command, args []string) error {
 	coreOutput := filepath.Join(OUTPUT_DIR, "grammar")
 	if err := transpiler.TranspileCore(coreOutput); err != nil {
 		return fmt.Errorf("failed to transpile core: %w", err)
+	}
+	if err := writeCoreGoMod(coreOutput); err != nil {
+		return fmt.Errorf("failed to write grammar go.mod: %w", err)
 	}
 
 	units, err := discoverGrammarUnits("third-party/tree-sitter-*")
@@ -113,6 +143,11 @@ func run(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("failed to update languages registry: %w", err)
 	}
 
+	slog.Info("writing per-grammar go.mod and go.work")
+	if err := ensureGrammarModules(OUTPUT_DIR); err != nil {
+		return fmt.Errorf("failed to write grammar modules: %w", err)
+	}
+
 	return nil
 }
 
@@ -125,9 +160,14 @@ func updateLanguagesGo(outputDir string) error {
 
 	var languages []string
 	for _, entry := range entries {
-		if entry.IsDir() {
-			languages = append(languages, entry.Name())
+		if !entry.IsDir() {
+			continue
 		}
+		// Match listGrammarLangs: only real grammar packages (have api.go).
+		if _, err := os.Stat(filepath.Join(grammarDir, entry.Name(), "api.go")); err != nil {
+			continue
+		}
+		languages = append(languages, entry.Name())
 	}
 	sort.Strings(languages)
 
