@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	rootModulePath    = "github.com/lucasew/ccgo-tree-sitter"
+	rootModulePath    = "github.com/modernc-tree-sitter/ccgo-tree-sitter"
 	grammarModulePath = rootModulePath + "/grammar"
 	moduleGoVersion   = "1.25.0"
 	// Keep in sync with root go.mod require modernc.org/libc.

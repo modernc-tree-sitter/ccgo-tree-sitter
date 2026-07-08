@@ -3,7 +3,7 @@ package grammar_tcl
 import (
 	"unsafe"
 	"reflect"
-	"github.com/lucasew/ccgo-tree-sitter/grammar"
+	"github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar"
 )
 
 // Language returns the TSLanguage for tcl with external scanner properly connected

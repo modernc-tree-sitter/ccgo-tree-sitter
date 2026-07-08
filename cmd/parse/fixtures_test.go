@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/lucasew/ccgo-tree-sitter/grammar"
+	"github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar"
 )
 
 var structPaddingPattern = regexp.MustCompile(`&struct \{ _ \[`)

@@ -171,7 +171,7 @@ func updateLanguagesGo(outputDir string) error {
 	}
 	sort.Strings(languages)
 
-	moduleName := "github.com/lucasew/ccgo-tree-sitter"
+	moduleName := "github.com/modernc-tree-sitter/ccgo-tree-sitter"
 
 	var sb strings.Builder
 	sb.WriteString("package main\n\n")

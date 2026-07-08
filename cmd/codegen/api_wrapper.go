@@ -9,7 +9,7 @@ import (
 func getModuleName(outputDir string) string {
 	moduleName := filepath.Base(outputDir)
 	if moduleName == "." {
-		moduleName = "github.com/lucasew/ccgo-tree-sitter"
+		moduleName = "github.com/modernc-tree-sitter/ccgo-tree-sitter"
 	}
 	return moduleName
 }
@@ -196,7 +196,7 @@ func GenerateAPIWrapper(outputDir, grammarName string) error {
 
 import (
 	"unsafe"
-	"github.com/lucasew/ccgo-tree-sitter/grammar"
+	"github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar"
 )
 
 // Language returns the TSLanguage for %s
@@ -228,7 +228,7 @@ func GenerateAPIWrapperWithScanner(outputDir, grammarName string) error {
 import (
 	"unsafe"
 	"reflect"
-	"github.com/lucasew/ccgo-tree-sitter/grammar"
+	"github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar"
 )
 
 // Language returns the TSLanguage for %s with external scanner properly connected

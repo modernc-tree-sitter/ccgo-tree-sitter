@@ -3,7 +3,7 @@ package grammar_bicep
 import (
 	"unsafe"
 	"reflect"
-	"github.com/lucasew/ccgo-tree-sitter/grammar"
+	"github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar"
 )
 
 // Language returns the TSLanguage for bicep with external scanner properly connected

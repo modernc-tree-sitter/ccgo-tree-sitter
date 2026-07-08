@@ -25,10 +25,10 @@ func TestWriteLangGoMod(t *testing.T) {
 	}
 	s := string(data)
 	for _, want := range []string{
-		"module github.com/lucasew/ccgo-tree-sitter/grammar/python",
-		"github.com/lucasew/ccgo-tree-sitter/grammar v0.0.0",
+		"module github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/python",
+		"github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar v0.0.0",
 		"modernc.org/libc " + libcModuleVersion,
-		"replace github.com/lucasew/ccgo-tree-sitter/grammar => ../",
+		"replace github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar => ../",
 		"replace modernc.org/libc => ../../third-party/libc",
 	} {
 		if !strings.Contains(s, want) {
@@ -48,7 +48,7 @@ func TestWriteCoreGoMod(t *testing.T) {
 	}
 	s := string(data)
 	for _, want := range []string{
-		"module github.com/lucasew/ccgo-tree-sitter/grammar",
+		"module github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar",
 		"require modernc.org/libc " + libcModuleVersion,
 		"replace modernc.org/libc => ../third-party/libc",
 	} {

@@ -2,7 +2,7 @@ package grammar_make
 
 import (
 	"unsafe"
-	"github.com/lucasew/ccgo-tree-sitter/grammar"
+	"github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar"
 )
 
 // Language returns the TSLanguage for make
