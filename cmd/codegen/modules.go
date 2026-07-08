@@ -167,7 +167,6 @@ func updateRootGoMod(outputDir string, langs []string) error {
 		if !os.IsNotExist(err) {
 			return err
 		}
-		// Tests / empty trees: create a minimal root module.
 		data = []byte("module " + rootModulePath + "\n\ngo " + moduleGoVersion + "\n")
 	}
 	f, err := modfile.Parse(path, data, nil)
@@ -175,63 +174,55 @@ func updateRootGoMod(outputDir string, langs []string) error {
 		return err
 	}
 
-	// Collect module paths we own under grammar/.
-	mods := []struct {
+	type modRef struct {
 		path string
 		dir  string
-	}{
-		{grammarModulePath, "./grammar"},
 	}
+	mods := []modRef{{grammarModulePath, "./grammar"}}
 	for _, lang := range langs {
-		mods = append(mods, struct {
-			path string
-			dir  string
-		}{grammarModulePath + "/" + lang, "./grammar/" + lang})
+		mods = append(mods, modRef{grammarModulePath + "/" + lang, "./grammar/" + lang})
 	}
-
-	// Drop existing require/replace for our nested modules so we can re-add cleanly.
-	owned := map[string]bool{}
+	owned := make(map[string]bool, len(mods)+1)
 	for _, m := range mods {
 		owned[m.path] = true
 	}
-	var reqKeep []*modfile.Require
-	for _, r := range f.Require {
-		if owned[r.Mod.Path] {
-			continue
+	owned["modernc.org/libc"] = true
+
+	// Drop every owned require/replace (may appear more than once after bad runs).
+	for {
+		var dropPath string
+		for _, r := range f.Require {
+			if owned[r.Mod.Path] {
+				dropPath = r.Mod.Path
+				break
+			}
 		}
-		reqKeep = append(reqKeep, r)
-	}
-	f.Require = reqKeep
-	var repKeep []*modfile.Replace
-	for _, r := range f.Replace {
-		if owned[r.Old.Path] {
-			continue
+		if dropPath == "" {
+			break
 		}
-		repKeep = append(repKeep, r)
+		_ = f.DropRequire(dropPath)
 	}
-	f.Replace = repKeep
+	for {
+		var dropPath string
+		for _, r := range f.Replace {
+			if owned[r.Old.Path] {
+				dropPath = r.Old.Path
+				break
+			}
+		}
+		if dropPath == "" {
+			break
+		}
+		_ = f.DropReplace(dropPath, "")
+	}
 
 	for _, m := range mods {
-		if err := f.AddRequire(m.path, localPseudoVer); err != nil {
-			return err
-		}
+		f.AddNewRequire(m.path, localPseudoVer, false)
 		if err := f.AddReplace(m.path, "", m.dir, ""); err != nil {
 			return err
 		}
 	}
-	// Ensure libc is required so the existing replace stays meaningful for tooling.
-	if err := f.AddRequire("modernc.org/libc", libcModuleVersion); err != nil {
-		return err
-	}
-
-	// Nested grammar modules are direct deps of root (cmd/parse blank-imports).
-	for _, r := range f.Require {
-		if owned[r.Mod.Path] || r.Mod.Path == "modernc.org/libc" {
-			r.Indirect = false
-		}
-	}
-	// Regroup direct vs indirect require blocks.
-	f.SetRequire(f.Require)
+	f.AddNewRequire("modernc.org/libc", libcModuleVersion, false)
 
 	f.Cleanup()
 	out, err := f.Format()
