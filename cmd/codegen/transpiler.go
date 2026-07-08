@@ -650,9 +650,10 @@ func (t *Transpiler) runCcgo(workDir string, sources []string, outputPath string
 
 	ccgoArgs := append([]string{"ccgo"}, ccgoExtraArgs(t.GOOS)...)
 	// gnu11: GCC 15+ defaults to C23 where bool is a keyword; ccgo uses _Bool.
-	// -fno-inline: emit out-of-line copies of static inline helpers from headers
-	// (e.g. ts_decode_utf* in unicode.h) so __ccgo_fp(name) has a real func.
-	ccgoArgs = append(ccgoArgs, "-std=gnu11", "-O0", "-fno-inline")
+	// Address-taken header static inlines (e.g. ts_decode_utf* in unicode.h) get
+	// out-of-line bodies from ccgo itself; do not pass -fno-inline (that forces
+	// emission of MinGW asm intrinsics and breaks Windows).
+	ccgoArgs = append(ccgoArgs, "-std=gnu11", "-O0")
 	ccgoArgs = append(ccgoArgs, hostDefinesForCcgo(t.GOOS, t.GOARCH)...)
 	ccgoArgs = append(ccgoArgs, extraDefines...)
 	if forceInclude != "" {

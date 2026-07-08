@@ -9,7 +9,8 @@ import (
 	"testing"
 )
 
-// Verifies -fno-inline causes out-of-line ts_decode_* emission (address-taken static inlines).
+// Verifies address-taken header static inlines (ts_decode_*) get out-of-line
+// Go funcs so __ccgo_fp(name) resolves, without requiring -fno-inline.
 func TestCoreEmitsUTFDecodeFuncs(t *testing.T) {
 	if testing.Short() {
 		t.Skip("core transpile is slow")
