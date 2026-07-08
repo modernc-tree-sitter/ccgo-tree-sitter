@@ -150,7 +150,7 @@ jobs:
           CGO_ENABLED: "0"
           GOOS: ${{ matrix.goos }}
           GOARCH: ${{ matrix.goarch }}
-        run: go test ./...
+        run: go test work
 
   codegen:
     name: codegen (${{ matrix.goos }}/${{ matrix.goarch }})
@@ -270,7 +270,7 @@ jobs:
           CGO_ENABLED: "0"
           GOOS: ${{ matrix.goos }}
           GOARCH: ${{ matrix.goarch }}
-        run: go test ./...
+        run: go test work
 
   merge:
     name: merge artifacts and open PR
