@@ -1,4 +1,4 @@
-// Code generated for linux/amd64 by 'ccgo -ignore-unsupported-alignment -ignore-unsupported-atomic-sizes -ignore-vector-functions preprocessed.c -o grammar.go', DO NOT EDIT.
+// Code generated for linux/amd64 by 'ccgo -ignore-unsupported-alignment -ignore-unsupported-atomic-sizes -ignore-vector-functions -std=gnu11 -O0 -Dfunc=func_token -Dinterface=interface_token -Dselect=select_token -Dchan=chan_token -Dgo=go_token -Dmap=map_token -Dpackage=package_token -Dtype=type_token -Dvar=var_token -Dimport=import_token -Ddefer=defer_token -Dfallthrough=fallthrough_token -Drange=range_token -I /home/runner/work/ccgo-tree-sitter/ccgo-tree-sitter/third-party/tree-sitter-astro/src -I /home/runner/work/ccgo-tree-sitter/ccgo-tree-sitter/third-party/tree-sitter-astro -I /home/runner/work/ccgo-tree-sitter/ccgo-tree-sitter/third-party -I /home/runner/work/ccgo-tree-sitter/ccgo-tree-sitter/third-party/tree-sitter/lib/include -I /home/runner/work/ccgo-tree-sitter/ccgo-tree-sitter/third-party/tree-sitter/lib/src combined.c -o grammar.go', DO NOT EDIT.
 
 //go:build linux && amd64
 
@@ -14,7 +14,79 @@ import (
 var _ reflect.Type
 var _ unsafe.Pointer
 
+const ALIAS_COUNT = 0
+const BUFSIZ = 1024
+const EXIT_FAILURE = 1
+const EXIT_SUCCESS = 0
+const EXTERNAL_TOKEN_COUNT = 16
+const FIELD_COUNT = 0
+const FILENAME_MAX = 4096
+const FOPEN_MAX = 1000
+const INT16_MAX = 0x7fff
+const INT32_MAX = 0x7fffffff
+const INT64_MAX = 0x7fffffffffffffff
+const INT8_MAX = 0x7f
+const INTMAX_MAX = "INT64_MAX"
+const INTMAX_MIN = "INT64_MIN"
+const INTPTR_MAX = "INT64_MAX"
+const INTPTR_MIN = "INT64_MIN"
+const INT_FAST16_MAX = "INT32_MAX"
+const INT_FAST16_MIN = "INT32_MIN"
+const INT_FAST32_MAX = "INT32_MAX"
+const INT_FAST32_MIN = "INT32_MIN"
+const INT_FAST64_MAX = "INT64_MAX"
+const INT_FAST64_MIN = "INT64_MIN"
+const INT_FAST8_MAX = "INT8_MAX"
+const INT_FAST8_MIN = "INT8_MIN"
+const INT_LEAST16_MAX = "INT16_MAX"
+const INT_LEAST16_MIN = "INT16_MIN"
+const INT_LEAST32_MAX = "INT32_MAX"
+const INT_LEAST32_MIN = "INT32_MIN"
+const INT_LEAST64_MAX = "INT64_MAX"
+const INT_LEAST64_MIN = "INT64_MIN"
+const INT_LEAST8_MAX = "INT8_MAX"
+const INT_LEAST8_MIN = "INT8_MIN"
+const LANGUAGE_VERSION = 14
+const LARGE_STATE_COUNT = 2
+const L_ctermid = 20
+const L_cuserid = 20
+const L_tmpnam = 20
+const MAX_ALIAS_SEQUENCE_LENGTH = 4
+const PRODUCTION_ID_COUNT = 1
+const PTRDIFF_MAX = "INT64_MAX"
+const PTRDIFF_MIN = "INT64_MIN"
+const P_tmpdir = "/tmp"
+const RAND_MAX = 0x7fffffff
+const SIG_ATOMIC_MAX = "INT32_MAX"
+const SIG_ATOMIC_MIN = "INT32_MIN"
+const SIZE_MAX = "UINT64_MAX"
+const STATE_COUNT = 163
+const SYMBOL_COUNT = 59
+const TMP_MAX = 10000
+const TOKEN_COUNT = 36
+const TREE_SITTER_SERIALIZATION_BUFFER_SIZE = 1024
+const UINT16_MAX = 65535
+const UINT32_MAX = "0xffffffffu"
+const UINT64_MAX = "0xffffffffffffffffu"
+const UINT8_MAX = 255
+const UINTMAX_MAX = "UINT64_MAX"
+const UINTPTR_MAX = "UINT64_MAX"
+const UINT_FAST16_MAX = "UINT32_MAX"
+const UINT_FAST32_MAX = "UINT32_MAX"
+const UINT_FAST64_MAX = "UINT64_MAX"
+const UINT_FAST8_MAX = "UINT8_MAX"
+const UINT_LEAST16_MAX = "UINT16_MAX"
+const UINT_LEAST32_MAX = "UINT32_MAX"
+const UINT_LEAST64_MAX = "UINT64_MAX"
+const UINT_LEAST8_MAX = "UINT8_MAX"
+const WINT_MAX = "UINT32_MAX"
+const WINT_MIN = 0
+const WNOHANG = 1
+const WUNTRACED = 2
 const _GNU_SOURCE = 1
+const _IOFBF = 0
+const _IOLBF = 1
+const _IONBF = 2
 const _LP64 = 1
 const __ATOMIC_ACQUIRE = 2
 const __ATOMIC_ACQ_REL = 4
@@ -23,8 +95,10 @@ const __ATOMIC_RELAXED = 0
 const __ATOMIC_RELEASE = 3
 const __ATOMIC_SEQ_CST = 5
 const __BIGGEST_ALIGNMENT__ = 16
+const __BIG_ENDIAN = 4321
 const __BITINT_MAXWIDTH__ = 8388608
 const __BOOL_WIDTH__ = 8
+const __BYTE_ORDER = 1234
 const __BYTE_ORDER__ = "__ORDER_LITTLE_ENDIAN__"
 const __CCGO__ = 1
 const __CHAR_BIT__ = 8
@@ -188,9 +262,11 @@ const __LDBL_MAX_10_EXP__ = 308
 const __LDBL_MAX_EXP__ = 1024
 const __LDBL_MAX__ = 1.7976931348623157e+308
 const __LDBL_MIN__ = 2.2250738585072014e-308
+const __LITTLE_ENDIAN = 1234
 const __LITTLE_ENDIAN__ = 1
 const __LLONG_WIDTH__ = 64
 const __LONG_LONG_MAX__ = 9223372036854775807
+const __LONG_MAX = 0x7fffffffffffffff
 const __LONG_MAX__ = 9223372036854775807
 const __LONG_WIDTH__ = 64
 const __LP64__ = 1
@@ -254,7 +330,7 @@ const __SSE__ = 1
 const __STDC_HOSTED__ = 1
 const __STDC_UTF_16__ = 1
 const __STDC_UTF_32__ = 1
-const __STDC_VERSION__ = 201710
+const __STDC_VERSION__ = 201112
 const __STDC__ = 1
 const __UINT16_FMTX__ = "hX"
 const __UINT16_FMTo__ = "ho"
@@ -331,6 +407,7 @@ const __UINT_LEAST8_FMTo__ = "hho"
 const __UINT_LEAST8_FMTu__ = "hhu"
 const __UINT_LEAST8_FMTx__ = "hhx"
 const __UINT_LEAST8_MAX__ = 255
+const __USE_TIME_BITS64 = 1
 const __VERSION__ = "Ubuntu Clang 18.1.3 (1ubuntu1)"
 const __WCHAR_MAX__ = 2147483647
 const __WCHAR_TYPE__ = "int"
@@ -340,6 +417,7 @@ const __WINT_UNSIGNED__ = 1
 const __WINT_WIDTH__ = 32
 const __amd64 = 1
 const __amd64__ = 1
+const __bool_true_false_are_defined = 1
 const __clang__ = 1
 const __clang_literal_encoding__ = "UTF-8"
 const __clang_major__ = 18
@@ -349,6 +427,7 @@ const __clang_version__ = "18.1.3 (1ubuntu1)"
 const __clang_wide_literal_encoding__ = "UTF-32"
 const __code_model_small__ = 1
 const __gnu_linux__ = 1
+const __inline = "inline"
 const __k8 = 1
 const __k8__ = 1
 const __linux = 1
@@ -356,14 +435,38 @@ const __linux__ = 1
 const __llvm__ = 1
 const __pic__ = 2
 const __pie__ = 2
+const __restrict = "restrict"
 const __restrict_arr = "restrict"
 const __tune_k8__ = 1
 const __unix = 1
 const __unix__ = 1
 const __x86_64 = 1
 const __x86_64__ = 1
+const alloca1 = "__builtin_alloca"
+const bool1 = "_Bool"
+const chan1 = "chan_token"
+const defer1 = "defer_token"
+const fallthrough1 = "fallthrough_token"
+const false1 = 0
+const func1 = "func_token"
+const go1 = "go_token"
+const import1 = "import_token"
+const interface1 = "interface_token"
 const linux = 1
+const map1 = "map_token"
+const package1 = "package_token"
+const range1 = "range_token"
+const select2 = "select_token"
+const static_assert = "_Static_assert"
+const true1 = 1
+const ts_builtin_sym_end = 0
+const ts_calloc = "calloc"
+const ts_free = "free"
+const ts_malloc = "malloc"
+const ts_realloc = "realloc"
+const type1 = "type_token"
 const unix = 1
+const var1 = "var_token"
 
 type __builtin_va_list = uintptr
 
@@ -373,133 +476,9 @@ type __predefined_wchar_t = int32
 
 type __predefined_ptrdiff_t = int64
 
-type __u_char = uint8
+type uintptr_t = uint64
 
-type __u_short = uint16
-
-type __u_int = uint32
-
-type __u_long = uint64
-
-type __int8_t = int8
-
-type __uint8_t = uint8
-
-type __int16_t = int16
-
-type __uint16_t = uint16
-
-type __int32_t = int32
-
-type __uint32_t = uint32
-
-type __int64_t = int64
-
-type __uint64_t = uint64
-
-type __int_least8_t = int8
-
-type __uint_least8_t = uint8
-
-type __int_least16_t = int16
-
-type __uint_least16_t = uint16
-
-type __int_least32_t = int32
-
-type __uint_least32_t = uint32
-
-type __int_least64_t = int64
-
-type __uint_least64_t = uint64
-
-type __quad_t = int64
-
-type __u_quad_t = uint64
-
-type __intmax_t = int64
-
-type __uintmax_t = uint64
-
-type __dev_t = uint64
-
-type __uid_t = uint32
-
-type __gid_t = uint32
-
-type __ino_t = uint64
-
-type __ino64_t = uint64
-
-type __mode_t = uint32
-
-type __nlink_t = uint64
-
-type __off_t = int64
-
-type __off64_t = int64
-
-type __pid_t = int32
-
-type __fsid_t = struct {
-	F__val [2]int32
-}
-
-type __clock_t = int64
-
-type __rlim_t = uint64
-
-type __rlim64_t = uint64
-
-type __id_t = uint32
-
-type __time_t = int64
-
-type __useconds_t = uint32
-
-type __suseconds_t = int64
-
-type __suseconds64_t = int64
-
-type __daddr_t = int32
-
-type __key_t = int32
-
-type __clockid_t = int32
-
-type __timer_t = uintptr
-
-type __blksize_t = int64
-
-type __blkcnt_t = int64
-
-type __blkcnt64_t = int64
-
-type __fsblkcnt_t = uint64
-
-type __fsblkcnt64_t = uint64
-
-type __fsfilcnt_t = uint64
-
-type __fsfilcnt64_t = uint64
-
-type __fsword_t = int64
-
-type __ssize_t = int64
-
-type __syscall_slong_t = int64
-
-type __syscall_ulong_t = uint64
-
-type __loff_t = int64
-
-type __caddr_t = uintptr
-
-type __intptr_t = int64
-
-type __socklen_t = uint32
-
-type __sig_atomic_t = int32
+type intptr_t = int64
 
 type int8_t = int8
 
@@ -509,6 +488,8 @@ type int32_t = int32
 
 type int64_t = int64
 
+type intmax_t = int64
+
 type uint8_t = uint8
 
 type uint16_t = uint16
@@ -516,6 +497,12 @@ type uint16_t = uint16
 type uint32_t = uint32
 
 type uint64_t = uint64
+
+type uintmax_t = uint64
+
+type int_fast8_t = int8
+
+type int_fast64_t = int64
 
 type int_least8_t = int8
 
@@ -525,6 +512,10 @@ type int_least32_t = int32
 
 type int_least64_t = int64
 
+type uint_fast8_t = uint8
+
+type uint_fast64_t = uint64
+
 type uint_least8_t = uint8
 
 type uint_least16_t = uint16
@@ -533,33 +524,17 @@ type uint_least32_t = uint32
 
 type uint_least64_t = uint64
 
-type int_fast8_t = int8
+type int_fast16_t = int32
 
-type int_fast16_t = int64
+type int_fast32_t = int32
 
-type int_fast32_t = int64
+type uint_fast16_t = uint32
 
-type int_fast64_t = int64
-
-type uint_fast8_t = uint8
-
-type uint_fast16_t = uint64
-
-type uint_fast32_t = uint64
-
-type uint_fast64_t = uint64
-
-type intptr_t = int64
-
-type uintptr_t = uint64
-
-type intmax_t = int64
-
-type uintmax_t = uint64
-
-type size_t = uint64
+type uint_fast32_t = uint32
 
 type wchar_t = int32
+
+type size_t = uint64
 
 type div_t = struct {
 	Fquot int32
@@ -575,275 +550,6 @@ type lldiv_t = struct {
 	Fquot int64
 	Frem  int64
 }
-
-type u_char = uint8
-
-type u_short = uint16
-
-type u_int = uint32
-
-type u_long = uint64
-
-type quad_t = int64
-
-type u_quad_t = uint64
-
-type fsid_t = struct {
-	F__val [2]int32
-}
-
-type loff_t = int64
-
-type ino_t = uint64
-
-type dev_t = uint64
-
-type gid_t = uint32
-
-type mode_t = uint32
-
-type nlink_t = uint64
-
-type uid_t = uint32
-
-type off_t = int64
-
-type pid_t = int32
-
-type id_t = uint32
-
-type ssize_t = int64
-
-type daddr_t = int32
-
-type caddr_t = uintptr
-
-type key_t = int32
-
-type clock_t = int64
-
-type clockid_t = int32
-
-type time_t = int64
-
-type timer_t = uintptr
-
-type ulong = uint64
-
-type ushort = uint16
-
-type uint1 = uint32
-
-type u_int8_t = uint8
-
-type u_int16_t = uint16
-
-type u_int32_t = uint32
-
-type u_int64_t = uint64
-
-type register_t = int32
-
-func __bswap_16(tls *libc.TLS, __bsx __uint16_t) (r __uint16_t) {
-	return libc.Uint16FromInt32(libc.Int32FromUint16(__bsx)>>libc.Int32FromInt32(8)&libc.Int32FromInt32(0xff) | libc.Int32FromUint16(__bsx)&libc.Int32FromInt32(0xff)<<libc.Int32FromInt32(8))
-}
-
-func __bswap_32(tls *libc.TLS, __bsx __uint32_t) (r __uint32_t) {
-	return __bsx&libc.Uint32FromUint32(0xff000000)>>libc.Int32FromInt32(24) | __bsx&libc.Uint32FromUint32(0x00ff0000)>>libc.Int32FromInt32(8) | __bsx&libc.Uint32FromUint32(0x0000ff00)<<libc.Int32FromInt32(8) | __bsx&libc.Uint32FromUint32(0x000000ff)<<libc.Int32FromInt32(24)
-}
-
-func __bswap_64(tls *libc.TLS, __bsx __uint64_t) (r __uint64_t) {
-	return uint64(__bsx&libc.Uint64FromUint64(0xff00000000000000)>>libc.Int32FromInt32(56) | __bsx&libc.Uint64FromUint64(0x00ff000000000000)>>libc.Int32FromInt32(40) | __bsx&libc.Uint64FromUint64(0x0000ff0000000000)>>libc.Int32FromInt32(24) | __bsx&libc.Uint64FromUint64(0x000000ff00000000)>>libc.Int32FromInt32(8) | __bsx&libc.Uint64FromUint64(0x00000000ff000000)<<libc.Int32FromInt32(8) | __bsx&libc.Uint64FromUint64(0x0000000000ff0000)<<libc.Int32FromInt32(24) | __bsx&libc.Uint64FromUint64(0x000000000000ff00)<<libc.Int32FromInt32(40) | __bsx&libc.Uint64FromUint64(0x00000000000000ff)<<libc.Int32FromInt32(56))
-}
-
-func __uint16_identity(tls *libc.TLS, __x __uint16_t) (r __uint16_t) {
-	return __x
-}
-
-func __uint32_identity(tls *libc.TLS, __x __uint32_t) (r __uint32_t) {
-	return __x
-}
-
-func __uint64_identity(tls *libc.TLS, __x __uint64_t) (r __uint64_t) {
-	return __x
-}
-
-type __sigset_t = struct {
-	F__val [16]uint64
-}
-
-type sigset_t = struct {
-	F__val [16]uint64
-}
-
-type timeval = struct {
-	Ftv_sec  __time_t
-	Ftv_usec __suseconds_t
-}
-
-type timespec = struct {
-	Ftv_sec  __time_t
-	Ftv_nsec __syscall_slong_t
-}
-
-type suseconds_t = int64
-
-type __fd_mask = int64
-
-type fd_set = struct {
-	F__fds_bits [16]__fd_mask
-}
-
-type fd_mask = int64
-
-type blksize_t = int64
-
-type blkcnt_t = int64
-
-type fsblkcnt_t = uint64
-
-type fsfilcnt_t = uint64
-
-type __atomic_wide_counter = struct {
-	F__value32 [0]struct {
-		F__low  uint32
-		F__high uint32
-	}
-	F__value64 uint64
-}
-
-type __pthread_list_t = struct {
-	F__prev uintptr
-	F__next uintptr
-}
-
-type __pthread_internal_list = __pthread_list_t
-
-type __pthread_slist_t = struct {
-	F__next uintptr
-}
-
-type __pthread_internal_slist = __pthread_slist_t
-
-type __pthread_mutex_s = struct {
-	F__lock    int32
-	F__count   uint32
-	F__owner   int32
-	F__nusers  uint32
-	F__kind    int32
-	F__spins   int16
-	F__elision int16
-	F__list    __pthread_list_t
-}
-
-type __pthread_rwlock_arch_t = struct {
-	F__readers       uint32
-	F__writers       uint32
-	F__wrphase_futex uint32
-	F__writers_futex uint32
-	F__pad3          uint32
-	F__pad4          uint32
-	F__cur_writer    int32
-	F__shared        int32
-	F__rwelision     int8
-	F__pad1          [7]uint8
-	F__pad2          uint64
-	F__flags         uint32
-}
-
-type __pthread_cond_s = struct {
-	F__wseq         __atomic_wide_counter
-	F__g1_start     __atomic_wide_counter
-	F__g_refs       [2]uint32
-	F__g_size       [2]uint32
-	F__g1_orig_size uint32
-	F__wrefs        uint32
-	F__g_signals    [2]uint32
-}
-
-type __tss_t = uint32
-
-type __thrd_t = uint64
-
-type __once_flag = struct {
-	F__data int32
-}
-
-type pthread_t = uint64
-
-type pthread_mutexattr_t = struct {
-	F__align [0]int32
-	F__size  [4]int8
-}
-
-type pthread_condattr_t = struct {
-	F__align [0]int32
-	F__size  [4]int8
-}
-
-type pthread_key_t = uint32
-
-type pthread_once_t = int32
-
-type pthread_attr_t = struct {
-	F__align [0]int64
-	F__size  [56]int8
-}
-
-type pthread_mutex_t = struct {
-	F__size  [0][40]int8
-	F__align [0]int64
-	F__data  __pthread_mutex_s
-}
-
-type pthread_cond_t = struct {
-	F__size  [0][48]int8
-	F__align [0]int64
-	F__data  __pthread_cond_s
-}
-
-type pthread_rwlock_t = struct {
-	F__size  [0][56]int8
-	F__align [0]int64
-	F__data  __pthread_rwlock_arch_t
-}
-
-type pthread_rwlockattr_t = struct {
-	F__align [0]int64
-	F__size  [8]int8
-}
-
-type pthread_spinlock_t = int32
-
-type pthread_barrier_t = struct {
-	F__align [0]int64
-	F__size  [32]int8
-}
-
-type pthread_barrierattr_t = struct {
-	F__align [0]int32
-	F__size  [4]int8
-}
-
-type random_data = struct {
-	Ffptr      uintptr
-	Frptr      uintptr
-	Fstate     uintptr
-	Frand_type int32
-	Frand_deg  int32
-	Frand_sep  int32
-	Fend_ptr   uintptr
-}
-
-type drand48_data = struct {
-	F__x     [3]uint16
-	F__old_x [3]uint16
-	F__c     uint16
-	F__init  uint16
-	F__a     uint64
-}
-
-type __compar_fn_t = uintptr
 
 type TSStateId = uint16
 
@@ -955,127 +661,21 @@ type TSParseActionEntry = struct {
 	Faction TSParseAction
 }
 
-type __gnuc_va_list = uintptr
+type ssize_t = int64
 
-type __mbstate_t = struct {
-	F__count int32
-	F__value struct {
-		F__wchb [0][4]int8
-		F__wch  uint32
-	}
+type off_t = int64
+
+type va_list = uintptr
+
+type __isoc_va_list = uintptr
+
+type fpos_t = struct {
+	F__lldata [0]int64
+	F__align  [0]float64
+	F__opaque [16]int8
 }
 
-type __fpos_t = struct {
-	F__pos   __off_t
-	F__state __mbstate_t
-}
-
-type _G_fpos_t = __fpos_t
-
-type __fpos64_t = struct {
-	F__pos   __off64_t
-	F__state __mbstate_t
-}
-
-type _G_fpos64_t = __fpos64_t
-
-type _IO_FILE = struct {
-	F_flags          int32
-	F_IO_read_ptr    uintptr
-	F_IO_read_end    uintptr
-	F_IO_read_base   uintptr
-	F_IO_write_base  uintptr
-	F_IO_write_ptr   uintptr
-	F_IO_write_end   uintptr
-	F_IO_buf_base    uintptr
-	F_IO_buf_end     uintptr
-	F_IO_save_base   uintptr
-	F_IO_backup_base uintptr
-	F_IO_save_end    uintptr
-	F_markers        uintptr
-	F_chain          uintptr
-	F_fileno         int32
-	F_flags2         int32
-	F_old_offset     __off_t
-	F_cur_column     uint16
-	F_vtable_offset  int8
-	F_shortbuf       [1]int8
-	F_lock           uintptr
-	F_offset         __off64_t
-	F_codecvt        uintptr
-	F_wide_data      uintptr
-	F_freeres_list   uintptr
-	F_freeres_buf    uintptr
-	F__pad5          size_t
-	F_mode           int32
-	F_unused2        [20]int8
-}
-
-type __FILE = struct {
-	F_flags          int32
-	F_IO_read_ptr    uintptr
-	F_IO_read_end    uintptr
-	F_IO_read_base   uintptr
-	F_IO_write_base  uintptr
-	F_IO_write_ptr   uintptr
-	F_IO_write_end   uintptr
-	F_IO_buf_base    uintptr
-	F_IO_buf_end     uintptr
-	F_IO_save_base   uintptr
-	F_IO_backup_base uintptr
-	F_IO_save_end    uintptr
-	F_markers        uintptr
-	F_chain          uintptr
-	F_fileno         int32
-	F_flags2         int32
-	F_old_offset     __off_t
-	F_cur_column     uint16
-	F_vtable_offset  int8
-	F_shortbuf       [1]int8
-	F_lock           uintptr
-	F_offset         __off64_t
-	F_codecvt        uintptr
-	F_wide_data      uintptr
-	F_freeres_list   uintptr
-	F_freeres_buf    uintptr
-	F__pad5          size_t
-	F_mode           int32
-	F_unused2        [20]int8
-}
-
-type FILE = struct {
-	F_flags          int32
-	F_IO_read_ptr    uintptr
-	F_IO_read_end    uintptr
-	F_IO_read_base   uintptr
-	F_IO_write_base  uintptr
-	F_IO_write_ptr   uintptr
-	F_IO_write_end   uintptr
-	F_IO_buf_base    uintptr
-	F_IO_buf_end     uintptr
-	F_IO_save_base   uintptr
-	F_IO_backup_base uintptr
-	F_IO_save_end    uintptr
-	F_markers        uintptr
-	F_chain          uintptr
-	F_fileno         int32
-	F_flags2         int32
-	F_old_offset     __off_t
-	F_cur_column     uint16
-	F_vtable_offset  int8
-	F_shortbuf       [1]int8
-	F_lock           uintptr
-	F_offset         __off64_t
-	F_codecvt        uintptr
-	F_wide_data      uintptr
-	F_freeres_list   uintptr
-	F_freeres_buf    uintptr
-	F__pad5          size_t
-	F_mode           int32
-	F_unused2        [20]int8
-}
-
-type _IO_lock_t = struct{}
+type _G_fpos64_t = fpos_t
 
 type cookie_io_functions_t = struct {
 	Fread   uintptr
@@ -1086,23 +686,6 @@ type cookie_io_functions_t = struct {
 
 type _IO_cookie_io_functions_t = cookie_io_functions_t
 
-type va_list = uintptr
-
-type fpos_t = struct {
-	F__pos   __off_t
-	F__state __mbstate_t
-}
-
-type __locale_struct = struct {
-	F__locales       [13]uintptr
-	F__ctype_b       uintptr
-	F__ctype_tolower uintptr
-	F__ctype_toupper uintptr
-	F__names         [13]uintptr
-}
-
-type __locale_t = uintptr
-
 type locale_t = uintptr
 
 type Array = struct {
@@ -1110,102 +693,6 @@ type Array = struct {
 	Fsize     uint32_t
 	Fcapacity uint32_t
 }
-
-func _array__delete(tls *libc.TLS, self uintptr) {
-	if (*Array)(unsafe.Pointer(self)).Fcontents != 0 {
-		libc.Xfree(tls, (*Array)(unsafe.Pointer(self)).Fcontents)
-		(*Array)(unsafe.Pointer(self)).Fcontents = libc.UintptrFromInt32(0)
-		(*Array)(unsafe.Pointer(self)).Fsize = uint32(0)
-		(*Array)(unsafe.Pointer(self)).Fcapacity = uint32(0)
-	}
-}
-
-func _array__erase(tls *libc.TLS, self uintptr, element_size size_t, index uint32_t) {
-	var contents uintptr
-	_ = contents
-	_ = libc.Uint64FromInt64(4)
-	{
-		if !(index < (*Array)(unsafe.Pointer(self)).Fsize) {
-			libc.X__assert_fail(tls, __ccgo_ts, __ccgo_ts+19, int32(174), uintptr(unsafe.Pointer(&__func__)))
-		}
-	}
-	contents = (*Array)(unsafe.Pointer(self)).Fcontents
-	libc.Xmemmove(tls, contents+uintptr(uint64(index)*element_size), contents+uintptr(uint64(index+libc.Uint32FromInt32(1))*element_size), uint64((*Array)(unsafe.Pointer(self)).Fsize-index-libc.Uint32FromInt32(1))*element_size)
-	(*Array)(unsafe.Pointer(self)).Fsize = (*Array)(unsafe.Pointer(self)).Fsize - 1
-}
-
-var __func__ = [14]int8{'_', 'a', 'r', 'r', 'a', 'y', '_', '_', 'e', 'r', 'a', 's', 'e'}
-
-func _array__reserve(tls *libc.TLS, self uintptr, element_size size_t, new_capacity uint32_t) {
-	if new_capacity > (*Array)(unsafe.Pointer(self)).Fcapacity {
-		if (*Array)(unsafe.Pointer(self)).Fcontents != 0 {
-			(*Array)(unsafe.Pointer(self)).Fcontents = libc.Xrealloc(tls, (*Array)(unsafe.Pointer(self)).Fcontents, uint64(new_capacity)*element_size)
-		} else {
-			(*Array)(unsafe.Pointer(self)).Fcontents = libc.Xmalloc(tls, uint64(new_capacity)*element_size)
-		}
-		(*Array)(unsafe.Pointer(self)).Fcapacity = new_capacity
-	}
-}
-
-func _array__assign(tls *libc.TLS, self uintptr, other uintptr, element_size size_t) {
-	_array__reserve(tls, self, element_size, (*Array)(unsafe.Pointer(other)).Fsize)
-	(*Array)(unsafe.Pointer(self)).Fsize = (*Array)(unsafe.Pointer(other)).Fsize
-	libc.Xmemcpy(tls, (*Array)(unsafe.Pointer(self)).Fcontents, (*Array)(unsafe.Pointer(other)).Fcontents, uint64((*Array)(unsafe.Pointer(self)).Fsize)*element_size)
-}
-
-func _array__swap(tls *libc.TLS, self uintptr, other uintptr) {
-	var swap Array
-	_ = swap
-	swap = *(*Array)(unsafe.Pointer(other))
-	*(*Array)(unsafe.Pointer(other)) = *(*Array)(unsafe.Pointer(self))
-	*(*Array)(unsafe.Pointer(self)) = swap
-}
-
-func _array__grow(tls *libc.TLS, self uintptr, count uint32_t, element_size size_t) {
-	var new_capacity, new_size uint32_t
-	_, _ = new_capacity, new_size
-	new_size = (*Array)(unsafe.Pointer(self)).Fsize + count
-	if new_size > (*Array)(unsafe.Pointer(self)).Fcapacity {
-		new_capacity = (*Array)(unsafe.Pointer(self)).Fcapacity * uint32(2)
-		if new_capacity < uint32(8) {
-			new_capacity = uint32(8)
-		}
-		if new_capacity < new_size {
-			new_capacity = new_size
-		}
-		_array__reserve(tls, self, element_size, new_capacity)
-	}
-}
-
-func _array__splice(tls *libc.TLS, self uintptr, element_size size_t, index uint32_t, old_count uint32_t, new_count uint32_t, elements uintptr) {
-	var contents uintptr
-	var new_end, new_size, old_end uint32_t
-	_, _, _, _ = contents, new_end, new_size, old_end
-	new_size = (*Array)(unsafe.Pointer(self)).Fsize + new_count - old_count
-	old_end = index + old_count
-	new_end = index + new_count
-	_ = libc.Uint64FromInt64(4)
-	{
-		if !(old_end <= (*Array)(unsafe.Pointer(self)).Fsize) {
-			libc.X__assert_fail(tls, __ccgo_ts+73, __ccgo_ts+19, int32(225), uintptr(unsafe.Pointer(&__func__1)))
-		}
-	}
-	_array__reserve(tls, self, element_size, new_size)
-	contents = (*Array)(unsafe.Pointer(self)).Fcontents
-	if (*Array)(unsafe.Pointer(self)).Fsize > old_end {
-		libc.Xmemmove(tls, contents+uintptr(uint64(new_end)*element_size), contents+uintptr(uint64(old_end)*element_size), uint64((*Array)(unsafe.Pointer(self)).Fsize-old_end)*element_size)
-	}
-	if new_count > uint32(0) {
-		if elements != 0 {
-			libc.Xmemcpy(tls, contents+uintptr(uint64(index)*element_size), elements, uint64(new_count)*element_size)
-		} else {
-			libc.Xmemset(tls, contents+uintptr(uint64(index)*element_size), 0, uint64(new_count)*element_size)
-		}
-	}
-	*(*uint32_t)(unsafe.Pointer(self + 8)) += new_count - old_count
-}
-
-var __func__1 = [15]int8{'_', 'a', 'r', 'r', 'a', 'y', '_', '_', 's', 'p', 'l', 'i', 'c', 'e'}
 
 type TagType = int32
 
@@ -1851,7 +1338,6 @@ var TAG_TYPES_BY_TAG_NAME = [126]TagMapEntry{
 		Ftag_type: int32(CUSTOM),
 	},
 }
-
 var TAG_TYPES_NOT_ALLOWED_IN_PARAGRAPHS = [26]TagType{
 	0:  int32(ADDRESS),
 	1:  int32(ARTICLE),
@@ -1902,62 +1388,13 @@ func tag_type_for_name(tls *libc.TLS, tag_name uintptr) (r TagType) {
 	return int32(CUSTOM)
 }
 
-func tag_new(tls *libc.TLS) (r Tag) {
-	var tag Tag
-	_ = tag
-	tag.Ftype_token = int32(END_)
-	tag.Fcustom_tag_name = String{}
-	return tag
-}
-
-func tag_for_name(tls *libc.TLS, _name String) (r Tag) {
-	bp := tls.Alloc(16)
-	defer tls.Free(16)
-	*(*String)(unsafe.Pointer(bp)) = _name
-	var tag Tag
-	_ = tag
-	tag = tag_new(tls)
-	tag.Ftype_token = tag_type_for_name(tls, bp)
-	if tag.Ftype_token == int32(CUSTOM) {
-		tag.Fcustom_tag_name = *(*String)(unsafe.Pointer(bp))
-	} else {
-		_array__delete(tls, bp)
-	}
-	return tag
-}
-
-func tag_free(tls *libc.TLS, tag uintptr) {
-	if (*Tag)(unsafe.Pointer(tag)).Ftype_token == int32(CUSTOM) {
-		_array__delete(tls, tag+8)
-	}
-}
-
-func tag_is_void(tls *libc.TLS, self uintptr) (r uint8) {
-	return libc.BoolUint8((*Tag)(unsafe.Pointer(self)).Ftype_token < int32(END_OF_VOID_TAGS))
-}
-
-func tag_eq(tls *libc.TLS, self uintptr, other uintptr) (r uint8) {
-	if (*Tag)(unsafe.Pointer(self)).Ftype_token != (*Tag)(unsafe.Pointer(other)).Ftype_token {
-		return libc.BoolUint8(0 != 0)
-	}
-	if (*Tag)(unsafe.Pointer(self)).Ftype_token == int32(CUSTOM) {
-		if (*Tag)(unsafe.Pointer(self)).Fcustom_tag_name.Fsize != (*Tag)(unsafe.Pointer(other)).Fcustom_tag_name.Fsize {
-			return libc.BoolUint8(0 != 0)
-		}
-		if libc.Xmemcmp(tls, (*Tag)(unsafe.Pointer(self)).Fcustom_tag_name.Fcontents, (*Tag)(unsafe.Pointer(other)).Fcustom_tag_name.Fcontents, uint64((*Tag)(unsafe.Pointer(self)).Fcustom_tag_name.Fsize)) != 0 {
-			return libc.BoolUint8(0 != 0)
-		}
-	}
-	return libc.BoolUint8(1 != 0)
-}
-
 func tag_can_contain(tls *libc.TLS, self uintptr, other uintptr) (r uint8) {
 	var child TagType
 	var i int32
 	_, _ = child, i
 	child = (*Tag)(unsafe.Pointer(other)).Ftype_token
 	if child == int32(INTERPOLATION) {
-		return libc.BoolUint8(1 != 0)
+		return libc.BoolUint8(true1 != 0)
 	}
 	switch (*Tag)(unsafe.Pointer(self)).Ftype_token {
 	case int32(LI):
@@ -2005,7 +1442,7 @@ _17:
 		goto _15
 	}
 	if child == TAG_TYPES_NOT_ALLOWED_IN_PARAGRAPHS[i] {
-		return libc.BoolUint8(0 != 0)
+		return libc.BoolUint8(false1 != 0)
 	}
 	goto _16
 _16:
@@ -2014,7 +1451,7 @@ _16:
 	goto _17
 _15:
 	;
-	return libc.BoolUint8(1 != 0)
+	return libc.BoolUint8(true1 != 0)
 _5:
 	;
 	return libc.BoolUint8(child == int32(COL))
@@ -2038,7 +1475,7 @@ _11:
 	return libc.BoolUint8(child != int32(TD) && child != int32(TH) && child != int32(TR))
 _13:
 	;
-	return libc.BoolUint8(1 != 0)
+	return libc.BoolUint8(true1 != 0)
 _14:
 	;
 	return r
@@ -2047,31 +1484,6 @@ _14:
 type wint_t = uint32
 
 type wctype_t = uint64
-
-const __ISwupper = 0
-const __ISwlower = 1
-const __ISwalpha = 2
-const __ISwdigit = 3
-const __ISwxdigit = 4
-const __ISwspace = 5
-const __ISwprint = 6
-const __ISwgraph = 7
-const __ISwblank = 8
-const __ISwcntrl = 9
-const __ISwpunct = 10
-const __ISwalnum = 11
-const _ISwupper = 16777216
-const _ISwlower = 33554432
-const _ISwalpha = 67108864
-const _ISwdigit = 134217728
-const _ISwxdigit = 268435456
-const _ISwspace = 536870912
-const _ISwprint = 1073741824
-const _ISwgraph = -2147483648
-const _ISwblank = 65536
-const _ISwcntrl = 131072
-const _ISwpunct = 262144
-const _ISwalnum = 524288
 
 type wctrans_t = uintptr
 
@@ -2103,11 +1515,11 @@ type Scanner = struct {
 }
 
 func advance(tls *libc.TLS, lexer uintptr) {
-	(*(*func(*libc.TLS, uintptr, uint8))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fadvance})))(tls, lexer, libc.BoolUint8(0 != 0))
+	(*(*func(*libc.TLS, uintptr, uint8))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fadvance})))(tls, lexer, libc.BoolUint8(false1 != 0))
 }
 
 func skip(tls *libc.TLS, lexer uintptr) {
-	(*(*func(*libc.TLS, uintptr, uint8))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fadvance})))(tls, lexer, libc.BoolUint8(1 != 0))
+	(*(*func(*libc.TLS, uintptr, uint8))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fadvance})))(tls, lexer, libc.BoolUint8(true1 != 0))
 }
 
 func serialize(tls *libc.TLS, scanner uintptr, buffer uintptr) (r uint32) {
@@ -2118,8 +1530,8 @@ func serialize(tls *libc.TLS, scanner uintptr, buffer uintptr) (r uint32) {
 	var _ /* serialized_tag_count at bp+2 */ uint16_t
 	var _ /* tag_count at bp+0 */ uint16_t
 	_, _, _, _ = name_length, size, tag, v1
-	if (*Scanner)(unsafe.Pointer(scanner)).Ftags.Fsize > libc.Uint32FromInt32(libc.Int32FromInt32(65535)) {
-		v1 = libc.Uint32FromInt32(libc.Int32FromInt32(65535))
+	if (*Scanner)(unsafe.Pointer(scanner)).Ftags.Fsize > libc.Uint32FromInt32(libc.Int32FromInt32(UINT16_MAX)) {
+		v1 = libc.Uint32FromInt32(libc.Int32FromInt32(UINT16_MAX))
 	} else {
 		v1 = (*Scanner)(unsafe.Pointer(scanner)).Ftags.Fsize
 	}
@@ -2135,10 +1547,10 @@ func serialize(tls *libc.TLS, scanner uintptr, buffer uintptr) (r uint32) {
 		tag = *(*Tag)(unsafe.Pointer((*Scanner)(unsafe.Pointer(scanner)).Ftags.Fcontents + uintptr(*(*uint16_t)(unsafe.Pointer(bp + 2)))*24))
 		if tag.Ftype_token == int32(CUSTOM) {
 			name_length = tag.Fcustom_tag_name.Fsize
-			if name_length > libc.Uint32FromInt32(libc.Int32FromInt32(255)) {
-				name_length = libc.Uint32FromInt32(libc.Int32FromInt32(255))
+			if name_length > libc.Uint32FromInt32(libc.Int32FromInt32(UINT8_MAX)) {
+				name_length = libc.Uint32FromInt32(libc.Int32FromInt32(UINT8_MAX))
 			}
-			if size+uint32(2)+name_length >= uint32(1024) {
+			if size+uint32(2)+name_length >= uint32(TREE_SITTER_SERIALIZATION_BUFFER_SIZE) {
 				break
 			}
 			v1 = size
@@ -2150,7 +1562,7 @@ func serialize(tls *libc.TLS, scanner uintptr, buffer uintptr) (r uint32) {
 			libc.Xstrncpy(tls, buffer+uintptr(size), tag.Fcustom_tag_name.Fcontents, uint64(name_length))
 			size = size + name_length
 		} else {
-			if size+uint32(1) >= uint32(1024) {
+			if size+uint32(1) >= uint32(TREE_SITTER_SERIALIZATION_BUFFER_SIZE) {
 				break
 			}
 			v1 = size
@@ -2169,20 +1581,31 @@ func serialize(tls *libc.TLS, scanner uintptr, buffer uintptr) (r uint32) {
 func deserialize(tls *libc.TLS, scanner uintptr, buffer uintptr, length uint32) {
 	bp := tls.Alloc(32)
 	defer tls.Free(32)
-	var i, iter, size, v3 uint32
+	var i, iter, size, v10 uint32
 	var name_length uint16_t
-	var v5 uint32_t
-	var v6 uintptr
+	var new_capacity1, new_size, v14, v6 uint32_t
+	var tag, v8 Tag
+	var v2, v3, v4 uintptr
+	var v5 size_t
 	var _ /* serialized_tag_count at bp+2 */ uint16_t
 	var _ /* tag at bp+8 */ Tag
 	var _ /* tag_count at bp+0 */ uint16_t
-	_, _, _, _, _, _, _ = i, iter, name_length, size, v3, v5, v6
+	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = i, iter, name_length, new_capacity1, new_size, size, tag, v10, v14, v2, v3, v4, v5, v6, v8
 	i = uint32(0)
 	for {
 		if !(i < (*Scanner)(unsafe.Pointer(scanner)).Ftags.Fsize) {
 			break
 		}
-		tag_free(tls, (*Scanner)(unsafe.Pointer(scanner)).Ftags.Fcontents+uintptr(i)*24)
+		v2 = (*Scanner)(unsafe.Pointer(scanner)).Ftags.Fcontents + uintptr(i)*24
+		if (*Tag)(unsafe.Pointer(v2)).Ftype_token == int32(CUSTOM) {
+			v3 = v2 + 8
+			if (*Array)(unsafe.Pointer(v3)).Fcontents != 0 {
+				libc.Xfree(tls, (*Array)(unsafe.Pointer(v3)).Fcontents)
+				(*Array)(unsafe.Pointer(v3)).Fcontents = libc.UintptrFromInt32(0)
+				(*Array)(unsafe.Pointer(v3)).Fsize = uint32(0)
+				(*Array)(unsafe.Pointer(v3)).Fcapacity = uint32(0)
+			}
+		}
 		goto _1
 	_1:
 		;
@@ -2201,7 +1624,17 @@ func deserialize(tls *libc.TLS, scanner uintptr, buffer uintptr, length uint32) 
 		size = uint32(uint64(size) + libc.Uint64FromInt64(2))
 		libc.Xmemcpy(tls, bp, buffer+uintptr(size), uint64(2))
 		size = uint32(uint64(size) + libc.Uint64FromInt64(2))
-		_array__reserve(tls, scanner, libc.Uint64FromInt64(24), uint32(*(*uint16_t)(unsafe.Pointer(bp))))
+		v2 = scanner
+		v5 = libc.Uint64FromInt64(24)
+		v6 = uint32(*(*uint16_t)(unsafe.Pointer(bp)))
+		if v6 > (*Array)(unsafe.Pointer(v2)).Fcapacity {
+			if (*Array)(unsafe.Pointer(v2)).Fcontents != 0 {
+				(*Array)(unsafe.Pointer(v2)).Fcontents = libc.Xrealloc(tls, (*Array)(unsafe.Pointer(v2)).Fcontents, uint64(v6)*v5)
+			} else {
+				(*Array)(unsafe.Pointer(v2)).Fcontents = libc.Xmalloc(tls, uint64(v6)*v5)
+			}
+			(*Array)(unsafe.Pointer(v2)).Fcapacity = v6
+		}
 		if libc.Int32FromUint16(*(*uint16_t)(unsafe.Pointer(bp))) > 0 {
 			iter = uint32(0)
 			iter = uint32(0)
@@ -2209,48 +1642,112 @@ func deserialize(tls *libc.TLS, scanner uintptr, buffer uintptr, length uint32) 
 				if !(iter < uint32(*(*uint16_t)(unsafe.Pointer(bp + 2)))) {
 					break
 				}
-				*(*Tag)(unsafe.Pointer(bp + 8)) = tag_new(tls)
-				v3 = size
+				tag.Ftype_token = int32(END_)
+				tag.Fcustom_tag_name = String{}
+				v8 = tag
+				goto _9
+			_9:
+				*(*Tag)(unsafe.Pointer(bp + 8)) = v8
+				v10 = size
 				size = size + 1
-				(*(*Tag)(unsafe.Pointer(bp + 8))).Ftype_token = int32(*(*int8)(unsafe.Pointer(buffer + uintptr(v3))))
+				(*(*Tag)(unsafe.Pointer(bp + 8))).Ftype_token = int32(*(*int8)(unsafe.Pointer(buffer + uintptr(v10))))
 				if (*(*Tag)(unsafe.Pointer(bp + 8))).Ftype_token == int32(CUSTOM) {
-					v3 = size
+					v10 = size
 					size = size + 1
-					name_length = uint16(libc.Uint8FromInt8(*(*int8)(unsafe.Pointer(buffer + uintptr(v3)))))
-					_array__reserve(tls, bp+8+8, libc.Uint64FromInt64(1), uint32(name_length))
+					name_length = uint16(libc.Uint8FromInt8(*(*int8)(unsafe.Pointer(buffer + uintptr(v10)))))
+					v2 = bp + 8 + 8
+					v5 = libc.Uint64FromInt64(1)
+					v6 = uint32(name_length)
+					if v6 > (*Array)(unsafe.Pointer(v2)).Fcapacity {
+						if (*Array)(unsafe.Pointer(v2)).Fcontents != 0 {
+							(*Array)(unsafe.Pointer(v2)).Fcontents = libc.Xrealloc(tls, (*Array)(unsafe.Pointer(v2)).Fcontents, uint64(v6)*v5)
+						} else {
+							(*Array)(unsafe.Pointer(v2)).Fcontents = libc.Xmalloc(tls, uint64(v6)*v5)
+						}
+						(*Array)(unsafe.Pointer(v2)).Fcapacity = v6
+					}
 					(*(*Tag)(unsafe.Pointer(bp + 8))).Fcustom_tag_name.Fsize = uint32(name_length)
 					libc.Xmemcpy(tls, (*(*Tag)(unsafe.Pointer(bp + 8))).Fcustom_tag_name.Fcontents, buffer+uintptr(size), uint64(name_length))
 					size = size + uint32(name_length)
 				}
-				_array__grow(tls, scanner, uint32(1), libc.Uint64FromInt64(24))
-				v6 = scanner + 8
-				v5 = *(*uint32_t)(unsafe.Pointer(v6))
-				*(*uint32_t)(unsafe.Pointer(v6)) = *(*uint32_t)(unsafe.Pointer(v6)) + 1
+				v2 = scanner
+				new_size = (*Array)(unsafe.Pointer(v2)).Fsize + uint32(1)
+				if new_size > (*Array)(unsafe.Pointer(v2)).Fcapacity {
+					new_capacity1 = (*Array)(unsafe.Pointer(v2)).Fcapacity * uint32(2)
+					if new_capacity1 < libc.Uint32FromInt32(8) {
+						new_capacity1 = uint32(8)
+					}
+					if new_capacity1 < new_size {
+						new_capacity1 = new_size
+					}
+					v3 = v2
+					v5 = libc.Uint64FromInt64(24)
+					v6 = new_capacity1
+					if v6 > (*Array)(unsafe.Pointer(v3)).Fcapacity {
+						if (*Array)(unsafe.Pointer(v3)).Fcontents != 0 {
+							(*Array)(unsafe.Pointer(v3)).Fcontents = libc.Xrealloc(tls, (*Array)(unsafe.Pointer(v3)).Fcontents, uint64(v6)*v5)
+						} else {
+							(*Array)(unsafe.Pointer(v3)).Fcontents = libc.Xmalloc(tls, uint64(v6)*v5)
+						}
+						(*Array)(unsafe.Pointer(v3)).Fcapacity = v6
+					}
+				}
+				v4 = scanner + 8
+				v14 = *(*uint32_t)(unsafe.Pointer(v4))
+				*(*uint32_t)(unsafe.Pointer(v4)) = *(*uint32_t)(unsafe.Pointer(v4)) + 1
 				*(*Tag)(unsafe.Pointer((*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(scanner)).Fcontents + uintptr(v5)*24)) = *(*Tag)(unsafe.Pointer(bp + 8))
-				goto _2
-			_2:
+				})(unsafe.Pointer(scanner)).Fcontents + uintptr(v14)*24)) = *(*Tag)(unsafe.Pointer(bp + 8))
+				goto _7
+			_7:
 				;
 				iter = iter + 1
 			}
+			// add zero tags if we didn't read enough, this is because the
+			// buffer had no more room but we held more tags.
 			for {
 				if !(iter < uint32(*(*uint16_t)(unsafe.Pointer(bp)))) {
 					break
 				}
-				_array__grow(tls, scanner, uint32(1), libc.Uint64FromInt64(24))
-				v6 = scanner + 8
-				v5 = *(*uint32_t)(unsafe.Pointer(v6))
-				*(*uint32_t)(unsafe.Pointer(v6)) = *(*uint32_t)(unsafe.Pointer(v6)) + 1
+				v2 = scanner
+				new_size = (*Array)(unsafe.Pointer(v2)).Fsize + uint32(1)
+				if new_size > (*Array)(unsafe.Pointer(v2)).Fcapacity {
+					new_capacity1 = (*Array)(unsafe.Pointer(v2)).Fcapacity * uint32(2)
+					if new_capacity1 < libc.Uint32FromInt32(8) {
+						new_capacity1 = uint32(8)
+					}
+					if new_capacity1 < new_size {
+						new_capacity1 = new_size
+					}
+					v3 = v2
+					v5 = libc.Uint64FromInt64(24)
+					v6 = new_capacity1
+					if v6 > (*Array)(unsafe.Pointer(v3)).Fcapacity {
+						if (*Array)(unsafe.Pointer(v3)).Fcontents != 0 {
+							(*Array)(unsafe.Pointer(v3)).Fcontents = libc.Xrealloc(tls, (*Array)(unsafe.Pointer(v3)).Fcontents, uint64(v6)*v5)
+						} else {
+							(*Array)(unsafe.Pointer(v3)).Fcontents = libc.Xmalloc(tls, uint64(v6)*v5)
+						}
+						(*Array)(unsafe.Pointer(v3)).Fcapacity = v6
+					}
+				}
+				v4 = scanner + 8
+				v14 = *(*uint32_t)(unsafe.Pointer(v4))
+				*(*uint32_t)(unsafe.Pointer(v4)) = *(*uint32_t)(unsafe.Pointer(v4)) + 1
+				tag.Ftype_token = int32(END_)
+				tag.Fcustom_tag_name = String{}
+				v8 = tag
+				goto _29
+			_29:
 				*(*Tag)(unsafe.Pointer((*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(scanner)).Fcontents + uintptr(v5)*24)) = tag_new(tls)
-				goto _7
-			_7:
+				})(unsafe.Pointer(scanner)).Fcontents + uintptr(v14)*24)) = v8
+				goto _21
+			_21:
 				;
 				iter = iter + 1
 			}
@@ -2261,17 +1758,39 @@ func deserialize(tls *libc.TLS, scanner uintptr, buffer uintptr, length uint32) 
 func scan_tag_name(tls *libc.TLS, lexer uintptr) (r String) {
 	bp := tls.Alloc(16)
 	defer tls.Free(16)
-	var v1 uint32_t
-	var v2 uintptr
+	var new_capacity1, new_size, v4, v5 uint32_t
+	var v1, v2, v6 uintptr
+	var v3 size_t
 	var _ /* tag_name at bp+0 */ String
-	_, _ = v1, v2
+	_, _, _, _, _, _, _, _ = new_capacity1, new_size, v1, v2, v3, v4, v5, v6
 	*(*String)(unsafe.Pointer(bp)) = String{}
 	for libc.Xiswalnum(tls, libc.Uint32FromInt32((*TSLexer)(unsafe.Pointer(lexer)).Flookahead)) != 0 || (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('-') || (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32(':') || (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('.') {
-		_array__grow(tls, bp, uint32(1), libc.Uint64FromInt64(1))
-		v2 = bp + 8
-		v1 = *(*uint32_t)(unsafe.Pointer(v2))
-		*(*uint32_t)(unsafe.Pointer(v2)) = *(*uint32_t)(unsafe.Pointer(v2)) + 1
-		*(*int8)(unsafe.Pointer((*String)(unsafe.Pointer(bp)).Fcontents + uintptr(v1))) = int8((*TSLexer)(unsafe.Pointer(lexer)).Flookahead)
+		v1 = bp
+		new_size = (*Array)(unsafe.Pointer(v1)).Fsize + uint32(1)
+		if new_size > (*Array)(unsafe.Pointer(v1)).Fcapacity {
+			new_capacity1 = (*Array)(unsafe.Pointer(v1)).Fcapacity * uint32(2)
+			if new_capacity1 < libc.Uint32FromInt32(8) {
+				new_capacity1 = uint32(8)
+			}
+			if new_capacity1 < new_size {
+				new_capacity1 = new_size
+			}
+			v2 = v1
+			v3 = libc.Uint64FromInt64(1)
+			v4 = new_capacity1
+			if v4 > (*Array)(unsafe.Pointer(v2)).Fcapacity {
+				if (*Array)(unsafe.Pointer(v2)).Fcontents != 0 {
+					(*Array)(unsafe.Pointer(v2)).Fcontents = libc.Xrealloc(tls, (*Array)(unsafe.Pointer(v2)).Fcontents, uint64(v4)*v3)
+				} else {
+					(*Array)(unsafe.Pointer(v2)).Fcontents = libc.Xmalloc(tls, uint64(v4)*v3)
+				}
+				(*Array)(unsafe.Pointer(v2)).Fcapacity = v4
+			}
+		}
+		v6 = bp + 8
+		v5 = *(*uint32_t)(unsafe.Pointer(v6))
+		*(*uint32_t)(unsafe.Pointer(v6)) = *(*uint32_t)(unsafe.Pointer(v6)) + 1
+		*(*int8)(unsafe.Pointer((*String)(unsafe.Pointer(bp)).Fcontents + uintptr(v5))) = int8((*TSLexer)(unsafe.Pointer(lexer)).Flookahead)
 		advance(tls, lexer)
 	}
 	return *(*String)(unsafe.Pointer(bp))
@@ -2281,11 +1800,11 @@ func scan_comment(tls *libc.TLS, lexer uintptr) (r uint8) {
 	var dashes uint32
 	_ = dashes
 	if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead != int32('-') {
-		return libc.BoolUint8(0 != 0)
+		return libc.BoolUint8(false1 != 0)
 	}
 	advance(tls, lexer)
 	if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead != int32('-') {
-		return libc.BoolUint8(0 != 0)
+		return libc.BoolUint8(false1 != 0)
 	}
 	advance(tls, lexer)
 	dashes = uint32(0)
@@ -2298,7 +1817,7 @@ func scan_comment(tls *libc.TLS, lexer uintptr) (r uint8) {
 				(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(COMMENT)
 				advance(tls, lexer)
 				(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
-				return libc.BoolUint8(1 != 0)
+				return libc.BoolUint8(true1 != 0)
 			}
 			fallthrough
 		default:
@@ -2306,53 +1825,72 @@ func scan_comment(tls *libc.TLS, lexer uintptr) (r uint8) {
 		}
 		advance(tls, lexer)
 	}
-	return libc.BoolUint8(0 != 0)
+	return libc.BoolUint8(false1 != 0)
 }
 
 type RawTextEndType = int32
 
-const EndFrontmatter = 0
-const EndCurly = 1
+const
+// corresponds to the ending delimiter "\n---"
+EndFrontmatter = 0
+const
+// corresponds to the ending delimiter "}",
+// used for JS backtick strings and attribute interpolations.
+// we have to balance brackets with this one.
+EndCurly = 1
 
 func scan_js_backtick_string(tls *libc.TLS, lexer uintptr) {
-	(*(*func(*libc.TLS, uintptr, uint8))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fadvance})))(tls, lexer, libc.BoolUint8(0 != 0))
+	// Advance past backtick
+	(*(*func(*libc.TLS, uintptr, uint8))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fadvance})))(tls, lexer, libc.BoolUint8(false1 != 0))
 	for (*TSLexer)(unsafe.Pointer(lexer)).Flookahead != int32('\000') {
 		if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('$') {
-			(*(*func(*libc.TLS, uintptr, uint8))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fadvance})))(tls, lexer, libc.BoolUint8(0 != 0))
+			(*(*func(*libc.TLS, uintptr, uint8))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fadvance})))(tls, lexer, libc.BoolUint8(false1 != 0))
 			if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('{') {
-				(*(*func(*libc.TLS, uintptr, uint8))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fadvance})))(tls, lexer, libc.BoolUint8(0 != 0))
+				// String interpolation
+				(*(*func(*libc.TLS, uintptr, uint8))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fadvance})))(tls, lexer, libc.BoolUint8(false1 != 0))
 				scan_js_expr_with_delimiter(tls, lexer, int32(EndCurly))
+				// Advance past the final curly
 			} else {
+				// Reprocess this character
 				continue
 			}
 		} else {
 			if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('`') {
-				(*(*func(*libc.TLS, uintptr, uint8))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fadvance})))(tls, lexer, libc.BoolUint8(0 != 0))
+				// End of string
+				(*(*func(*libc.TLS, uintptr, uint8))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fadvance})))(tls, lexer, libc.BoolUint8(false1 != 0))
 				break
 			}
 		}
-		(*(*func(*libc.TLS, uintptr, uint8))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fadvance})))(tls, lexer, libc.BoolUint8(0 != 0))
+		(*(*func(*libc.TLS, uintptr, uint8))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fadvance})))(tls, lexer, libc.BoolUint8(false1 != 0))
 	}
 }
 
 func scan_js_string(tls *libc.TLS, lexer uintptr) {
 	var str_end_char int8
 	_ = str_end_char
+	// Assumes the lookahead char is actually valid
 	if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('`') {
 		scan_js_backtick_string(tls, lexer)
 	} else {
+		// Start and end chars are the same
 		str_end_char = int8((*TSLexer)(unsafe.Pointer(lexer)).Flookahead)
-		(*(*func(*libc.TLS, uintptr, uint8))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fadvance})))(tls, lexer, libc.BoolUint8(0 != 0))
+		(*(*func(*libc.TLS, uintptr, uint8))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fadvance})))(tls, lexer, libc.BoolUint8(false1 != 0))
 		for (*TSLexer)(unsafe.Pointer(lexer)).Flookahead != int32('\000') {
+			// Note that this doesn't take into account newlines in basic
+			// strings, for the same reason why tree-sitter-javascript
+			// doesn't.
+			// https://github.com/tree-sitter/tree-sitter-javascript/blob/fdeb68ac8d2bd5a78b943528bb68ceda3aade2eb/grammar.js#L860
 			if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('\\') {
-				(*(*func(*libc.TLS, uintptr, uint8))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fadvance})))(tls, lexer, libc.BoolUint8(0 != 0))
+				// Accept any next char
+				(*(*func(*libc.TLS, uintptr, uint8))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fadvance})))(tls, lexer, libc.BoolUint8(false1 != 0))
 			} else {
 				if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32(str_end_char) {
-					(*(*func(*libc.TLS, uintptr, uint8))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fadvance})))(tls, lexer, libc.BoolUint8(0 != 0))
+					// End of string
+					(*(*func(*libc.TLS, uintptr, uint8))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fadvance})))(tls, lexer, libc.BoolUint8(false1 != 0))
 					return
 				}
 			}
-			(*(*func(*libc.TLS, uintptr, uint8))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fadvance})))(tls, lexer, libc.BoolUint8(0 != 0))
+			(*(*func(*libc.TLS, uintptr, uint8))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fadvance})))(tls, lexer, libc.BoolUint8(false1 != 0))
 		}
 	}
 }
@@ -2363,22 +1901,35 @@ func scan_js_expr_with_delimiter(tls *libc.TLS, lexer uintptr, end_type RawTextE
 	var in_comment, v1 int32
 	_, _, _, _, _ = END, curly_count, delimiter_index, in_comment, v1
 	(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
+	// `delimiter_index` is only used when `end_type == EndFrontmatter`.
+	// We assign "1" here because we only enter this function when "---\n" is parsed by tree-sitter,
+	// but tree-sitter leaves out the extra newline when giving the lexer to us.
+	// "1" reflects the true delimiter status.
+	// (This ensures parsing empty delimiters correctly.)
 	delimiter_index = uint32(1)
 	curly_count = uint32(0)
 	in_comment = 0
 	for (*TSLexer)(unsafe.Pointer(lexer)).Flookahead != int32('\000') {
 		if in_comment == 0 {
+			// delimiter check
 			if end_type == int32(EndFrontmatter) {
+				// We have to `mark_end` at index 0, always,
+				// so just pre-emptively do it here.
 				if delimiter_index == uint32(0) {
 					(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 				}
-				END = __ccgo_ts + 95
+				END = __ccgo_ts
 				if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32(*(*int8)(unsafe.Pointer(END + uintptr(delimiter_index)))) {
 					delimiter_index = delimiter_index + 1
 					if uint64(delimiter_index) == libc.Xstrlen(tls, END) {
 						break
 					}
 				} else {
+					// In case we stumble into a newline. This could happen if e.g.
+					// ---
+					// -
+					// ---
+					// was the frontmatter.
 					(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 					if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('\n') {
 						v1 = int32(1)
@@ -2390,11 +1941,13 @@ func scan_js_expr_with_delimiter(tls *libc.TLS, lexer uintptr, end_type RawTextE
 			} else {
 				if end_type == int32(EndCurly) {
 					(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
+					// balance braces
 					if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('{') {
 						curly_count = curly_count + 1
 					} else {
 						if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('}') {
 							if curly_count == uint32(0) {
+								// delimiter, break
 								(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 								break
 							}
@@ -2408,7 +1961,8 @@ func scan_js_expr_with_delimiter(tls *libc.TLS, lexer uintptr, end_type RawTextE
 				continue
 			}
 			if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('/') {
-				(*(*func(*libc.TLS, uintptr, uint8))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fadvance})))(tls, lexer, libc.BoolUint8(0 != 0))
+				// comment?
+				(*(*func(*libc.TLS, uintptr, uint8))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fadvance})))(tls, lexer, libc.BoolUint8(false1 != 0))
 				if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('/') {
 					in_comment = 1
 				} else {
@@ -2421,20 +1975,29 @@ func scan_js_expr_with_delimiter(tls *libc.TLS, lexer uintptr, end_type RawTextE
 		} else {
 			if in_comment == 1 {
 				if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('\n') {
+					// End of comment
 					in_comment = 0
+					// Frontmatter delimiters start with 1 newline.
 					if end_type == int32(EndFrontmatter) {
 						v1 = int32(1)
 					} else {
 						v1 = 0
 					}
 					delimiter_index = libc.Uint32FromInt32(v1)
+					// `mark_end` here ensures that we don't accidentally skip a frontmatter delimiter start point.
+					// If this was left out, delimiters of the form
+					// ---
+					// // comment
+					// ---
+					// would never `mark_end` before the delimiter, causing the returned token to be truncated in size.
 					(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 				}
 			} else {
 				if in_comment == 2 {
 					if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('*') {
-						(*(*func(*libc.TLS, uintptr, uint8))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fadvance})))(tls, lexer, libc.BoolUint8(0 != 0))
+						(*(*func(*libc.TLS, uintptr, uint8))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fadvance})))(tls, lexer, libc.BoolUint8(false1 != 0))
 						if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('/') {
+							// End of comment
 							in_comment = 0
 							delimiter_index = uint32(0)
 						} else {
@@ -2444,29 +2007,28 @@ func scan_js_expr_with_delimiter(tls *libc.TLS, lexer uintptr, end_type RawTextE
 				}
 			}
 		}
-		(*(*func(*libc.TLS, uintptr, uint8))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fadvance})))(tls, lexer, libc.BoolUint8(0 != 0))
+		(*(*func(*libc.TLS, uintptr, uint8))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fadvance})))(tls, lexer, libc.BoolUint8(false1 != 0))
 	}
 }
 
 func scan_raw_text(tls *libc.TLS, scanner uintptr, lexer uintptr) (r uint8) {
 	var delimiter_index uint32
 	var end_delimiter, v1 uintptr
-	_, _, _ = delimiter_index, end_delimiter, v1
+	var v2 bool
+	_, _, _, _ = delimiter_index, end_delimiter, v1, v2
 	(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
-	_ = libc.Uint64FromInt64(4)
-	{
-		if !((*struct {
-			Fcontents uintptr
-			Fsize     uint32_t
-			Fcapacity uint32_t
-		})(unsafe.Pointer(scanner)).Fsize-libc.Uint32FromInt32(1) < (*struct {
-			Fcontents uintptr
-			Fsize     uint32_t
-			Fcapacity uint32_t
-		})(unsafe.Pointer(scanner)).Fsize) {
-			libc.X__assert_fail(tls, __ccgo_ts+100, __ccgo_ts+164, int32(315), uintptr(unsafe.Pointer(&__func__2)))
-		}
+	if v2 = (*struct {
+		Fcontents uintptr
+		Fsize     uint32_t
+		Fcapacity uint32_t
+	})(unsafe.Pointer(scanner)).Fsize-libc.Uint32FromInt32(1) < (*struct {
+		Fcontents uintptr
+		Fsize     uint32_t
+		Fcapacity uint32_t
+	})(unsafe.Pointer(scanner)).Fsize; !v2 {
+		libc.X__assert_fail(tls, __ccgo_ts+5, __ccgo_ts+69, int32(315), uintptr(unsafe.Pointer(&__func__)))
 	}
+	_ = v2 || libc.Bool(libc.Int32FromInt32(0) != 0)
 	if (*Tag)(unsafe.Pointer((*struct {
 		Fcontents uintptr
 		Fsize     uint32_t
@@ -2476,13 +2038,14 @@ func scan_raw_text(tls *libc.TLS, scanner uintptr, lexer uintptr) (r uint8) {
 		Fsize     uint32_t
 		Fcapacity uint32_t
 	})(unsafe.Pointer(scanner)).Fsize-uint32(1))*24)).Ftype_token == int32(SCRIPT) {
-		v1 = __ccgo_ts + 175
+		v1 = __ccgo_ts + 80
 	} else {
-		v1 = __ccgo_ts + 184
+		v1 = __ccgo_ts + 89
 	}
 	end_delimiter = v1
 	delimiter_index = uint32(0)
 	for (*TSLexer)(unsafe.Pointer(lexer)).Flookahead != 0 {
+		// TODO add test for uppercase SCRIPT not conflicting with lowercase script
 		if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32(*(*int8)(unsafe.Pointer(end_delimiter + uintptr(delimiter_index)))) {
 			delimiter_index = delimiter_index + 1
 			if uint64(delimiter_index) == libc.Xstrlen(tls, end_delimiter) {
@@ -2496,18 +2059,18 @@ func scan_raw_text(tls *libc.TLS, scanner uintptr, lexer uintptr) (r uint8) {
 		}
 	}
 	(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(RAW_TEXT)
-	return libc.BoolUint8(1 != 0)
+	return libc.BoolUint8(true1 != 0)
 }
 
-var __func__2 = [14]int8{'s', 'c', 'a', 'n', '_', 'r', 'a', 'w', '_', 't', 'e', 'x', 't'}
+var __func__ = [14]int8{'s', 'c', 'a', 'n', '_', 'r', 'a', 'w', '_', 't', 'e', 'x', 't'}
 
 func pop_tag(tls *libc.TLS, scanner uintptr) {
 	bp := tls.Alloc(32)
 	defer tls.Free(32)
 	var v1 uint32_t
-	var v2 uintptr
+	var v2, v3, v4 uintptr
 	var _ /* popped_tag at bp+0 */ Tag
-	_, _ = v1, v2
+	_, _, _, _ = v1, v2, v3, v4
 	v2 = scanner + 8
 	*(*uint32_t)(unsafe.Pointer(v2)) = *(*uint32_t)(unsafe.Pointer(v2)) - 1
 	v1 = *(*uint32_t)(unsafe.Pointer(v2))
@@ -2516,36 +2079,45 @@ func pop_tag(tls *libc.TLS, scanner uintptr) {
 		Fsize     uint32_t
 		Fcapacity uint32_t
 	})(unsafe.Pointer(scanner)).Fcontents + uintptr(v1)*24))
-	tag_free(tls, bp)
+	v3 = bp
+	if (*Tag)(unsafe.Pointer(v3)).Ftype_token == int32(CUSTOM) {
+		v4 = v3 + 8
+		if (*Array)(unsafe.Pointer(v4)).Fcontents != 0 {
+			libc.Xfree(tls, (*Array)(unsafe.Pointer(v4)).Fcontents)
+			(*Array)(unsafe.Pointer(v4)).Fcontents = libc.UintptrFromInt32(0)
+			(*Array)(unsafe.Pointer(v4)).Fsize = uint32(0)
+			(*Array)(unsafe.Pointer(v4)).Fcapacity = uint32(0)
+		}
+	}
 }
 
 func scan_implicit_end_tag(tls *libc.TLS, scanner uintptr, lexer uintptr) (r uint8) {
-	bp := tls.Alloc(48)
-	defer tls.Free(48)
+	bp := tls.Alloc(64)
+	defer tls.Free(64)
 	var i uint32
-	var is_closing_tag uint8
-	var parent, v1 uintptr
-	var v2 bool
-	var _ /* next_tag at bp+16 */ Tag
-	var _ /* tag_name at bp+0 */ String
-	_, _, _, _, _ = i, is_closing_tag, parent, v1, v2
+	var is_closing_tag, v3 uint8
+	var parent, v1, v10, v14, v15, v6 uintptr
+	var tag, tag1, v11, v8 Tag
+	var v2, v5 bool
+	var v7 String
+	var _ /* next_tag at bp+32 */ Tag
+	var _ /* tag_name at bp+16 */ String
+	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = i, is_closing_tag, parent, tag, tag1, v1, v10, v11, v14, v15, v2, v3, v5, v6, v7, v8
 	if (*Scanner)(unsafe.Pointer(scanner)).Ftags.Fsize == uint32(0) {
 		v1 = libc.UintptrFromInt32(0)
 	} else {
-		_ = libc.Uint64FromInt64(4)
-		{
-			if !((*struct {
-				Fcontents uintptr
-				Fsize     uint32_t
-				Fcapacity uint32_t
-			})(unsafe.Pointer(scanner)).Fsize-libc.Uint32FromInt32(1) < (*struct {
-				Fcontents uintptr
-				Fsize     uint32_t
-				Fcapacity uint32_t
-			})(unsafe.Pointer(scanner)).Fsize) {
-				libc.X__assert_fail(tls, __ccgo_ts+100, __ccgo_ts+164, int32(343), uintptr(unsafe.Pointer(&__func__3)))
-			}
+		if v2 = (*struct {
+			Fcontents uintptr
+			Fsize     uint32_t
+			Fcapacity uint32_t
+		})(unsafe.Pointer(scanner)).Fsize-libc.Uint32FromInt32(1) < (*struct {
+			Fcontents uintptr
+			Fsize     uint32_t
+			Fcapacity uint32_t
+		})(unsafe.Pointer(scanner)).Fsize; !v2 {
+			libc.X__assert_fail(tls, __ccgo_ts+5, __ccgo_ts+69, int32(343), uintptr(unsafe.Pointer(&__func__6)))
 		}
+		_ = v2 || libc.Bool(libc.Int32FromInt32(0) != 0)
 		v1 = (*struct {
 			Fcontents uintptr
 			Fsize     uint32_t
@@ -2557,124 +2129,288 @@ func scan_implicit_end_tag(tls *libc.TLS, scanner uintptr, lexer uintptr) (r uin
 		})(unsafe.Pointer(scanner)).Fsize-uint32(1))*24
 	}
 	parent = v1
-	is_closing_tag = libc.BoolUint8(0 != 0)
+	is_closing_tag = libc.BoolUint8(false1 != 0)
 	if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('/') {
-		is_closing_tag = libc.BoolUint8(1 != 0)
+		is_closing_tag = libc.BoolUint8(true1 != 0)
 		advance(tls, lexer)
 	} else {
-		if parent != 0 && tag_is_void(tls, parent) != 0 {
+		if v2 = parent != 0; v2 {
+			v3 = libc.BoolUint8((*Tag)(unsafe.Pointer(parent)).Ftype_token < int32(END_OF_VOID_TAGS))
+			goto _4
+		_4:
+		}
+		if v2 && v3 != 0 {
 			pop_tag(tls, scanner)
 			(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(IMPLICIT_END_TAG)
-			return libc.BoolUint8(1 != 0)
+			return libc.BoolUint8(true1 != 0)
 		}
 	}
-	*(*String)(unsafe.Pointer(bp)) = scan_tag_name(tls, lexer)
-	if (*(*String)(unsafe.Pointer(bp))).Fsize == uint32(0) && !((*(*func(*libc.TLS, uintptr) uint8)(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Feof})))(tls, lexer) != 0) {
-		_array__delete(tls, bp)
-		return libc.BoolUint8(0 != 0)
+	*(*String)(unsafe.Pointer(bp + 16)) = scan_tag_name(tls, lexer)
+	if (*(*String)(unsafe.Pointer(bp + 16))).Fsize == uint32(0) && !((*(*func(*libc.TLS, uintptr) uint8)(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Feof})))(tls, lexer) != 0) {
+		v1 = bp + 16
+		if (*Array)(unsafe.Pointer(v1)).Fcontents != 0 {
+			libc.Xfree(tls, (*Array)(unsafe.Pointer(v1)).Fcontents)
+			(*Array)(unsafe.Pointer(v1)).Fcontents = libc.UintptrFromInt32(0)
+			(*Array)(unsafe.Pointer(v1)).Fsize = uint32(0)
+			(*Array)(unsafe.Pointer(v1)).Fcapacity = uint32(0)
+		}
+		return libc.BoolUint8(false1 != 0)
 	}
-	*(*Tag)(unsafe.Pointer(bp + 16)) = tag_for_name(tls, *(*String)(unsafe.Pointer(bp)))
+	v7 = *(*String)(unsafe.Pointer(bp + 16))
+	*(*String)(unsafe.Pointer(bp)) = v7
+	tag.Ftype_token = int32(END_)
+	tag.Fcustom_tag_name = String{}
+	v8 = tag
+	goto _9
+_9:
+	tag1 = v8
+	tag1.Ftype_token = tag_type_for_name(tls, bp)
+	if tag1.Ftype_token == int32(CUSTOM) {
+		tag1.Fcustom_tag_name = v7
+	} else {
+		v1 = bp
+		if (*Array)(unsafe.Pointer(v1)).Fcontents != 0 {
+			libc.Xfree(tls, (*Array)(unsafe.Pointer(v1)).Fcontents)
+			(*Array)(unsafe.Pointer(v1)).Fcontents = libc.UintptrFromInt32(0)
+			(*Array)(unsafe.Pointer(v1)).Fsize = uint32(0)
+			(*Array)(unsafe.Pointer(v1)).Fcapacity = uint32(0)
+		}
+	}
+	v11 = tag1
+	goto _12
+_12:
+	*(*Tag)(unsafe.Pointer(bp + 32)) = v11
 	if is_closing_tag != 0 {
-		if v2 = (*Scanner)(unsafe.Pointer(scanner)).Ftags.Fsize > uint32(0); v2 {
-			_ = libc.Uint64FromInt64(4)
-			{
-				if !((*struct {
-					Fcontents uintptr
-					Fsize     uint32_t
-					Fcapacity uint32_t
-				})(unsafe.Pointer(scanner)).Fsize-libc.Uint32FromInt32(1) < (*struct {
-					Fcontents uintptr
-					Fsize     uint32_t
-					Fcapacity uint32_t
-				})(unsafe.Pointer(scanner)).Fsize) {
-					libc.X__assert_fail(tls, __ccgo_ts+100, __ccgo_ts+164, int32(367), uintptr(unsafe.Pointer(&__func__3)))
+		// The tag correctly closes the topmost element on the stack
+		if v5 = (*Scanner)(unsafe.Pointer(scanner)).Ftags.Fsize > uint32(0); v5 {
+			if v2 = (*struct {
+				Fcontents uintptr
+				Fsize     uint32_t
+				Fcapacity uint32_t
+			})(unsafe.Pointer(scanner)).Fsize-libc.Uint32FromInt32(1) < (*struct {
+				Fcontents uintptr
+				Fsize     uint32_t
+				Fcapacity uint32_t
+			})(unsafe.Pointer(scanner)).Fsize; !v2 {
+				libc.X__assert_fail(tls, __ccgo_ts+5, __ccgo_ts+69, int32(367), uintptr(unsafe.Pointer(&__func__6)))
+			}
+			_ = v2 || libc.Bool(libc.Int32FromInt32(0) != 0)
+			v6 = (*struct {
+				Fcontents uintptr
+				Fsize     uint32_t
+				Fcapacity uint32_t
+			})(unsafe.Pointer(scanner)).Fcontents + uintptr((*struct {
+				Fcontents uintptr
+				Fsize     uint32_t
+				Fcapacity uint32_t
+			})(unsafe.Pointer(scanner)).Fsize-uint32(1))*24
+			v10 = bp + 32
+			if (*Tag)(unsafe.Pointer(v6)).Ftype_token != (*Tag)(unsafe.Pointer(v10)).Ftype_token {
+				v3 = libc.BoolUint8(false1 != 0)
+				goto _17
+			}
+			if (*Tag)(unsafe.Pointer(v6)).Ftype_token == int32(CUSTOM) {
+				if (*Tag)(unsafe.Pointer(v6)).Fcustom_tag_name.Fsize != (*Tag)(unsafe.Pointer(v10)).Fcustom_tag_name.Fsize {
+					v3 = libc.BoolUint8(false1 != 0)
+					goto _17
+				}
+				if libc.Xmemcmp(tls, (*Tag)(unsafe.Pointer(v6)).Fcustom_tag_name.Fcontents, (*Tag)(unsafe.Pointer(v10)).Fcustom_tag_name.Fcontents, uint64((*Tag)(unsafe.Pointer(v6)).Fcustom_tag_name.Fsize)) != libc.Int32FromInt32(0) {
+					v3 = libc.BoolUint8(false1 != 0)
+					goto _17
 				}
 			}
+			v3 = libc.BoolUint8(true1 != 0)
+			goto _17
+		_17:
 		}
-		if v2 && tag_eq(tls, (*struct {
-			Fcontents uintptr
-			Fsize     uint32_t
-			Fcapacity uint32_t
-		})(unsafe.Pointer(scanner)).Fcontents+uintptr((*struct {
-			Fcontents uintptr
-			Fsize     uint32_t
-			Fcapacity uint32_t
-		})(unsafe.Pointer(scanner)).Fsize-uint32(1))*24, bp+16) != 0 {
-			tag_free(tls, bp+16)
-			return libc.BoolUint8(0 != 0)
+		if v5 && v3 != 0 {
+			v14 = bp + 32
+			if (*Tag)(unsafe.Pointer(v14)).Ftype_token == int32(CUSTOM) {
+				v15 = v14 + 8
+				if (*Array)(unsafe.Pointer(v15)).Fcontents != 0 {
+					libc.Xfree(tls, (*Array)(unsafe.Pointer(v15)).Fcontents)
+					(*Array)(unsafe.Pointer(v15)).Fcontents = libc.UintptrFromInt32(0)
+					(*Array)(unsafe.Pointer(v15)).Fsize = uint32(0)
+					(*Array)(unsafe.Pointer(v15)).Fcapacity = uint32(0)
+				}
+			}
+			return libc.BoolUint8(false1 != 0)
 		}
+		// Otherwise, dig deeper and queue implicit end tags (to be nice in
+		// the case of malformed Astro)
 		i = (*Scanner)(unsafe.Pointer(scanner)).Ftags.Fsize
 		for {
 			if !(i > uint32(0)) {
 				break
 			}
-			if (*(*Tag)(unsafe.Pointer((*Scanner)(unsafe.Pointer(scanner)).Ftags.Fcontents + uintptr(i-uint32(1))*24))).Ftype_token == (*(*Tag)(unsafe.Pointer(bp + 16))).Ftype_token {
+			if (*(*Tag)(unsafe.Pointer((*Scanner)(unsafe.Pointer(scanner)).Ftags.Fcontents + uintptr(i-uint32(1))*24))).Ftype_token == (*(*Tag)(unsafe.Pointer(bp + 32))).Ftype_token {
 				pop_tag(tls, scanner)
 				(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(IMPLICIT_END_TAG)
-				tag_free(tls, bp+16)
-				return libc.BoolUint8(1 != 0)
+				v1 = bp + 32
+				if (*Tag)(unsafe.Pointer(v1)).Ftype_token == int32(CUSTOM) {
+					v6 = v1 + 8
+					if (*Array)(unsafe.Pointer(v6)).Fcontents != 0 {
+						libc.Xfree(tls, (*Array)(unsafe.Pointer(v6)).Fcontents)
+						(*Array)(unsafe.Pointer(v6)).Fcontents = libc.UintptrFromInt32(0)
+						(*Array)(unsafe.Pointer(v6)).Fsize = uint32(0)
+						(*Array)(unsafe.Pointer(v6)).Fcapacity = uint32(0)
+					}
+				}
+				return libc.BoolUint8(true1 != 0)
 			}
-			goto _3
-		_3:
+			goto _21
+		_21:
 			;
 			i = i - 1
 		}
 	} else {
-		if parent != 0 && (!(tag_can_contain(tls, parent, bp+16) != 0) || ((*Tag)(unsafe.Pointer(parent)).Ftype_token == int32(HTML) || (*Tag)(unsafe.Pointer(parent)).Ftype_token == int32(HEAD) || (*Tag)(unsafe.Pointer(parent)).Ftype_token == int32(BODY)) && (*(*func(*libc.TLS, uintptr) uint8)(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Feof})))(tls, lexer) != 0) {
+		if parent != 0 && (!(tag_can_contain(tls, parent, bp+32) != 0) || ((*Tag)(unsafe.Pointer(parent)).Ftype_token == int32(HTML) || (*Tag)(unsafe.Pointer(parent)).Ftype_token == int32(HEAD) || (*Tag)(unsafe.Pointer(parent)).Ftype_token == int32(BODY)) && (*(*func(*libc.TLS, uintptr) uint8)(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Feof})))(tls, lexer) != 0) {
 			pop_tag(tls, scanner)
 			(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(IMPLICIT_END_TAG)
-			tag_free(tls, bp+16)
-			return libc.BoolUint8(1 != 0)
+			v1 = bp + 32
+			if (*Tag)(unsafe.Pointer(v1)).Ftype_token == int32(CUSTOM) {
+				v6 = v1 + 8
+				if (*Array)(unsafe.Pointer(v6)).Fcontents != 0 {
+					libc.Xfree(tls, (*Array)(unsafe.Pointer(v6)).Fcontents)
+					(*Array)(unsafe.Pointer(v6)).Fcontents = libc.UintptrFromInt32(0)
+					(*Array)(unsafe.Pointer(v6)).Fsize = uint32(0)
+					(*Array)(unsafe.Pointer(v6)).Fcapacity = uint32(0)
+				}
+			}
+			return libc.BoolUint8(true1 != 0)
 		}
 	}
-	tag_free(tls, bp+16)
-	return libc.BoolUint8(0 != 0)
+	v1 = bp + 32
+	if (*Tag)(unsafe.Pointer(v1)).Ftype_token == int32(CUSTOM) {
+		v6 = v1 + 8
+		if (*Array)(unsafe.Pointer(v6)).Fcontents != 0 {
+			libc.Xfree(tls, (*Array)(unsafe.Pointer(v6)).Fcontents)
+			(*Array)(unsafe.Pointer(v6)).Fcontents = libc.UintptrFromInt32(0)
+			(*Array)(unsafe.Pointer(v6)).Fsize = uint32(0)
+			(*Array)(unsafe.Pointer(v6)).Fcapacity = uint32(0)
+		}
+	}
+	return libc.BoolUint8(false1 != 0)
 }
 
-var __func__3 = [22]int8{'s', 'c', 'a', 'n', '_', 'i', 'm', 'p', 'l', 'i', 'c', 'i', 't', '_', 'e', 'n', 'd', '_', 't', 'a', 'g'}
+var __func__6 = [22]int8{'s', 'c', 'a', 'n', '_', 'i', 'm', 'p', 'l', 'i', 'c', 'i', 't', '_', 'e', 'n', 'd', '_', 't', 'a', 'g'}
 
 func scan_start_tag_name(tls *libc.TLS, scanner uintptr, lexer uintptr) (r uint8) {
-	bp := tls.Alloc(16)
-	defer tls.Free(16)
-	var tag, tag1 Tag
-	var v1 uint32_t
-	var v2 uintptr
-	var _ /* tag_name at bp+0 */ String
-	_, _, _, _ = tag, tag1, v1, v2
-	*(*String)(unsafe.Pointer(bp)) = scan_tag_name(tls, lexer)
-	if (*(*String)(unsafe.Pointer(bp))).Fsize == uint32(0) {
-		_array__delete(tls, bp)
+	bp := tls.Alloc(32)
+	defer tls.Free(32)
+	var new_capacity1, new_size, v5, v6 uint32_t
+	var tag, tag1, tag2, tag3, v12, v9 Tag
+	var v1, v2, v3, v7 uintptr
+	var v4 size_t
+	var v8 String
+	var _ /* tag_name at bp+16 */ String
+	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = new_capacity1, new_size, tag, tag1, tag2, tag3, v1, v12, v2, v3, v4, v5, v6, v7, v8, v9
+	*(*String)(unsafe.Pointer(bp + 16)) = scan_tag_name(tls, lexer)
+	if (*(*String)(unsafe.Pointer(bp + 16))).Fsize == uint32(0) {
+		v1 = bp + 16
+		if (*Array)(unsafe.Pointer(v1)).Fcontents != 0 {
+			libc.Xfree(tls, (*Array)(unsafe.Pointer(v1)).Fcontents)
+			(*Array)(unsafe.Pointer(v1)).Fcontents = libc.UintptrFromInt32(0)
+			(*Array)(unsafe.Pointer(v1)).Fsize = uint32(0)
+			(*Array)(unsafe.Pointer(v1)).Fcapacity = uint32(0)
+		}
+		// Fragment tags don't contain spaces.
 		if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('>') {
 			advance(tls, lexer)
-			tag = Tag{
+			tag2 = Tag{
 				Ftype_token: int32(FRAGMENT),
 			}
-			_array__grow(tls, scanner, uint32(1), libc.Uint64FromInt64(24))
-			v2 = scanner + 8
-			v1 = *(*uint32_t)(unsafe.Pointer(v2))
-			*(*uint32_t)(unsafe.Pointer(v2)) = *(*uint32_t)(unsafe.Pointer(v2)) + 1
+			v1 = scanner
+			new_size = (*Array)(unsafe.Pointer(v1)).Fsize + uint32(1)
+			if new_size > (*Array)(unsafe.Pointer(v1)).Fcapacity {
+				new_capacity1 = (*Array)(unsafe.Pointer(v1)).Fcapacity * uint32(2)
+				if new_capacity1 < libc.Uint32FromInt32(8) {
+					new_capacity1 = uint32(8)
+				}
+				if new_capacity1 < new_size {
+					new_capacity1 = new_size
+				}
+				v2 = v1
+				v4 = libc.Uint64FromInt64(24)
+				v5 = new_capacity1
+				if v5 > (*Array)(unsafe.Pointer(v2)).Fcapacity {
+					if (*Array)(unsafe.Pointer(v2)).Fcontents != 0 {
+						(*Array)(unsafe.Pointer(v2)).Fcontents = libc.Xrealloc(tls, (*Array)(unsafe.Pointer(v2)).Fcontents, uint64(v5)*v4)
+					} else {
+						(*Array)(unsafe.Pointer(v2)).Fcontents = libc.Xmalloc(tls, uint64(v5)*v4)
+					}
+					(*Array)(unsafe.Pointer(v2)).Fcapacity = v5
+				}
+			}
+			v3 = scanner + 8
+			v6 = *(*uint32_t)(unsafe.Pointer(v3))
+			*(*uint32_t)(unsafe.Pointer(v3)) = *(*uint32_t)(unsafe.Pointer(v3)) + 1
 			*(*Tag)(unsafe.Pointer((*struct {
 				Fcontents uintptr
 				Fsize     uint32_t
 				Fcapacity uint32_t
-			})(unsafe.Pointer(scanner)).Fcontents + uintptr(v1)*24)) = tag
+			})(unsafe.Pointer(scanner)).Fcontents + uintptr(v6)*24)) = tag2
 			(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(FRAGMENT_TAG_DELIM)
-			return libc.BoolUint8(1 != 0)
+			return libc.BoolUint8(true1 != 0)
 		} else {
-			return libc.BoolUint8(0 != 0)
+			return libc.BoolUint8(false1 != 0)
 		}
 	}
-	tag1 = tag_for_name(tls, *(*String)(unsafe.Pointer(bp)))
-	_array__grow(tls, scanner, uint32(1), libc.Uint64FromInt64(24))
-	v2 = scanner + 8
-	v1 = *(*uint32_t)(unsafe.Pointer(v2))
-	*(*uint32_t)(unsafe.Pointer(v2)) = *(*uint32_t)(unsafe.Pointer(v2)) + 1
+	v8 = *(*String)(unsafe.Pointer(bp + 16))
+	*(*String)(unsafe.Pointer(bp)) = v8
+	tag.Ftype_token = int32(END_)
+	tag.Fcustom_tag_name = String{}
+	v9 = tag
+	goto _10
+_10:
+	tag1 = v9
+	tag1.Ftype_token = tag_type_for_name(tls, bp)
+	if tag1.Ftype_token == int32(CUSTOM) {
+		tag1.Fcustom_tag_name = v8
+	} else {
+		v1 = bp
+		if (*Array)(unsafe.Pointer(v1)).Fcontents != 0 {
+			libc.Xfree(tls, (*Array)(unsafe.Pointer(v1)).Fcontents)
+			(*Array)(unsafe.Pointer(v1)).Fcontents = libc.UintptrFromInt32(0)
+			(*Array)(unsafe.Pointer(v1)).Fsize = uint32(0)
+			(*Array)(unsafe.Pointer(v1)).Fcapacity = uint32(0)
+		}
+	}
+	v12 = tag1
+	goto _13
+_13:
+	tag3 = v12
+	v2 = scanner
+	new_size = (*Array)(unsafe.Pointer(v2)).Fsize + uint32(1)
+	if new_size > (*Array)(unsafe.Pointer(v2)).Fcapacity {
+		new_capacity1 = (*Array)(unsafe.Pointer(v2)).Fcapacity * uint32(2)
+		if new_capacity1 < libc.Uint32FromInt32(8) {
+			new_capacity1 = uint32(8)
+		}
+		if new_capacity1 < new_size {
+			new_capacity1 = new_size
+		}
+		v3 = v2
+		v4 = libc.Uint64FromInt64(24)
+		v5 = new_capacity1
+		if v5 > (*Array)(unsafe.Pointer(v3)).Fcapacity {
+			if (*Array)(unsafe.Pointer(v3)).Fcontents != 0 {
+				(*Array)(unsafe.Pointer(v3)).Fcontents = libc.Xrealloc(tls, (*Array)(unsafe.Pointer(v3)).Fcontents, uint64(v5)*v4)
+			} else {
+				(*Array)(unsafe.Pointer(v3)).Fcontents = libc.Xmalloc(tls, uint64(v5)*v4)
+			}
+			(*Array)(unsafe.Pointer(v3)).Fcapacity = v5
+		}
+	}
+	v7 = scanner + 8
+	v6 = *(*uint32_t)(unsafe.Pointer(v7))
+	*(*uint32_t)(unsafe.Pointer(v7)) = *(*uint32_t)(unsafe.Pointer(v7)) + 1
 	*(*Tag)(unsafe.Pointer((*struct {
 		Fcontents uintptr
 		Fsize     uint32_t
 		Fcapacity uint32_t
-	})(unsafe.Pointer(scanner)).Fcontents + uintptr(v1)*24)) = tag1
-	switch tag1.Ftype_token {
+	})(unsafe.Pointer(scanner)).Fcontents + uintptr(v6)*24)) = tag3
+	switch tag3.Ftype_token {
 	case int32(SCRIPT):
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(SCRIPT_START_TAG_NAME)
 	case int32(STYLE):
@@ -2683,38 +2419,46 @@ func scan_start_tag_name(tls *libc.TLS, scanner uintptr, lexer uintptr) (r uint8
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(START_TAG_NAME)
 		break
 	}
-	return libc.BoolUint8(1 != 0)
+	return libc.BoolUint8(true1 != 0)
 }
 
 func scan_end_tag_name(tls *libc.TLS, scanner uintptr, lexer uintptr) (r uint8) {
-	bp := tls.Alloc(48)
-	defer tls.Free(48)
-	var v1 bool
-	var _ /* tag at bp+16 */ Tag
-	var _ /* tag_name at bp+0 */ String
-	_ = v1
-	*(*String)(unsafe.Pointer(bp)) = scan_tag_name(tls, lexer)
-	if (*(*String)(unsafe.Pointer(bp))).Fsize == uint32(0) {
-		_array__delete(tls, bp)
+	bp := tls.Alloc(64)
+	defer tls.Free(64)
+	var tag, tag1, v5, v8 Tag
+	var v1, v11, v7 uintptr
+	var v2, v3 bool
+	var v13 uint8
+	var v4 String
+	var _ /* tag at bp+32 */ Tag
+	var _ /* tag_name at bp+16 */ String
+	_, _, _, _, _, _, _, _, _, _, _ = tag, tag1, v1, v11, v13, v2, v3, v4, v5, v7, v8
+	*(*String)(unsafe.Pointer(bp + 16)) = scan_tag_name(tls, lexer)
+	if (*(*String)(unsafe.Pointer(bp + 16))).Fsize == uint32(0) {
+		v1 = bp + 16
+		if (*Array)(unsafe.Pointer(v1)).Fcontents != 0 {
+			libc.Xfree(tls, (*Array)(unsafe.Pointer(v1)).Fcontents)
+			(*Array)(unsafe.Pointer(v1)).Fcontents = libc.UintptrFromInt32(0)
+			(*Array)(unsafe.Pointer(v1)).Fsize = uint32(0)
+			(*Array)(unsafe.Pointer(v1)).Fcapacity = uint32(0)
+		}
 		if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('>') {
 			advance(tls, lexer)
-			if v1 = (*Scanner)(unsafe.Pointer(scanner)).Ftags.Fsize > uint32(0); v1 {
-				_ = libc.Uint64FromInt64(4)
-				{
-					if !((*struct {
-						Fcontents uintptr
-						Fsize     uint32_t
-						Fcapacity uint32_t
-					})(unsafe.Pointer(scanner)).Fsize-libc.Uint32FromInt32(1) < (*struct {
-						Fcontents uintptr
-						Fsize     uint32_t
-						Fcapacity uint32_t
-					})(unsafe.Pointer(scanner)).Fsize) {
-						libc.X__assert_fail(tls, __ccgo_ts+100, __ccgo_ts+164, int32(437), uintptr(unsafe.Pointer(&__func__4)))
-					}
+			if v3 = (*Scanner)(unsafe.Pointer(scanner)).Ftags.Fsize > uint32(0); v3 {
+				if v2 = (*struct {
+					Fcontents uintptr
+					Fsize     uint32_t
+					Fcapacity uint32_t
+				})(unsafe.Pointer(scanner)).Fsize-libc.Uint32FromInt32(1) < (*struct {
+					Fcontents uintptr
+					Fsize     uint32_t
+					Fcapacity uint32_t
+				})(unsafe.Pointer(scanner)).Fsize; !v2 {
+					libc.X__assert_fail(tls, __ccgo_ts+5, __ccgo_ts+69, int32(437), uintptr(unsafe.Pointer(&__func__5)))
 				}
+				_ = v2 || libc.Bool(libc.Int32FromInt32(0) != 0)
 			}
-			if v1 && (*Tag)(unsafe.Pointer((*struct {
+			if v3 && (*Tag)(unsafe.Pointer((*struct {
 				Fcontents uintptr
 				Fsize     uint32_t
 				Fcapacity uint32_t
@@ -2725,51 +2469,101 @@ func scan_end_tag_name(tls *libc.TLS, scanner uintptr, lexer uintptr) (r uint8) 
 			})(unsafe.Pointer(scanner)).Fsize-uint32(1))*24)).Ftype_token == int32(FRAGMENT) {
 				pop_tag(tls, scanner)
 				(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(FRAGMENT_TAG_DELIM)
-				return libc.BoolUint8(1 != 0)
+				return libc.BoolUint8(true1 != 0)
 			} else {
 				(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(ERRONEOUS_END_TAG_NAME)
-				return libc.BoolUint8(1 != 0)
+				return libc.BoolUint8(true1 != 0)
 			}
 		} else {
-			return libc.BoolUint8(0 != 0)
+			// Closing fragment tags don't have spaces.
+			return libc.BoolUint8(false1 != 0)
 		}
 	}
-	*(*Tag)(unsafe.Pointer(bp + 16)) = tag_for_name(tls, *(*String)(unsafe.Pointer(bp)))
-	if v1 = (*Scanner)(unsafe.Pointer(scanner)).Ftags.Fsize > uint32(0); v1 {
-		_ = libc.Uint64FromInt64(4)
-		{
-			if !((*struct {
-				Fcontents uintptr
-				Fsize     uint32_t
-				Fcapacity uint32_t
-			})(unsafe.Pointer(scanner)).Fsize-libc.Uint32FromInt32(1) < (*struct {
-				Fcontents uintptr
-				Fsize     uint32_t
-				Fcapacity uint32_t
-			})(unsafe.Pointer(scanner)).Fsize) {
-				libc.X__assert_fail(tls, __ccgo_ts+100, __ccgo_ts+164, int32(452), uintptr(unsafe.Pointer(&__func__4)))
+	v4 = *(*String)(unsafe.Pointer(bp + 16))
+	*(*String)(unsafe.Pointer(bp)) = v4
+	tag.Ftype_token = int32(END_)
+	tag.Fcustom_tag_name = String{}
+	v5 = tag
+	goto _6
+_6:
+	tag1 = v5
+	tag1.Ftype_token = tag_type_for_name(tls, bp)
+	if tag1.Ftype_token == int32(CUSTOM) {
+		tag1.Fcustom_tag_name = v4
+	} else {
+		v1 = bp
+		if (*Array)(unsafe.Pointer(v1)).Fcontents != 0 {
+			libc.Xfree(tls, (*Array)(unsafe.Pointer(v1)).Fcontents)
+			(*Array)(unsafe.Pointer(v1)).Fcontents = libc.UintptrFromInt32(0)
+			(*Array)(unsafe.Pointer(v1)).Fsize = uint32(0)
+			(*Array)(unsafe.Pointer(v1)).Fcapacity = uint32(0)
+		}
+	}
+	v8 = tag1
+	goto _9
+_9:
+	*(*Tag)(unsafe.Pointer(bp + 32)) = v8
+	if v3 = (*Scanner)(unsafe.Pointer(scanner)).Ftags.Fsize > uint32(0); v3 {
+		if v2 = (*struct {
+			Fcontents uintptr
+			Fsize     uint32_t
+			Fcapacity uint32_t
+		})(unsafe.Pointer(scanner)).Fsize-libc.Uint32FromInt32(1) < (*struct {
+			Fcontents uintptr
+			Fsize     uint32_t
+			Fcapacity uint32_t
+		})(unsafe.Pointer(scanner)).Fsize; !v2 {
+			libc.X__assert_fail(tls, __ccgo_ts+5, __ccgo_ts+69, int32(452), uintptr(unsafe.Pointer(&__func__5)))
+		}
+		_ = v2 || libc.Bool(libc.Int32FromInt32(0) != 0)
+		v7 = (*struct {
+			Fcontents uintptr
+			Fsize     uint32_t
+			Fcapacity uint32_t
+		})(unsafe.Pointer(scanner)).Fcontents + uintptr((*struct {
+			Fcontents uintptr
+			Fsize     uint32_t
+			Fcapacity uint32_t
+		})(unsafe.Pointer(scanner)).Fsize-uint32(1))*24
+		v11 = bp + 32
+		if (*Tag)(unsafe.Pointer(v7)).Ftype_token != (*Tag)(unsafe.Pointer(v11)).Ftype_token {
+			v13 = libc.BoolUint8(false1 != 0)
+			goto _14
+		}
+		if (*Tag)(unsafe.Pointer(v7)).Ftype_token == int32(CUSTOM) {
+			if (*Tag)(unsafe.Pointer(v7)).Fcustom_tag_name.Fsize != (*Tag)(unsafe.Pointer(v11)).Fcustom_tag_name.Fsize {
+				v13 = libc.BoolUint8(false1 != 0)
+				goto _14
+			}
+			if libc.Xmemcmp(tls, (*Tag)(unsafe.Pointer(v7)).Fcustom_tag_name.Fcontents, (*Tag)(unsafe.Pointer(v11)).Fcustom_tag_name.Fcontents, uint64((*Tag)(unsafe.Pointer(v7)).Fcustom_tag_name.Fsize)) != libc.Int32FromInt32(0) {
+				v13 = libc.BoolUint8(false1 != 0)
+				goto _14
 			}
 		}
+		v13 = libc.BoolUint8(true1 != 0)
+		goto _14
+	_14:
 	}
-	if v1 && tag_eq(tls, (*struct {
-		Fcontents uintptr
-		Fsize     uint32_t
-		Fcapacity uint32_t
-	})(unsafe.Pointer(scanner)).Fcontents+uintptr((*struct {
-		Fcontents uintptr
-		Fsize     uint32_t
-		Fcapacity uint32_t
-	})(unsafe.Pointer(scanner)).Fsize-uint32(1))*24, bp+16) != 0 {
+	if v3 && v13 != 0 {
 		pop_tag(tls, scanner)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(END_TAG_NAME)
 	} else {
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(ERRONEOUS_END_TAG_NAME)
 	}
-	tag_free(tls, bp+16)
-	return libc.BoolUint8(1 != 0)
+	v1 = bp + 32
+	if (*Tag)(unsafe.Pointer(v1)).Ftype_token == int32(CUSTOM) {
+		v7 = v1 + 8
+		if (*Array)(unsafe.Pointer(v7)).Fcontents != 0 {
+			libc.Xfree(tls, (*Array)(unsafe.Pointer(v7)).Fcontents)
+			(*Array)(unsafe.Pointer(v7)).Fcontents = libc.UintptrFromInt32(0)
+			(*Array)(unsafe.Pointer(v7)).Fsize = uint32(0)
+			(*Array)(unsafe.Pointer(v7)).Fcapacity = uint32(0)
+		}
+	}
+	return libc.BoolUint8(true1 != 0)
 }
 
-var __func__4 = [18]int8{'s', 'c', 'a', 'n', '_', 'e', 'n', 'd', '_', 't', 'a', 'g', '_', 'n', 'a', 'm', 'e'}
+var __func__5 = [18]int8{'s', 'c', 'a', 'n', '_', 'e', 'n', 'd', '_', 't', 'a', 'g', '_', 'n', 'a', 'm', 'e'}
 
 func scan_self_closing_tag_delimiter(tls *libc.TLS, scanner uintptr, lexer uintptr) (r uint8) {
 	advance(tls, lexer)
@@ -2779,38 +2573,45 @@ func scan_self_closing_tag_delimiter(tls *libc.TLS, scanner uintptr, lexer uintp
 			pop_tag(tls, scanner)
 			(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(SELF_CLOSING_TAG_DELIMITER)
 		}
-		return libc.BoolUint8(1 != 0)
+		return libc.BoolUint8(true1 != 0)
 	}
-	return libc.BoolUint8(0 != 0)
+	return libc.BoolUint8(false1 != 0)
 }
 
 func scan_permissible_text(tls *libc.TLS, lexer uintptr) (r uint8) {
 	var there_is_text uint8
 	_ = there_is_text
-	there_is_text = libc.BoolUint8(0 != 0)
+	there_is_text = libc.BoolUint8(false1 != 0)
 	for (*TSLexer)(unsafe.Pointer(lexer)).Flookahead != int32('\000') {
 		if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('{') || (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('}') {
+			// Start of interpolation / end of interpolation, break
 			break
 		}
 		if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('\'') || (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('"') || (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('`') {
+			// skip string
 			scan_js_string(tls, lexer)
-			there_is_text = libc.BoolUint8(1 != 0)
+			there_is_text = libc.BoolUint8(true1 != 0)
 			goto text_found
 		}
 		if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('/') {
+			// check for a comment
+			// (c.f. https://github.com/withastro/compiler/blob/e8b6cdfc89f940a411304787632efd8140535feb/internal/token.go#L1017)
 			advance(tls, lexer)
-			there_is_text = libc.BoolUint8(1 != 0)
+			there_is_text = libc.BoolUint8(true1 != 0)
 			if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('/') {
+				// single-line comment
 				for (*TSLexer)(unsafe.Pointer(lexer)).Flookahead != int32('\r') && (*TSLexer)(unsafe.Pointer(lexer)).Flookahead != int32('\n') && (*TSLexer)(unsafe.Pointer(lexer)).Flookahead != int32('\000') {
 					advance(tls, lexer)
 				}
 			}
 			if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('*') {
+				// multiline comment
 				for (*TSLexer)(unsafe.Pointer(lexer)).Flookahead != int32('\000') {
 					advance(tls, lexer)
 					if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('*') {
 						advance(tls, lexer)
 						if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('/') {
+							// end of multi-line comment
 							advance(tls, lexer)
 							break
 						}
@@ -2821,48 +2622,63 @@ func scan_permissible_text(tls *libc.TLS, lexer uintptr) (r uint8) {
 		}
 		if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('<') {
 			advance(tls, lexer)
+			// This is the same logic the Astro compiler uses
+			// to find when to terminate a text node.
+			// https://github.com/withastro/compiler/blob/e8b6cdfc89f940a411304787632efd8140535feb/internal/token.go#L1737
 			if int32('a') <= (*TSLexer)(unsafe.Pointer(lexer)).Flookahead && (*TSLexer)(unsafe.Pointer(lexer)).Flookahead <= int32('z') || int32('A') <= (*TSLexer)(unsafe.Pointer(lexer)).Flookahead && (*TSLexer)(unsafe.Pointer(lexer)).Flookahead <= int32('Z') {
+				// Potential <start> tag
 				break
 			}
 			if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('/') {
+				// Potential </end> tag
 				break
 			}
 			if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('/') || (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('?') {
+				// Potential <!-- comment --> tag
+				// or <!DOCTYPE ...> tag
+				// or <?xml processing instructions?> tag
 				break
 			}
 			if (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('>') {
+				// Fragment tag
+				// (e.g. `<> <p> hi </p> </>`)
 				break
 			}
+			// If none of the above conditions pass,
+			// there's definitely text here.
 			goto text_found
 		}
 		advance(tls, lexer)
 		goto text_found
 	text_found:
 		;
-		there_is_text = libc.BoolUint8(1 != 0)
+		there_is_text = libc.BoolUint8(true1 != 0)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 	}
+	// If there isn't any text,
+	// then this can't be permissible text.
 	if there_is_text != 0 {
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(PERMISSIBLE_TEXT)
-		return libc.BoolUint8(1 != 0)
+		return libc.BoolUint8(true1 != 0)
 	} else {
-		return libc.BoolUint8(0 != 0)
+		return libc.BoolUint8(false1 != 0)
 	}
 	return r
 }
 
 func scan(tls *libc.TLS, scanner uintptr, lexer uintptr, valid_symbols uintptr) (r uint8) {
 	var definitely_not_permissible_text, invalid uint8
+	var new_capacity1, new_size, v4, v5 uint32_t
 	var tag Tag
-	var v1 uint32_t
-	var v2 uintptr
-	var v3 bool
-	var v6 int32
-	_, _, _, _, _, _, _ = definitely_not_permissible_text, invalid, tag, v1, v2, v3, v6
+	var v1, v2, v6 uintptr
+	var v11 int32
+	var v3 size_t
+	var v7, v8 bool
+	_, _, _, _, _, _, _, _, _, _, _, _, _, _ = definitely_not_permissible_text, invalid, new_capacity1, new_size, tag, v1, v11, v2, v3, v4, v5, v6, v7, v8
 	if *(*uint8)(unsafe.Pointer(valid_symbols + uintptr(FRONTMATTER_JS_BLOCK))) != 0 && (*Scanner)(unsafe.Pointer(scanner)).Ftags.Fsize == uint32(0) {
 		scan_js_expr_with_delimiter(tls, lexer, int32(EndFrontmatter))
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(FRONTMATTER_JS_BLOCK)
-		return libc.BoolUint8(1 != 0)
+		return libc.BoolUint8(true1 != 0)
 	}
 	if *(*uint8)(unsafe.Pointer(valid_symbols + uintptr(RAW_TEXT))) != 0 && !(*(*uint8)(unsafe.Pointer(valid_symbols + uintptr(START_TAG_NAME))) != 0) && !(*(*uint8)(unsafe.Pointer(valid_symbols + uintptr(END_TAG_NAME))) != 0) {
 		return scan_raw_text(tls, scanner, lexer)
@@ -2870,10 +2686,11 @@ func scan(tls *libc.TLS, scanner uintptr, lexer uintptr, valid_symbols uintptr) 
 	if *(*uint8)(unsafe.Pointer(valid_symbols + uintptr(ATTRIBUTE_JS_EXPR))) != 0 {
 		scan_js_expr_with_delimiter(tls, lexer, int32(EndCurly))
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(ATTRIBUTE_JS_EXPR)
-		return libc.BoolUint8(1 != 0)
+		return libc.BoolUint8(true1 != 0)
 	}
 	if *(*uint8)(unsafe.Pointer(valid_symbols + uintptr(PERMISSIBLE_TEXT))) != 0 {
 		if libc.Xiswspace(tls, libc.Uint32FromInt32((*TSLexer)(unsafe.Pointer(lexer)).Flookahead)) != 0 {
+			// Can't be anything else.
 			return scan_permissible_text(tls, lexer)
 		}
 	} else {
@@ -2881,7 +2698,7 @@ func scan(tls *libc.TLS, scanner uintptr, lexer uintptr, valid_symbols uintptr) 
 			skip(tls, lexer)
 		}
 	}
-	definitely_not_permissible_text = libc.BoolUint8(0 != 0)
+	definitely_not_permissible_text = libc.BoolUint8(false1 != 0)
 	switch (*TSLexer)(unsafe.Pointer(lexer)).Flookahead {
 	case int32('<'):
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
@@ -2896,11 +2713,13 @@ func scan(tls *libc.TLS, scanner uintptr, lexer uintptr, valid_symbols uintptr) 
 		if *(*uint8)(unsafe.Pointer(valid_symbols + uintptr(PERMISSIBLE_TEXT))) != 0 {
 			invalid = libc.BoolUint8(int32('a') <= (*TSLexer)(unsafe.Pointer(lexer)).Flookahead && (*TSLexer)(unsafe.Pointer(lexer)).Flookahead <= int32('z') || int32('A') <= (*TSLexer)(unsafe.Pointer(lexer)).Flookahead && (*TSLexer)(unsafe.Pointer(lexer)).Flookahead <= int32('Z') || (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('/') || (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('?') || (*TSLexer)(unsafe.Pointer(lexer)).Flookahead == int32('>'))
 			if invalid != 0 {
-				definitely_not_permissible_text = libc.BoolUint8(1 != 0)
+				// This looks like an element,
+				// so it can't be permissible text.
+				definitely_not_permissible_text = libc.BoolUint8(true1 != 0)
 			}
 		}
 	case int32('\000'):
-		definitely_not_permissible_text = libc.BoolUint8(1 != 0)
+		definitely_not_permissible_text = libc.BoolUint8(true1 != 0)
 		if *(*uint8)(unsafe.Pointer(valid_symbols + uintptr(IMPLICIT_END_TAG))) != 0 {
 			return scan_implicit_end_tag(tls, scanner, lexer)
 		}
@@ -2910,43 +2729,63 @@ func scan(tls *libc.TLS, scanner uintptr, lexer uintptr, valid_symbols uintptr) 
 		}
 	case int32('{'):
 		if *(*uint8)(unsafe.Pointer(valid_symbols + uintptr(HTML_INTERPOLATION_START))) != 0 {
-			(*(*func(*libc.TLS, uintptr, uint8))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fadvance})))(tls, lexer, libc.BoolUint8(0 != 0))
+			(*(*func(*libc.TLS, uintptr, uint8))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fadvance})))(tls, lexer, libc.BoolUint8(false1 != 0))
 			tag = Tag{
 				Ftype_token: int32(INTERPOLATION),
 			}
-			_array__grow(tls, scanner, uint32(1), libc.Uint64FromInt64(24))
-			v2 = scanner + 8
-			v1 = *(*uint32_t)(unsafe.Pointer(v2))
-			*(*uint32_t)(unsafe.Pointer(v2)) = *(*uint32_t)(unsafe.Pointer(v2)) + 1
+			v1 = scanner
+			new_size = (*Array)(unsafe.Pointer(v1)).Fsize + uint32(1)
+			if new_size > (*Array)(unsafe.Pointer(v1)).Fcapacity {
+				new_capacity1 = (*Array)(unsafe.Pointer(v1)).Fcapacity * uint32(2)
+				if new_capacity1 < libc.Uint32FromInt32(8) {
+					new_capacity1 = uint32(8)
+				}
+				if new_capacity1 < new_size {
+					new_capacity1 = new_size
+				}
+				v2 = v1
+				v3 = libc.Uint64FromInt64(24)
+				v4 = new_capacity1
+				if v4 > (*Array)(unsafe.Pointer(v2)).Fcapacity {
+					if (*Array)(unsafe.Pointer(v2)).Fcontents != 0 {
+						(*Array)(unsafe.Pointer(v2)).Fcontents = libc.Xrealloc(tls, (*Array)(unsafe.Pointer(v2)).Fcontents, uint64(v4)*v3)
+					} else {
+						(*Array)(unsafe.Pointer(v2)).Fcontents = libc.Xmalloc(tls, uint64(v4)*v3)
+					}
+					(*Array)(unsafe.Pointer(v2)).Fcapacity = v4
+				}
+			}
+			v6 = scanner + 8
+			v5 = *(*uint32_t)(unsafe.Pointer(v6))
+			*(*uint32_t)(unsafe.Pointer(v6)) = *(*uint32_t)(unsafe.Pointer(v6)) + 1
 			*(*Tag)(unsafe.Pointer((*struct {
 				Fcontents uintptr
 				Fsize     uint32_t
 				Fcapacity uint32_t
-			})(unsafe.Pointer(scanner)).Fcontents + uintptr(v1)*24)) = tag
+			})(unsafe.Pointer(scanner)).Fcontents + uintptr(v5)*24)) = tag
 			(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(HTML_INTERPOLATION_START)
-			return libc.BoolUint8(1 != 0)
+			return libc.BoolUint8(true1 != 0)
 		}
 	case int32('}'):
+		// Close any void tags before exiting the interpolation node.
 		if *(*uint8)(unsafe.Pointer(valid_symbols + uintptr(IMPLICIT_END_TAG))) != 0 {
 			return scan_implicit_end_tag(tls, scanner, lexer)
 		}
-		if v3 = *(*uint8)(unsafe.Pointer(valid_symbols + uintptr(HTML_INTERPOLATION_END))) != 0 && (*Scanner)(unsafe.Pointer(scanner)).Ftags.Fsize > uint32(0); v3 {
-			_ = libc.Uint64FromInt64(4)
-			{
-				if !((*struct {
-					Fcontents uintptr
-					Fsize     uint32_t
-					Fcapacity uint32_t
-				})(unsafe.Pointer(scanner)).Fsize-libc.Uint32FromInt32(1) < (*struct {
-					Fcontents uintptr
-					Fsize     uint32_t
-					Fcapacity uint32_t
-				})(unsafe.Pointer(scanner)).Fsize) {
-					libc.X__assert_fail(tls, __ccgo_ts+100, __ccgo_ts+164, int32(650), uintptr(unsafe.Pointer(&__func__5)))
-				}
+		if v8 = *(*uint8)(unsafe.Pointer(valid_symbols + uintptr(HTML_INTERPOLATION_END))) != 0 && (*Scanner)(unsafe.Pointer(scanner)).Ftags.Fsize > uint32(0); v8 {
+			if v7 = (*struct {
+				Fcontents uintptr
+				Fsize     uint32_t
+				Fcapacity uint32_t
+			})(unsafe.Pointer(scanner)).Fsize-libc.Uint32FromInt32(1) < (*struct {
+				Fcontents uintptr
+				Fsize     uint32_t
+				Fcapacity uint32_t
+			})(unsafe.Pointer(scanner)).Fsize; !v7 {
+				libc.X__assert_fail(tls, __ccgo_ts+5, __ccgo_ts+69, int32(650), uintptr(unsafe.Pointer(&__func__2)))
 			}
+			_ = v7 || libc.Bool(libc.Int32FromInt32(0) != 0)
 		}
-		if v3 && (*Tag)(unsafe.Pointer((*struct {
+		if v8 && (*Tag)(unsafe.Pointer((*struct {
 			Fcontents uintptr
 			Fsize     uint32_t
 			Fcapacity uint32_t
@@ -2955,42 +2794,43 @@ func scan(tls *libc.TLS, scanner uintptr, lexer uintptr, valid_symbols uintptr) 
 			Fsize     uint32_t
 			Fcapacity uint32_t
 		})(unsafe.Pointer(scanner)).Fsize-uint32(1))*24)).Ftype_token == int32(INTERPOLATION) {
-			(*(*func(*libc.TLS, uintptr, uint8))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fadvance})))(tls, lexer, libc.BoolUint8(0 != 0))
-			v2 = scanner + 8
-			*(*uint32_t)(unsafe.Pointer(v2)) = *(*uint32_t)(unsafe.Pointer(v2)) - 1
-			v1 = *(*uint32_t)(unsafe.Pointer(v2))
+			(*(*func(*libc.TLS, uintptr, uint8))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fadvance})))(tls, lexer, libc.BoolUint8(false1 != 0))
+			v1 = scanner + 8
+			*(*uint32_t)(unsafe.Pointer(v1)) = *(*uint32_t)(unsafe.Pointer(v1)) - 1
+			v4 = *(*uint32_t)(unsafe.Pointer(v1))
 			_ = *(*Tag)(unsafe.Pointer((*struct {
 				Fcontents uintptr
 				Fsize     uint32_t
 				Fcapacity uint32_t
-			})(unsafe.Pointer(scanner)).Fcontents + uintptr(v1)*24))
+			})(unsafe.Pointer(scanner)).Fcontents + uintptr(v4)*24))
 			(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(HTML_INTERPOLATION_END)
-			return libc.BoolUint8(1 != 0)
+			return libc.BoolUint8(true1 != 0)
 		}
 	case int32('`'):
 		if *(*uint8)(unsafe.Pointer(valid_symbols + uintptr(ATTRIBUTE_BACKTICK_STRING))) != 0 {
 			scan_js_backtick_string(tls, lexer)
 			(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 			(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(ATTRIBUTE_BACKTICK_STRING)
-			return libc.BoolUint8(1 != 0)
+			return libc.BoolUint8(true1 != 0)
 		}
 	default:
 		if (*(*uint8)(unsafe.Pointer(valid_symbols + uintptr(START_TAG_NAME))) != 0 || *(*uint8)(unsafe.Pointer(valid_symbols + uintptr(END_TAG_NAME))) != 0) && !(*(*uint8)(unsafe.Pointer(valid_symbols + uintptr(RAW_TEXT))) != 0) {
 			if *(*uint8)(unsafe.Pointer(valid_symbols + uintptr(START_TAG_NAME))) != 0 {
-				v6 = libc.Int32FromUint8(scan_start_tag_name(tls, scanner, lexer))
+				v11 = libc.Int32FromUint8(scan_start_tag_name(tls, scanner, lexer))
 			} else {
-				v6 = libc.Int32FromUint8(scan_end_tag_name(tls, scanner, lexer))
+				v11 = libc.Int32FromUint8(scan_end_tag_name(tls, scanner, lexer))
 			}
-			return libc.Uint8FromInt32(libc.BoolInt32(v6 != 0))
+			return libc.Uint8FromInt32(libc.BoolInt32(v11 != 0))
 		}
 	}
 	if !(definitely_not_permissible_text != 0) && *(*uint8)(unsafe.Pointer(valid_symbols + uintptr(PERMISSIBLE_TEXT))) != 0 {
+		// There are no other choices, it's this or nothing.
 		return scan_permissible_text(tls, lexer)
 	}
-	return libc.BoolUint8(0 != 0)
+	return libc.BoolUint8(false1 != 0)
 }
 
-var __func__5 = [5]int8{'s', 'c', 'a', 'n'}
+var __func__2 = [5]int8{'s', 'c', 'a', 'n'}
 
 func tree_sitter_astro_external_scanner_create(tls *libc.TLS) (r uintptr) {
 	var scanner uintptr
@@ -3022,21 +2862,36 @@ func tree_sitter_astro_external_scanner_deserialize(tls *libc.TLS, payload uintp
 
 func tree_sitter_astro_external_scanner_destroy(tls *libc.TLS, payload uintptr) {
 	var i uint32
-	var scanner uintptr
-	_, _ = i, scanner
+	var scanner, v2, v3 uintptr
+	_, _, _, _ = i, scanner, v2, v3
 	scanner = payload
 	i = uint32(0)
 	for {
 		if !(i < (*Scanner)(unsafe.Pointer(scanner)).Ftags.Fsize) {
 			break
 		}
-		tag_free(tls, (*Scanner)(unsafe.Pointer(scanner)).Ftags.Fcontents+uintptr(i)*24)
+		v2 = (*Scanner)(unsafe.Pointer(scanner)).Ftags.Fcontents + uintptr(i)*24
+		if (*Tag)(unsafe.Pointer(v2)).Ftype_token == int32(CUSTOM) {
+			v3 = v2 + 8
+			if (*Array)(unsafe.Pointer(v3)).Fcontents != 0 {
+				libc.Xfree(tls, (*Array)(unsafe.Pointer(v3)).Fcontents)
+				(*Array)(unsafe.Pointer(v3)).Fcontents = libc.UintptrFromInt32(0)
+				(*Array)(unsafe.Pointer(v3)).Fsize = uint32(0)
+				(*Array)(unsafe.Pointer(v3)).Fcapacity = uint32(0)
+			}
+		}
 		goto _1
 	_1:
 		;
 		i = i + 1
 	}
-	_array__delete(tls, scanner)
+	v2 = scanner
+	if (*Array)(unsafe.Pointer(v2)).Fcontents != 0 {
+		libc.Xfree(tls, (*Array)(unsafe.Pointer(v2)).Fcontents)
+		(*Array)(unsafe.Pointer(v2)).Fcontents = libc.UintptrFromInt32(0)
+		(*Array)(unsafe.Pointer(v2)).Fsize = uint32(0)
+		(*Array)(unsafe.Pointer(v2)).Fcapacity = uint32(0)
+	}
 	libc.Xfree(tls, scanner)
 }
 
@@ -3102,65 +2957,65 @@ const aux_sym_start_tag_repeat1 = 57
 const aux_sym_html_interpolation_repeat1 = 58
 
 var ts_symbol_names = [59]uintptr{
-	0:  __ccgo_ts + 192,
-	1:  __ccgo_ts + 196,
-	2:  __ccgo_ts + 199,
-	3:  __ccgo_ts + 214,
-	4:  __ccgo_ts + 216,
-	5:  __ccgo_ts + 224,
-	6:  __ccgo_ts + 226,
-	7:  __ccgo_ts + 229,
-	8:  __ccgo_ts + 232,
-	9:  __ccgo_ts + 234,
-	10: __ccgo_ts + 249,
-	11: __ccgo_ts + 265,
-	12: __ccgo_ts + 272,
-	13: __ccgo_ts + 249,
-	14: __ccgo_ts + 274,
-	15: __ccgo_ts + 249,
-	16: __ccgo_ts + 276,
-	17: __ccgo_ts + 281,
-	18: __ccgo_ts + 281,
-	19: __ccgo_ts + 285,
-	20: __ccgo_ts + 287,
-	21: __ccgo_ts + 289,
-	22: __ccgo_ts + 289,
-	23: __ccgo_ts + 289,
-	24: __ccgo_ts + 289,
-	25: __ccgo_ts + 298,
-	26: __ccgo_ts + 321,
-	27: __ccgo_ts + 339,
-	28: __ccgo_ts + 348,
-	29: __ccgo_ts + 285,
-	30: __ccgo_ts + 287,
-	31: __ccgo_ts + 356,
-	32: __ccgo_ts + 377,
-	33: __ccgo_ts + 395,
-	34: __ccgo_ts + 421,
-	35: __ccgo_ts + 214,
-	36: __ccgo_ts + 438,
-	37: __ccgo_ts + 216,
-	38: __ccgo_ts + 447,
-	39: __ccgo_ts + 453,
-	40: __ccgo_ts + 461,
-	41: __ccgo_ts + 476,
-	42: __ccgo_ts + 490,
-	43: __ccgo_ts + 490,
-	44: __ccgo_ts + 490,
-	45: __ccgo_ts + 500,
-	46: __ccgo_ts + 517,
-	47: __ccgo_ts + 525,
-	48: __ccgo_ts + 543,
-	49: __ccgo_ts + 553,
-	50: __ccgo_ts + 576,
-	51: __ccgo_ts + 604,
-	52: __ccgo_ts + 616,
-	53: __ccgo_ts + 640,
-	54: __ccgo_ts + 500,
-	55: __ccgo_ts + 500,
-	56: __ccgo_ts + 659,
-	57: __ccgo_ts + 676,
-	58: __ccgo_ts + 694,
+	0:  __ccgo_ts + 97,
+	1:  __ccgo_ts + 101,
+	2:  __ccgo_ts + 104,
+	3:  __ccgo_ts + 119,
+	4:  __ccgo_ts + 121,
+	5:  __ccgo_ts + 129,
+	6:  __ccgo_ts + 131,
+	7:  __ccgo_ts + 134,
+	8:  __ccgo_ts + 137,
+	9:  __ccgo_ts + 139,
+	10: __ccgo_ts + 154,
+	11: __ccgo_ts + 170,
+	12: __ccgo_ts + 177,
+	13: __ccgo_ts + 154,
+	14: __ccgo_ts + 179,
+	15: __ccgo_ts + 154,
+	16: __ccgo_ts + 181,
+	17: __ccgo_ts + 186,
+	18: __ccgo_ts + 186,
+	19: __ccgo_ts + 190,
+	20: __ccgo_ts + 192,
+	21: __ccgo_ts + 194,
+	22: __ccgo_ts + 194,
+	23: __ccgo_ts + 194,
+	24: __ccgo_ts + 194,
+	25: __ccgo_ts + 203,
+	26: __ccgo_ts + 226,
+	27: __ccgo_ts + 244,
+	28: __ccgo_ts + 253,
+	29: __ccgo_ts + 190,
+	30: __ccgo_ts + 192,
+	31: __ccgo_ts + 261,
+	32: __ccgo_ts + 282,
+	33: __ccgo_ts + 300,
+	34: __ccgo_ts + 326,
+	35: __ccgo_ts + 119,
+	36: __ccgo_ts + 343,
+	37: __ccgo_ts + 121,
+	38: __ccgo_ts + 352,
+	39: __ccgo_ts + 358,
+	40: __ccgo_ts + 366,
+	41: __ccgo_ts + 381,
+	42: __ccgo_ts + 395,
+	43: __ccgo_ts + 395,
+	44: __ccgo_ts + 395,
+	45: __ccgo_ts + 405,
+	46: __ccgo_ts + 422,
+	47: __ccgo_ts + 430,
+	48: __ccgo_ts + 448,
+	49: __ccgo_ts + 458,
+	50: __ccgo_ts + 481,
+	51: __ccgo_ts + 509,
+	52: __ccgo_ts + 521,
+	53: __ccgo_ts + 545,
+	54: __ccgo_ts + 405,
+	55: __ccgo_ts + 405,
+	56: __ccgo_ts + 564,
+	57: __ccgo_ts + 581,
+	58: __ccgo_ts + 599,
 }
 
 var ts_symbol_map = [59]TSSymbol{
@@ -3226,205 +3081,205 @@ var ts_symbol_map = [59]TSSymbol{
 
 var ts_symbol_metadata = [59]TSSymbolMetadata{
 	0: {
-		Fnamed: libc.BoolUint8(1 != 0),
+		Fnamed: libc.BoolUint8(true1 != 0),
 	},
 	1: {
-		Fvisible: libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
 	},
 	2: {},
 	3: {
-		Fvisible: libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
 	},
 	4: {
-		Fvisible: libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
 	},
 	5: {
-		Fvisible: libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
 	},
 	6: {
-		Fvisible: libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
 	},
 	7: {
-		Fvisible: libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
 	},
 	8: {
-		Fvisible: libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
 	},
 	9: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	10: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	11: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	12: {
-		Fvisible: libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
 	},
 	13: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	14: {
-		Fvisible: libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
 	},
 	15: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	16: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	17: {
-		Fvisible: libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
 	},
 	18: {
-		Fvisible: libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
 	},
 	19: {
-		Fvisible: libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
 	},
 	20: {
-		Fvisible: libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
 	},
 	21: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	22: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	23: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	24: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	25: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	26: {
-		Fnamed: libc.BoolUint8(1 != 0),
+		Fnamed: libc.BoolUint8(true1 != 0),
 	},
 	27: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	28: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	29: {
-		Fvisible: libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
 	},
 	30: {
-		Fvisible: libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
 	},
 	31: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	32: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	33: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	34: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	35: {
-		Fvisible: libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
 	},
 	36: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	37: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	38: {
-		Fnamed: libc.BoolUint8(1 != 0),
+		Fnamed: libc.BoolUint8(true1 != 0),
 	},
 	39: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	40: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	41: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	42: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	43: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	44: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	45: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	46: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	47: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	48: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	49: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	50: {
-		Fnamed: libc.BoolUint8(1 != 0),
+		Fnamed: libc.BoolUint8(true1 != 0),
 	},
 	51: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	52: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	53: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	54: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	55: {
-		Fvisible: libc.BoolUint8(1 != 0),
-		Fnamed:   libc.BoolUint8(1 != 0),
+		Fvisible: libc.BoolUint8(true1 != 0),
+		Fnamed:   libc.BoolUint8(true1 != 0),
 	},
 	56: {},
 	57: {},
@@ -3604,9 +3459,9 @@ func ts_lex(tls *libc.TLS, lexer uintptr, state TSStateId) (r uint8) {
 	var eof, result, skip uint8
 	var lookahead int32_t
 	_, _, _, _ = eof, lookahead, result, skip
-	result = libc.BoolUint8(0 != 0)
-	skip = libc.BoolUint8(0 != 0)
-	eof = libc.BoolUint8(0 != 0)
+	result = libc.BoolUint8(false1 != 0)
+	skip = libc.BoolUint8(false1 != 0)
+	eof = libc.BoolUint8(false1 != 0)
 	goto start
 	goto next_state
 next_state:
@@ -3615,7 +3470,7 @@ next_state:
 	goto start
 start:
 	;
-	skip = libc.BoolUint8(0 != 0)
+	skip = libc.BoolUint8(false1 != 0)
 	lookahead = (*TSLexer)(unsafe.Pointer(lexer)).Flookahead
 	eof = (*(*func(*libc.TLS, uintptr) uint8)(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Feof})))(tls, lexer)
 	switch libc.Int32FromUint16(state) {
@@ -3669,7 +3524,7 @@ start:
 			goto next_state
 		}
 		if int32('\t') <= lookahead && lookahead <= int32('\r') || lookahead == int32(' ') {
-			skip = libc.BoolUint8(1 != 0)
+			skip = libc.BoolUint8(true1 != 0)
 			state = uint16(0)
 			goto next_state
 		}
@@ -3688,7 +3543,7 @@ start:
 			goto next_state
 		}
 		if int32('\t') <= lookahead && lookahead <= int32('\r') || lookahead == int32(' ') {
-			skip = libc.BoolUint8(1 != 0)
+			skip = libc.BoolUint8(true1 != 0)
 			state = uint16(1)
 			goto next_state
 		}
@@ -3765,7 +3620,7 @@ start:
 			goto next_state
 		}
 		if int32('\t') <= lookahead && lookahead <= int32('\r') || lookahead == int32(' ') {
-			skip = libc.BoolUint8(1 != 0)
+			skip = libc.BoolUint8(true1 != 0)
 			state = uint16(9)
 			goto next_state
 		}
@@ -3788,7 +3643,7 @@ start:
 			goto next_state
 		}
 		if int32('\t') <= lookahead && lookahead <= int32('\r') || lookahead == int32(' ') {
-			skip = libc.BoolUint8(1 != 0)
+			skip = libc.BoolUint8(true1 != 0)
 			state = uint16(10)
 			goto next_state
 		}
@@ -3889,7 +3744,7 @@ start:
 			goto next_state
 		}
 		if int32('\t') <= lookahead && lookahead <= int32('\r') || lookahead == int32(' ') {
-			skip = libc.BoolUint8(1 != 0)
+			skip = libc.BoolUint8(true1 != 0)
 			state = uint16(22)
 			goto next_state
 		}
@@ -3908,7 +3763,7 @@ start:
 			goto next_state
 		}
 		if int32('\t') <= lookahead && lookahead <= int32('\r') || lookahead == int32(' ') {
-			skip = libc.BoolUint8(1 != 0)
+			skip = libc.BoolUint8(true1 != 0)
 			state = uint16(23)
 			goto next_state
 		}
@@ -3918,17 +3773,17 @@ start:
 		}
 		return result
 	case int32(24):
-		result = libc.BoolUint8(1 != 0)
-		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(0)
+		result = libc.BoolUint8(true1 != 0)
+		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(ts_builtin_sym_end)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		return result
 	case int32(25):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(anon_sym_LT_BANG)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		return result
 	case int32(26):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(aux_sym_doctype_token1)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if int32('\t') <= lookahead && lookahead <= int32('\r') || lookahead == int32(' ') {
@@ -3941,7 +3796,7 @@ start:
 		}
 		return result
 	case int32(27):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(aux_sym_doctype_token1)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead != 0 && lookahead != int32('>') {
@@ -3950,17 +3805,17 @@ start:
 		}
 		return result
 	case int32(28):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(anon_sym_GT)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		return result
 	case int32(29):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym__doctype)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		return result
 	case int32(30):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(anon_sym_LT)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32('!') {
@@ -3973,22 +3828,22 @@ start:
 		}
 		return result
 	case int32(31):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(anon_sym_SLASH_GT)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		return result
 	case int32(32):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(anon_sym_LT_SLASH)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		return result
 	case int32(33):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(anon_sym_EQ)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		return result
 	case int32(34):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_attribute_name)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead != 0 && (lookahead < int32('\t') || int32('\r') < lookahead) && lookahead != int32(' ') && lookahead != int32('"') && lookahead != int32('\'') && lookahead != int32('/') && (lookahead < int32('<') || int32('>') < lookahead) {
@@ -3997,7 +3852,7 @@ start:
 		}
 		return result
 	case int32(35):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_attribute_value)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead != 0 && (lookahead < int32('\t') || int32('\r') < lookahead) && lookahead != int32(' ') && lookahead != int32('"') && lookahead != int32('\'') && (lookahead < int32('<') || int32('>') < lookahead) {
@@ -4006,12 +3861,12 @@ start:
 		}
 		return result
 	case int32(36):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		return result
 	case int32(37):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4020,7 +3875,7 @@ start:
 		}
 		return result
 	case int32(38):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4033,7 +3888,7 @@ start:
 		}
 		return result
 	case int32(39):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4046,7 +3901,7 @@ start:
 		}
 		return result
 	case int32(40):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4059,7 +3914,7 @@ start:
 		}
 		return result
 	case int32(41):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4072,7 +3927,7 @@ start:
 		}
 		return result
 	case int32(42):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4085,7 +3940,7 @@ start:
 		}
 		return result
 	case int32(43):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4098,7 +3953,7 @@ start:
 		}
 		return result
 	case int32(44):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4111,7 +3966,7 @@ start:
 		}
 		return result
 	case int32(45):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4124,7 +3979,7 @@ start:
 		}
 		return result
 	case int32(46):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4137,7 +3992,7 @@ start:
 		}
 		return result
 	case int32(47):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4150,7 +4005,7 @@ start:
 		}
 		return result
 	case int32(48):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4163,7 +4018,7 @@ start:
 		}
 		return result
 	case int32(49):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4176,7 +4031,7 @@ start:
 		}
 		return result
 	case int32(50):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4189,7 +4044,7 @@ start:
 		}
 		return result
 	case int32(51):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4202,7 +4057,7 @@ start:
 		}
 		return result
 	case int32(52):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4215,7 +4070,7 @@ start:
 		}
 		return result
 	case int32(53):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4228,7 +4083,7 @@ start:
 		}
 		return result
 	case int32(54):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4241,7 +4096,7 @@ start:
 		}
 		return result
 	case int32(55):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4254,7 +4109,7 @@ start:
 		}
 		return result
 	case int32(56):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4267,7 +4122,7 @@ start:
 		}
 		return result
 	case int32(57):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4280,7 +4135,7 @@ start:
 		}
 		return result
 	case int32(58):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4293,7 +4148,7 @@ start:
 		}
 		return result
 	case int32(59):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4306,7 +4161,7 @@ start:
 		}
 		return result
 	case int32(60):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4319,7 +4174,7 @@ start:
 		}
 		return result
 	case int32(61):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4332,7 +4187,7 @@ start:
 		}
 		return result
 	case int32(62):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4345,7 +4200,7 @@ start:
 		}
 		return result
 	case int32(63):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4358,7 +4213,7 @@ start:
 		}
 		return result
 	case int32(64):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4371,7 +4226,7 @@ start:
 		}
 		return result
 	case int32(65):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4384,7 +4239,7 @@ start:
 		}
 		return result
 	case int32(66):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4397,7 +4252,7 @@ start:
 		}
 		return result
 	case int32(67):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4410,7 +4265,7 @@ start:
 		}
 		return result
 	case int32(68):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4423,7 +4278,7 @@ start:
 		}
 		return result
 	case int32(69):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4436,7 +4291,7 @@ start:
 		}
 		return result
 	case int32(70):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4449,7 +4304,7 @@ start:
 		}
 		return result
 	case int32(71):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4462,7 +4317,7 @@ start:
 		}
 		return result
 	case int32(72):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4475,7 +4330,7 @@ start:
 		}
 		return result
 	case int32(73):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4488,7 +4343,7 @@ start:
 		}
 		return result
 	case int32(74):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4501,7 +4356,7 @@ start:
 		}
 		return result
 	case int32(75):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_entity)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32(';') {
@@ -4514,12 +4369,12 @@ start:
 		}
 		return result
 	case int32(76):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(anon_sym_SQUOTE)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		return result
 	case int32(77):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(aux_sym_quoted_attribute_value_token1)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if int32('\t') <= lookahead && lookahead <= int32('\r') || lookahead == int32(' ') {
@@ -4532,7 +4387,7 @@ start:
 		}
 		return result
 	case int32(78):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(aux_sym_quoted_attribute_value_token1)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead != 0 && lookahead != int32('\'') {
@@ -4541,12 +4396,12 @@ start:
 		}
 		return result
 	case int32(79):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(anon_sym_DQUOTE)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		return result
 	case int32(80):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(aux_sym_quoted_attribute_value_token2)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if int32('\t') <= lookahead && lookahead <= int32('\r') || lookahead == int32(' ') {
@@ -4559,7 +4414,7 @@ start:
 		}
 		return result
 	case int32(81):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(aux_sym_quoted_attribute_value_token2)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead != 0 && lookahead != int32('"') {
@@ -4568,7 +4423,7 @@ start:
 		}
 		return result
 	case int32(82):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_text)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32('-') {
@@ -4585,7 +4440,7 @@ start:
 		}
 		return result
 	case int32(83):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_text)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if lookahead == int32('-') {
@@ -4602,7 +4457,7 @@ start:
 		}
 		return result
 	case int32(84):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(sym_text)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		if int32('\t') <= lookahead && lookahead <= int32('\r') || lookahead == int32(' ') {
@@ -4615,27 +4470,27 @@ start:
 		}
 		return result
 	case int32(85):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(anon_sym_DASH_DASH_DASH)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		return result
 	case int32(86):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(anon_sym_DASH_DASH_DASH2)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		return result
 	case int32(87):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(anon_sym_LBRACE)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		return result
 	case int32(88):
-		result = libc.BoolUint8(1 != 0)
+		result = libc.BoolUint8(true1 != 0)
 		(*TSLexer)(unsafe.Pointer(lexer)).Fresult_symbol = uint16(anon_sym_RBRACE)
 		(*(*func(*libc.TLS, uintptr))(unsafe.Pointer(&struct{ uintptr }{(*TSLexer)(unsafe.Pointer(lexer)).Fmark_end})))(tls, lexer)
 		return result
 	default:
-		return libc.BoolUint8(0 != 0)
+		return libc.BoolUint8(false1 != 0)
 	}
 	return r
 }
@@ -8264,7 +8119,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	4: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -8280,7 +8135,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Fextra      uint8
 		Frepetition uint8
 	}{
-		Fextra: libc.BoolUint8(1 != 0),
+		Fextra: libc.BoolUint8(true1 != 0),
 	}})))),
 	5: *(*TSParseActionEntry)(unsafe.Pointer(&struct {
 		f struct {
@@ -8293,7 +8148,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	6: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -8316,7 +8171,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	8: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -8373,7 +8228,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	12: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -8430,7 +8285,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	16: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -8459,7 +8314,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	18: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -8488,7 +8343,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	20: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -8545,7 +8400,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	24: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -8574,7 +8429,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	26: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -8603,7 +8458,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	28: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -8632,7 +8487,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	30: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -8661,7 +8516,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	32: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -8690,7 +8545,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	34: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -8719,7 +8574,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	36: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -8748,7 +8603,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	38: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -8777,7 +8632,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	40: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -8806,7 +8661,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	42: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -8835,7 +8690,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	44: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -8864,7 +8719,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	46: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -8893,7 +8748,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	48: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -8922,7 +8777,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	50: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -8951,7 +8806,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	52: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -8975,7 +8830,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(2),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	54: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -9003,7 +8858,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Frepetition uint8
 	}{
 		Fstate:      libc.Uint16FromInt32(libc.Int32FromInt32(148)),
-		Frepetition: libc.BoolUint8(1 != 0),
+		Frepetition: libc.BoolUint8(true1 != 0),
 	}})))),
 	56: *(*TSParseActionEntry)(unsafe.Pointer(&struct {
 		f struct {
@@ -9043,7 +8898,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Frepetition uint8
 	}{
 		Fstate:      libc.Uint16FromInt32(libc.Int32FromInt32(112)),
-		Frepetition: libc.BoolUint8(1 != 0),
+		Frepetition: libc.BoolUint8(true1 != 0),
 	}})))),
 	59: *(*TSParseActionEntry)(unsafe.Pointer(&struct {
 		f struct {
@@ -9056,7 +8911,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(2),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	60: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -9084,7 +8939,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Frepetition uint8
 	}{
 		Fstate:      libc.Uint16FromInt32(libc.Int32FromInt32(153)),
-		Frepetition: libc.BoolUint8(1 != 0),
+		Frepetition: libc.BoolUint8(true1 != 0),
 	}})))),
 	62: *(*TSParseActionEntry)(unsafe.Pointer(&struct {
 		f struct {
@@ -9097,7 +8952,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(2),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	63: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -9125,7 +8980,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Frepetition uint8
 	}{
 		Fstate:      libc.Uint16FromInt32(libc.Int32FromInt32(8)),
-		Frepetition: libc.BoolUint8(1 != 0),
+		Frepetition: libc.BoolUint8(true1 != 0),
 	}})))),
 	65: *(*TSParseActionEntry)(unsafe.Pointer(&struct {
 		f struct {
@@ -9138,7 +8993,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(2),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	66: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -9166,7 +9021,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Frepetition uint8
 	}{
 		Fstate:      libc.Uint16FromInt32(libc.Int32FromInt32(13)),
-		Frepetition: libc.BoolUint8(1 != 0),
+		Frepetition: libc.BoolUint8(true1 != 0),
 	}})))),
 	68: *(*TSParseActionEntry)(unsafe.Pointer(&struct {
 		f struct {
@@ -9179,7 +9034,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	69: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -9203,7 +9058,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	71: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -9232,7 +9087,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(2),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	73: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -9260,7 +9115,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Frepetition uint8
 	}{
 		Fstate:      libc.Uint16FromInt32(libc.Int32FromInt32(162)),
-		Frepetition: libc.BoolUint8(1 != 0),
+		Frepetition: libc.BoolUint8(true1 != 0),
 	}})))),
 	75: *(*TSParseActionEntry)(unsafe.Pointer(&struct {
 		f struct {
@@ -9300,7 +9155,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Frepetition uint8
 	}{
 		Fstate:      libc.Uint16FromInt32(libc.Int32FromInt32(115)),
-		Frepetition: libc.BoolUint8(1 != 0),
+		Frepetition: libc.BoolUint8(true1 != 0),
 	}})))),
 	78: *(*TSParseActionEntry)(unsafe.Pointer(&struct {
 		f struct {
@@ -9313,7 +9168,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(2),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	79: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -9341,7 +9196,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Frepetition uint8
 	}{
 		Fstate:      libc.Uint16FromInt32(libc.Int32FromInt32(157)),
-		Frepetition: libc.BoolUint8(1 != 0),
+		Frepetition: libc.BoolUint8(true1 != 0),
 	}})))),
 	81: *(*TSParseActionEntry)(unsafe.Pointer(&struct {
 		f struct {
@@ -9354,7 +9209,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(2),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	82: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -9382,7 +9237,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Frepetition uint8
 	}{
 		Fstate:      libc.Uint16FromInt32(libc.Int32FromInt32(10)),
-		Frepetition: libc.BoolUint8(1 != 0),
+		Frepetition: libc.BoolUint8(true1 != 0),
 	}})))),
 	84: *(*TSParseActionEntry)(unsafe.Pointer(&struct {
 		f struct {
@@ -9395,7 +9250,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(2),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	85: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -9423,7 +9278,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Frepetition uint8
 	}{
 		Fstate:      libc.Uint16FromInt32(libc.Int32FromInt32(17)),
-		Frepetition: libc.BoolUint8(1 != 0),
+		Frepetition: libc.BoolUint8(true1 != 0),
 	}})))),
 	87: *(*TSParseActionEntry)(unsafe.Pointer(&struct {
 		f struct {
@@ -9436,7 +9291,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	88: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -9460,7 +9315,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	90: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -9489,7 +9344,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	92: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -9546,7 +9401,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	96: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -9575,7 +9430,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	98: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -9604,7 +9459,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	100: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -9633,7 +9488,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(2),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	102: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -9661,7 +9516,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Frepetition uint8
 	}{
 		Fstate:      libc.Uint16FromInt32(libc.Int32FromInt32(161)),
-		Frepetition: libc.BoolUint8(1 != 0),
+		Frepetition: libc.BoolUint8(true1 != 0),
 	}})))),
 	104: *(*TSParseActionEntry)(unsafe.Pointer(&struct {
 		f struct {
@@ -9701,7 +9556,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Frepetition uint8
 	}{
 		Fstate:      libc.Uint16FromInt32(libc.Int32FromInt32(114)),
-		Frepetition: libc.BoolUint8(1 != 0),
+		Frepetition: libc.BoolUint8(true1 != 0),
 	}})))),
 	107: *(*TSParseActionEntry)(unsafe.Pointer(&struct {
 		f struct {
@@ -9714,7 +9569,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(2),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	108: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -9742,7 +9597,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Frepetition uint8
 	}{
 		Fstate:      libc.Uint16FromInt32(libc.Int32FromInt32(15)),
-		Frepetition: libc.BoolUint8(1 != 0),
+		Frepetition: libc.BoolUint8(true1 != 0),
 	}})))),
 	110: *(*TSParseActionEntry)(unsafe.Pointer(&struct {
 		f struct {
@@ -9755,7 +9610,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	111: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -9779,7 +9634,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(2),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	113: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -9807,7 +9662,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Frepetition uint8
 	}{
 		Fstate:      libc.Uint16FromInt32(libc.Int32FromInt32(14)),
-		Frepetition: libc.BoolUint8(1 != 0),
+		Frepetition: libc.BoolUint8(true1 != 0),
 	}})))),
 	115: *(*TSParseActionEntry)(unsafe.Pointer(&struct {
 		f struct {
@@ -9820,7 +9675,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	116: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -9849,7 +9704,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	118: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -9878,7 +9733,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	120: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -9907,7 +9762,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	122: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -9936,7 +9791,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	124: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -9965,7 +9820,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	126: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -9994,7 +9849,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	128: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -10023,7 +9878,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	130: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -10052,7 +9907,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	132: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -10081,7 +9936,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	134: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -10138,7 +9993,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	138: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -10167,7 +10022,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	140: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -10196,7 +10051,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	142: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -10225,7 +10080,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	144: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -10254,7 +10109,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	146: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -10283,7 +10138,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	148: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -10312,7 +10167,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	150: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -10341,7 +10196,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	152: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -10370,7 +10225,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	154: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -10399,7 +10254,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	156: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -10428,7 +10283,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	158: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -10457,7 +10312,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	160: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -10486,7 +10341,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	162: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -10515,7 +10370,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	164: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -10544,7 +10399,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	166: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -10573,7 +10428,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	168: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -10602,7 +10457,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	170: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -10631,7 +10486,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	172: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -10660,7 +10515,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	174: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -10689,7 +10544,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	176: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -10718,7 +10573,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	178: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -10775,7 +10630,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	182: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -10804,7 +10659,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	184: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -10833,7 +10688,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	186: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -10862,7 +10717,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	188: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -10891,7 +10746,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	190: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -10920,7 +10775,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	192: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -10971,7 +10826,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Frepetition uint8
 	}{
 		Fstate:      libc.Uint16FromInt32(libc.Int32FromInt32(104)),
-		Frepetition: libc.BoolUint8(1 != 0),
+		Frepetition: libc.BoolUint8(true1 != 0),
 	}})))),
 	196: *(*TSParseActionEntry)(unsafe.Pointer(&struct {
 		f struct {
@@ -10984,7 +10839,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(2),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	197: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -11012,7 +10867,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Frepetition uint8
 	}{
 		Fstate:      libc.Uint16FromInt32(libc.Int32FromInt32(159)),
-		Frepetition: libc.BoolUint8(1 != 0),
+		Frepetition: libc.BoolUint8(true1 != 0),
 	}})))),
 	199: *(*TSParseActionEntry)(unsafe.Pointer(&struct {
 		f struct {
@@ -11025,7 +10880,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	200: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -11072,7 +10927,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	204: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -11119,7 +10974,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	208: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -11166,7 +11021,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	212: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -11213,7 +11068,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	216: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -11260,7 +11115,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	220: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -11307,7 +11162,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	224: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -11354,7 +11209,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	228: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -11401,7 +11256,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	232: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -11448,7 +11303,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	236: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -11495,7 +11350,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	240: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -11542,7 +11397,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	244: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -11589,7 +11444,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	248: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -11636,7 +11491,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	252: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -11683,7 +11538,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	256: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -11730,7 +11585,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	260: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -11777,7 +11632,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	264: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -11824,7 +11679,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	268: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -11871,7 +11726,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	272: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -11918,7 +11773,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	276: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -11965,7 +11820,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	280: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -12012,7 +11867,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	284: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -12059,7 +11914,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	288: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -12106,7 +11961,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	292: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -12153,7 +12008,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	296: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -12200,7 +12055,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	300: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -12247,7 +12102,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	304: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -12271,7 +12126,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	306: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -12323,7 +12178,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	310: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -12370,7 +12225,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	314: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -12417,7 +12272,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	318: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -12464,7 +12319,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	322: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -12511,7 +12366,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	326: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -12540,7 +12395,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	328: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -12569,7 +12424,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	330: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -12598,7 +12453,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	332: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -12627,7 +12482,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	334: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -12656,7 +12511,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	336: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -12685,7 +12540,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	338: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -12714,7 +12569,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	340: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -12743,7 +12598,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	342: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -12772,7 +12627,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	344: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -12801,7 +12656,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	346: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -12830,7 +12685,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	348: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -12859,7 +12714,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	350: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -12888,7 +12743,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	352: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -12917,7 +12772,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	354: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -12946,7 +12801,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	356: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -12975,7 +12830,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	358: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -13004,7 +12859,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	360: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -13033,7 +12888,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	362: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -13062,7 +12917,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	364: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -13091,7 +12946,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	366: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -13120,7 +12975,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	368: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -13149,7 +13004,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	370: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -13178,7 +13033,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	372: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -13207,7 +13062,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	374: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -13236,7 +13091,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	376: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -13293,7 +13148,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	380: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -13322,7 +13177,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	382: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -13351,7 +13206,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	384: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -13375,7 +13230,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	386: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -13399,7 +13254,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	388: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -13428,7 +13283,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	390: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -13457,7 +13312,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	392: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -13481,7 +13336,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	394: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		Ftype_token         uint8_t
@@ -13505,7 +13360,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	396: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -13534,7 +13389,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	398: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -13563,7 +13418,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	400: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -13592,7 +13447,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	402: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -13621,7 +13476,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	404: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -13650,7 +13505,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	406: *(*TSParseActionEntry)(unsafe.Pointer(&struct {
 		f uint8_t
@@ -13667,7 +13522,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	408: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -13696,7 +13551,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	410: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -13725,7 +13580,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	412: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -13754,7 +13609,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	414: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -13783,7 +13638,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	416: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -13812,7 +13667,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	418: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -13841,7 +13696,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	420: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -13870,7 +13725,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	422: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -13899,7 +13754,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	424: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -13928,7 +13783,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	426: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -13957,7 +13812,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	428: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -13986,7 +13841,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	430: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -14015,7 +13870,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	432: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -14044,7 +13899,7 @@ var ts_parse_actions = [435]TSParseActionEntry{
 		Freusable uint8
 	}{
 		Fcount:    uint8(1),
-		Freusable: libc.BoolUint8(1 != 0),
+		Freusable: libc.BoolUint8(true1 != 0),
 	}})),
 	434: *(*TSParseActionEntry)(unsafe.Pointer(&*(*TSParseAction)(unsafe.Pointer(&struct {
 		f struct {
@@ -14104,82 +13959,82 @@ var ts_external_scanner_symbol_map = [16]TSSymbol{
 
 var ts_external_scanner_states = [15][16]uint8{
 	1: {
-		0:  libc.BoolUint8(1 != 0),
-		1:  libc.BoolUint8(1 != 0),
-		2:  libc.BoolUint8(1 != 0),
-		3:  libc.BoolUint8(1 != 0),
-		4:  libc.BoolUint8(1 != 0),
-		5:  libc.BoolUint8(1 != 0),
-		6:  libc.BoolUint8(1 != 0),
-		7:  libc.BoolUint8(1 != 0),
-		8:  libc.BoolUint8(1 != 0),
-		9:  libc.BoolUint8(1 != 0),
-		10: libc.BoolUint8(1 != 0),
-		11: libc.BoolUint8(1 != 0),
-		12: libc.BoolUint8(1 != 0),
-		13: libc.BoolUint8(1 != 0),
-		14: libc.BoolUint8(1 != 0),
-		15: libc.BoolUint8(1 != 0),
+		0:  libc.BoolUint8(true1 != 0),
+		1:  libc.BoolUint8(true1 != 0),
+		2:  libc.BoolUint8(true1 != 0),
+		3:  libc.BoolUint8(true1 != 0),
+		4:  libc.BoolUint8(true1 != 0),
+		5:  libc.BoolUint8(true1 != 0),
+		6:  libc.BoolUint8(true1 != 0),
+		7:  libc.BoolUint8(true1 != 0),
+		8:  libc.BoolUint8(true1 != 0),
+		9:  libc.BoolUint8(true1 != 0),
+		10: libc.BoolUint8(true1 != 0),
+		11: libc.BoolUint8(true1 != 0),
+		12: libc.BoolUint8(true1 != 0),
+		13: libc.BoolUint8(true1 != 0),
+		14: libc.BoolUint8(true1 != 0),
+		15: libc.BoolUint8(true1 != 0),
 	},
 	2: {
-		8: libc.BoolUint8(1 != 0),
-		9: libc.BoolUint8(1 != 0),
+		8: libc.BoolUint8(true1 != 0),
+		9: libc.BoolUint8(true1 != 0),
 	},
 	3: {
-		6: libc.BoolUint8(1 != 0),
-		8: libc.BoolUint8(1 != 0),
-		9: libc.BoolUint8(1 != 0),
+		6: libc.BoolUint8(true1 != 0),
+		8: libc.BoolUint8(true1 != 0),
+		9: libc.BoolUint8(true1 != 0),
 	},
 	4: {
-		8:  libc.BoolUint8(1 != 0),
-		9:  libc.BoolUint8(1 != 0),
-		10: libc.BoolUint8(1 != 0),
-		14: libc.BoolUint8(1 != 0),
+		8:  libc.BoolUint8(true1 != 0),
+		9:  libc.BoolUint8(true1 != 0),
+		10: libc.BoolUint8(true1 != 0),
+		14: libc.BoolUint8(true1 != 0),
 	},
 	5: {
-		5: libc.BoolUint8(1 != 0),
-		8: libc.BoolUint8(1 != 0),
+		5: libc.BoolUint8(true1 != 0),
+		8: libc.BoolUint8(true1 != 0),
 	},
 	6: {
-		8:  libc.BoolUint8(1 != 0),
-		13: libc.BoolUint8(1 != 0),
+		8:  libc.BoolUint8(true1 != 0),
+		13: libc.BoolUint8(true1 != 0),
 	},
 	7: {
-		0:  libc.BoolUint8(1 != 0),
-		1:  libc.BoolUint8(1 != 0),
-		2:  libc.BoolUint8(1 != 0),
-		8:  libc.BoolUint8(1 != 0),
-		15: libc.BoolUint8(1 != 0),
+		0:  libc.BoolUint8(true1 != 0),
+		1:  libc.BoolUint8(true1 != 0),
+		2:  libc.BoolUint8(true1 != 0),
+		8:  libc.BoolUint8(true1 != 0),
+		15: libc.BoolUint8(true1 != 0),
 	},
 	8: {
-		7: libc.BoolUint8(1 != 0),
-		8: libc.BoolUint8(1 != 0),
+		7: libc.BoolUint8(true1 != 0),
+		8: libc.BoolUint8(true1 != 0),
 	},
 	9: {
-		3:  libc.BoolUint8(1 != 0),
-		4:  libc.BoolUint8(1 != 0),
-		8:  libc.BoolUint8(1 != 0),
-		15: libc.BoolUint8(1 != 0),
+		3:  libc.BoolUint8(true1 != 0),
+		4:  libc.BoolUint8(true1 != 0),
+		8:  libc.BoolUint8(true1 != 0),
+		15: libc.BoolUint8(true1 != 0),
 	},
 	10: {
-		8: libc.BoolUint8(1 != 0),
+		8: libc.BoolUint8(true1 != 0),
 	},
 	11: {
-		3:  libc.BoolUint8(1 != 0),
-		8:  libc.BoolUint8(1 != 0),
-		15: libc.BoolUint8(1 != 0),
+		3:  libc.BoolUint8(true1 != 0),
+		8:  libc.BoolUint8(true1 != 0),
+		15: libc.BoolUint8(true1 != 0),
 	},
 	12: {
-		8:  libc.BoolUint8(1 != 0),
-		11: libc.BoolUint8(1 != 0),
+		8:  libc.BoolUint8(true1 != 0),
+		11: libc.BoolUint8(true1 != 0),
 	},
 	13: {
-		4: libc.BoolUint8(1 != 0),
-		8: libc.BoolUint8(1 != 0),
+		4: libc.BoolUint8(true1 != 0),
+		8: libc.BoolUint8(true1 != 0),
 	},
 	14: {
-		8:  libc.BoolUint8(1 != 0),
-		12: libc.BoolUint8(1 != 0),
+		8:  libc.BoolUint8(true1 != 0),
+		12: libc.BoolUint8(true1 != 0),
 	},
 }
 
@@ -14188,14 +14043,14 @@ func tree_sitter_astro(tls *libc.TLS) (r uintptr) {
 }
 
 var language = TSLanguage{
-	Fversion:                   uint32(14),
-	Fsymbol_count:              uint32(59),
-	Ftoken_count:               uint32(36),
-	Fexternal_token_count:      uint32(16),
-	Fstate_count:               uint32(163),
-	Flarge_state_count:         uint32(2),
-	Fproduction_id_count:       uint32(1),
-	Fmax_alias_sequence_length: uint16(4),
+	Fversion:                   uint32(LANGUAGE_VERSION),
+	Fsymbol_count:              uint32(SYMBOL_COUNT),
+	Ftoken_count:               uint32(TOKEN_COUNT),
+	Fexternal_token_count:      uint32(EXTERNAL_TOKEN_COUNT),
+	Fstate_count:               uint32(STATE_COUNT),
+	Flarge_state_count:         uint32(LARGE_STATE_COUNT),
+	Fproduction_id_count:       uint32(PRODUCTION_ID_COUNT),
+	Fmax_alias_sequence_length: uint16(MAX_ALIAS_SEQUENCE_LENGTH),
 	Fparse_table:               uintptr(unsafe.Pointer(&ts_parse_table)),
 	Fsmall_parse_table:         uintptr(unsafe.Pointer(&ts_small_parse_table)),
 	Fsmall_parse_table_map:     uintptr(unsafe.Pointer(&ts_small_parse_table_map)),
@@ -14238,4 +14093,4 @@ func __ccgo_fp(f interface{}) uintptr {
 
 var __ccgo_ts = (*reflect.StringHeader)(unsafe.Pointer(&__ccgo_ts1)).Data
 
-var __ccgo_ts1 = "index < self->size\x00third-party/tree-sitter-astro/src/tree_sitter/array.h\x00old_end <= self->size\x00\n---\x00(uint32_t)((&scanner->tags)->size - 1) < (&scanner->tags)->size\x00combined.c\x00</script\x00</style\x00end\x00<!\x00doctype_token1\x00>\x00doctype\x00<\x00/>\x00</\x00=\x00attribute_name\x00attribute_value\x00entity\x00'\x00\"\x00text\x00---\x00{\x00}\x00tag_name\x00erroneous_end_tag_name\x00_implicit_end_tag\x00raw_text\x00comment\x00frontmatter_js_block\x00attribute_js_expr\x00attribute_backtick_string\x00permissible_text\x00document\x00_node\x00element\x00script_element\x00style_element\x00start_tag\x00self_closing_tag\x00end_tag\x00erroneous_end_tag\x00attribute\x00quoted_attribute_value\x00_node_with_permissible_text\x00frontmatter\x00attribute_interpolation\x00html_interpolation\x00document_repeat1\x00start_tag_repeat1\x00html_interpolation_repeat1\x00"
+var __ccgo_ts1 = "\n---\x00(uint32_t)((&scanner->tags)->size - 1) < (&scanner->tags)->size\x00combined.c\x00</script\x00</style\x00end\x00<!\x00doctype_token1\x00>\x00doctype\x00<\x00/>\x00</\x00=\x00attribute_name\x00attribute_value\x00entity\x00'\x00\"\x00text\x00---\x00{\x00}\x00tag_name\x00erroneous_end_tag_name\x00_implicit_end_tag\x00raw_text\x00comment\x00frontmatter_js_block\x00attribute_js_expr\x00attribute_backtick_string\x00permissible_text\x00document\x00_node\x00element\x00script_element\x00style_element\x00start_tag\x00self_closing_tag\x00end_tag\x00erroneous_end_tag\x00attribute\x00quoted_attribute_value\x00_node_with_permissible_text\x00frontmatter\x00attribute_interpolation\x00html_interpolation\x00document_repeat1\x00start_tag_repeat1\x00html_interpolation_repeat1\x00"
