@@ -3,38 +3,40 @@ go = "1.26.4"
 uv = "0.11.26"
 "go:golang.org/x/tools/gopls" = "0.22.0"
 
+# Pure-Go default: parse/tests must not require a host C compiler.
+# Codegen tasks set CC=clang only where the probe needs it.
 [env]
-CC = "clang"
+CGO_ENABLED = "0"
 
 # Per-target tasks. CI runs exactly one task per runner (native OS/arch).
 # Windows uses MinGW gcc on PATH when CC is unset for that task.
 
 [tasks."codegen:linux-amd64"]
-env = { TARGET_GOOS = "linux", TARGET_GOARCH = "amd64", CC = "clang" }
+env = { TARGET_GOOS = "linux", TARGET_GOARCH = "amd64", CC = "clang", CGO_ENABLED = "0" }
 run = "go run -v ./cmd/codegen"
 
 [tasks."codegen:linux-arm64"]
-env = { TARGET_GOOS = "linux", TARGET_GOARCH = "arm64", CC = "clang" }
+env = { TARGET_GOOS = "linux", TARGET_GOARCH = "arm64", CC = "clang", CGO_ENABLED = "0" }
 run = "go run -v ./cmd/codegen"
 
 [tasks."codegen:linux-386"]
-env = { TARGET_GOOS = "linux", TARGET_GOARCH = "386", CC = "clang" }
+env = { TARGET_GOOS = "linux", TARGET_GOARCH = "386", CC = "clang", CGO_ENABLED = "0" }
 run = "go run -v ./cmd/codegen"
 
 [tasks."codegen:darwin-amd64"]
-env = { TARGET_GOOS = "darwin", TARGET_GOARCH = "amd64", CC = "clang" }
+env = { TARGET_GOOS = "darwin", TARGET_GOARCH = "amd64", CC = "clang", CGO_ENABLED = "0" }
 run = "go run -v ./cmd/codegen"
 
 [tasks."codegen:darwin-arm64"]
-env = { TARGET_GOOS = "darwin", TARGET_GOARCH = "arm64", CC = "clang" }
+env = { TARGET_GOOS = "darwin", TARGET_GOARCH = "arm64", CC = "clang", CGO_ENABLED = "0" }
 run = "go run -v ./cmd/codegen"
 
 [tasks."codegen:windows-amd64"]
-env = { TARGET_GOOS = "windows", TARGET_GOARCH = "amd64" }
+env = { TARGET_GOOS = "windows", TARGET_GOARCH = "amd64", CGO_ENABLED = "0" }
 run = "go run -v ./cmd/codegen"
 
 [tasks."codegen:windows-arm64"]
-env = { TARGET_GOOS = "windows", TARGET_GOARCH = "arm64" }
+env = { TARGET_GOOS = "windows", TARGET_GOARCH = "arm64", CGO_ENABLED = "0" }
 run = "go run -v ./cmd/codegen"
 
 [tasks.codegen]
