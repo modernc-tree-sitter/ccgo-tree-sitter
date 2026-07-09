@@ -35,6 +35,7 @@ require (
 	github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/arduino v0.0.0
 	github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/astro v0.0.0
 	github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/bash v0.0.0
+	github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/beancount v0.0.0
 	github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/bicep v0.0.0
 	github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/c v0.0.0
 	github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/c_sharp v0.0.0
@@ -113,6 +114,8 @@ replace github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/arduino => ./gra
 replace github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/astro => ./grammar/astro
 
 replace github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/bash => ./grammar/bash
+
+replace github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/beancount => ./grammar/beancount
 
 replace github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/bicep => ./grammar/bicep
 

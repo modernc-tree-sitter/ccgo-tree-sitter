@@ -86225,7 +86225,7 @@ func ts_subtree_retain(tls *libc.TLS, _self Subtree) {
 		libc.X_assert(tls, __ccgo_ts+11267, __ccgo_ts+11027, uint32(560))
 	}
 	_ = v1 || libc.Bool(libc.Int32FromInt32(0) != 0)
-	_ = InterlockedIncrement(tls, *(*uintptr)(unsafe.Pointer(bp)))
+	_ = _InterlockedIncrement(tls, *(*uintptr)(unsafe.Pointer(bp)))
 	goto _2
 _2:
 	;
@@ -86256,7 +86256,7 @@ func ts_subtree_release(tls *libc.TLS, pool uintptr, _self Subtree) {
 		libc.X_assert(tls, __ccgo_ts+11267, __ccgo_ts+11027, uint32(569))
 	}
 	_ = v1 || libc.Bool(libc.Int32FromInt32(0) != 0)
-	v2 = uint32(InterlockedDecrement(tls, *(*uintptr)(unsafe.Pointer(bp + 16))))
+	v2 = uint32(_InterlockedDecrement(tls, *(*uintptr)(unsafe.Pointer(bp + 16))))
 	goto _3
 _3:
 	if v2 == uint32(0) {
@@ -86337,7 +86337,7 @@ _3:
 					libc.X_assert(tls, __ccgo_ts+11316, __ccgo_ts+11027, uint32(581))
 				}
 				_ = v1 || libc.Bool(libc.Int32FromInt32(0) != 0)
-				v2 = uint32(InterlockedDecrement(tls, *(*uintptr)(unsafe.Pointer(bp + 32))))
+				v2 = uint32(_InterlockedDecrement(tls, *(*uintptr)(unsafe.Pointer(bp + 32))))
 				goto _24
 			_24:
 				if v2 == uint32(0) {
