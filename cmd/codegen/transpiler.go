@@ -1067,6 +1067,34 @@ func postProcessWindowsLibcCalls(goCode string) string {
 	goCode = strings.ReplaceAll(goCode, "libc.X_sync_", "libc.X__sync_")
 	// MinGW MemoryBarrier/__faststorefence → portable fence.
 	goCode = strings.ReplaceAll(goCode, "libc.X__builtin_ia32_sfence(", "libc.X__sync_synchronize(")
+
+	// winnt.h maps Interlocked* → _Interlocked* via #define. ccgo emits both
+	// `const InterlockedIncrement = "_InterlockedIncrement"` and call sites
+	// `InterlockedIncrement(tls, p)`, which is a string not a function. Prefer
+	// the underscore form that ccgo also emits as a real func.
+	//
+	// Only rewrite names whose const value is the underscore form; leave real
+	// funcs like InterlockedBitTestAndSet alone.
+	goCode = rewriteInterlockedStringAliasCalls(goCode)
+	return goCode
+}
+
+// rewriteInterlockedStringAliasCalls rewrites call sites of Interlocked* names
+// that ccgo materialized as string consts pointing at _Interlocked*.
+func rewriteInterlockedStringAliasCalls(goCode string) string {
+	// const InterlockedFoo = "_InterlockedFoo"
+	constRe := regexp.MustCompile(`(?m)^const (Interlocked[A-Za-z0-9_]+) = "(_Interlocked[A-Za-z0-9_]+)"\s*$`)
+	aliases := map[string]string{}
+	for _, m := range constRe.FindAllStringSubmatch(goCode, -1) {
+		aliases[m[1]] = m[2]
+	}
+	if len(aliases) == 0 {
+		return goCode
+	}
+	for bare, underscored := range aliases {
+		re := regexp.MustCompile(`\b` + regexp.QuoteMeta(bare) + `\(`)
+		goCode = re.ReplaceAllString(goCode, underscored+"(")
+	}
 	return goCode
 }
 

@@ -311,6 +311,9 @@ jobs:
             exit 1
           fi
           ./scripts/merge-codegen-artifacts.sh "$arts"
+          # Artifacts may be incomplete (failed legs) or miss root go.mod; rebuild
+          # nested modules + go.work + root require/replace from discovered langs.
+          go run ./cmd/codegen modules
           {
             echo "## Codegen matrix"
             echo
@@ -353,3 +356,6 @@ jobs:
           add-paths: |
             grammar/**
             cmd/parse/languages.go
+            go.mod
+            go.sum
+            go.work

@@ -12,7 +12,7 @@ if [[ ${#dirs[@]} -eq 0 ]]; then
   exit 1
 fi
 
-preferred_registry=""
+preferred_dir=""
 preferred_name=""
 merged=0
 for d in "${dirs[@]}"; do
@@ -24,12 +24,10 @@ for d in "${dirs[@]}"; do
   echo "merging $name"
   cp -a "$d/grammar/." grammar/
   merged=$((merged + 1))
-  if [[ -f "$d/cmd/parse/languages.go" ]]; then
-    # Artifact dirs may be named linux-amd64 or codegen-linux-amd64.
-    if [[ "$name" == "linux-amd64" || "$name" == "codegen-linux-amd64" || -z "$preferred_registry" ]]; then
-      preferred_registry="$d/cmd/parse/languages.go"
-      preferred_name="$name"
-    fi
+  # Prefer linux-amd64 for shared files (languages.go, go.work, root go.mod).
+  if [[ "$name" == "linux-amd64" || "$name" == "codegen-linux-amd64" || -z "$preferred_dir" ]]; then
+    preferred_dir="$d"
+    preferred_name="$name"
   fi
 done
 
@@ -38,10 +36,25 @@ if [[ "$merged" -eq 0 ]]; then
   exit 1
 fi
 
-if [[ -n "$preferred_registry" ]]; then
-  mkdir -p cmd/parse
-  cp "$preferred_registry" cmd/parse/languages.go
-  echo "installed cmd/parse/languages.go from ${preferred_name}"
+if [[ -n "$preferred_dir" ]]; then
+  if [[ -f "$preferred_dir/cmd/parse/languages.go" ]]; then
+    mkdir -p cmd/parse
+    cp "$preferred_dir/cmd/parse/languages.go" cmd/parse/languages.go
+    echo "installed cmd/parse/languages.go from ${preferred_name}"
+  fi
+  # New grammars rewrite languages.go and need matching go.work / root go.mod.
+  if [[ -f "$preferred_dir/go.work" ]]; then
+    cp "$preferred_dir/go.work" go.work
+    echo "installed go.work from ${preferred_name}"
+  fi
+  if [[ -f "$preferred_dir/go.mod" ]]; then
+    cp "$preferred_dir/go.mod" go.mod
+    echo "installed go.mod from ${preferred_name}"
+  fi
+  if [[ -f "$preferred_dir/go.sum" ]]; then
+    cp "$preferred_dir/go.sum" go.sum
+    echo "installed go.sum from ${preferred_name}"
+  fi
 fi
 
 echo "merged ${merged} artifact bundles"

@@ -44,7 +44,7 @@ while IFS= read -r f; do
   cp "$f" "$dir/"
 done < <(find grammar -type f -name api.go | LC_ALL=C sort)
 
-# Nested modules: core + per-lang go.mod (and go.work at repo root if present)
+# Nested modules: core + per-lang go.mod (and root go.mod / go.work if present)
 if [[ -f grammar/go.mod ]]; then
   cp grammar/go.mod "$out/grammar/"
 fi
@@ -57,6 +57,13 @@ while IFS= read -r f; do
 done < <(find grammar -type f -name go.mod | LC_ALL=C sort)
 if [[ -f go.work ]]; then
   cp go.work "$out/"
+fi
+# Root go.mod/go.sum carry require+replace for new grammar packages (e.g. beancount).
+if [[ -f go.mod ]]; then
+  cp go.mod "$out/"
+fi
+if [[ -f go.sum ]]; then
+  cp go.sum "$out/"
 fi
 
 echo "collected core + ${found} grammars for ${goos}/${goarch}"

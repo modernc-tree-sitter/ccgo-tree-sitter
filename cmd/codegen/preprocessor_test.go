@@ -273,6 +273,9 @@ func TestCcgoExtraArgs(t *testing.T) {
 
 func TestPostProcessWindowsLibcCalls(t *testing.T) {
 	in := "//go:build windows && amd64\n\npackage grammar\n\n" +
+		"const InterlockedIncrement = \"_InterlockedIncrement\"\n" +
+		"const InterlockedDecrement = \"_InterlockedDecrement\"\n" +
+		"func InterlockedBitTestAndSet(tls *libc.TLS) {}\n" +
 		"func f(tls *libc.TLS) {\n" +
 		"\tiqlibc.__builtin_vsnprintf(tls, 0, 0, 0, 0)\n" +
 		"\tv1 = strnlen(tls, _src, _count)\n" +
@@ -280,6 +283,10 @@ func TestPostProcessWindowsLibcCalls(t *testing.T) {
 		"\t_ = _sync_fetch_and_add(tls, p, v)\n" +
 		"\t_ = towupper(tls, uint16('a'))\n" +
 		"\tlibc.X__builtin_ia32_sfence(tls)\n" +
+		"\t_ = InterlockedIncrement(tls, p)\n" +
+		"\t_ = InterlockedDecrement(tls, p)\n" +
+		"\t_ = _InterlockedIncrement(tls, p)\n" +
+		"\tInterlockedBitTestAndSet(tls)\n" +
 		"}\n"
 	out := postProcessWindowsLibcCalls(in)
 	for _, want := range []string{
@@ -289,15 +296,26 @@ func TestPostProcessWindowsLibcCalls(t *testing.T) {
 		"libc.X__sync_fetch_and_add(",
 		"libc.Xtowupper(",
 		"libc.X__sync_synchronize(",
+		"_InterlockedIncrement(tls, p)",
+		"_InterlockedDecrement(tls, p)",
+		"InterlockedBitTestAndSet(tls)",
 	} {
 		if !strings.Contains(out, want) {
 			t.Fatalf("missing %q in\n%s", want, out)
 		}
 	}
-	for _, junk := range []string{"iqlibc.", "\tstrnlen(", " iswctype(", " _sync_fetch_and_add(", " towupper(", "__builtin_ia32_sfence"} {
+	for _, junk := range []string{"iqlibc.", "\tstrnlen(", " iswctype(", " _sync_fetch_and_add(", " towupper(", "__builtin_ia32_sfence", "\tInterlockedIncrement(", "\tInterlockedDecrement("} {
 		if strings.Contains(out, junk) {
 			t.Fatalf("left junk %q in\n%s", junk, out)
 		}
+	}
+	// Already-underscore form must not gain a double underscore.
+	if strings.Contains(out, "__InterlockedIncrement(") {
+		t.Fatalf("double-underscore Interlocked in\n%s", out)
+	}
+	// Real funcs (no string-const alias) must keep their bare name.
+	if strings.Contains(out, "_InterlockedBitTestAndSet(") {
+		t.Fatalf("rewrote real InterlockedBitTestAndSet in\n%s", out)
 	}
 	// Non-windows sources must be untouched.
 	linux := "package grammar\nfunc f() { strnlen(tls, 0, 0) }\n"

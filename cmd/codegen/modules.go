@@ -182,17 +182,18 @@ func updateRootGoMod(outputDir string, langs []string) error {
 	for _, lang := range langs {
 		mods = append(mods, modRef{grammarModulePath + "/" + lang, "./grammar/" + lang})
 	}
-	owned := make(map[string]bool, len(mods)+1)
-	for _, m := range mods {
-		owned[m.path] = true
+	// Drop every local grammar require/replace we manage, including stale
+	// languages removed since the last run (prefix match, not only current set).
+	isManaged := func(path string) bool {
+		if path == grammarModulePath || path == "modernc.org/libc" {
+			return true
+		}
+		return strings.HasPrefix(path, grammarModulePath+"/")
 	}
-	owned["modernc.org/libc"] = true
-
-	// Drop every owned require/replace (may appear more than once after bad runs).
 	for {
 		var dropPath string
 		for _, r := range f.Require {
-			if owned[r.Mod.Path] {
+			if isManaged(r.Mod.Path) {
 				dropPath = r.Mod.Path
 				break
 			}
@@ -205,7 +206,7 @@ func updateRootGoMod(outputDir string, langs []string) error {
 	for {
 		var dropPath string
 		for _, r := range f.Replace {
-			if owned[r.Old.Path] {
+			if isManaged(r.Old.Path) {
 				dropPath = r.Old.Path
 				break
 			}
