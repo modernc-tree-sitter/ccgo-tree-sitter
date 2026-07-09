@@ -193,3 +193,6 @@
 	path = third-party/libc
 	url = https://github.com/modernc-tree-sitter/libc
 	branch = feat/tree-sitter
+[submodule "third-party/tree-sitter-beancount"]
+	path = third-party/tree-sitter-beancount
+	url = https://github.com/polarmutex/tree-sitter-beancount.git
