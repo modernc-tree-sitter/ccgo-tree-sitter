@@ -6,6 +6,7 @@ use (
 	./grammar/arduino
 	./grammar/astro
 	./grammar/bash
+	./grammar/beancount
 	./grammar/bicep
 	./grammar/c
 	./grammar/c_sharp

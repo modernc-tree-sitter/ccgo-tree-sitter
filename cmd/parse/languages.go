@@ -4,6 +4,7 @@ import (
 	_ "github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/arduino"
 	_ "github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/astro"
 	_ "github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/bash"
+	_ "github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/beancount"
 	_ "github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/bicep"
 	_ "github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/c"
 	_ "github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/c_sharp"
