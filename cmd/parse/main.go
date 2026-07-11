@@ -58,16 +58,14 @@ func run(languageName, filename string) error {
 		)
 	}
 
-	// Create parser
+	// Create parser (GC-managed; no Delete required)
 	parser := grammar.NewParser()
-	defer parser.Delete()
 	if !parser.SetLanguage(lang) {
 		return fmt.Errorf("failed to set language")
 	}
 
 	// Parse
 	tree := parser.ParseString(string(source))
-	defer tree.Delete()
 
 	query := querySource
 	if queryFile != "" {
@@ -85,7 +83,6 @@ func run(languageName, filename string) error {
 		if err != nil {
 			return err
 		}
-		defer compiledQuery.Delete()
 		matches := compiledQuery.ExecuteMatches(root, source)
 		enc := json.NewEncoder(os.Stdout)
 		for _, match := range matches {

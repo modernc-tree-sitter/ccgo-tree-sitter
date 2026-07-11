@@ -14,77 +14,169 @@ func getModuleName(outputDir string) string {
 	return moduleName
 }
 
+// coreAPITemplate is the seed for grammar/api.go when missing. Keep in sync with
+// the hand-maintained grammar/api.go (CString + destroyer finalizers).
+// coreAPITemplate seeds grammar/api.go when missing. Keep in sync with grammar/api.go.
 var coreAPITemplate = `package grammar
 
 import (
+	"runtime"
 	"unsafe"
+
 	"modernc.org/libc"
 )
 
-// Language wraps a TSLanguage pointer
+// Language wraps a TSLanguage pointer.
 type Language = *TSLanguage
 
-// Parser wraps parser functions
+// Parser wraps a tree-sitter parser.
+//
+// Ownership is GC-managed: a runtime cleanup frees the native parser and TLS
+// when the *Parser becomes unreachable. Explicit Delete is optional (eager free).
 type Parser struct {
-	ptr uintptr
-	tls *libc.TLS
+	ptr     uintptr
+	tls     *libc.TLS
+	cleanup runtime.Cleanup
 }
 
-// Tree wraps a parse tree
+// Tree wraps a parse tree.
+//
+// The tree pins its *Parser so the parser/TLS stay alive until the tree is
+// collected or deleted. Cleanup frees only the native tree (not the parser).
 type Tree struct {
-	ptr uintptr
-	tls *libc.TLS
+	ptr     uintptr
+	parser  *Parser
+	cleanup runtime.Cleanup
 }
 
-// Node wraps a TSNode
+// Node wraps a TSNode. Nodes borrow the parent tree's TLS; keep the *Tree
+// reachable while using a Node.
 type Node struct {
 	node TSNode
+	tls  *libc.TLS
+}
+
+type parserRes struct {
+	ptr uintptr
 	tls *libc.TLS
 }
 
-// NewParser creates a new parser
+type treeRes struct {
+	ptr    uintptr
+	parser *Parser // pins parser until tree cleanup runs
+}
+
+// NewParser creates a parser. Callers need not Delete; the GC will free it.
 func NewParser() *Parser {
 	tls := libc.NewTLS()
 	ptr := ts_parser_new(tls)
-	return &Parser{ptr: ptr, tls: tls}
+	p := &Parser{ptr: ptr, tls: tls}
+	p.cleanup = runtime.AddCleanup(p, freeParser, parserRes{ptr: ptr, tls: tls})
+	return p
 }
 
-// SetLanguage sets the language for parsing
+// SetLanguage sets the language for parsing.
 func (p *Parser) SetLanguage(lang Language) bool {
+	if p == nil || p.ptr == 0 {
+		return false
+	}
 	langPtr := uintptr(unsafe.Pointer(lang))
 	return ts_parser_set_language(p.tls, p.ptr, langPtr) != 0
 }
 
-// ParseString parses a string
+// ParseString parses a string.
+//
+// Source is copied into a libc CString for the call and freed with defer.
+// Tree-sitter only borrows the buffer during parse.
 func (p *Parser) ParseString(source string) *Tree {
-	sourceBytes := []byte(source)
-	var sourcePtr uintptr
-	if len(sourceBytes) > 0 {
-		sourcePtr = uintptr(unsafe.Pointer(&sourceBytes[0]))
+	if p == nil || p.ptr == 0 {
+		return &Tree{}
 	}
-	ptr := ts_parser_parse_string(p.tls, p.ptr, 0, sourcePtr, uint32(len(source)))
-	return &Tree{ptr: ptr, tls: p.tls}
+	cstr, err := libc.CString(source)
+	if err != nil {
+		return &Tree{parser: p}
+	}
+	defer libc.Xfree(nil, cstr)
+
+	ptr := ts_parser_parse_string(p.tls, p.ptr, 0, cstr, uint32(len(source)))
+	return newTree(ptr, p)
 }
 
-// Delete frees the parser
+// ParseBytes parses a contiguous UTF-8 source buffer.
+func (p *Parser) ParseBytes(source []byte) *Tree {
+	return p.ParseString(string(source))
+}
+
+func newTree(ptr uintptr, p *Parser) *Tree {
+	t := &Tree{ptr: ptr, parser: p}
+	if ptr != 0 {
+		// Cleanup arg holds *Parser so parser cannot be freed before the tree.
+		t.cleanup = runtime.AddCleanup(t, freeTree, treeRes{ptr: ptr, parser: p})
+	}
+	return t
+}
+
+func freeParser(r parserRes) {
+	if r.ptr != 0 && r.tls != nil {
+		ts_parser_delete(r.tls, r.ptr)
+	}
+	if r.tls != nil {
+		r.tls.Close()
+	}
+}
+
+func freeTree(r treeRes) {
+	if r.ptr == 0 || r.parser == nil || r.parser.tls == nil {
+		return
+	}
+	ts_tree_delete(r.parser.tls, r.ptr)
+}
+
+// Delete eagerly frees the parser. Optional: the GC will free it if omitted.
+// Do not Delete a parser while any Tree from it is still in use.
 func (p *Parser) Delete() {
-	ts_parser_delete(p.tls, p.ptr)
-	p.tls.Close()
+	if p == nil || p.ptr == 0 {
+		return
+	}
+	p.cleanup.Stop()
+	freeParser(parserRes{ptr: p.ptr, tls: p.tls})
+	p.ptr = 0
+	p.tls = nil
 }
 
-// Delete frees the tree
+// Delete eagerly frees the tree. Optional: the GC will free it if omitted.
 func (t *Tree) Delete() {
-	ts_tree_delete(t.tls, t.ptr)
+	if t == nil || t.ptr == 0 {
+		return
+	}
+	t.cleanup.Stop()
+	freeTree(treeRes{ptr: t.ptr, parser: t.parser})
+	t.ptr = 0
+	t.parser = nil
 }
 
-// RootNode returns the root node of the tree
+func (t *Tree) tls() *libc.TLS {
+	if t == nil || t.parser == nil {
+		return nil
+	}
+	return t.parser.tls
+}
+
+// RootNode returns the root node of the tree.
 func (t *Tree) RootNode() *Node {
-	node := ts_tree_root_node(t.tls, t.ptr)
-	return &Node{node: node, tls: t.tls}
+	tls := t.tls()
+	if tls == nil || t.ptr == 0 {
+		return &Node{}
+	}
+	node := ts_tree_root_node(tls, t.ptr)
+	return &Node{node: node, tls: tls}
 }
 
-// Type returns the node type as a string
+// Type returns the node type as a string.
 func (n *Node) Type() string {
+	if n == nil || n.tls == nil {
+		return ""
+	}
 	ptr := ts_node_type(n.tls, n.node)
 	if ptr == 0 {
 		return ""
@@ -92,19 +184,28 @@ func (n *Node) Type() string {
 	return libc.GoString(ptr)
 }
 
-// ChildCount returns the number of children
+// ChildCount returns the number of children.
 func (n *Node) ChildCount() uint32 {
+	if n == nil || n.tls == nil {
+		return 0
+	}
 	return ts_node_child_count(n.tls, n.node)
 }
 
-// Child returns the child at the given index
+// Child returns the child at the given index.
 func (n *Node) Child(index uint32) *Node {
+	if n == nil || n.tls == nil {
+		return &Node{}
+	}
 	node := ts_node_child(n.tls, n.node, index)
 	return &Node{node: node, tls: n.tls}
 }
 
-// FieldNameForChild returns the field name for the child at the given index
+// FieldNameForChild returns the field name for the child at the given index.
 func (n *Node) FieldNameForChild(index uint32) string {
+	if n == nil || n.tls == nil {
+		return ""
+	}
 	ptr := ts_node_field_name_for_child(n.tls, n.node, index)
 	if ptr == 0 {
 		return ""
@@ -112,29 +213,44 @@ func (n *Node) FieldNameForChild(index uint32) string {
 	return libc.GoString(ptr)
 }
 
-// NamedChildCount returns the number of named children
+// NamedChildCount returns the number of named children.
 func (n *Node) NamedChildCount() uint32 {
+	if n == nil || n.tls == nil {
+		return 0
+	}
 	return ts_node_named_child_count(n.tls, n.node)
 }
 
-// NamedChild returns the named child at the given index
+// NamedChild returns the named child at the given index.
 func (n *Node) NamedChild(index uint32) *Node {
+	if n == nil || n.tls == nil {
+		return &Node{}
+	}
 	node := ts_node_named_child(n.tls, n.node, index)
 	return &Node{node: node, tls: n.tls}
 }
 
-// StartByte returns the start byte offset
+// StartByte returns the start byte offset.
 func (n *Node) StartByte() uint32 {
+	if n == nil || n.tls == nil {
+		return 0
+	}
 	return ts_node_start_byte(n.tls, n.node)
 }
 
-// EndByte returns the end byte offset
+// EndByte returns the end byte offset.
 func (n *Node) EndByte() uint32 {
+	if n == nil || n.tls == nil {
+		return 0
+	}
 	return ts_node_end_byte(n.tls, n.node)
 }
 
-// String returns the S-expression representation of the node
+// String returns the S-expression representation of the node.
 func (n *Node) String() string {
+	if n == nil || n.tls == nil {
+		return ""
+	}
 	ptr := ts_node_string(n.tls, n.node)
 	if ptr == 0 {
 		return ""
@@ -144,37 +260,55 @@ func (n *Node) String() string {
 	return str
 }
 
-// IsNull returns true if the node is null
+// IsNull returns true if the node is null.
 func (n *Node) IsNull() bool {
+	if n == nil || n.tls == nil {
+		return true
+	}
 	return ts_node_is_null(n.tls, n.node) != 0
 }
 
-// IsNamed returns true if the node is named
+// IsNamed returns true if the node is named.
 func (n *Node) IsNamed() bool {
+	if n == nil || n.tls == nil {
+		return false
+	}
 	return ts_node_is_named(n.tls, n.node) != 0
 }
 
-// IsExtra returns true if the node is extra
+// IsExtra returns true if the node is extra.
 func (n *Node) IsExtra() bool {
+	if n == nil || n.tls == nil {
+		return false
+	}
 	return ts_node_is_extra(n.tls, n.node) != 0
 }
 
-// IsError returns true if the node is an error
+// IsError returns true if the node is an error.
 func (n *Node) IsError() bool {
+	if n == nil || n.tls == nil {
+		return false
+	}
 	return ts_node_is_error(n.tls, n.node) != 0
 }
 
-// HasError returns true if the node or any descendant has an error
+// HasError returns true if the node or any descendant has an error.
 func (n *Node) HasError() bool {
+	if n == nil || n.tls == nil {
+		return false
+	}
 	return ts_node_has_error(n.tls, n.node) != 0
 }
 
-// HasChanges returns true if the node has changed
+// HasChanges returns true if the node has changed.
 func (n *Node) HasChanges() bool {
+	if n == nil || n.tls == nil {
+		return false
+	}
 	return ts_node_has_changes(n.tls, n.node) != 0
 }
 
-// PrintTree prints the node tree in S-expression format
+// PrintTree prints the node tree in S-expression format.
 func (n *Node) PrintTree() string {
 	if n.IsNull() {
 		return "(null)"

@@ -19,6 +19,11 @@ type fixtureExpectation struct {
 }
 
 var languageExpectations = map[string]fixtureExpectation{
+	"go": {
+		// Real-world fixture: refactree internal/fuzzy/catalog.go
+		rootType:       "source_file",
+		firstChildType: "package_clause",
+	},
 	"json": {
 		rootType:       "document",
 		firstChildType: "object",
@@ -118,13 +123,11 @@ func TestLanguageFixtures(t *testing.T) {
 			}
 
 			parser := grammar.NewParser()
-			defer parser.Delete()
 			if !parser.SetLanguage(lang) {
 				t.Fatalf("failed to set language %q", language)
 			}
 
 			tree := parser.ParseString(string(source))
-			defer tree.Delete()
 			rootNode := tree.RootNode()
 			if rootNode.IsNull() {
 				t.Fatalf("root node is null for fixture %s", fixturePath)

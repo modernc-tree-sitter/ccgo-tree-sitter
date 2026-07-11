@@ -120,9 +120,8 @@ func main() {
 		os.Exit(1)
 	}
 
-	// Create parser
+	// Create parser (GC-managed; no Delete required)
 	parser := core.NewParser()
-	defer parser.Delete()
 	if !parser.SetLanguage(lang) {
 		fmt.Fprintf(os.Stderr, "Failed to set language\n")
 		os.Exit(1)
@@ -130,7 +129,6 @@ func main() {
 
 	// Parse
 	tree := parser.ParseString(string(source))
-	defer tree.Delete()
 
 	// Print tree
 	root := tree.RootNode()

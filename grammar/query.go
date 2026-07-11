@@ -2,19 +2,26 @@ package grammar
 
 import (
 	"fmt"
+	"runtime"
 	"unsafe"
 
 	"modernc.org/libc"
 )
 
+// Query wraps a compiled tree-sitter query.
+//
+// Ownership is GC-managed via runtime cleanup. Explicit Delete is optional.
 type Query struct {
-	ptr uintptr
-	tls *libc.TLS
+	ptr     uintptr
+	tls     *libc.TLS
+	cleanup runtime.Cleanup
 }
 
+// QueryCursor wraps a query cursor. Cleanup pins the parent *Query.
 type QueryCursor struct {
-	ptr uintptr
-	tls *libc.TLS
+	ptr     uintptr
+	query   *Query
+	cleanup runtime.Cleanup
 }
 
 type QueryCompileError struct {
@@ -41,22 +48,34 @@ type QueryMatch struct {
 	Captures     []QueryCapture `json:"captures"`
 }
 
+type queryRes struct {
+	ptr uintptr
+	tls *libc.TLS
+}
+
+type cursorRes struct {
+	ptr   uintptr
+	query *Query // pins query until cursor cleanup runs
+}
+
+// NewQuery compiles a query. Callers need not Delete; the GC will free it.
 func NewQuery(lang Language, source string) (*Query, error) {
 	tls := libc.NewTLS()
 
-	sourceBytes := []byte(source)
-	var sourcePtr uintptr
-	if len(sourceBytes) > 0 {
-		sourcePtr = uintptr(unsafe.Pointer(&sourceBytes[0]))
+	cstr, err := libc.CString(source)
+	if err != nil {
+		tls.Close()
+		return nil, err
 	}
+	defer libc.Xfree(nil, cstr)
 
 	var errOffset uint32
 	var errType TSQueryError1
 	ptr := ts_query_new(
 		tls,
 		uintptr(unsafe.Pointer(lang)),
-		sourcePtr,
-		uint32(len(sourceBytes)),
+		cstr,
+		uint32(len(source)),
 		uintptr(unsafe.Pointer(&errOffset)),
 		uintptr(unsafe.Pointer(&errType)),
 	)
@@ -68,34 +87,66 @@ func NewQuery(lang Language, source string) (*Query, error) {
 		}
 	}
 
-	return &Query{ptr: ptr, tls: tls}, nil
+	q := &Query{ptr: ptr, tls: tls}
+	q.cleanup = runtime.AddCleanup(q, freeQuery, queryRes{ptr: ptr, tls: tls})
+	return q, nil
 }
 
+func freeQuery(r queryRes) {
+	if r.ptr != 0 && r.tls != nil {
+		ts_query_delete(r.tls, r.ptr)
+	}
+	if r.tls != nil {
+		r.tls.Close()
+	}
+}
+
+func freeCursor(r cursorRes) {
+	if r.ptr == 0 || r.query == nil || r.query.tls == nil {
+		return
+	}
+	ts_query_cursor_delete(r.query.tls, r.ptr)
+}
+
+// Delete eagerly frees the query. Optional: the GC will free it if omitted.
 func (q *Query) Delete() {
 	if q == nil || q.ptr == 0 {
 		return
 	}
-	ts_query_delete(q.tls, q.ptr)
+	q.cleanup.Stop()
+	freeQuery(queryRes{ptr: q.ptr, tls: q.tls})
 	q.ptr = 0
-	q.tls.Close()
+	q.tls = nil
 }
 
+// NewCursor creates a cursor for this query.
 func (q *Query) NewCursor() *QueryCursor {
+	if q == nil || q.ptr == 0 {
+		return &QueryCursor{}
+	}
 	ptr := ts_query_cursor_new(q.tls)
-	return &QueryCursor{ptr: ptr, tls: q.tls}
+	c := &QueryCursor{ptr: ptr, query: q}
+	if ptr != 0 {
+		c.cleanup = runtime.AddCleanup(c, freeCursor, cursorRes{ptr: ptr, query: q})
+	}
+	return c
 }
 
+// Delete eagerly frees the cursor. Optional: the GC will free it if omitted.
 func (c *QueryCursor) Delete() {
 	if c == nil || c.ptr == 0 {
 		return
 	}
-	ts_query_cursor_delete(c.tls, c.ptr)
+	c.cleanup.Stop()
+	freeCursor(cursorRes{ptr: c.ptr, query: c.query})
 	c.ptr = 0
+	c.query = nil
 }
 
+// ExecuteMatches runs the query over root and returns all matches.
+// The temporary cursor is GC-managed.
 func (q *Query) ExecuteMatches(root *Node, source []byte) []QueryMatch {
 	cursor := q.NewCursor()
-	defer cursor.Delete()
 
 	ts_query_cursor_exec(q.tls, cursor.ptr, q.ptr, root.node)
 
@@ -129,6 +180,8 @@ func (q *Query) ExecuteMatches(root *Node, source []byte) []QueryMatch {
 		})
 	}
 
+	// cursor is GC-managed (AddCleanup); keep it live until we finish matching.
+	runtime.KeepAlive(cursor)
 	return matches
 }
 
