@@ -22672,44 +22672,52 @@ func ts_parser__has_included_range_difference(tls *libc.TLS, self uintptr, start
 	return ts_range_array_intersects(tls, self+1424, (*TSParser)(unsafe.Pointer(self)).Fincluded_range_difference_index, start_position, end_position)
 }
 
-func ts_parser__reuse_node(tls *libc.TLS, self18 uintptr, version StackVersion, state uintptr, position uint32_t, last_external_token Subtree, table_entry uintptr) (r Subtree) {
-	bp := tls.Alloc(144)
-	defer tls.Free(144)
-	var byte_offset, byte_offset1, end_byte_offset, new_capacity1, new_size, next_index, v2, v45, v5, v53, v58, v66, v94, v98 uint32_t
+func ts_parser__reuse_node(tls *libc.TLS, self19 uintptr, version StackVersion, state uintptr, position uint32_t, last_external_token Subtree, table_entry uintptr) (r Subtree) {
+	bp := tls.Alloc(128)
+	defer tls.Free(128)
+	var byte_offset, byte_offset1, end_byte_offset, new_capacity1, new_size, next_index, v10, v103, v50, v58, v63, v7, v71, v99 uint32_t
 	var last_entry, popped_entry StackEntry
-	var leaf_symbol, v31 TSSymbol
-	var new_contents, new_contents1, reason, v1, v102, v103, v104, v105, v108, v110, v113, v114, v42, v48, v49, v50, v51, v54, v56, v59, v60, v64, v99 uintptr
-	var result, v18, v19, v20, v22, v24 TSPoint
-	var result1, result2, result3, v11, v14, v16, v17, v26, v8 Length
-	var v10, v13, v30, v34, v38, v7 Subtree
-	var v101, v43, v63, v65 bool
-	var v106, v52 size_t
-	var v33 int32
-	var v28, v61 uint8
-	var v4, v47 uint32
+	var leaf_symbol, v36 TSSymbol
+	var new_contents, new_contents1, reason, v104, v107, v108, v109, v110, v113, v115, v118, v2, v47, v53, v54, v55, v56, v59, v6, v61, v64, v65, v69 uintptr
+	var result, v23, v24, v25, v27, v29 TSPoint
+	var result1, result2, result3, v13, v16, v19, v21, v22, v31 Length
+	var result4, v1, v12, v15, v18, v3, v35, v5 Subtree
+	var v52, v9 uint32
+	var v106, v48, v68, v70 bool
+	var v111, v57 size_t
+	var v38 int32
+	var v33, v66 uint8
 	var _ /* last_entry at bp+88 */ StackEntry
-	var _ /* result at bp+104 */ Subtree
 	var _ /* tree at bp+80 */ Subtree
-	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = byte_offset, byte_offset1, end_byte_offset, last_entry, leaf_symbol, new_capacity1, new_contents, new_contents1, new_size, next_index, popped_entry, reason, result, result1, result2, result3, v1, v10, v101, v102, v103, v104, v105, v106, v108, v11, v110, v113, v114, v13, v14, v16, v17, v18, v19, v2, v20, v22, v24, v26, v28, v30, v31, v33, v34, v38, v4, v42, v43, v45, v47, v48, v49, v5, v50, v51, v52, v53, v54, v56, v58, v59, v60, v61, v63, v64, v65, v66, v7, v8, v94, v98, v99
+	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = byte_offset, byte_offset1, end_byte_offset, last_entry, leaf_symbol, new_capacity1, new_contents, new_contents1, new_size, next_index, popped_entry, reason, result, result1, result2, result3, result4, v1, v10, v103, v104, v106, v107, v108, v109, v110, v111, v113, v115, v118, v12, v13, v15, v16, v18, v19, v2, v21, v22, v23, v24, v25, v27, v29, v3, v31, v33, v35, v36, v38, v47, v48, v5, v50, v52, v53, v54, v55, v56, v57, v58, v59, v6, v61, v63, v64, v65, v66, v68, v69, v7, v70, v71, v9, v99
 	for {
-		v1 = self18 + 1368
-		if (*ReusableNode)(unsafe.Pointer(v1)).Fstack.Fsize > uint32(0) {
-			*(*Subtree)(unsafe.Pointer(bp + 104)) = (*(*StackEntry)(unsafe.Pointer((*ReusableNode)(unsafe.Pointer(v1)).Fstack.Fcontents + uintptr((*ReusableNode)(unsafe.Pointer(v1)).Fstack.Fsize-uint32(1))*16))).Ftree
-			v4 = (*(*StackEntry)(unsafe.Pointer((*ReusableNode)(unsafe.Pointer(v1)).Fstack.Fcontents + uintptr((*ReusableNode)(unsafe.Pointer(v1)).Fstack.Fsize-uint32(1))*16))).Fbyte_offset
+		v2 = self19 + 1368
+		if (*ReusableNode)(unsafe.Pointer(v2)).Fstack.Fsize > uint32(0) {
+			v5 = (*(*StackEntry)(unsafe.Pointer((*ReusableNode)(unsafe.Pointer(v2)).Fstack.Fcontents + uintptr((*ReusableNode)(unsafe.Pointer(v2)).Fstack.Fsize-uint32(1))*16))).Ftree
 		} else {
-			*(*Subtree)(unsafe.Pointer(bp + 104)) = Subtree{}
-			v4 = uint32(0xffffffff)
+			v5 = Subtree{}
 		}
-		if *(*uintptr)(unsafe.Pointer(bp + 104)) == 0 {
+		v3 = v5
+		goto _4
+	_4:
+		v1 = v3
+		result4 = v1
+		if !(*(*uintptr)(unsafe.Pointer(uintptr(unsafe.Pointer(&v1)))) != 0) {
 			break
 		}
-		v2 = v4
-		goto _3
-	_3:
-		byte_offset1 = v2
-		v7 = *(*Subtree)(unsafe.Pointer(bp + 104))
-		v10 = v7
-		*(*Subtree)(unsafe.Pointer(bp + 40)) = v10
+		v6 = self19 + 1368
+		if (*ReusableNode)(unsafe.Pointer(v6)).Fstack.Fsize > uint32(0) {
+			v9 = (*(*StackEntry)(unsafe.Pointer((*ReusableNode)(unsafe.Pointer(v6)).Fstack.Fcontents + uintptr((*ReusableNode)(unsafe.Pointer(v6)).Fstack.Fsize-uint32(1))*16))).Fbyte_offset
+		} else {
+			v9 = uint32(0xffffffff)
+		}
+		v7 = v9
+		goto _8
+	_8:
+		byte_offset1 = v7
+		v12 = result4
+		v15 = v12
+		*(*Subtree)(unsafe.Pointer(bp + 40)) = v15
 		if int32(*(*uint8)(unsafe.Pointer(bp + 40 + 0))&0x1>>0) != 0 {
 			result2 = Length{
 				Fbytes: uint32((*(*SubtreeInlineData)(unsafe.Pointer(bp + 40))).Fpadding_bytes),
@@ -22718,15 +22726,15 @@ func ts_parser__reuse_node(tls *libc.TLS, self18 uintptr, version StackVersion, 
 					Fcolumn: uint32((*(*SubtreeInlineData)(unsafe.Pointer(bp + 40))).Fpadding_columns),
 				},
 			}
-			v11 = result2
-			goto _12
+			v16 = result2
+			goto _17
 		} else {
-			v11 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 40)))).Fpadding
-			goto _12
+			v16 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 40)))).Fpadding
+			goto _17
 		}
-	_12:
-		v13 = v7
-		*(*Subtree)(unsafe.Pointer(bp + 48)) = v13
+	_17:
+		v18 = v12
+		*(*Subtree)(unsafe.Pointer(bp + 48)) = v18
 		if int32(*(*uint8)(unsafe.Pointer(bp + 48 + 0))&0x1>>0) != 0 {
 			result3 = Length{
 				Fbytes: uint32((*(*SubtreeInlineData)(unsafe.Pointer(bp + 48))).Fsize_bytes),
@@ -22734,115 +22742,115 @@ func ts_parser__reuse_node(tls *libc.TLS, self18 uintptr, version StackVersion, 
 					Fcolumn: uint32((*(*SubtreeInlineData)(unsafe.Pointer(bp + 48))).Fsize_bytes),
 				},
 			}
-			v14 = result3
-			goto _15
+			v19 = result3
+			goto _20
 		} else {
-			v14 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 48)))).Fsize
-			goto _15
+			v19 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 48)))).Fsize
+			goto _20
 		}
-	_15:
-		v16 = v11
-		v17 = v14
-		result1.Fbytes = v16.Fbytes + v17.Fbytes
-		v18 = v16.Fextent
-		v19 = v17.Fextent
-		if v19.Frow > libc.Uint32FromInt32(0) {
+	_20:
+		v21 = v16
+		v22 = v19
+		result1.Fbytes = v21.Fbytes + v22.Fbytes
+		v23 = v21.Fextent
+		v24 = v22.Fextent
+		if v24.Frow > libc.Uint32FromInt32(0) {
 			result = TSPoint{
-				Frow:    v18.Frow + v19.Frow,
-				Fcolumn: v19.Fcolumn,
+				Frow:    v23.Frow + v24.Frow,
+				Fcolumn: v24.Fcolumn,
 			}
-			v22 = result
-			goto _23
-		_23:
-			v20 = v22
-			goto _21
+			v27 = result
+			goto _28
+		_28:
+			v25 = v27
+			goto _26
 		} else {
 			result = TSPoint{
-				Frow:    v18.Frow,
-				Fcolumn: v18.Fcolumn + v19.Fcolumn,
+				Frow:    v23.Frow,
+				Fcolumn: v23.Fcolumn + v24.Fcolumn,
 			}
-			v24 = result
-			goto _25
-		_25:
-			v20 = v24
-			goto _21
+			v29 = result
+			goto _30
+		_30:
+			v25 = v29
+			goto _26
 		}
-	_21:
-		result1.Fextent = v20
-		v26 = result1
-		goto _27
-	_27:
-		v8 = v26
-		goto _9
-	_9:
-		v5 = v8.Fbytes
-		goto _6
-	_6:
-		end_byte_offset = byte_offset1 + v5
-		// Do not reuse an EOF node if the included ranges array has changes
-		// later on in the file.
-		v30 = *(*Subtree)(unsafe.Pointer(bp + 104))
-		*(*Subtree)(unsafe.Pointer(bp)) = v30
-		if int32(*(*uint8)(unsafe.Pointer(bp + 0))&0x1>>0) != 0 {
-			v33 = int32((*(*SubtreeInlineData)(unsafe.Pointer(bp))).Fsymbol)
-		} else {
-			v33 = int32((*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)))).Fsymbol)
-		}
-		v31 = uint16(v33)
+	_26:
+		result1.Fextent = v25
+		v31 = result1
 		goto _32
 	_32:
-		v28 = libc.BoolUint8(int32(v31) == ts_builtin_sym_end)
-		goto _29
-	_29:
-		if v28 != 0 {
+		v13 = v31
+		goto _14
+	_14:
+		v10 = v13.Fbytes
+		goto _11
+	_11:
+		end_byte_offset = byte_offset1 + v10
+		// Do not reuse an EOF node if the included ranges array has changes
+		// later on in the file.
+		v35 = result4
+		*(*Subtree)(unsafe.Pointer(bp)) = v35
+		if int32(*(*uint8)(unsafe.Pointer(bp + 0))&0x1>>0) != 0 {
+			v38 = int32((*(*SubtreeInlineData)(unsafe.Pointer(bp))).Fsymbol)
+		} else {
+			v38 = int32((*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)))).Fsymbol)
+		}
+		v36 = uint16(v38)
+		goto _37
+	_37:
+		v33 = libc.BoolUint8(int32(v36) == ts_builtin_sym_end)
+		goto _34
+	_34:
+		if v33 != 0 {
 			end_byte_offset = uint32(0xffffffff)
 		}
 		if byte_offset1 > position {
-			if (*TSParser)(unsafe.Pointer(self18)).Flexer.Flogger.Flog != 0 || (*TSParser)(unsafe.Pointer(self18)).Fdot_graph_file != 0 {
-				v7 = *(*Subtree)(unsafe.Pointer(bp + 104))
-				*(*Subtree)(unsafe.Pointer(bp)) = v7
+			if (*TSParser)(unsafe.Pointer(self19)).Flexer.Flogger.Flog != 0 || (*TSParser)(unsafe.Pointer(self19)).Fdot_graph_file != 0 {
+				v1 = result4
+				*(*Subtree)(unsafe.Pointer(bp)) = v1
 				if int32(*(*uint8)(unsafe.Pointer(bp + 0))&0x1>>0) != 0 {
-					v33 = int32((*(*SubtreeInlineData)(unsafe.Pointer(bp))).Fsymbol)
+					v38 = int32((*(*SubtreeInlineData)(unsafe.Pointer(bp))).Fsymbol)
 				} else {
-					v33 = int32((*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)))).Fsymbol)
+					v38 = int32((*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)))).Fsymbol)
 				}
-				v31 = uint16(v33)
-				goto _36
-			_36:
-				libc.X__builtin_snprintf(tls, self18+192, uint64(TREE_SITTER_SERIALIZATION_BUFFER_SIZE), __ccgo_ts+1417, libc.VaList(bp+120, ts_language_symbol_name(tls, (*TSParser)(unsafe.Pointer(self18)).Flanguage, v31)))
-				ts_parser__log(tls, self18)
+				v36 = uint16(v38)
+				goto _41
+			_41:
+				libc.X__builtin_snprintf(tls, self19+192, uint64(TREE_SITTER_SERIALIZATION_BUFFER_SIZE), __ccgo_ts+1417, libc.VaList(bp+112, ts_language_symbol_name(tls, (*TSParser)(unsafe.Pointer(self19)).Flanguage, v36)))
+				ts_parser__log(tls, self19)
 			}
 			break
 		}
 		if byte_offset1 < position {
-			if (*TSParser)(unsafe.Pointer(self18)).Flexer.Flogger.Flog != 0 || (*TSParser)(unsafe.Pointer(self18)).Fdot_graph_file != 0 {
-				v7 = *(*Subtree)(unsafe.Pointer(bp + 104))
-				*(*Subtree)(unsafe.Pointer(bp)) = v7
+			if (*TSParser)(unsafe.Pointer(self19)).Flexer.Flogger.Flog != 0 || (*TSParser)(unsafe.Pointer(self19)).Fdot_graph_file != 0 {
+				v1 = result4
+				*(*Subtree)(unsafe.Pointer(bp)) = v1
 				if int32(*(*uint8)(unsafe.Pointer(bp + 0))&0x1>>0) != 0 {
-					v33 = int32((*(*SubtreeInlineData)(unsafe.Pointer(bp))).Fsymbol)
+					v38 = int32((*(*SubtreeInlineData)(unsafe.Pointer(bp))).Fsymbol)
 				} else {
-					v33 = int32((*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)))).Fsymbol)
+					v38 = int32((*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)))).Fsymbol)
 				}
-				v31 = uint16(v33)
-				goto _40
-			_40:
-				libc.X__builtin_snprintf(tls, self18+192, uint64(TREE_SITTER_SERIALIZATION_BUFFER_SIZE), __ccgo_ts+1448, libc.VaList(bp+120, ts_language_symbol_name(tls, (*TSParser)(unsafe.Pointer(self18)).Flanguage, v31)))
-				ts_parser__log(tls, self18)
+				v36 = uint16(v38)
+				goto _45
+			_45:
+				libc.X__builtin_snprintf(tls, self19+192, uint64(TREE_SITTER_SERIALIZATION_BUFFER_SIZE), __ccgo_ts+1448, libc.VaList(bp+112, ts_language_symbol_name(tls, (*TSParser)(unsafe.Pointer(self19)).Flanguage, v36)))
+				ts_parser__log(tls, self19)
 			}
-			if v63 = end_byte_offset <= position; !v63 {
-				v1 = self18 + 1368
-				if v43 = !!((*struct {
+			if v68 = end_byte_offset <= position; !v68 {
+				v2 = self19 + 1368
+				if v48 = !!((*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v1)).Fsize-libc.Uint32FromInt32(1) < (*struct {
+				})(unsafe.Pointer(v2)).Fsize-libc.Uint32FromInt32(1) < (*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v1)).Fsize); !v43 {
+				})(unsafe.Pointer(v2)).Fsize); !v48 {
 					libc.X_assert(tls, __ccgo_ts+1038, __ccgo_ts+1098, uint32(63))
 				}
-				_ = v43 || libc.Bool(libc.Int32FromInt32(0) != 0)
+				_ = v48 || libc.Bool(libc.Int32FromInt32(0) != 0)
 				*(*StackEntry)(unsafe.Pointer(bp + 88)) = StackEntry{}
 				*(*struct {
 					Ftree struct {
@@ -22855,118 +22863,118 @@ func ts_parser__reuse_node(tls *libc.TLS, self18 uintptr, version StackVersion, 
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v1)).Fcontents + uintptr((*struct {
+				})(unsafe.Pointer(v2)).Fcontents + uintptr((*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v1)).Fsize-uint32(1))*16))
-				v7 = (*(*StackEntry)(unsafe.Pointer(bp + 88))).Ftree
-				*(*Subtree)(unsafe.Pointer(bp + 56)) = v7
+				})(unsafe.Pointer(v2)).Fsize-uint32(1))*16))
+				v1 = (*(*StackEntry)(unsafe.Pointer(bp + 88))).Ftree
+				*(*Subtree)(unsafe.Pointer(bp + 56)) = v1
 				if int32(*(*uint8)(unsafe.Pointer(bp + 56 + 0))&0x1>>0) != 0 {
-					v4 = uint32(0)
+					v9 = uint32(0)
 				} else {
-					v4 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 56)))).Fchild_count
+					v9 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 56)))).Fchild_count
 				}
-				v2 = v4
-				goto _46
-			_46:
-				if v2 > libc.Uint32FromInt32(0) {
-					v42 = (*struct {
+				v7 = v9
+				goto _51
+			_51:
+				if v7 > libc.Uint32FromInt32(0) {
+					v6 = (*struct {
 						Fcontents uintptr
 						Fsize     uint32_t
 						Fcapacity uint32_t
-					})(unsafe.Pointer(v1)).Fcontents
-					v48 = v1 + 12
-					new_contents1 = v42
+					})(unsafe.Pointer(v2)).Fcontents
+					v47 = v2 + 12
+					new_contents1 = v6
 					new_size = (*struct {
 						Fcontents uintptr
 						Fsize     uint32_t
 						Fcapacity uint32_t
-					})(unsafe.Pointer(v1)).Fsize + uint32(1)
-					if new_size > *(*uint32_t)(unsafe.Pointer(v48)) {
-						new_capacity1 = *(*uint32_t)(unsafe.Pointer(v48)) * uint32(2)
+					})(unsafe.Pointer(v2)).Fsize + uint32(1)
+					if new_size > *(*uint32_t)(unsafe.Pointer(v47)) {
+						new_capacity1 = *(*uint32_t)(unsafe.Pointer(v47)) * uint32(2)
 						if new_capacity1 < libc.Uint32FromInt32(8) {
 							new_capacity1 = uint32(8)
 						}
 						if new_capacity1 < new_size {
 							new_capacity1 = new_size
 						}
-						v49 = v42
-						v50 = v48
-						v52 = libc.Uint64FromInt64(16)
-						v5 = new_capacity1
-						new_contents = v49
-						if v5 > *(*uint32_t)(unsafe.Pointer(v50)) {
-							if v49 != 0 {
-								new_contents = (*(*func(*libc.TLS, uintptr, size_t) uintptr)(unsafe.Pointer(&struct{ uintptr }{ts_current_realloc})))(tls, v49, uint64(v5)*v52)
+						v53 = v6
+						v54 = v47
+						v57 = libc.Uint64FromInt64(16)
+						v10 = new_capacity1
+						new_contents = v53
+						if v10 > *(*uint32_t)(unsafe.Pointer(v54)) {
+							if v53 != 0 {
+								new_contents = (*(*func(*libc.TLS, uintptr, size_t) uintptr)(unsafe.Pointer(&struct{ uintptr }{ts_current_realloc})))(tls, v53, uint64(v10)*v57)
 							} else {
-								new_contents = (*(*func(*libc.TLS, size_t) uintptr)(unsafe.Pointer(&struct{ uintptr }{ts_current_malloc})))(tls, uint64(v5)*v52)
+								new_contents = (*(*func(*libc.TLS, size_t) uintptr)(unsafe.Pointer(&struct{ uintptr }{ts_current_malloc})))(tls, uint64(v10)*v57)
 							}
-							*(*uint32_t)(unsafe.Pointer(v50)) = v5
+							*(*uint32_t)(unsafe.Pointer(v54)) = v10
 						}
-						v51 = new_contents
-						goto _55
-					_55:
-						new_contents1 = v51
+						v55 = new_contents
+						goto _60
+					_60:
+						new_contents1 = v55
 					}
-					v54 = new_contents1
-					goto _57
-				_57:
+					v56 = new_contents1
+					goto _62
+				_62:
 					(*struct {
 						Fcontents uintptr
 						Fsize     uint32_t
 						Fcapacity uint32_t
-					})(unsafe.Pointer(v1)).Fcontents = v54
-					v56 = v1 + 8
-					v45 = *(*uint32_t)(unsafe.Pointer(v56))
-					*(*uint32_t)(unsafe.Pointer(v56)) = *(*uint32_t)(unsafe.Pointer(v56)) + 1
+					})(unsafe.Pointer(v2)).Fcontents = v56
+					v59 = v2 + 8
+					v50 = *(*uint32_t)(unsafe.Pointer(v59))
+					*(*uint32_t)(unsafe.Pointer(v59)) = *(*uint32_t)(unsafe.Pointer(v59)) + 1
 					if int32(*(*uint8)(unsafe.Pointer(bp + 88 + 0))&0x1>>0) != 0 {
-						v59 = libc.UintptrFromInt32(0)
+						v61 = libc.UintptrFromInt32(0)
 					} else {
-						v59 = *(*uintptr)(unsafe.Pointer(bp + 88)) - uintptr((*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 88)))).Fchild_count)*8
+						v61 = *(*uintptr)(unsafe.Pointer(bp + 88)) - uintptr((*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 88)))).Fchild_count)*8
 					}
 					*(*StackEntry)(unsafe.Pointer((*struct {
 						Fcontents uintptr
 						Fsize     uint32_t
 						Fcapacity uint32_t
-					})(unsafe.Pointer(v1)).Fcontents + uintptr(v45)*16)) = StackEntry{
-						Ftree:        *(*Subtree)(unsafe.Pointer(v59)),
+					})(unsafe.Pointer(v2)).Fcontents + uintptr(v50)*16)) = StackEntry{
+						Ftree:        *(*Subtree)(unsafe.Pointer(v61)),
 						Fbyte_offset: (*(*StackEntry)(unsafe.Pointer(bp + 88))).Fbyte_offset,
 					}
-					v28 = libc.BoolUint8(true1 != 0)
-					goto _62
+					v33 = libc.BoolUint8(true1 != 0)
+					goto _67
 				} else {
-					v28 = libc.BoolUint8(false1 != 0)
-					goto _62
+					v33 = libc.BoolUint8(false1 != 0)
+					goto _67
 				}
-			_62:
+			_67:
 			}
-			if v63 || !(v28 != 0) {
-				v60 = self18 + 1368
-				if v65 = !!((*struct {
+			if v68 || !(v33 != 0) {
+				v64 = self19 + 1368
+				if v70 = !!((*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v60)).Fsize-libc.Uint32FromInt32(1) < (*struct {
+				})(unsafe.Pointer(v64)).Fsize-libc.Uint32FromInt32(1) < (*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v60)).Fsize); !v65 {
+				})(unsafe.Pointer(v64)).Fsize); !v70 {
 					libc.X_assert(tls, __ccgo_ts+1038, __ccgo_ts+1098, uint32(40))
 				}
-				_ = v65 || libc.Bool(libc.Int32FromInt32(0) != 0)
+				_ = v70 || libc.Bool(libc.Int32FromInt32(0) != 0)
 				last_entry = *(*StackEntry)(unsafe.Pointer((*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v60)).Fcontents + uintptr((*struct {
+				})(unsafe.Pointer(v64)).Fcontents + uintptr((*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v60)).Fsize-uint32(1))*16))
-				v10 = last_entry.Ftree
-				v13 = v10
-				*(*Subtree)(unsafe.Pointer(bp + 40)) = v13
+				})(unsafe.Pointer(v64)).Fsize-uint32(1))*16))
+				v3 = last_entry.Ftree
+				v5 = v3
+				*(*Subtree)(unsafe.Pointer(bp + 40)) = v5
 				if int32(*(*uint8)(unsafe.Pointer(bp + 40 + 0))&0x1>>0) != 0 {
 					result2 = Length{
 						Fbytes: uint32((*(*SubtreeInlineData)(unsafe.Pointer(bp + 40))).Fpadding_bytes),
@@ -22975,15 +22983,15 @@ func ts_parser__reuse_node(tls *libc.TLS, self18 uintptr, version StackVersion, 
 							Fcolumn: uint32((*(*SubtreeInlineData)(unsafe.Pointer(bp + 40))).Fpadding_columns),
 						},
 					}
-					v11 = result2
-					goto _73
+					v16 = result2
+					goto _78
 				} else {
-					v11 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 40)))).Fpadding
-					goto _73
+					v16 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 40)))).Fpadding
+					goto _78
 				}
-			_73:
-				v30 = v10
-				*(*Subtree)(unsafe.Pointer(bp + 48)) = v30
+			_78:
+				v12 = v3
+				*(*Subtree)(unsafe.Pointer(bp + 48)) = v12
 				if int32(*(*uint8)(unsafe.Pointer(bp + 48 + 0))&0x1>>0) != 0 {
 					result3 = Length{
 						Fbytes: uint32((*(*SubtreeInlineData)(unsafe.Pointer(bp + 48))).Fsize_bytes),
@@ -22991,223 +22999,223 @@ func ts_parser__reuse_node(tls *libc.TLS, self18 uintptr, version StackVersion, 
 							Fcolumn: uint32((*(*SubtreeInlineData)(unsafe.Pointer(bp + 48))).Fsize_bytes),
 						},
 					}
-					v14 = result3
-					goto _76
+					v19 = result3
+					goto _81
 				} else {
-					v14 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 48)))).Fsize
-					goto _76
+					v19 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 48)))).Fsize
+					goto _81
 				}
-			_76:
-				v16 = v11
-				v17 = v14
-				result1.Fbytes = v16.Fbytes + v17.Fbytes
-				v18 = v16.Fextent
-				v19 = v17.Fextent
-				if v19.Frow > libc.Uint32FromInt32(0) {
+			_81:
+				v21 = v16
+				v22 = v19
+				result1.Fbytes = v21.Fbytes + v22.Fbytes
+				v23 = v21.Fextent
+				v24 = v22.Fextent
+				if v24.Frow > libc.Uint32FromInt32(0) {
 					result = TSPoint{
-						Frow:    v18.Frow + v19.Frow,
-						Fcolumn: v19.Fcolumn,
+						Frow:    v23.Frow + v24.Frow,
+						Fcolumn: v24.Fcolumn,
 					}
-					v22 = result
-					goto _84
-				_84:
-					v20 = v22
-					goto _82
+					v27 = result
+					goto _89
+				_89:
+					v25 = v27
+					goto _87
 				} else {
 					result = TSPoint{
-						Frow:    v18.Frow,
-						Fcolumn: v18.Fcolumn + v19.Fcolumn,
+						Frow:    v23.Frow,
+						Fcolumn: v23.Fcolumn + v24.Fcolumn,
 					}
-					v24 = result
-					goto _86
-				_86:
-					v20 = v24
-					goto _82
+					v29 = result
+					goto _91
+				_91:
+					v25 = v29
+					goto _87
 				}
-			_82:
-				result1.Fextent = v20
-				v26 = result1
-				goto _88
-			_88:
-				v8 = v26
-				goto _70
-			_70:
-				v53 = v8.Fbytes
-				goto _67
-			_67:
-				byte_offset = last_entry.Fbyte_offset + v53
-				v34 = last_entry.Ftree
-				*(*Subtree)(unsafe.Pointer(bp + 64)) = v34
+			_87:
+				result1.Fextent = v25
+				v31 = result1
+				goto _93
+			_93:
+				v13 = v31
+				goto _75
+			_75:
+				v58 = v13.Fbytes
+				goto _72
+			_72:
+				byte_offset = last_entry.Fbyte_offset + v58
+				v15 = last_entry.Ftree
+				*(*Subtree)(unsafe.Pointer(bp + 64)) = v15
 				if int32(*(*uint8)(unsafe.Pointer(bp + 64 + 0))&0x1>>0) != 0 {
-					v33 = false1
+					v38 = false1
 				} else {
-					v33 = int32(*(*uint8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 64)) + 44)) & 0x40 >> 6)
+					v38 = int32(*(*uint8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 64)) + 44)) & 0x40 >> 6)
 				}
-				v61 = uint8(libc.BoolInt32(v33 != 0))
-				goto _91
-			_91:
-				if v61 != 0 {
-					(*ReusableNode)(unsafe.Pointer(v60)).Flast_external_token = ts_subtree_last_external_token(tls, last_entry.Ftree)
+				v66 = uint8(libc.BoolInt32(v38 != 0))
+				goto _96
+			_96:
+				if v66 != 0 {
+					(*ReusableNode)(unsafe.Pointer(v64)).Flast_external_token = ts_subtree_last_external_token(tls, last_entry.Ftree)
 				}
 				for {
-					v64 = v60 + 8
-					*(*uint32_t)(unsafe.Pointer(v64)) = *(*uint32_t)(unsafe.Pointer(v64)) - 1
-					v66 = *(*uint32_t)(unsafe.Pointer(v64))
+					v65 = v64 + 8
+					*(*uint32_t)(unsafe.Pointer(v65)) = *(*uint32_t)(unsafe.Pointer(v65)) - 1
+					v71 = *(*uint32_t)(unsafe.Pointer(v65))
 					popped_entry = *(*StackEntry)(unsafe.Pointer((*struct {
 						Fcontents uintptr
 						Fsize     uint32_t
 						Fcapacity uint32_t
-					})(unsafe.Pointer(v60)).Fcontents + uintptr(v66)*16))
+					})(unsafe.Pointer(v64)).Fcontents + uintptr(v71)*16))
 					next_index = popped_entry.Fchild_index + uint32(1)
-					if (*ReusableNode)(unsafe.Pointer(v60)).Fstack.Fsize == libc.Uint32FromInt32(0) {
-						goto _100
+					if (*ReusableNode)(unsafe.Pointer(v64)).Fstack.Fsize == libc.Uint32FromInt32(0) {
+						goto _105
 					}
-					if v101 = !!((*struct {
+					if v106 = !!((*struct {
 						Fcontents uintptr
 						Fsize     uint32_t
 						Fcapacity uint32_t
-					})(unsafe.Pointer(v60)).Fsize-libc.Uint32FromInt32(1) < (*struct {
+					})(unsafe.Pointer(v64)).Fsize-libc.Uint32FromInt32(1) < (*struct {
 						Fcontents uintptr
 						Fsize     uint32_t
 						Fcapacity uint32_t
-					})(unsafe.Pointer(v60)).Fsize); !v101 {
+					})(unsafe.Pointer(v64)).Fsize); !v106 {
 						libc.X_assert(tls, __ccgo_ts+1038, __ccgo_ts+1098, uint32(52))
 					}
-					_ = v101 || libc.Bool(libc.Int32FromInt32(0) != 0)
+					_ = v106 || libc.Bool(libc.Int32FromInt32(0) != 0)
 					*(*Subtree)(unsafe.Pointer(bp + 80)) = (*StackEntry)(unsafe.Pointer((*struct {
 						Fcontents uintptr
 						Fsize     uint32_t
 						Fcapacity uint32_t
-					})(unsafe.Pointer(v60)).Fcontents + uintptr((*struct {
+					})(unsafe.Pointer(v64)).Fcontents + uintptr((*struct {
 						Fcontents uintptr
 						Fsize     uint32_t
 						Fcapacity uint32_t
-					})(unsafe.Pointer(v60)).Fsize-uint32(1))*16)).Ftree
-					goto _97
-				_97:
+					})(unsafe.Pointer(v64)).Fsize-uint32(1))*16)).Ftree
+					goto _102
+				_102:
 					;
-					v38 = *(*Subtree)(unsafe.Pointer(bp + 80))
-					*(*Subtree)(unsafe.Pointer(bp + 56)) = v38
+					v18 = *(*Subtree)(unsafe.Pointer(bp + 80))
+					*(*Subtree)(unsafe.Pointer(bp + 56)) = v18
 					if int32(*(*uint8)(unsafe.Pointer(bp + 56 + 0))&0x1>>0) != 0 {
-						v47 = uint32(0)
+						v52 = uint32(0)
 					} else {
-						v47 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 56)))).Fchild_count
+						v52 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 56)))).Fchild_count
 					}
-					v58 = v47
-					goto _95
-				_95:
+					v63 = v52
+					goto _100
+				_100:
 					;
-					if !(v58 <= next_index) {
+					if !(v63 <= next_index) {
 						break
 					}
 				}
-				v99 = (*struct {
+				v69 = (*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v60)).Fcontents
-				v102 = v60 + 12
-				new_contents1 = v99
+				})(unsafe.Pointer(v64)).Fcontents
+				v104 = v64 + 12
+				new_contents1 = v69
 				new_size = (*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v60)).Fsize + uint32(1)
-				if new_size > *(*uint32_t)(unsafe.Pointer(v102)) {
-					new_capacity1 = *(*uint32_t)(unsafe.Pointer(v102)) * uint32(2)
+				})(unsafe.Pointer(v64)).Fsize + uint32(1)
+				if new_size > *(*uint32_t)(unsafe.Pointer(v104)) {
+					new_capacity1 = *(*uint32_t)(unsafe.Pointer(v104)) * uint32(2)
 					if new_capacity1 < libc.Uint32FromInt32(8) {
 						new_capacity1 = uint32(8)
 					}
 					if new_capacity1 < new_size {
 						new_capacity1 = new_size
 					}
-					v103 = v99
-					v104 = v102
-					v106 = libc.Uint64FromInt64(16)
-					v94 = new_capacity1
-					new_contents = v103
-					if v94 > *(*uint32_t)(unsafe.Pointer(v104)) {
-						if v103 != 0 {
-							new_contents = (*(*func(*libc.TLS, uintptr, size_t) uintptr)(unsafe.Pointer(&struct{ uintptr }{ts_current_realloc})))(tls, v103, uint64(v94)*v106)
+					v107 = v69
+					v108 = v104
+					v111 = libc.Uint64FromInt64(16)
+					v99 = new_capacity1
+					new_contents = v107
+					if v99 > *(*uint32_t)(unsafe.Pointer(v108)) {
+						if v107 != 0 {
+							new_contents = (*(*func(*libc.TLS, uintptr, size_t) uintptr)(unsafe.Pointer(&struct{ uintptr }{ts_current_realloc})))(tls, v107, uint64(v99)*v111)
 						} else {
-							new_contents = (*(*func(*libc.TLS, size_t) uintptr)(unsafe.Pointer(&struct{ uintptr }{ts_current_malloc})))(tls, uint64(v94)*v106)
+							new_contents = (*(*func(*libc.TLS, size_t) uintptr)(unsafe.Pointer(&struct{ uintptr }{ts_current_malloc})))(tls, uint64(v99)*v111)
 						}
-						*(*uint32_t)(unsafe.Pointer(v104)) = v94
+						*(*uint32_t)(unsafe.Pointer(v108)) = v99
 					}
-					v105 = new_contents
-					goto _109
-				_109:
-					new_contents1 = v105
+					v109 = new_contents
+					goto _114
+				_114:
+					new_contents1 = v109
 				}
-				v108 = new_contents1
-				goto _111
-			_111:
+				v110 = new_contents1
+				goto _116
+			_116:
 				(*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v60)).Fcontents = v108
-				v110 = v60 + 8
-				v98 = *(*uint32_t)(unsafe.Pointer(v110))
-				*(*uint32_t)(unsafe.Pointer(v110)) = *(*uint32_t)(unsafe.Pointer(v110)) + 1
+				})(unsafe.Pointer(v64)).Fcontents = v110
+				v113 = v64 + 8
+				v103 = *(*uint32_t)(unsafe.Pointer(v113))
+				*(*uint32_t)(unsafe.Pointer(v113)) = *(*uint32_t)(unsafe.Pointer(v113)) + 1
 				if int32(*(*uint8)(unsafe.Pointer(bp + 80 + 0))&0x1>>0) != 0 {
-					v113 = libc.UintptrFromInt32(0)
+					v115 = libc.UintptrFromInt32(0)
 				} else {
-					v113 = *(*uintptr)(unsafe.Pointer(bp + 80)) - uintptr((*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 80)))).Fchild_count)*8
+					v115 = *(*uintptr)(unsafe.Pointer(bp + 80)) - uintptr((*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 80)))).Fchild_count)*8
 				}
 				*(*StackEntry)(unsafe.Pointer((*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v60)).Fcontents + uintptr(v98)*16)) = StackEntry{
-					Ftree:        *(*Subtree)(unsafe.Pointer(v113 + uintptr(next_index)*8)),
+				})(unsafe.Pointer(v64)).Fcontents + uintptr(v103)*16)) = StackEntry{
+					Ftree:        *(*Subtree)(unsafe.Pointer(v115 + uintptr(next_index)*8)),
 					Fchild_index: next_index,
 					Fbyte_offset: byte_offset,
 				}
-			_100:
+			_105:
 			}
 			continue
 		}
-		if !(ts_subtree_external_scanner_state_eq(tls, (*TSParser)(unsafe.Pointer(self18)).Freusable_node.Flast_external_token, last_external_token) != 0) {
-			if (*TSParser)(unsafe.Pointer(self18)).Flexer.Flogger.Flog != 0 || (*TSParser)(unsafe.Pointer(self18)).Fdot_graph_file != 0 {
-				v7 = *(*Subtree)(unsafe.Pointer(bp + 104))
-				*(*Subtree)(unsafe.Pointer(bp)) = v7
+		if !(ts_subtree_external_scanner_state_eq(tls, (*TSParser)(unsafe.Pointer(self19)).Freusable_node.Flast_external_token, last_external_token) != 0) {
+			if (*TSParser)(unsafe.Pointer(self19)).Flexer.Flogger.Flog != 0 || (*TSParser)(unsafe.Pointer(self19)).Fdot_graph_file != 0 {
+				v1 = result4
+				*(*Subtree)(unsafe.Pointer(bp)) = v1
 				if int32(*(*uint8)(unsafe.Pointer(bp + 0))&0x1>>0) != 0 {
-					v33 = int32((*(*SubtreeInlineData)(unsafe.Pointer(bp))).Fsymbol)
+					v38 = int32((*(*SubtreeInlineData)(unsafe.Pointer(bp))).Fsymbol)
 				} else {
-					v33 = int32((*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)))).Fsymbol)
+					v38 = int32((*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)))).Fsymbol)
 				}
-				v31 = uint16(v33)
-				goto _117
-			_117:
-				libc.X__builtin_snprintf(tls, self18+192, uint64(TREE_SITTER_SERIALIZATION_BUFFER_SIZE), __ccgo_ts+1477, libc.VaList(bp+120, ts_language_symbol_name(tls, (*TSParser)(unsafe.Pointer(self18)).Flanguage, v31)))
-				ts_parser__log(tls, self18)
+				v36 = uint16(v38)
+				goto _122
+			_122:
+				libc.X__builtin_snprintf(tls, self19+192, uint64(TREE_SITTER_SERIALIZATION_BUFFER_SIZE), __ccgo_ts+1477, libc.VaList(bp+112, ts_language_symbol_name(tls, (*TSParser)(unsafe.Pointer(self19)).Flanguage, v36)))
+				ts_parser__log(tls, self19)
 			}
-			v1 = self18 + 1368
-			if v43 = !!((*struct {
+			v2 = self19 + 1368
+			if v48 = !!((*struct {
 				Fcontents uintptr
 				Fsize     uint32_t
 				Fcapacity uint32_t
-			})(unsafe.Pointer(v1)).Fsize-libc.Uint32FromInt32(1) < (*struct {
+			})(unsafe.Pointer(v2)).Fsize-libc.Uint32FromInt32(1) < (*struct {
 				Fcontents uintptr
 				Fsize     uint32_t
 				Fcapacity uint32_t
-			})(unsafe.Pointer(v1)).Fsize); !v43 {
+			})(unsafe.Pointer(v2)).Fsize); !v48 {
 				libc.X_assert(tls, __ccgo_ts+1038, __ccgo_ts+1098, uint32(40))
 			}
-			_ = v43 || libc.Bool(libc.Int32FromInt32(0) != 0)
+			_ = v48 || libc.Bool(libc.Int32FromInt32(0) != 0)
 			last_entry = *(*StackEntry)(unsafe.Pointer((*struct {
 				Fcontents uintptr
 				Fsize     uint32_t
 				Fcapacity uint32_t
-			})(unsafe.Pointer(v1)).Fcontents + uintptr((*struct {
+			})(unsafe.Pointer(v2)).Fcontents + uintptr((*struct {
 				Fcontents uintptr
 				Fsize     uint32_t
 				Fcapacity uint32_t
-			})(unsafe.Pointer(v1)).Fsize-uint32(1))*16))
-			v7 = last_entry.Ftree
-			v10 = v7
-			*(*Subtree)(unsafe.Pointer(bp + 40)) = v10
+			})(unsafe.Pointer(v2)).Fsize-uint32(1))*16))
+			v1 = last_entry.Ftree
+			v3 = v1
+			*(*Subtree)(unsafe.Pointer(bp + 40)) = v3
 			if int32(*(*uint8)(unsafe.Pointer(bp + 40 + 0))&0x1>>0) != 0 {
 				result2 = Length{
 					Fbytes: uint32((*(*SubtreeInlineData)(unsafe.Pointer(bp + 40))).Fpadding_bytes),
@@ -23216,15 +23224,15 @@ func ts_parser__reuse_node(tls *libc.TLS, self18 uintptr, version StackVersion, 
 						Fcolumn: uint32((*(*SubtreeInlineData)(unsafe.Pointer(bp + 40))).Fpadding_columns),
 					},
 				}
-				v11 = result2
-				goto _128
+				v16 = result2
+				goto _133
 			} else {
-				v11 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 40)))).Fpadding
-				goto _128
+				v16 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 40)))).Fpadding
+				goto _133
 			}
-		_128:
-			v13 = v7
-			*(*Subtree)(unsafe.Pointer(bp + 48)) = v13
+		_133:
+			v5 = v1
+			*(*Subtree)(unsafe.Pointer(bp + 48)) = v5
 			if int32(*(*uint8)(unsafe.Pointer(bp + 48 + 0))&0x1>>0) != 0 {
 				result3 = Length{
 					Fbytes: uint32((*(*SubtreeInlineData)(unsafe.Pointer(bp + 48))).Fsize_bytes),
@@ -23232,268 +23240,268 @@ func ts_parser__reuse_node(tls *libc.TLS, self18 uintptr, version StackVersion, 
 						Fcolumn: uint32((*(*SubtreeInlineData)(unsafe.Pointer(bp + 48))).Fsize_bytes),
 					},
 				}
-				v14 = result3
-				goto _131
+				v19 = result3
+				goto _136
 			} else {
-				v14 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 48)))).Fsize
-				goto _131
+				v19 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 48)))).Fsize
+				goto _136
 			}
-		_131:
-			v16 = v11
-			v17 = v14
-			result1.Fbytes = v16.Fbytes + v17.Fbytes
-			v18 = v16.Fextent
-			v19 = v17.Fextent
-			if v19.Frow > libc.Uint32FromInt32(0) {
+		_136:
+			v21 = v16
+			v22 = v19
+			result1.Fbytes = v21.Fbytes + v22.Fbytes
+			v23 = v21.Fextent
+			v24 = v22.Fextent
+			if v24.Frow > libc.Uint32FromInt32(0) {
 				result = TSPoint{
-					Frow:    v18.Frow + v19.Frow,
-					Fcolumn: v19.Fcolumn,
+					Frow:    v23.Frow + v24.Frow,
+					Fcolumn: v24.Fcolumn,
 				}
-				v22 = result
-				goto _139
-			_139:
-				v20 = v22
-				goto _137
+				v27 = result
+				goto _144
+			_144:
+				v25 = v27
+				goto _142
 			} else {
 				result = TSPoint{
-					Frow:    v18.Frow,
-					Fcolumn: v18.Fcolumn + v19.Fcolumn,
+					Frow:    v23.Frow,
+					Fcolumn: v23.Fcolumn + v24.Fcolumn,
 				}
-				v24 = result
-				goto _141
-			_141:
-				v20 = v24
-				goto _137
+				v29 = result
+				goto _146
+			_146:
+				v25 = v29
+				goto _142
 			}
-		_137:
-			result1.Fextent = v20
-			v26 = result1
-			goto _143
-		_143:
-			v8 = v26
-			goto _125
-		_125:
-			v2 = v8.Fbytes
-			goto _122
-		_122:
-			byte_offset = last_entry.Fbyte_offset + v2
-			v30 = last_entry.Ftree
-			*(*Subtree)(unsafe.Pointer(bp + 64)) = v30
+		_142:
+			result1.Fextent = v25
+			v31 = result1
+			goto _148
+		_148:
+			v13 = v31
+			goto _130
+		_130:
+			v7 = v13.Fbytes
+			goto _127
+		_127:
+			byte_offset = last_entry.Fbyte_offset + v7
+			v12 = last_entry.Ftree
+			*(*Subtree)(unsafe.Pointer(bp + 64)) = v12
 			if int32(*(*uint8)(unsafe.Pointer(bp + 64 + 0))&0x1>>0) != 0 {
-				v33 = false1
+				v38 = false1
 			} else {
-				v33 = int32(*(*uint8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 64)) + 44)) & 0x40 >> 6)
+				v38 = int32(*(*uint8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 64)) + 44)) & 0x40 >> 6)
 			}
-			v28 = uint8(libc.BoolInt32(v33 != 0))
-			goto _146
-		_146:
-			if v28 != 0 {
-				(*ReusableNode)(unsafe.Pointer(v1)).Flast_external_token = ts_subtree_last_external_token(tls, last_entry.Ftree)
+			v33 = uint8(libc.BoolInt32(v38 != 0))
+			goto _151
+		_151:
+			if v33 != 0 {
+				(*ReusableNode)(unsafe.Pointer(v2)).Flast_external_token = ts_subtree_last_external_token(tls, last_entry.Ftree)
 			}
 			for {
-				v42 = v1 + 8
-				*(*uint32_t)(unsafe.Pointer(v42)) = *(*uint32_t)(unsafe.Pointer(v42)) - 1
-				v45 = *(*uint32_t)(unsafe.Pointer(v42))
+				v6 = v2 + 8
+				*(*uint32_t)(unsafe.Pointer(v6)) = *(*uint32_t)(unsafe.Pointer(v6)) - 1
+				v50 = *(*uint32_t)(unsafe.Pointer(v6))
 				popped_entry = *(*StackEntry)(unsafe.Pointer((*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v1)).Fcontents + uintptr(v45)*16))
+				})(unsafe.Pointer(v2)).Fcontents + uintptr(v50)*16))
 				next_index = popped_entry.Fchild_index + uint32(1)
-				if (*ReusableNode)(unsafe.Pointer(v1)).Fstack.Fsize == libc.Uint32FromInt32(0) {
-					goto _155
+				if (*ReusableNode)(unsafe.Pointer(v2)).Fstack.Fsize == libc.Uint32FromInt32(0) {
+					goto _160
 				}
-				if v63 = !!((*struct {
+				if v68 = !!((*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v1)).Fsize-libc.Uint32FromInt32(1) < (*struct {
+				})(unsafe.Pointer(v2)).Fsize-libc.Uint32FromInt32(1) < (*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v1)).Fsize); !v63 {
+				})(unsafe.Pointer(v2)).Fsize); !v68 {
 					libc.X_assert(tls, __ccgo_ts+1038, __ccgo_ts+1098, uint32(52))
 				}
-				_ = v63 || libc.Bool(libc.Int32FromInt32(0) != 0)
+				_ = v68 || libc.Bool(libc.Int32FromInt32(0) != 0)
 				*(*Subtree)(unsafe.Pointer(bp + 80)) = (*StackEntry)(unsafe.Pointer((*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v1)).Fcontents + uintptr((*struct {
+				})(unsafe.Pointer(v2)).Fcontents + uintptr((*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v1)).Fsize-uint32(1))*16)).Ftree
-				goto _152
-			_152:
+				})(unsafe.Pointer(v2)).Fsize-uint32(1))*16)).Ftree
+				goto _157
+			_157:
 				;
-				v34 = *(*Subtree)(unsafe.Pointer(bp + 80))
-				*(*Subtree)(unsafe.Pointer(bp + 56)) = v34
+				v15 = *(*Subtree)(unsafe.Pointer(bp + 80))
+				*(*Subtree)(unsafe.Pointer(bp + 56)) = v15
 				if int32(*(*uint8)(unsafe.Pointer(bp + 56 + 0))&0x1>>0) != 0 {
-					v4 = uint32(0)
+					v9 = uint32(0)
 				} else {
-					v4 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 56)))).Fchild_count
+					v9 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 56)))).Fchild_count
 				}
-				v5 = v4
-				goto _150
-			_150:
+				v10 = v9
+				goto _155
+			_155:
 				;
-				if !(v5 <= next_index) {
+				if !(v10 <= next_index) {
 					break
 				}
 			}
-			v48 = (*struct {
+			v47 = (*struct {
 				Fcontents uintptr
 				Fsize     uint32_t
 				Fcapacity uint32_t
-			})(unsafe.Pointer(v1)).Fcontents
-			v49 = v1 + 12
-			new_contents1 = v48
+			})(unsafe.Pointer(v2)).Fcontents
+			v53 = v2 + 12
+			new_contents1 = v47
 			new_size = (*struct {
 				Fcontents uintptr
 				Fsize     uint32_t
 				Fcapacity uint32_t
-			})(unsafe.Pointer(v1)).Fsize + uint32(1)
-			if new_size > *(*uint32_t)(unsafe.Pointer(v49)) {
-				new_capacity1 = *(*uint32_t)(unsafe.Pointer(v49)) * uint32(2)
+			})(unsafe.Pointer(v2)).Fsize + uint32(1)
+			if new_size > *(*uint32_t)(unsafe.Pointer(v53)) {
+				new_capacity1 = *(*uint32_t)(unsafe.Pointer(v53)) * uint32(2)
 				if new_capacity1 < libc.Uint32FromInt32(8) {
 					new_capacity1 = uint32(8)
 				}
 				if new_capacity1 < new_size {
 					new_capacity1 = new_size
 				}
-				v50 = v48
-				v51 = v49
-				v52 = libc.Uint64FromInt64(16)
-				v53 = new_capacity1
-				new_contents = v50
-				if v53 > *(*uint32_t)(unsafe.Pointer(v51)) {
-					if v50 != 0 {
-						new_contents = (*(*func(*libc.TLS, uintptr, size_t) uintptr)(unsafe.Pointer(&struct{ uintptr }{ts_current_realloc})))(tls, v50, uint64(v53)*v52)
+				v54 = v47
+				v55 = v53
+				v57 = libc.Uint64FromInt64(16)
+				v58 = new_capacity1
+				new_contents = v54
+				if v58 > *(*uint32_t)(unsafe.Pointer(v55)) {
+					if v54 != 0 {
+						new_contents = (*(*func(*libc.TLS, uintptr, size_t) uintptr)(unsafe.Pointer(&struct{ uintptr }{ts_current_realloc})))(tls, v54, uint64(v58)*v57)
 					} else {
-						new_contents = (*(*func(*libc.TLS, size_t) uintptr)(unsafe.Pointer(&struct{ uintptr }{ts_current_malloc})))(tls, uint64(v53)*v52)
+						new_contents = (*(*func(*libc.TLS, size_t) uintptr)(unsafe.Pointer(&struct{ uintptr }{ts_current_malloc})))(tls, uint64(v58)*v57)
 					}
-					*(*uint32_t)(unsafe.Pointer(v51)) = v53
+					*(*uint32_t)(unsafe.Pointer(v55)) = v58
 				}
-				v54 = new_contents
-				goto _164
-			_164:
-				new_contents1 = v54
+				v56 = new_contents
+				goto _169
+			_169:
+				new_contents1 = v56
 			}
-			v56 = new_contents1
-			goto _166
-		_166:
+			v59 = new_contents1
+			goto _171
+		_171:
 			(*struct {
 				Fcontents uintptr
 				Fsize     uint32_t
 				Fcapacity uint32_t
-			})(unsafe.Pointer(v1)).Fcontents = v56
-			v59 = v1 + 8
-			v58 = *(*uint32_t)(unsafe.Pointer(v59))
-			*(*uint32_t)(unsafe.Pointer(v59)) = *(*uint32_t)(unsafe.Pointer(v59)) + 1
+			})(unsafe.Pointer(v2)).Fcontents = v59
+			v61 = v2 + 8
+			v63 = *(*uint32_t)(unsafe.Pointer(v61))
+			*(*uint32_t)(unsafe.Pointer(v61)) = *(*uint32_t)(unsafe.Pointer(v61)) + 1
 			if int32(*(*uint8)(unsafe.Pointer(bp + 80 + 0))&0x1>>0) != 0 {
-				v60 = libc.UintptrFromInt32(0)
+				v64 = libc.UintptrFromInt32(0)
 			} else {
-				v60 = *(*uintptr)(unsafe.Pointer(bp + 80)) - uintptr((*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 80)))).Fchild_count)*8
+				v64 = *(*uintptr)(unsafe.Pointer(bp + 80)) - uintptr((*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 80)))).Fchild_count)*8
 			}
 			*(*StackEntry)(unsafe.Pointer((*struct {
 				Fcontents uintptr
 				Fsize     uint32_t
 				Fcapacity uint32_t
-			})(unsafe.Pointer(v1)).Fcontents + uintptr(v58)*16)) = StackEntry{
-				Ftree:        *(*Subtree)(unsafe.Pointer(v60 + uintptr(next_index)*8)),
+			})(unsafe.Pointer(v2)).Fcontents + uintptr(v63)*16)) = StackEntry{
+				Ftree:        *(*Subtree)(unsafe.Pointer(v64 + uintptr(next_index)*8)),
 				Fchild_index: next_index,
 				Fbyte_offset: byte_offset,
 			}
-		_155:
+		_160:
 			;
 			continue
 		}
 		reason = libc.UintptrFromInt32(0)
-		v7 = *(*Subtree)(unsafe.Pointer(bp + 104))
-		*(*Subtree)(unsafe.Pointer(bp + 8)) = v7
+		v1 = result4
+		*(*Subtree)(unsafe.Pointer(bp + 8)) = v1
 		if int32(*(*uint8)(unsafe.Pointer(bp + 8 + 0))&0x1>>0) != 0 {
-			v33 = int32(*(*uint8)(unsafe.Pointer(bp + 8 + 0)) & 0x10 >> 4)
+			v38 = int32(*(*uint8)(unsafe.Pointer(bp + 8 + 0)) & 0x10 >> 4)
 		} else {
-			v33 = int32(*(*uint8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 8)) + 44)) & 0x20 >> 5)
+			v38 = int32(*(*uint8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 8)) + 44)) & 0x20 >> 5)
 		}
-		v28 = uint8(libc.BoolInt32(v33 != 0))
-		goto _172
-	_172:
-		if v28 != 0 {
+		v33 = uint8(libc.BoolInt32(v38 != 0))
+		goto _177
+	_177:
+		if v33 != 0 {
 			reason = __ccgo_ts + 1538
 		} else {
-			v7 = *(*Subtree)(unsafe.Pointer(bp + 104))
-			*(*Subtree)(unsafe.Pointer(bp)) = v7
+			v1 = result4
+			*(*Subtree)(unsafe.Pointer(bp)) = v1
 			if int32(*(*uint8)(unsafe.Pointer(bp + 0))&0x1>>0) != 0 {
-				v33 = int32((*(*SubtreeInlineData)(unsafe.Pointer(bp))).Fsymbol)
+				v38 = int32((*(*SubtreeInlineData)(unsafe.Pointer(bp))).Fsymbol)
 			} else {
-				v33 = int32((*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)))).Fsymbol)
+				v38 = int32((*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)))).Fsymbol)
 			}
-			v31 = uint16(v33)
-			goto _178
-		_178:
-			v28 = libc.BoolUint8(int32(v31) == int32(uint16(-libc.Int32FromInt32(1))))
-			goto _175
-		_175:
-			if v28 != 0 {
+			v36 = uint16(v38)
+			goto _183
+		_183:
+			v33 = libc.BoolUint8(int32(v36) == int32(uint16(-libc.Int32FromInt32(1))))
+			goto _180
+		_180:
+			if v33 != 0 {
 				reason = __ccgo_ts + 1550
 			} else {
-				v7 = *(*Subtree)(unsafe.Pointer(bp + 104))
-				*(*Subtree)(unsafe.Pointer(bp + 16)) = v7
+				v1 = result4
+				*(*Subtree)(unsafe.Pointer(bp + 16)) = v1
 				if int32(*(*uint8)(unsafe.Pointer(bp + 16 + 0))&0x1>>0) != 0 {
-					v33 = int32(*(*uint8)(unsafe.Pointer(bp + 16 + 0)) & 0x20 >> 5)
+					v38 = int32(*(*uint8)(unsafe.Pointer(bp + 16 + 0)) & 0x20 >> 5)
 				} else {
-					v33 = int32(*(*uint8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 16)) + 45)) & 0x2 >> 1)
+					v38 = int32(*(*uint8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 16)) + 45)) & 0x2 >> 1)
 				}
-				v28 = uint8(libc.BoolInt32(v33 != 0))
-				goto _182
-			_182:
-				if v28 != 0 {
+				v33 = uint8(libc.BoolInt32(v38 != 0))
+				goto _187
+			_187:
+				if v33 != 0 {
 					reason = __ccgo_ts + 1559
 				} else {
-					v7 = *(*Subtree)(unsafe.Pointer(bp + 104))
-					*(*Subtree)(unsafe.Pointer(bp + 72)) = v7
+					v1 = result4
+					*(*Subtree)(unsafe.Pointer(bp + 72)) = v1
 					if int32(*(*uint8)(unsafe.Pointer(bp + 72 + 0))&0x1>>0) != 0 {
-						v33 = false1
+						v38 = false1
 					} else {
-						v33 = libc.BoolInt32(int32(*(*uint8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 72)) + 44))&0x8>>3) != 0 || int32(*(*uint8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 72)) + 44))&0x10>>4) != 0)
+						v38 = libc.BoolInt32(int32(*(*uint8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 72)) + 44))&0x8>>3) != 0 || int32(*(*uint8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 72)) + 44))&0x10>>4) != 0)
 					}
-					v28 = uint8(libc.BoolInt32(v33 != 0))
-					goto _186
-				_186:
-					if v28 != 0 {
+					v33 = uint8(libc.BoolInt32(v38 != 0))
+					goto _191
+				_191:
+					if v33 != 0 {
 						reason = __ccgo_ts + 1570
 					} else {
-						v7 = *(*Subtree)(unsafe.Pointer(bp + 104))
-						*(*Subtree)(unsafe.Pointer(bp)) = v7
+						v1 = result4
+						*(*Subtree)(unsafe.Pointer(bp)) = v1
 						if int32(*(*uint8)(unsafe.Pointer(bp + 0))&0x1>>0) != 0 {
-							v33 = int32((*(*SubtreeInlineData)(unsafe.Pointer(bp))).Fsymbol)
+							v38 = int32((*(*SubtreeInlineData)(unsafe.Pointer(bp))).Fsymbol)
 						} else {
-							v33 = int32((*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)))).Fsymbol)
+							v38 = int32((*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)))).Fsymbol)
 						}
-						v31 = uint16(v33)
-						goto _193
-					_193:
-						v28 = libc.BoolUint8(int32(v31) == ts_builtin_sym_end)
-						goto _190
-					_190:
-						if v28 != 0 {
-							v4 = end_byte_offset
+						v36 = uint16(v38)
+						goto _198
+					_198:
+						v33 = libc.BoolUint8(int32(v36) == ts_builtin_sym_end)
+						goto _195
+					_195:
+						if v33 != 0 {
+							v9 = end_byte_offset
 						} else {
-							v10 = *(*Subtree)(unsafe.Pointer(bp + 104))
-							*(*Subtree)(unsafe.Pointer(bp + 24)) = v10
+							v3 = result4
+							*(*Subtree)(unsafe.Pointer(bp + 24)) = v3
 							if int32(*(*uint8)(unsafe.Pointer(bp + 24 + 0))&0x1>>0) != 0 {
-								v47 = uint32(int32(*(*uint8)(unsafe.Pointer(bp + 24 + 5)) & 0xf0 >> 4))
+								v52 = uint32(int32(*(*uint8)(unsafe.Pointer(bp + 24 + 5)) & 0xf0 >> 4))
 							} else {
-								v47 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 24)))).Flookahead_bytes
+								v52 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 24)))).Flookahead_bytes
 							}
-							v2 = v47
-							goto _197
-						_197:
-							v4 = end_byte_offset + v2
+							v7 = v52
+							goto _202
+						_202:
+							v9 = end_byte_offset + v7
 						}
-						if ts_parser__has_included_range_difference(tls, self18, byte_offset1, v4) != 0 {
+						if ts_parser__has_included_range_difference(tls, self19, byte_offset1, v9) != 0 {
 							reason = __ccgo_ts + 1581
 						}
 					}
@@ -23501,33 +23509,33 @@ func ts_parser__reuse_node(tls *libc.TLS, self18 uintptr, version StackVersion, 
 			}
 		}
 		if reason != 0 {
-			if (*TSParser)(unsafe.Pointer(self18)).Flexer.Flogger.Flog != 0 || (*TSParser)(unsafe.Pointer(self18)).Fdot_graph_file != 0 {
-				v7 = *(*Subtree)(unsafe.Pointer(bp + 104))
-				*(*Subtree)(unsafe.Pointer(bp)) = v7
+			if (*TSParser)(unsafe.Pointer(self19)).Flexer.Flogger.Flog != 0 || (*TSParser)(unsafe.Pointer(self19)).Fdot_graph_file != 0 {
+				v1 = result4
+				*(*Subtree)(unsafe.Pointer(bp)) = v1
 				if int32(*(*uint8)(unsafe.Pointer(bp + 0))&0x1>>0) != 0 {
-					v33 = int32((*(*SubtreeInlineData)(unsafe.Pointer(bp))).Fsymbol)
+					v38 = int32((*(*SubtreeInlineData)(unsafe.Pointer(bp))).Fsymbol)
 				} else {
-					v33 = int32((*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)))).Fsymbol)
+					v38 = int32((*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)))).Fsymbol)
 				}
-				v31 = uint16(v33)
-				goto _201
-			_201:
-				libc.X__builtin_snprintf(tls, self18+192, uint64(TREE_SITTER_SERIALIZATION_BUFFER_SIZE), __ccgo_ts+1615, libc.VaList(bp+120, reason, ts_language_symbol_name(tls, (*TSParser)(unsafe.Pointer(self18)).Flanguage, v31)))
-				ts_parser__log(tls, self18)
+				v36 = uint16(v38)
+				goto _206
+			_206:
+				libc.X__builtin_snprintf(tls, self19+192, uint64(TREE_SITTER_SERIALIZATION_BUFFER_SIZE), __ccgo_ts+1615, libc.VaList(bp+112, reason, ts_language_symbol_name(tls, (*TSParser)(unsafe.Pointer(self19)).Flanguage, v36)))
+				ts_parser__log(tls, self19)
 			}
-			v1 = self18 + 1368
-			if v43 = !!((*struct {
+			v2 = self19 + 1368
+			if v48 = !!((*struct {
 				Fcontents uintptr
 				Fsize     uint32_t
 				Fcapacity uint32_t
-			})(unsafe.Pointer(v1)).Fsize-libc.Uint32FromInt32(1) < (*struct {
+			})(unsafe.Pointer(v2)).Fsize-libc.Uint32FromInt32(1) < (*struct {
 				Fcontents uintptr
 				Fsize     uint32_t
 				Fcapacity uint32_t
-			})(unsafe.Pointer(v1)).Fsize); !v43 {
+			})(unsafe.Pointer(v2)).Fsize); !v48 {
 				libc.X_assert(tls, __ccgo_ts+1038, __ccgo_ts+1098, uint32(63))
 			}
-			_ = v43 || libc.Bool(libc.Int32FromInt32(0) != 0)
+			_ = v48 || libc.Bool(libc.Int32FromInt32(0) != 0)
 			*(*StackEntry)(unsafe.Pointer(bp + 88)) = StackEntry{}
 			*(*struct {
 				Ftree struct {
@@ -23540,117 +23548,117 @@ func ts_parser__reuse_node(tls *libc.TLS, self18 uintptr, version StackVersion, 
 				Fcontents uintptr
 				Fsize     uint32_t
 				Fcapacity uint32_t
-			})(unsafe.Pointer(v1)).Fcontents + uintptr((*struct {
+			})(unsafe.Pointer(v2)).Fcontents + uintptr((*struct {
 				Fcontents uintptr
 				Fsize     uint32_t
 				Fcapacity uint32_t
-			})(unsafe.Pointer(v1)).Fsize-uint32(1))*16))
-			v7 = (*(*StackEntry)(unsafe.Pointer(bp + 88))).Ftree
-			*(*Subtree)(unsafe.Pointer(bp + 56)) = v7
+			})(unsafe.Pointer(v2)).Fsize-uint32(1))*16))
+			v1 = (*(*StackEntry)(unsafe.Pointer(bp + 88))).Ftree
+			*(*Subtree)(unsafe.Pointer(bp + 56)) = v1
 			if int32(*(*uint8)(unsafe.Pointer(bp + 56 + 0))&0x1>>0) != 0 {
-				v4 = uint32(0)
+				v9 = uint32(0)
 			} else {
-				v4 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 56)))).Fchild_count
+				v9 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 56)))).Fchild_count
 			}
-			v2 = v4
-			goto _207
-		_207:
-			if v2 > libc.Uint32FromInt32(0) {
-				v42 = (*struct {
+			v7 = v9
+			goto _212
+		_212:
+			if v7 > libc.Uint32FromInt32(0) {
+				v6 = (*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v1)).Fcontents
-				v48 = v1 + 12
-				new_contents1 = v42
+				})(unsafe.Pointer(v2)).Fcontents
+				v47 = v2 + 12
+				new_contents1 = v6
 				new_size = (*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v1)).Fsize + uint32(1)
-				if new_size > *(*uint32_t)(unsafe.Pointer(v48)) {
-					new_capacity1 = *(*uint32_t)(unsafe.Pointer(v48)) * uint32(2)
+				})(unsafe.Pointer(v2)).Fsize + uint32(1)
+				if new_size > *(*uint32_t)(unsafe.Pointer(v47)) {
+					new_capacity1 = *(*uint32_t)(unsafe.Pointer(v47)) * uint32(2)
 					if new_capacity1 < libc.Uint32FromInt32(8) {
 						new_capacity1 = uint32(8)
 					}
 					if new_capacity1 < new_size {
 						new_capacity1 = new_size
 					}
-					v49 = v42
-					v50 = v48
-					v52 = libc.Uint64FromInt64(16)
-					v5 = new_capacity1
-					new_contents = v49
-					if v5 > *(*uint32_t)(unsafe.Pointer(v50)) {
-						if v49 != 0 {
-							new_contents = (*(*func(*libc.TLS, uintptr, size_t) uintptr)(unsafe.Pointer(&struct{ uintptr }{ts_current_realloc})))(tls, v49, uint64(v5)*v52)
+					v53 = v6
+					v54 = v47
+					v57 = libc.Uint64FromInt64(16)
+					v10 = new_capacity1
+					new_contents = v53
+					if v10 > *(*uint32_t)(unsafe.Pointer(v54)) {
+						if v53 != 0 {
+							new_contents = (*(*func(*libc.TLS, uintptr, size_t) uintptr)(unsafe.Pointer(&struct{ uintptr }{ts_current_realloc})))(tls, v53, uint64(v10)*v57)
 						} else {
-							new_contents = (*(*func(*libc.TLS, size_t) uintptr)(unsafe.Pointer(&struct{ uintptr }{ts_current_malloc})))(tls, uint64(v5)*v52)
+							new_contents = (*(*func(*libc.TLS, size_t) uintptr)(unsafe.Pointer(&struct{ uintptr }{ts_current_malloc})))(tls, uint64(v10)*v57)
 						}
-						*(*uint32_t)(unsafe.Pointer(v50)) = v5
+						*(*uint32_t)(unsafe.Pointer(v54)) = v10
 					}
-					v51 = new_contents
-					goto _216
-				_216:
-					new_contents1 = v51
+					v55 = new_contents
+					goto _221
+				_221:
+					new_contents1 = v55
 				}
-				v54 = new_contents1
-				goto _218
-			_218:
+				v56 = new_contents1
+				goto _223
+			_223:
 				(*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v1)).Fcontents = v54
-				v56 = v1 + 8
-				v45 = *(*uint32_t)(unsafe.Pointer(v56))
-				*(*uint32_t)(unsafe.Pointer(v56)) = *(*uint32_t)(unsafe.Pointer(v56)) + 1
+				})(unsafe.Pointer(v2)).Fcontents = v56
+				v59 = v2 + 8
+				v50 = *(*uint32_t)(unsafe.Pointer(v59))
+				*(*uint32_t)(unsafe.Pointer(v59)) = *(*uint32_t)(unsafe.Pointer(v59)) + 1
 				if int32(*(*uint8)(unsafe.Pointer(bp + 88 + 0))&0x1>>0) != 0 {
-					v59 = libc.UintptrFromInt32(0)
+					v61 = libc.UintptrFromInt32(0)
 				} else {
-					v59 = *(*uintptr)(unsafe.Pointer(bp + 88)) - uintptr((*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 88)))).Fchild_count)*8
+					v61 = *(*uintptr)(unsafe.Pointer(bp + 88)) - uintptr((*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 88)))).Fchild_count)*8
 				}
 				*(*StackEntry)(unsafe.Pointer((*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v1)).Fcontents + uintptr(v45)*16)) = StackEntry{
-					Ftree:        *(*Subtree)(unsafe.Pointer(v59)),
+				})(unsafe.Pointer(v2)).Fcontents + uintptr(v50)*16)) = StackEntry{
+					Ftree:        *(*Subtree)(unsafe.Pointer(v61)),
 					Fbyte_offset: (*(*StackEntry)(unsafe.Pointer(bp + 88))).Fbyte_offset,
 				}
-				v28 = libc.BoolUint8(true1 != 0)
-				goto _223
+				v33 = libc.BoolUint8(true1 != 0)
+				goto _228
 			} else {
-				v28 = libc.BoolUint8(false1 != 0)
-				goto _223
+				v33 = libc.BoolUint8(false1 != 0)
+				goto _228
 			}
-		_223:
-			if !(v28 != 0) {
-				v60 = self18 + 1368
-				if v63 = !!((*struct {
+		_228:
+			if !(v33 != 0) {
+				v64 = self19 + 1368
+				if v68 = !!((*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v60)).Fsize-libc.Uint32FromInt32(1) < (*struct {
+				})(unsafe.Pointer(v64)).Fsize-libc.Uint32FromInt32(1) < (*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v60)).Fsize); !v63 {
+				})(unsafe.Pointer(v64)).Fsize); !v68 {
 					libc.X_assert(tls, __ccgo_ts+1038, __ccgo_ts+1098, uint32(40))
 				}
-				_ = v63 || libc.Bool(libc.Int32FromInt32(0) != 0)
+				_ = v68 || libc.Bool(libc.Int32FromInt32(0) != 0)
 				last_entry = *(*StackEntry)(unsafe.Pointer((*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v60)).Fcontents + uintptr((*struct {
+				})(unsafe.Pointer(v64)).Fcontents + uintptr((*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v60)).Fsize-uint32(1))*16))
-				v10 = last_entry.Ftree
-				v13 = v10
-				*(*Subtree)(unsafe.Pointer(bp + 40)) = v13
+				})(unsafe.Pointer(v64)).Fsize-uint32(1))*16))
+				v3 = last_entry.Ftree
+				v5 = v3
+				*(*Subtree)(unsafe.Pointer(bp + 40)) = v5
 				if int32(*(*uint8)(unsafe.Pointer(bp + 40 + 0))&0x1>>0) != 0 {
 					result2 = Length{
 						Fbytes: uint32((*(*SubtreeInlineData)(unsafe.Pointer(bp + 40))).Fpadding_bytes),
@@ -23659,15 +23667,15 @@ func ts_parser__reuse_node(tls *libc.TLS, self18 uintptr, version StackVersion, 
 							Fcolumn: uint32((*(*SubtreeInlineData)(unsafe.Pointer(bp + 40))).Fpadding_columns),
 						},
 					}
-					v11 = result2
-					goto _233
+					v16 = result2
+					goto _238
 				} else {
-					v11 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 40)))).Fpadding
-					goto _233
+					v16 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 40)))).Fpadding
+					goto _238
 				}
-			_233:
-				v30 = v10
-				*(*Subtree)(unsafe.Pointer(bp + 48)) = v30
+			_238:
+				v12 = v3
+				*(*Subtree)(unsafe.Pointer(bp + 48)) = v12
 				if int32(*(*uint8)(unsafe.Pointer(bp + 48 + 0))&0x1>>0) != 0 {
 					result3 = Length{
 						Fbytes: uint32((*(*SubtreeInlineData)(unsafe.Pointer(bp + 48))).Fsize_bytes),
@@ -23675,231 +23683,231 @@ func ts_parser__reuse_node(tls *libc.TLS, self18 uintptr, version StackVersion, 
 							Fcolumn: uint32((*(*SubtreeInlineData)(unsafe.Pointer(bp + 48))).Fsize_bytes),
 						},
 					}
-					v14 = result3
-					goto _236
+					v19 = result3
+					goto _241
 				} else {
-					v14 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 48)))).Fsize
-					goto _236
+					v19 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 48)))).Fsize
+					goto _241
 				}
-			_236:
-				v16 = v11
-				v17 = v14
-				result1.Fbytes = v16.Fbytes + v17.Fbytes
-				v18 = v16.Fextent
-				v19 = v17.Fextent
-				if v19.Frow > libc.Uint32FromInt32(0) {
+			_241:
+				v21 = v16
+				v22 = v19
+				result1.Fbytes = v21.Fbytes + v22.Fbytes
+				v23 = v21.Fextent
+				v24 = v22.Fextent
+				if v24.Frow > libc.Uint32FromInt32(0) {
 					result = TSPoint{
-						Frow:    v18.Frow + v19.Frow,
-						Fcolumn: v19.Fcolumn,
+						Frow:    v23.Frow + v24.Frow,
+						Fcolumn: v24.Fcolumn,
 					}
-					v22 = result
-					goto _244
-				_244:
-					v20 = v22
-					goto _242
+					v27 = result
+					goto _249
+				_249:
+					v25 = v27
+					goto _247
 				} else {
 					result = TSPoint{
-						Frow:    v18.Frow,
-						Fcolumn: v18.Fcolumn + v19.Fcolumn,
+						Frow:    v23.Frow,
+						Fcolumn: v23.Fcolumn + v24.Fcolumn,
 					}
-					v24 = result
-					goto _246
-				_246:
-					v20 = v24
-					goto _242
+					v29 = result
+					goto _251
+				_251:
+					v25 = v29
+					goto _247
 				}
-			_242:
-				result1.Fextent = v20
-				v26 = result1
-				goto _248
-			_248:
-				v8 = v26
-				goto _230
-			_230:
-				v53 = v8.Fbytes
-				goto _227
-			_227:
-				byte_offset = last_entry.Fbyte_offset + v53
-				v34 = last_entry.Ftree
-				*(*Subtree)(unsafe.Pointer(bp + 64)) = v34
+			_247:
+				result1.Fextent = v25
+				v31 = result1
+				goto _253
+			_253:
+				v13 = v31
+				goto _235
+			_235:
+				v58 = v13.Fbytes
+				goto _232
+			_232:
+				byte_offset = last_entry.Fbyte_offset + v58
+				v15 = last_entry.Ftree
+				*(*Subtree)(unsafe.Pointer(bp + 64)) = v15
 				if int32(*(*uint8)(unsafe.Pointer(bp + 64 + 0))&0x1>>0) != 0 {
-					v33 = false1
+					v38 = false1
 				} else {
-					v33 = int32(*(*uint8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 64)) + 44)) & 0x40 >> 6)
+					v38 = int32(*(*uint8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 64)) + 44)) & 0x40 >> 6)
 				}
-				v61 = uint8(libc.BoolInt32(v33 != 0))
-				goto _251
-			_251:
-				if v61 != 0 {
-					(*ReusableNode)(unsafe.Pointer(v60)).Flast_external_token = ts_subtree_last_external_token(tls, last_entry.Ftree)
+				v66 = uint8(libc.BoolInt32(v38 != 0))
+				goto _256
+			_256:
+				if v66 != 0 {
+					(*ReusableNode)(unsafe.Pointer(v64)).Flast_external_token = ts_subtree_last_external_token(tls, last_entry.Ftree)
 				}
 				for {
-					v64 = v60 + 8
-					*(*uint32_t)(unsafe.Pointer(v64)) = *(*uint32_t)(unsafe.Pointer(v64)) - 1
-					v66 = *(*uint32_t)(unsafe.Pointer(v64))
+					v65 = v64 + 8
+					*(*uint32_t)(unsafe.Pointer(v65)) = *(*uint32_t)(unsafe.Pointer(v65)) - 1
+					v71 = *(*uint32_t)(unsafe.Pointer(v65))
 					popped_entry = *(*StackEntry)(unsafe.Pointer((*struct {
 						Fcontents uintptr
 						Fsize     uint32_t
 						Fcapacity uint32_t
-					})(unsafe.Pointer(v60)).Fcontents + uintptr(v66)*16))
+					})(unsafe.Pointer(v64)).Fcontents + uintptr(v71)*16))
 					next_index = popped_entry.Fchild_index + uint32(1)
-					if (*ReusableNode)(unsafe.Pointer(v60)).Fstack.Fsize == libc.Uint32FromInt32(0) {
-						goto _260
+					if (*ReusableNode)(unsafe.Pointer(v64)).Fstack.Fsize == libc.Uint32FromInt32(0) {
+						goto _265
 					}
-					if v65 = !!((*struct {
+					if v70 = !!((*struct {
 						Fcontents uintptr
 						Fsize     uint32_t
 						Fcapacity uint32_t
-					})(unsafe.Pointer(v60)).Fsize-libc.Uint32FromInt32(1) < (*struct {
+					})(unsafe.Pointer(v64)).Fsize-libc.Uint32FromInt32(1) < (*struct {
 						Fcontents uintptr
 						Fsize     uint32_t
 						Fcapacity uint32_t
-					})(unsafe.Pointer(v60)).Fsize); !v65 {
+					})(unsafe.Pointer(v64)).Fsize); !v70 {
 						libc.X_assert(tls, __ccgo_ts+1038, __ccgo_ts+1098, uint32(52))
 					}
-					_ = v65 || libc.Bool(libc.Int32FromInt32(0) != 0)
+					_ = v70 || libc.Bool(libc.Int32FromInt32(0) != 0)
 					*(*Subtree)(unsafe.Pointer(bp + 80)) = (*StackEntry)(unsafe.Pointer((*struct {
 						Fcontents uintptr
 						Fsize     uint32_t
 						Fcapacity uint32_t
-					})(unsafe.Pointer(v60)).Fcontents + uintptr((*struct {
+					})(unsafe.Pointer(v64)).Fcontents + uintptr((*struct {
 						Fcontents uintptr
 						Fsize     uint32_t
 						Fcapacity uint32_t
-					})(unsafe.Pointer(v60)).Fsize-uint32(1))*16)).Ftree
-					goto _257
-				_257:
+					})(unsafe.Pointer(v64)).Fsize-uint32(1))*16)).Ftree
+					goto _262
+				_262:
 					;
-					v38 = *(*Subtree)(unsafe.Pointer(bp + 80))
-					*(*Subtree)(unsafe.Pointer(bp + 56)) = v38
+					v18 = *(*Subtree)(unsafe.Pointer(bp + 80))
+					*(*Subtree)(unsafe.Pointer(bp + 56)) = v18
 					if int32(*(*uint8)(unsafe.Pointer(bp + 56 + 0))&0x1>>0) != 0 {
-						v47 = uint32(0)
+						v52 = uint32(0)
 					} else {
-						v47 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 56)))).Fchild_count
+						v52 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 56)))).Fchild_count
 					}
-					v58 = v47
-					goto _255
-				_255:
+					v63 = v52
+					goto _260
+				_260:
 					;
-					if !(v58 <= next_index) {
+					if !(v63 <= next_index) {
 						break
 					}
 				}
-				v99 = (*struct {
+				v69 = (*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v60)).Fcontents
-				v102 = v60 + 12
-				new_contents1 = v99
+				})(unsafe.Pointer(v64)).Fcontents
+				v104 = v64 + 12
+				new_contents1 = v69
 				new_size = (*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v60)).Fsize + uint32(1)
-				if new_size > *(*uint32_t)(unsafe.Pointer(v102)) {
-					new_capacity1 = *(*uint32_t)(unsafe.Pointer(v102)) * uint32(2)
+				})(unsafe.Pointer(v64)).Fsize + uint32(1)
+				if new_size > *(*uint32_t)(unsafe.Pointer(v104)) {
+					new_capacity1 = *(*uint32_t)(unsafe.Pointer(v104)) * uint32(2)
 					if new_capacity1 < libc.Uint32FromInt32(8) {
 						new_capacity1 = uint32(8)
 					}
 					if new_capacity1 < new_size {
 						new_capacity1 = new_size
 					}
-					v103 = v99
-					v104 = v102
-					v106 = libc.Uint64FromInt64(16)
-					v94 = new_capacity1
-					new_contents = v103
-					if v94 > *(*uint32_t)(unsafe.Pointer(v104)) {
-						if v103 != 0 {
-							new_contents = (*(*func(*libc.TLS, uintptr, size_t) uintptr)(unsafe.Pointer(&struct{ uintptr }{ts_current_realloc})))(tls, v103, uint64(v94)*v106)
+					v107 = v69
+					v108 = v104
+					v111 = libc.Uint64FromInt64(16)
+					v99 = new_capacity1
+					new_contents = v107
+					if v99 > *(*uint32_t)(unsafe.Pointer(v108)) {
+						if v107 != 0 {
+							new_contents = (*(*func(*libc.TLS, uintptr, size_t) uintptr)(unsafe.Pointer(&struct{ uintptr }{ts_current_realloc})))(tls, v107, uint64(v99)*v111)
 						} else {
-							new_contents = (*(*func(*libc.TLS, size_t) uintptr)(unsafe.Pointer(&struct{ uintptr }{ts_current_malloc})))(tls, uint64(v94)*v106)
+							new_contents = (*(*func(*libc.TLS, size_t) uintptr)(unsafe.Pointer(&struct{ uintptr }{ts_current_malloc})))(tls, uint64(v99)*v111)
 						}
-						*(*uint32_t)(unsafe.Pointer(v104)) = v94
+						*(*uint32_t)(unsafe.Pointer(v108)) = v99
 					}
-					v105 = new_contents
-					goto _269
-				_269:
-					new_contents1 = v105
+					v109 = new_contents
+					goto _274
+				_274:
+					new_contents1 = v109
 				}
-				v108 = new_contents1
-				goto _271
-			_271:
+				v110 = new_contents1
+				goto _276
+			_276:
 				(*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v60)).Fcontents = v108
-				v110 = v60 + 8
-				v98 = *(*uint32_t)(unsafe.Pointer(v110))
-				*(*uint32_t)(unsafe.Pointer(v110)) = *(*uint32_t)(unsafe.Pointer(v110)) + 1
+				})(unsafe.Pointer(v64)).Fcontents = v110
+				v113 = v64 + 8
+				v103 = *(*uint32_t)(unsafe.Pointer(v113))
+				*(*uint32_t)(unsafe.Pointer(v113)) = *(*uint32_t)(unsafe.Pointer(v113)) + 1
 				if int32(*(*uint8)(unsafe.Pointer(bp + 80 + 0))&0x1>>0) != 0 {
-					v113 = libc.UintptrFromInt32(0)
+					v115 = libc.UintptrFromInt32(0)
 				} else {
-					v113 = *(*uintptr)(unsafe.Pointer(bp + 80)) - uintptr((*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 80)))).Fchild_count)*8
+					v115 = *(*uintptr)(unsafe.Pointer(bp + 80)) - uintptr((*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 80)))).Fchild_count)*8
 				}
 				*(*StackEntry)(unsafe.Pointer((*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v60)).Fcontents + uintptr(v98)*16)) = StackEntry{
-					Ftree:        *(*Subtree)(unsafe.Pointer(v113 + uintptr(next_index)*8)),
+				})(unsafe.Pointer(v64)).Fcontents + uintptr(v103)*16)) = StackEntry{
+					Ftree:        *(*Subtree)(unsafe.Pointer(v115 + uintptr(next_index)*8)),
 					Fchild_index: next_index,
 					Fbyte_offset: byte_offset,
 				}
-			_260:
+			_265:
 				;
-				ts_parser__breakdown_top_of_stack(tls, self18, version)
-				*(*TSStateId)(unsafe.Pointer(state)) = ts_stack_state(tls, (*TSParser)(unsafe.Pointer(self18)).Fstack, version)
+				ts_parser__breakdown_top_of_stack(tls, self19, version)
+				*(*TSStateId)(unsafe.Pointer(state)) = ts_stack_state(tls, (*TSParser)(unsafe.Pointer(self19)).Fstack, version)
 			}
 			continue
 		}
-		v7 = *(*Subtree)(unsafe.Pointer(bp + 104))
-		*(*Subtree)(unsafe.Pointer(bp + 32)) = v7
+		v1 = result4
+		*(*Subtree)(unsafe.Pointer(bp + 32)) = v1
 		if int32(*(*uint8)(unsafe.Pointer(bp + 32 + 0))&0x1>>0) != 0 {
-			v31 = uint16((*(*SubtreeInlineData)(unsafe.Pointer(bp + 32))).Fsymbol)
-			goto _277
+			v36 = uint16((*(*SubtreeInlineData)(unsafe.Pointer(bp + 32))).Fsymbol)
+			goto _282
 		}
 		if (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 32)))).Fchild_count == libc.Uint32FromInt32(0) {
-			v31 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 32)))).Fsymbol
-			goto _277
+			v36 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 32)))).Fsymbol
+			goto _282
 		}
-		v31 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 32)))).F__ccgo19_48.F__ccgo0_0.Ffirst_leaf.Fsymbol
-		goto _277
-	_277:
-		leaf_symbol = v31
-		ts_language_table_entry(tls, (*TSParser)(unsafe.Pointer(self18)).Flanguage, *(*TSStateId)(unsafe.Pointer(state)), leaf_symbol, table_entry)
-		if !(ts_parser__can_reuse_first_leaf(tls, self18, *(*TSStateId)(unsafe.Pointer(state)), *(*Subtree)(unsafe.Pointer(bp + 104)), table_entry) != 0) {
-			if (*TSParser)(unsafe.Pointer(self18)).Flexer.Flogger.Flog != 0 || (*TSParser)(unsafe.Pointer(self18)).Fdot_graph_file != 0 {
-				v7 = *(*Subtree)(unsafe.Pointer(bp + 104))
-				*(*Subtree)(unsafe.Pointer(bp)) = v7
+		v36 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 32)))).F__ccgo19_48.F__ccgo0_0.Ffirst_leaf.Fsymbol
+		goto _282
+	_282:
+		leaf_symbol = v36
+		ts_language_table_entry(tls, (*TSParser)(unsafe.Pointer(self19)).Flanguage, *(*TSStateId)(unsafe.Pointer(state)), leaf_symbol, table_entry)
+		if !(ts_parser__can_reuse_first_leaf(tls, self19, *(*TSStateId)(unsafe.Pointer(state)), result4, table_entry) != 0) {
+			if (*TSParser)(unsafe.Pointer(self19)).Flexer.Flogger.Flog != 0 || (*TSParser)(unsafe.Pointer(self19)).Fdot_graph_file != 0 {
+				v1 = result4
+				*(*Subtree)(unsafe.Pointer(bp)) = v1
 				if int32(*(*uint8)(unsafe.Pointer(bp + 0))&0x1>>0) != 0 {
-					v33 = int32((*(*SubtreeInlineData)(unsafe.Pointer(bp))).Fsymbol)
+					v38 = int32((*(*SubtreeInlineData)(unsafe.Pointer(bp))).Fsymbol)
 				} else {
-					v33 = int32((*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)))).Fsymbol)
+					v38 = int32((*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)))).Fsymbol)
 				}
-				v31 = uint16(v33)
-				goto _280
-			_280:
-				libc.X__builtin_snprintf(tls, self18+192, uint64(TREE_SITTER_SERIALIZATION_BUFFER_SIZE), __ccgo_ts+1642, libc.VaList(bp+120, ts_language_symbol_name(tls, (*TSParser)(unsafe.Pointer(self18)).Flanguage, v31), ts_language_symbol_name(tls, (*TSParser)(unsafe.Pointer(self18)).Flanguage, leaf_symbol)))
-				ts_parser__log(tls, self18)
+				v36 = uint16(v38)
+				goto _285
+			_285:
+				libc.X__builtin_snprintf(tls, self19+192, uint64(TREE_SITTER_SERIALIZATION_BUFFER_SIZE), __ccgo_ts+1642, libc.VaList(bp+112, ts_language_symbol_name(tls, (*TSParser)(unsafe.Pointer(self19)).Flanguage, v36), ts_language_symbol_name(tls, (*TSParser)(unsafe.Pointer(self19)).Flanguage, leaf_symbol)))
+				ts_parser__log(tls, self19)
 			}
-			v1 = self18 + 1368
+			v2 = self19 + 1368
 			for {
-				v42 = v1
-				if v43 = !!((*struct {
+				v6 = v2
+				if v48 = !!((*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v42)).Fsize-libc.Uint32FromInt32(1) < (*struct {
+				})(unsafe.Pointer(v6)).Fsize-libc.Uint32FromInt32(1) < (*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v42)).Fsize); !v43 {
+				})(unsafe.Pointer(v6)).Fsize); !v48 {
 					libc.X_assert(tls, __ccgo_ts+1038, __ccgo_ts+1098, uint32(63))
 				}
-				_ = v43 || libc.Bool(libc.Int32FromInt32(0) != 0)
+				_ = v48 || libc.Bool(libc.Int32FromInt32(0) != 0)
 				*(*StackEntry)(unsafe.Pointer(bp + 88)) = StackEntry{}
 				*(*struct {
 					Ftree struct {
@@ -23912,120 +23920,120 @@ func ts_parser__reuse_node(tls *libc.TLS, self18 uintptr, version StackVersion, 
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v42)).Fcontents + uintptr((*struct {
+				})(unsafe.Pointer(v6)).Fcontents + uintptr((*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v42)).Fsize-uint32(1))*16))
-				v7 = (*(*StackEntry)(unsafe.Pointer(bp + 88))).Ftree
-				*(*Subtree)(unsafe.Pointer(bp + 56)) = v7
+				})(unsafe.Pointer(v6)).Fsize-uint32(1))*16))
+				v1 = (*(*StackEntry)(unsafe.Pointer(bp + 88))).Ftree
+				*(*Subtree)(unsafe.Pointer(bp + 56)) = v1
 				if int32(*(*uint8)(unsafe.Pointer(bp + 56 + 0))&0x1>>0) != 0 {
-					v4 = uint32(0)
+					v9 = uint32(0)
 				} else {
-					v4 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 56)))).Fchild_count
+					v9 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 56)))).Fchild_count
 				}
-				v2 = v4
-				goto _287
-			_287:
-				if v2 > libc.Uint32FromInt32(0) {
-					v48 = (*struct {
+				v7 = v9
+				goto _292
+			_292:
+				if v7 > libc.Uint32FromInt32(0) {
+					v47 = (*struct {
 						Fcontents uintptr
 						Fsize     uint32_t
 						Fcapacity uint32_t
-					})(unsafe.Pointer(v42)).Fcontents
-					v49 = v42 + 12
-					new_contents1 = v48
+					})(unsafe.Pointer(v6)).Fcontents
+					v53 = v6 + 12
+					new_contents1 = v47
 					new_size = (*struct {
 						Fcontents uintptr
 						Fsize     uint32_t
 						Fcapacity uint32_t
-					})(unsafe.Pointer(v42)).Fsize + uint32(1)
-					if new_size > *(*uint32_t)(unsafe.Pointer(v49)) {
-						new_capacity1 = *(*uint32_t)(unsafe.Pointer(v49)) * uint32(2)
+					})(unsafe.Pointer(v6)).Fsize + uint32(1)
+					if new_size > *(*uint32_t)(unsafe.Pointer(v53)) {
+						new_capacity1 = *(*uint32_t)(unsafe.Pointer(v53)) * uint32(2)
 						if new_capacity1 < libc.Uint32FromInt32(8) {
 							new_capacity1 = uint32(8)
 						}
 						if new_capacity1 < new_size {
 							new_capacity1 = new_size
 						}
-						v50 = v48
-						v51 = v49
-						v52 = libc.Uint64FromInt64(16)
-						v5 = new_capacity1
-						new_contents = v50
-						if v5 > *(*uint32_t)(unsafe.Pointer(v51)) {
-							if v50 != 0 {
-								new_contents = (*(*func(*libc.TLS, uintptr, size_t) uintptr)(unsafe.Pointer(&struct{ uintptr }{ts_current_realloc})))(tls, v50, uint64(v5)*v52)
+						v54 = v47
+						v55 = v53
+						v57 = libc.Uint64FromInt64(16)
+						v10 = new_capacity1
+						new_contents = v54
+						if v10 > *(*uint32_t)(unsafe.Pointer(v55)) {
+							if v54 != 0 {
+								new_contents = (*(*func(*libc.TLS, uintptr, size_t) uintptr)(unsafe.Pointer(&struct{ uintptr }{ts_current_realloc})))(tls, v54, uint64(v10)*v57)
 							} else {
-								new_contents = (*(*func(*libc.TLS, size_t) uintptr)(unsafe.Pointer(&struct{ uintptr }{ts_current_malloc})))(tls, uint64(v5)*v52)
+								new_contents = (*(*func(*libc.TLS, size_t) uintptr)(unsafe.Pointer(&struct{ uintptr }{ts_current_malloc})))(tls, uint64(v10)*v57)
 							}
-							*(*uint32_t)(unsafe.Pointer(v51)) = v5
+							*(*uint32_t)(unsafe.Pointer(v55)) = v10
 						}
-						v54 = new_contents
-						goto _296
-					_296:
-						new_contents1 = v54
+						v56 = new_contents
+						goto _301
+					_301:
+						new_contents1 = v56
 					}
-					v56 = new_contents1
-					goto _298
-				_298:
+					v59 = new_contents1
+					goto _303
+				_303:
 					(*struct {
 						Fcontents uintptr
 						Fsize     uint32_t
 						Fcapacity uint32_t
-					})(unsafe.Pointer(v42)).Fcontents = v56
-					v59 = v42 + 8
-					v45 = *(*uint32_t)(unsafe.Pointer(v59))
-					*(*uint32_t)(unsafe.Pointer(v59)) = *(*uint32_t)(unsafe.Pointer(v59)) + 1
+					})(unsafe.Pointer(v6)).Fcontents = v59
+					v61 = v6 + 8
+					v50 = *(*uint32_t)(unsafe.Pointer(v61))
+					*(*uint32_t)(unsafe.Pointer(v61)) = *(*uint32_t)(unsafe.Pointer(v61)) + 1
 					if int32(*(*uint8)(unsafe.Pointer(bp + 88 + 0))&0x1>>0) != 0 {
-						v60 = libc.UintptrFromInt32(0)
+						v64 = libc.UintptrFromInt32(0)
 					} else {
-						v60 = *(*uintptr)(unsafe.Pointer(bp + 88)) - uintptr((*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 88)))).Fchild_count)*8
+						v64 = *(*uintptr)(unsafe.Pointer(bp + 88)) - uintptr((*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 88)))).Fchild_count)*8
 					}
 					*(*StackEntry)(unsafe.Pointer((*struct {
 						Fcontents uintptr
 						Fsize     uint32_t
 						Fcapacity uint32_t
-					})(unsafe.Pointer(v42)).Fcontents + uintptr(v45)*16)) = StackEntry{
-						Ftree:        *(*Subtree)(unsafe.Pointer(v60)),
+					})(unsafe.Pointer(v6)).Fcontents + uintptr(v50)*16)) = StackEntry{
+						Ftree:        *(*Subtree)(unsafe.Pointer(v64)),
 						Fbyte_offset: (*(*StackEntry)(unsafe.Pointer(bp + 88))).Fbyte_offset,
 					}
-					v28 = libc.BoolUint8(true1 != 0)
-					goto _303
+					v33 = libc.BoolUint8(true1 != 0)
+					goto _308
 				} else {
-					v28 = libc.BoolUint8(false1 != 0)
-					goto _303
+					v33 = libc.BoolUint8(false1 != 0)
+					goto _308
 				}
-			_303:
-				if !(v28 != 0) {
+			_308:
+				if !(v33 != 0) {
 					break
 				}
 			}
-			v64 = v1
-			if v63 = !!((*struct {
+			v65 = v2
+			if v68 = !!((*struct {
 				Fcontents uintptr
 				Fsize     uint32_t
 				Fcapacity uint32_t
-			})(unsafe.Pointer(v64)).Fsize-libc.Uint32FromInt32(1) < (*struct {
+			})(unsafe.Pointer(v65)).Fsize-libc.Uint32FromInt32(1) < (*struct {
 				Fcontents uintptr
 				Fsize     uint32_t
 				Fcapacity uint32_t
-			})(unsafe.Pointer(v64)).Fsize); !v63 {
+			})(unsafe.Pointer(v65)).Fsize); !v68 {
 				libc.X_assert(tls, __ccgo_ts+1038, __ccgo_ts+1098, uint32(40))
 			}
-			_ = v63 || libc.Bool(libc.Int32FromInt32(0) != 0)
+			_ = v68 || libc.Bool(libc.Int32FromInt32(0) != 0)
 			last_entry = *(*StackEntry)(unsafe.Pointer((*struct {
 				Fcontents uintptr
 				Fsize     uint32_t
 				Fcapacity uint32_t
-			})(unsafe.Pointer(v64)).Fcontents + uintptr((*struct {
+			})(unsafe.Pointer(v65)).Fcontents + uintptr((*struct {
 				Fcontents uintptr
 				Fsize     uint32_t
 				Fcapacity uint32_t
-			})(unsafe.Pointer(v64)).Fsize-uint32(1))*16))
-			v10 = last_entry.Ftree
-			v13 = v10
-			*(*Subtree)(unsafe.Pointer(bp + 40)) = v13
+			})(unsafe.Pointer(v65)).Fsize-uint32(1))*16))
+			v3 = last_entry.Ftree
+			v5 = v3
+			*(*Subtree)(unsafe.Pointer(bp + 40)) = v5
 			if int32(*(*uint8)(unsafe.Pointer(bp + 40 + 0))&0x1>>0) != 0 {
 				result2 = Length{
 					Fbytes: uint32((*(*SubtreeInlineData)(unsafe.Pointer(bp + 40))).Fpadding_bytes),
@@ -24034,15 +24042,15 @@ func ts_parser__reuse_node(tls *libc.TLS, self18 uintptr, version StackVersion, 
 						Fcolumn: uint32((*(*SubtreeInlineData)(unsafe.Pointer(bp + 40))).Fpadding_columns),
 					},
 				}
-				v11 = result2
-				goto _313
+				v16 = result2
+				goto _318
 			} else {
-				v11 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 40)))).Fpadding
-				goto _313
+				v16 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 40)))).Fpadding
+				goto _318
 			}
-		_313:
-			v30 = v10
-			*(*Subtree)(unsafe.Pointer(bp + 48)) = v30
+		_318:
+			v12 = v3
+			*(*Subtree)(unsafe.Pointer(bp + 48)) = v12
 			if int32(*(*uint8)(unsafe.Pointer(bp + 48 + 0))&0x1>>0) != 0 {
 				result3 = Length{
 					Fbytes: uint32((*(*SubtreeInlineData)(unsafe.Pointer(bp + 48))).Fsize_bytes),
@@ -24050,199 +24058,199 @@ func ts_parser__reuse_node(tls *libc.TLS, self18 uintptr, version StackVersion, 
 						Fcolumn: uint32((*(*SubtreeInlineData)(unsafe.Pointer(bp + 48))).Fsize_bytes),
 					},
 				}
-				v14 = result3
-				goto _316
+				v19 = result3
+				goto _321
 			} else {
-				v14 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 48)))).Fsize
-				goto _316
+				v19 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 48)))).Fsize
+				goto _321
 			}
-		_316:
-			v16 = v11
-			v17 = v14
-			result1.Fbytes = v16.Fbytes + v17.Fbytes
-			v18 = v16.Fextent
-			v19 = v17.Fextent
-			if v19.Frow > libc.Uint32FromInt32(0) {
+		_321:
+			v21 = v16
+			v22 = v19
+			result1.Fbytes = v21.Fbytes + v22.Fbytes
+			v23 = v21.Fextent
+			v24 = v22.Fextent
+			if v24.Frow > libc.Uint32FromInt32(0) {
 				result = TSPoint{
-					Frow:    v18.Frow + v19.Frow,
-					Fcolumn: v19.Fcolumn,
+					Frow:    v23.Frow + v24.Frow,
+					Fcolumn: v24.Fcolumn,
 				}
-				v22 = result
-				goto _324
-			_324:
-				v20 = v22
-				goto _322
+				v27 = result
+				goto _329
+			_329:
+				v25 = v27
+				goto _327
 			} else {
 				result = TSPoint{
-					Frow:    v18.Frow,
-					Fcolumn: v18.Fcolumn + v19.Fcolumn,
+					Frow:    v23.Frow,
+					Fcolumn: v23.Fcolumn + v24.Fcolumn,
 				}
-				v24 = result
-				goto _326
-			_326:
-				v20 = v24
-				goto _322
+				v29 = result
+				goto _331
+			_331:
+				v25 = v29
+				goto _327
 			}
-		_322:
-			result1.Fextent = v20
-			v26 = result1
-			goto _328
-		_328:
-			v8 = v26
-			goto _310
-		_310:
-			v53 = v8.Fbytes
-			goto _307
-		_307:
-			byte_offset = last_entry.Fbyte_offset + v53
-			v34 = last_entry.Ftree
-			*(*Subtree)(unsafe.Pointer(bp + 64)) = v34
+		_327:
+			result1.Fextent = v25
+			v31 = result1
+			goto _333
+		_333:
+			v13 = v31
+			goto _315
+		_315:
+			v58 = v13.Fbytes
+			goto _312
+		_312:
+			byte_offset = last_entry.Fbyte_offset + v58
+			v15 = last_entry.Ftree
+			*(*Subtree)(unsafe.Pointer(bp + 64)) = v15
 			if int32(*(*uint8)(unsafe.Pointer(bp + 64 + 0))&0x1>>0) != 0 {
-				v33 = false1
+				v38 = false1
 			} else {
-				v33 = int32(*(*uint8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 64)) + 44)) & 0x40 >> 6)
+				v38 = int32(*(*uint8)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 64)) + 44)) & 0x40 >> 6)
 			}
-			v61 = uint8(libc.BoolInt32(v33 != 0))
-			goto _331
-		_331:
-			if v61 != 0 {
-				(*ReusableNode)(unsafe.Pointer(v64)).Flast_external_token = ts_subtree_last_external_token(tls, last_entry.Ftree)
+			v66 = uint8(libc.BoolInt32(v38 != 0))
+			goto _336
+		_336:
+			if v66 != 0 {
+				(*ReusableNode)(unsafe.Pointer(v65)).Flast_external_token = ts_subtree_last_external_token(tls, last_entry.Ftree)
 			}
 			for {
-				v99 = v64 + 8
-				*(*uint32_t)(unsafe.Pointer(v99)) = *(*uint32_t)(unsafe.Pointer(v99)) - 1
-				v66 = *(*uint32_t)(unsafe.Pointer(v99))
+				v69 = v65 + 8
+				*(*uint32_t)(unsafe.Pointer(v69)) = *(*uint32_t)(unsafe.Pointer(v69)) - 1
+				v71 = *(*uint32_t)(unsafe.Pointer(v69))
 				popped_entry = *(*StackEntry)(unsafe.Pointer((*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v64)).Fcontents + uintptr(v66)*16))
+				})(unsafe.Pointer(v65)).Fcontents + uintptr(v71)*16))
 				next_index = popped_entry.Fchild_index + uint32(1)
-				if (*ReusableNode)(unsafe.Pointer(v64)).Fstack.Fsize == libc.Uint32FromInt32(0) {
-					goto _340
+				if (*ReusableNode)(unsafe.Pointer(v65)).Fstack.Fsize == libc.Uint32FromInt32(0) {
+					goto _345
 				}
-				if v65 = !!((*struct {
+				if v70 = !!((*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v64)).Fsize-libc.Uint32FromInt32(1) < (*struct {
+				})(unsafe.Pointer(v65)).Fsize-libc.Uint32FromInt32(1) < (*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v64)).Fsize); !v65 {
+				})(unsafe.Pointer(v65)).Fsize); !v70 {
 					libc.X_assert(tls, __ccgo_ts+1038, __ccgo_ts+1098, uint32(52))
 				}
-				_ = v65 || libc.Bool(libc.Int32FromInt32(0) != 0)
+				_ = v70 || libc.Bool(libc.Int32FromInt32(0) != 0)
 				*(*Subtree)(unsafe.Pointer(bp + 80)) = (*StackEntry)(unsafe.Pointer((*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v64)).Fcontents + uintptr((*struct {
+				})(unsafe.Pointer(v65)).Fcontents + uintptr((*struct {
 					Fcontents uintptr
 					Fsize     uint32_t
 					Fcapacity uint32_t
-				})(unsafe.Pointer(v64)).Fsize-uint32(1))*16)).Ftree
-				goto _337
-			_337:
+				})(unsafe.Pointer(v65)).Fsize-uint32(1))*16)).Ftree
+				goto _342
+			_342:
 				;
-				v38 = *(*Subtree)(unsafe.Pointer(bp + 80))
-				*(*Subtree)(unsafe.Pointer(bp + 56)) = v38
+				v18 = *(*Subtree)(unsafe.Pointer(bp + 80))
+				*(*Subtree)(unsafe.Pointer(bp + 56)) = v18
 				if int32(*(*uint8)(unsafe.Pointer(bp + 56 + 0))&0x1>>0) != 0 {
-					v47 = uint32(0)
+					v52 = uint32(0)
 				} else {
-					v47 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 56)))).Fchild_count
+					v52 = (*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 56)))).Fchild_count
 				}
-				v58 = v47
-				goto _335
-			_335:
+				v63 = v52
+				goto _340
+			_340:
 				;
-				if !(v58 <= next_index) {
+				if !(v63 <= next_index) {
 					break
 				}
 			}
-			v102 = (*struct {
+			v104 = (*struct {
 				Fcontents uintptr
 				Fsize     uint32_t
 				Fcapacity uint32_t
-			})(unsafe.Pointer(v64)).Fcontents
-			v103 = v64 + 12
-			new_contents1 = v102
+			})(unsafe.Pointer(v65)).Fcontents
+			v107 = v65 + 12
+			new_contents1 = v104
 			new_size = (*struct {
 				Fcontents uintptr
 				Fsize     uint32_t
 				Fcapacity uint32_t
-			})(unsafe.Pointer(v64)).Fsize + uint32(1)
-			if new_size > *(*uint32_t)(unsafe.Pointer(v103)) {
-				new_capacity1 = *(*uint32_t)(unsafe.Pointer(v103)) * uint32(2)
+			})(unsafe.Pointer(v65)).Fsize + uint32(1)
+			if new_size > *(*uint32_t)(unsafe.Pointer(v107)) {
+				new_capacity1 = *(*uint32_t)(unsafe.Pointer(v107)) * uint32(2)
 				if new_capacity1 < libc.Uint32FromInt32(8) {
 					new_capacity1 = uint32(8)
 				}
 				if new_capacity1 < new_size {
 					new_capacity1 = new_size
 				}
-				v104 = v102
-				v105 = v103
-				v106 = libc.Uint64FromInt64(16)
-				v94 = new_capacity1
-				new_contents = v104
-				if v94 > *(*uint32_t)(unsafe.Pointer(v105)) {
-					if v104 != 0 {
-						new_contents = (*(*func(*libc.TLS, uintptr, size_t) uintptr)(unsafe.Pointer(&struct{ uintptr }{ts_current_realloc})))(tls, v104, uint64(v94)*v106)
+				v108 = v104
+				v109 = v107
+				v111 = libc.Uint64FromInt64(16)
+				v99 = new_capacity1
+				new_contents = v108
+				if v99 > *(*uint32_t)(unsafe.Pointer(v109)) {
+					if v108 != 0 {
+						new_contents = (*(*func(*libc.TLS, uintptr, size_t) uintptr)(unsafe.Pointer(&struct{ uintptr }{ts_current_realloc})))(tls, v108, uint64(v99)*v111)
 					} else {
-						new_contents = (*(*func(*libc.TLS, size_t) uintptr)(unsafe.Pointer(&struct{ uintptr }{ts_current_malloc})))(tls, uint64(v94)*v106)
+						new_contents = (*(*func(*libc.TLS, size_t) uintptr)(unsafe.Pointer(&struct{ uintptr }{ts_current_malloc})))(tls, uint64(v99)*v111)
 					}
-					*(*uint32_t)(unsafe.Pointer(v105)) = v94
+					*(*uint32_t)(unsafe.Pointer(v109)) = v99
 				}
-				v108 = new_contents
-				goto _349
-			_349:
-				new_contents1 = v108
+				v110 = new_contents
+				goto _354
+			_354:
+				new_contents1 = v110
 			}
-			v110 = new_contents1
-			goto _351
-		_351:
+			v113 = new_contents1
+			goto _356
+		_356:
 			(*struct {
 				Fcontents uintptr
 				Fsize     uint32_t
 				Fcapacity uint32_t
-			})(unsafe.Pointer(v64)).Fcontents = v110
-			v113 = v64 + 8
-			v98 = *(*uint32_t)(unsafe.Pointer(v113))
-			*(*uint32_t)(unsafe.Pointer(v113)) = *(*uint32_t)(unsafe.Pointer(v113)) + 1
+			})(unsafe.Pointer(v65)).Fcontents = v113
+			v115 = v65 + 8
+			v103 = *(*uint32_t)(unsafe.Pointer(v115))
+			*(*uint32_t)(unsafe.Pointer(v115)) = *(*uint32_t)(unsafe.Pointer(v115)) + 1
 			if int32(*(*uint8)(unsafe.Pointer(bp + 80 + 0))&0x1>>0) != 0 {
-				v114 = libc.UintptrFromInt32(0)
+				v118 = libc.UintptrFromInt32(0)
 			} else {
-				v114 = *(*uintptr)(unsafe.Pointer(bp + 80)) - uintptr((*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 80)))).Fchild_count)*8
+				v118 = *(*uintptr)(unsafe.Pointer(bp + 80)) - uintptr((*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp + 80)))).Fchild_count)*8
 			}
 			*(*StackEntry)(unsafe.Pointer((*struct {
 				Fcontents uintptr
 				Fsize     uint32_t
 				Fcapacity uint32_t
-			})(unsafe.Pointer(v64)).Fcontents + uintptr(v98)*16)) = StackEntry{
-				Ftree:        *(*Subtree)(unsafe.Pointer(v114 + uintptr(next_index)*8)),
+			})(unsafe.Pointer(v65)).Fcontents + uintptr(v103)*16)) = StackEntry{
+				Ftree:        *(*Subtree)(unsafe.Pointer(v118 + uintptr(next_index)*8)),
 				Fchild_index: next_index,
 				Fbyte_offset: byte_offset,
 			}
-		_340:
+		_345:
 			;
 			break
 		}
-		if (*TSParser)(unsafe.Pointer(self18)).Flexer.Flogger.Flog != 0 || (*TSParser)(unsafe.Pointer(self18)).Fdot_graph_file != 0 {
-			v7 = *(*Subtree)(unsafe.Pointer(bp + 104))
-			*(*Subtree)(unsafe.Pointer(bp)) = v7
+		if (*TSParser)(unsafe.Pointer(self19)).Flexer.Flogger.Flog != 0 || (*TSParser)(unsafe.Pointer(self19)).Fdot_graph_file != 0 {
+			v1 = result4
+			*(*Subtree)(unsafe.Pointer(bp)) = v1
 			if int32(*(*uint8)(unsafe.Pointer(bp + 0))&0x1>>0) != 0 {
-				v33 = int32((*(*SubtreeInlineData)(unsafe.Pointer(bp))).Fsymbol)
+				v38 = int32((*(*SubtreeInlineData)(unsafe.Pointer(bp))).Fsymbol)
 			} else {
-				v33 = int32((*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)))).Fsymbol)
+				v38 = int32((*SubtreeHeapData)(unsafe.Pointer(*(*uintptr)(unsafe.Pointer(bp)))).Fsymbol)
 			}
-			v31 = uint16(v33)
-			goto _357
-		_357:
-			libc.X__builtin_snprintf(tls, self18+192, uint64(TREE_SITTER_SERIALIZATION_BUFFER_SIZE), __ccgo_ts+1690, libc.VaList(bp+120, ts_language_symbol_name(tls, (*TSParser)(unsafe.Pointer(self18)).Flanguage, v31)))
-			ts_parser__log(tls, self18)
+			v36 = uint16(v38)
+			goto _362
+		_362:
+			libc.X__builtin_snprintf(tls, self19+192, uint64(TREE_SITTER_SERIALIZATION_BUFFER_SIZE), __ccgo_ts+1690, libc.VaList(bp+112, ts_language_symbol_name(tls, (*TSParser)(unsafe.Pointer(self19)).Flanguage, v36)))
+			ts_parser__log(tls, self19)
 		}
-		ts_subtree_retain(tls, *(*Subtree)(unsafe.Pointer(bp + 104)))
-		return *(*Subtree)(unsafe.Pointer(bp + 104))
+		ts_subtree_retain(tls, result4)
+		return result4
 	}
 	return Subtree{}
 }
