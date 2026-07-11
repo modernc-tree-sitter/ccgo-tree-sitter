@@ -10489,12 +10489,17 @@ func ts_parser__reuse_node(tls *libc.TLS, self18 uintptr, version StackVersion, 
 	var _ /* result at bp+104 */ Subtree
 	var _ /* tree at bp+80 */ Subtree
 	_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ = byte_offset, byte_offset1, end_byte_offset, last_entry, leaf_symbol, new_capacity1, new_contents, new_contents1, new_size, next_index, popped_entry, reason, result, result1, result2, result3, v1, v10, v100, v101, v102, v103, v105, v107, v11, v110, v111, v13, v14, v16, v17, v18, v19, v2, v20, v22, v24, v26, v28, v30, v31, v33, v34, v38, v4, v42, v44, v46, v47, v48, v49, v5, v50, v51, v52, v53, v55, v57, v58, v59, v60, v62, v63, v64, v7, v8, v92, v96, v97, v99
-	for *(*uintptr)(unsafe.Pointer(bp + 104)) != 0 {
+	for {
 		v1 = self18 + 1368
 		if (*ReusableNode)(unsafe.Pointer(v1)).Fstack.Fsize > uint32(0) {
+			*(*Subtree)(unsafe.Pointer(bp + 104)) = (*(*StackEntry)(unsafe.Pointer((*ReusableNode)(unsafe.Pointer(v1)).Fstack.Fcontents + uintptr((*ReusableNode)(unsafe.Pointer(v1)).Fstack.Fsize-uint32(1))*16))).Ftree
 			v4 = (*(*StackEntry)(unsafe.Pointer((*ReusableNode)(unsafe.Pointer(v1)).Fstack.Fcontents + uintptr((*ReusableNode)(unsafe.Pointer(v1)).Fstack.Fsize-uint32(1))*16))).Fbyte_offset
 		} else {
-			v4 = uint32(4294967295)
+			*(*Subtree)(unsafe.Pointer(bp + 104)) = Subtree{}
+			v4 = uint32(0xffffffff)
+		}
+		if *(*uintptr)(unsafe.Pointer(bp + 104)) == 0 {
+			break
 		}
 		v2 = v4
 		goto _3

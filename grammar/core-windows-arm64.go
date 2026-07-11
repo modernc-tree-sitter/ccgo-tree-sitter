@@ -7028,7 +7028,11 @@ func ts_parser__reuse_node(tls *libc.TLS, self uintptr, version StackVersion, st
 	var v1 uint32
 	var _ /* result at bp+0 */ Subtree
 	_, _, _, _, _ = byte_offset, end_byte_offset, leaf_symbol, reason, v1
-	for *(*uintptr)(unsafe.Pointer(bp)) != 0 {
+	for {
+		*(*Subtree)(unsafe.Pointer(bp)) = reusable_node_tree(tls, self+1368)
+		if *(*uintptr)(unsafe.Pointer(bp)) == 0 {
+			break
+		}
 		byte_offset = reusable_node_byte_offset(tls, self+1368)
 		end_byte_offset = byte_offset + ts_subtree_total_bytes(tls, *(*Subtree)(unsafe.Pointer(bp)))
 		if ts_subtree_is_eof(tls, *(*Subtree)(unsafe.Pointer(bp))) != 0 {

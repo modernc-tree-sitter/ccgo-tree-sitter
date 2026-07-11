@@ -995,6 +995,74 @@ func postProcess(goCode, workDir string) string {
 	return libc.Uint8FromInt32(libc.BoolInt32(v1 != 0))
 }`)
 
+	// Fix ccgo dropping the assignment in:
+	//   while ((result = reusable_node_tree(...)).ptr)
+	// which becomes a for-loop testing an uninitialized stack Subtree.
+	goCode = fixReuseNodeLoop(goCode)
+
+	return goCode
+}
+
+// fixReuseNodeLoop repairs ts_parser__reuse_node's main loop after ccgo omits
+// the C assignment `result = reusable_node_tree(...)` from the while condition.
+// Without it, the loop reads garbage from the TLS stack frame and can SEGV
+// when the low bit looks like a heap Subtree pointer.
+func fixReuseNodeLoop(goCode string) string {
+	// Pattern A (most 64-bit cores): inlined reusable_node_* , result at bp+104.
+	// RE2 has no backrefs; match the stack-entry expression twice via a non-capturing
+	// structure and rebuild with ReplaceAllStringFunc.
+	reA := regexp.MustCompile(
+		`\tfor \*\(\*uintptr\)\(unsafe\.Pointer\(bp \+ 104\)\) != 0 \{\n` +
+			`\t\t(v\d+) = (self\d*) \+ (\d+)\n` +
+			`\t\tif \(\*ReusableNode\)\(unsafe\.Pointer\((v\d+)\)\)\.Fstack\.Fsize > uint32\(0\) \{\n` +
+			`\t\t\t(v\d+) = \(\*\(\*StackEntry\)\(unsafe\.Pointer\(\(\*ReusableNode\)\(unsafe\.Pointer\((v\d+)\)\)\.Fstack\.Fcontents \+ uintptr\(\(\*ReusableNode\)\(unsafe\.Pointer\((v\d+)\)\)\.Fstack\.Fsize-uint32\(1\)\)\*16\)\)\)\.Fbyte_offset\n` +
+			`\t\t\} else \{\n` +
+			`\t\t\t(v\d+) = uint32\((?:0xffffffff|4294967295)\)\n` +
+			`\t\t\}`,
+	)
+	goCode = reA.ReplaceAllStringFunc(goCode, func(m string) string {
+		sub := reA.FindStringSubmatch(m)
+		// sub: full, vSelfAssign, selfN, off, vIf, vByte, vPtr1, vPtr2, vElse
+		if len(sub) < 9 {
+			return m
+		}
+		v1, self, off, v4 := sub[1], sub[2], sub[3], sub[5]
+		// Prefer the register used in the if-condition (should match v1).
+		if sub[4] != v1 {
+			v1 = sub[4]
+		}
+		if sub[8] != v4 {
+			v4 = sub[8]
+		}
+		last := `(*(*StackEntry)(unsafe.Pointer((*ReusableNode)(unsafe.Pointer(` + v1 + `)).Fstack.Fcontents + uintptr((*ReusableNode)(unsafe.Pointer(` + v1 + `)).Fstack.Fsize-uint32(1))*16)))`
+		return "\tfor {\n" +
+			"\t\t" + v1 + " = " + self + " + " + off + "\n" +
+			"\t\tif (*ReusableNode)(unsafe.Pointer(" + v1 + ")).Fstack.Fsize > uint32(0) {\n" +
+			"\t\t\t*(*Subtree)(unsafe.Pointer(bp + 104)) = " + last + ".Ftree\n" +
+			"\t\t\t" + v4 + " = " + last + ".Fbyte_offset\n" +
+			"\t\t} else {\n" +
+			"\t\t\t*(*Subtree)(unsafe.Pointer(bp + 104)) = Subtree{}\n" +
+			"\t\t\t" + v4 + " = uint32(0xffffffff)\n" +
+			"\t\t}\n" +
+			"\t\tif *(*uintptr)(unsafe.Pointer(bp + 104)) == 0 {\n" +
+			"\t\t\tbreak\n" +
+			"\t\t}"
+	})
+
+	// Pattern B (e.g. windows/arm64): result at bp+0, helpers not fully inlined.
+	reB := regexp.MustCompile(
+		`\tfor \*\(\*uintptr\)\(unsafe\.Pointer\(bp\)\) != 0 \{\n` +
+			`\t\tbyte_offset = reusable_node_byte_offset\(tls, (self\d*)\+(\d+)\)\n`,
+	)
+	goCode = reB.ReplaceAllString(goCode,
+		"\tfor {\n"+
+			"\t\t*(*Subtree)(unsafe.Pointer(bp)) = reusable_node_tree(tls, $1+$2)\n"+
+			"\t\tif *(*uintptr)(unsafe.Pointer(bp)) == 0 {\n"+
+			"\t\t\tbreak\n"+
+			"\t\t}\n"+
+			"\t\tbyte_offset = reusable_node_byte_offset(tls, $1+$2)\n",
+	)
+
 	return goCode
 }
 
