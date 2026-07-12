@@ -19,7 +19,7 @@ func TestParserConcurrentShare(t *testing.T) {
 	if !p.SetLanguage(lang) {
 		t.Fatal("SetLanguage failed")
 	}
-	const src = "package main\n\nfunc main() {}\n"
+	src := []byte("package main\n\nfunc main() {}\n")
 	var wg sync.WaitGroup
 	errCh := make(chan string, 32)
 	for i := 0; i < 16; i++ {
@@ -27,7 +27,7 @@ func TestParserConcurrentShare(t *testing.T) {
 		go func() {
 			defer wg.Done()
 			for j := 0; j < 20; j++ {
-				tree := p.ParseString(src)
+				tree := p.ParseBytes(src)
 				root := tree.RootNode()
 				if root.IsNull() {
 					errCh <- "null root"
