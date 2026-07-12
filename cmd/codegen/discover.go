@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log/slog"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -108,11 +109,17 @@ func discoverGrammarUnits(thirdPartyGlob string) ([]GrammarUnit, error) {
 
 // languageNameForParser prefers the tree_sitter_<id> symbol from parser.c;
 // falls back to the unit directory name (tree-sitter- prefix stripped).
+// Missing parser.c is a quiet fallback; other read errors are logged then fall back.
 func languageNameForParser(parserC, unitPath string) string {
-	if data, err := os.ReadFile(parserC); err == nil {
-		if m := langEntryRe.FindSubmatch(data); len(m) == 2 {
-			return string(m[1])
+	data, err := os.ReadFile(parserC)
+	if err != nil {
+		if !os.IsNotExist(err) {
+			slog.Warn("failed to read parser.c for language name", "path", parserC, "error", err)
 		}
+		return normalizeGrammarName(filepath.Base(unitPath))
+	}
+	if m := langEntryRe.FindSubmatch(data); len(m) == 2 {
+		return string(m[1])
 	}
 	return normalizeGrammarName(filepath.Base(unitPath))
 }

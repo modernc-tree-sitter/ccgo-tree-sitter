@@ -88,6 +88,42 @@ func TestNormalizeGrammarName(t *testing.T) {
 	}
 }
 
+func TestLanguageNameForParser(t *testing.T) {
+	dir := t.TempDir()
+	unitPath := filepath.Join(dir, "tree-sitter-example")
+	if err := os.MkdirAll(filepath.Join(unitPath, "src"), 0o755); err != nil {
+		t.Fatal(err)
+	}
+	parserC := filepath.Join(unitPath, "src", "parser.c")
+
+	// C entry symbol wins over folder name.
+	body := "const TSLanguage *tree_sitter_example_lang(void) {\n\treturn NULL;\n}\n"
+	if err := os.WriteFile(parserC, []byte(body), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if got := languageNameForParser(parserC, unitPath); got != "example_lang" {
+		t.Errorf("symbol path: got %q want example_lang", got)
+	}
+
+	// Missing file: quiet fallback to unit folder.
+	missing := filepath.Join(unitPath, "src", "nope.c")
+	if got := languageNameForParser(missing, unitPath); got != "example" {
+		t.Errorf("IsNotExist fallback: got %q want example", got)
+	}
+
+	// Unreadable parser.c: still falls back (slog.Warn is side effect).
+	if err := os.WriteFile(parserC, []byte(body), 0o000); err != nil {
+		t.Fatal(err)
+	}
+	t.Cleanup(func() { _ = os.Chmod(parserC, 0o644) })
+	// Root may ignore mode bits; only assert when read truly fails.
+	if _, err := os.ReadFile(parserC); err != nil {
+		if got := languageNameForParser(parserC, unitPath); got != "example" {
+			t.Errorf("read-error fallback: got %q want example", got)
+		}
+	}
+}
+
 func containsPathPart(path, part string) bool {
 	for _, p := range splitPath(path) {
 		if p == part {
