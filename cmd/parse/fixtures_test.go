@@ -159,7 +159,7 @@ func TestLanguageFixtures(t *testing.T) {
 		var testErr *testFailure
 		if errors.As(err, &testErr) {
 			if testErr.message == "language is not registered" {
-				t.Fatalf("%v; supported languages: %s", err, supportedLanguages())
+				t.Fatalf("%v; supported languages: %s", err, grammar.SupportedLanguages())
 			}
 			t.Fatal(err)
 		}
