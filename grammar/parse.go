@@ -1,5 +1,8 @@
 package grammar
 
+// ParseOutput is the JSON envelope for a serialized parse tree (e.g. cmd/parse).
+// Language and File identify the grammar and input path; Root holds the tree.
+// Matches is optional and omitted from JSON when empty.
 type ParseOutput struct {
 	Language string       `json:"language"`
 	File     string       `json:"file"`
@@ -7,6 +10,9 @@ type ParseOutput struct {
 	Matches  []QueryMatch `json:"matches,omitempty"`
 }
 
+// ParseNode is a JSON-friendly view of a syntax node: type, optional field
+// name relative to the parent, byte span in the source, and children.
+// Text is set only on leaves (no children); internal nodes omit it.
 type ParseNode struct {
 	Type      string       `json:"type"`
 	Field     string       `json:"field,omitempty"`
@@ -16,6 +22,12 @@ type ParseNode struct {
 	Children  []*ParseNode `json:"children,omitempty"`
 }
 
+// BuildParseNode copies n into a ParseNode tree for JSON encoding.
+// Under one lock it snapshots type, span, children, and field names, then
+// unlocks before recursing so child work does not hold n's mutex.
+// fieldName is the field name on the parent (empty for the root).
+// Leaf Text is source[start:end] when the span is in range; returns nil if n
+// is nil or null.
 func BuildParseNode(n *Node, source []byte, fieldName string) *ParseNode {
 	if n == nil || n.tls == nil {
 		return nil
