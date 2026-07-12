@@ -552,22 +552,29 @@ func (t *Transpiler) TranspileGrammar(grammarPath, grammarName, outputDir string
 
 // combineFiles sequentially concatenates multiple C input source paths
 // into a single output file to supply ccgo with unified compilation units.
-func combineFiles(inputs []string, output string) error {
+func combineFiles(inputs []string, output string) (err error) {
 	out, err := os.Create(output)
 	if err != nil {
 		return err
 	}
-	defer out.Close()
+	defer func() {
+		if cerr := out.Close(); err == nil {
+			err = cerr
+		}
+	}()
 
 	for _, input := range inputs {
-		data, err := os.ReadFile(input)
+		var data []byte
+		data, err = os.ReadFile(input)
 		if err != nil {
 			return err
 		}
-		if _, err := out.Write(data); err != nil {
+		if _, err = out.Write(data); err != nil {
 			return err
 		}
-		out.WriteString("\n\n")
+		if _, err = out.WriteString("\n\n"); err != nil {
+			return err
+		}
 	}
 
 	return nil
