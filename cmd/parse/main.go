@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-	"sort"
 	"strings"
 
 	"github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar"
@@ -12,10 +11,11 @@ import (
 )
 
 var Command = &cobra.Command{
-	Use:          "parse <language> <file>",
-	Short:        "Parse source files and print tree-sitter nodes",
-	Args:         cobra.ExactArgs(2),
-	SilenceUsage: true,
+	Use:           "parse <language> <file>",
+	Short:         "Parse source files and print tree-sitter nodes",
+	Args:          cobra.ExactArgs(2),
+	SilenceUsage:  true,
+	SilenceErrors: true,
 	RunE: func(_ *cobra.Command, args []string) error {
 		return run(args[0], args[1])
 	},
@@ -30,7 +30,7 @@ func init() {
 }
 
 func main() {
-	Command.SetUsageTemplate(Command.UsageTemplate() + "\nSupported languages:\n" + supportedLanguages() + "\n")
+	Command.SetUsageTemplate(Command.UsageTemplate() + "\nSupported languages:\n" + grammar.SupportedLanguages() + "\n")
 	if err := Command.Execute(); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
@@ -54,7 +54,7 @@ func run(languageName, filename string) error {
 		return fmt.Errorf(
 			"unsupported language: %s\nsupported languages: %s",
 			languageName,
-			supportedLanguages(),
+			grammar.SupportedLanguages(),
 		)
 	}
 
@@ -105,13 +105,4 @@ func run(languageName, filename string) error {
 		return fmt.Errorf("failed to encode output: %w", err)
 	}
 	return nil
-}
-
-func supportedLanguages() string {
-	langs := grammar.List()
-	if len(langs) == 0 {
-		return "none"
-	}
-	sort.Strings(langs)
-	return strings.Join(langs, ", ")
 }
