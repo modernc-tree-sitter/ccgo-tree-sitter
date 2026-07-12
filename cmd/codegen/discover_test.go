@@ -89,9 +89,6 @@ func TestNormalizeGrammarName(t *testing.T) {
 }
 
 func containsPathPart(path, part string) bool {
-	for _, p := range filepath.SplitList(path) {
-		_ = p
-	}
 	for _, p := range splitPath(path) {
 		if p == part {
 			return true
