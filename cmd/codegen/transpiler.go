@@ -461,15 +461,22 @@ func (t *Transpiler) TranspileGrammar(grammarPath, grammarName, outputDir string
 
 	// Check parser.c exists
 	parserC := filepath.Join(grammarPath, "src", "parser.c")
-	if _, err := os.Stat(parserC); os.IsNotExist(err) {
-		return fmt.Errorf("parser.c not found at %s", parserC)
+	if _, err := os.Stat(parserC); err != nil {
+		if os.IsNotExist(err) {
+			return fmt.Errorf("parser.c not found at %s", parserC)
+		}
+		return fmt.Errorf("cannot stat parser.c at %s: %w", parserC, err)
 	}
 
 	// Check for scanner.c
 	scannerC := filepath.Join(grammarPath, "src", "scanner.c")
 	hasScanner := true
-	if _, err := os.Stat(scannerC); os.IsNotExist(err) {
-		hasScanner = false
+	if _, err := os.Stat(scannerC); err != nil {
+		if os.IsNotExist(err) {
+			hasScanner = false
+		} else {
+			return fmt.Errorf("cannot stat scanner.c at %s: %w", scannerC, err)
+		}
 	}
 
 	tmpDir, err := t.prepareWorkDir("grammar", grammarName)
