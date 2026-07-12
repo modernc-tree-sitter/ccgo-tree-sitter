@@ -116,8 +116,30 @@ func (p *Parser) ParseString(source string) *Tree {
 }
 
 // ParseBytes parses a contiguous UTF-8 source buffer.
+//
+// Source is copied into a NUL-terminated libc buffer for the call and freed
+// with defer (no intermediate string allocation). Tree-sitter only borrows
+// the buffer during parse.
 func (p *Parser) ParseBytes(source []byte) *Tree {
-	return p.ParseString(string(source))
+	if p == nil {
+		return &Tree{}
+	}
+	p.mu.Lock()
+	defer p.mu.Unlock()
+	if p.ptr == 0 || p.tls == nil {
+		return &Tree{}
+	}
+	n := len(source)
+	cstr := libc.Xmalloc(nil, libc.Tsize_t(n)+1)
+	if cstr == 0 {
+		return &Tree{parser: p}
+	}
+	defer libc.Xfree(nil, cstr)
+	copy(unsafe.Slice((*byte)(unsafe.Pointer(cstr)), n), source)
+	*(*byte)(unsafe.Pointer(cstr + uintptr(n))) = 0
+
+	ptr := ts_parser_parse_string(p.tls, p.ptr, 0, cstr, uint32(n))
+	return newTree(ptr, p)
 }
 
 func newTree(ptr uintptr, p *Parser) *Tree {
