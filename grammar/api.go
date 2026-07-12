@@ -219,6 +219,10 @@ func (n *Node) ChildCount() uint32 {
 	}
 	n.lock()
 	defer n.unlock()
+	return n.childCountUnlocked()
+}
+
+func (n *Node) childCountUnlocked() uint32 {
 	return ts_node_child_count(n.tls, n.node)
 }
 
@@ -229,6 +233,10 @@ func (n *Node) Child(index uint32) *Node {
 	}
 	n.lock()
 	defer n.unlock()
+	return n.childUnlocked(index)
+}
+
+func (n *Node) childUnlocked(index uint32) *Node {
 	node := ts_node_child(n.tls, n.node, index)
 	return &Node{node: node, tls: n.tls, mu: n.mu}
 }
@@ -240,6 +248,10 @@ func (n *Node) FieldNameForChild(index uint32) string {
 	}
 	n.lock()
 	defer n.unlock()
+	return n.fieldNameForChildUnlocked(index)
+}
+
+func (n *Node) fieldNameForChildUnlocked(index uint32) string {
 	ptr := ts_node_field_name_for_child(n.tls, n.node, index)
 	if ptr == 0 {
 		return ""
@@ -275,6 +287,10 @@ func (n *Node) StartByte() uint32 {
 	}
 	n.lock()
 	defer n.unlock()
+	return n.startByteUnlocked()
+}
+
+func (n *Node) startByteUnlocked() uint32 {
 	return ts_node_start_byte(n.tls, n.node)
 }
 
@@ -285,6 +301,10 @@ func (n *Node) EndByte() uint32 {
 	}
 	n.lock()
 	defer n.unlock()
+	return n.endByteUnlocked()
+}
+
+func (n *Node) endByteUnlocked() uint32 {
 	return ts_node_end_byte(n.tls, n.node)
 }
 
