@@ -2,19 +2,27 @@ package grammar
 
 import (
 	"runtime"
+	"sync"
 	"unsafe"
 
 	"modernc.org/libc"
 )
 
 // Language wraps a TSLanguage pointer.
+// Languages are immutable after load and may be shared across parsers and goroutines.
 type Language = *TSLanguage
 
 // Parser wraps a tree-sitter parser.
 //
 // Ownership is GC-managed: a runtime cleanup frees the native parser and TLS
 // when the *Parser becomes unreachable. Explicit Delete is optional (eager free).
+//
+// Parser methods (and Trees/Nodes from this parser) are safe for concurrent use
+// by multiple goroutines. An internal mutex serializes access to the native
+// parser and TLS; callers do not need external locking. For throughput under
+// heavy parallel load, prefer one Parser per goroutine to avoid lock contention.
 type Parser struct {
+	mu      sync.Mutex
 	ptr     uintptr
 	tls     *libc.TLS
 	cleanup runtime.Cleanup
@@ -24,17 +32,20 @@ type Parser struct {
 //
 // The tree pins its *Parser so the parser/TLS stay alive until the tree is
 // collected or deleted. Cleanup frees only the native tree (not the parser).
+// Concurrent use is safe; operations lock the parent Parser.
 type Tree struct {
 	ptr     uintptr
 	parser  *Parser
 	cleanup runtime.Cleanup
 }
 
-// Node wraps a TSNode. Nodes borrow the parent tree's TLS; keep the *Tree
-// reachable while using a Node.
+// Node wraps a TSNode. Nodes borrow the parent tree's (or query's) TLS and lock;
+// keep the *Tree or *Query reachable while using a Node.
+// Concurrent use is safe when the node was produced by this package's APIs.
 type Node struct {
 	node TSNode
 	tls  *libc.TLS
+	mu   *sync.Mutex // parser.mu or query.mu; nil for empty nodes
 }
 
 type parserRes struct {
@@ -58,7 +69,12 @@ func NewParser() *Parser {
 
 // SetLanguage sets the language for parsing.
 func (p *Parser) SetLanguage(lang Language) bool {
-	if p == nil || p.ptr == 0 {
+	if p == nil {
+		return false
+	}
+	p.mu.Lock()
+	defer p.mu.Unlock()
+	if p.ptr == 0 || p.tls == nil {
 		return false
 	}
 	langPtr := uintptr(unsafe.Pointer(lang))
@@ -70,7 +86,12 @@ func (p *Parser) SetLanguage(lang Language) bool {
 // Source is copied into a libc CString for the call and freed with defer.
 // Tree-sitter only borrows the buffer during parse.
 func (p *Parser) ParseString(source string) *Tree {
-	if p == nil || p.ptr == 0 {
+	if p == nil {
+		return &Tree{}
+	}
+	p.mu.Lock()
+	defer p.mu.Unlock()
+	if p.ptr == 0 || p.tls == nil {
 		return &Tree{}
 	}
 	cstr, err := libc.CString(source)
@@ -107,7 +128,12 @@ func freeParser(r parserRes) {
 }
 
 func freeTree(r treeRes) {
-	if r.ptr == 0 || r.parser == nil || r.parser.tls == nil {
+	if r.ptr == 0 || r.parser == nil {
+		return
+	}
+	r.parser.mu.Lock()
+	defer r.parser.mu.Unlock()
+	if r.parser.tls == nil {
 		return
 	}
 	ts_tree_delete(r.parser.tls, r.ptr)
@@ -116,7 +142,12 @@ func freeTree(r treeRes) {
 // Delete eagerly frees the parser. Optional: the GC will free it if omitted.
 // Do not Delete a parser while any Tree from it is still in use.
 func (p *Parser) Delete() {
-	if p == nil || p.ptr == 0 {
+	if p == nil {
+		return
+	}
+	p.mu.Lock()
+	defer p.mu.Unlock()
+	if p.ptr == 0 {
 		return
 	}
 	p.cleanup.Stop()
@@ -127,30 +158,40 @@ func (p *Parser) Delete() {
 
 // Delete eagerly frees the tree. Optional: the GC will free it if omitted.
 func (t *Tree) Delete() {
-	if t == nil || t.ptr == 0 {
+	if t == nil || t.ptr == 0 || t.parser == nil {
 		return
 	}
 	t.cleanup.Stop()
+	// freeTree takes parser.mu
 	freeTree(treeRes{ptr: t.ptr, parser: t.parser})
 	t.ptr = 0
 	t.parser = nil
 }
 
-func (t *Tree) tls() *libc.TLS {
-	if t == nil || t.parser == nil {
-		return nil
-	}
-	return t.parser.tls
-}
-
 // RootNode returns the root node of the tree.
 func (t *Tree) RootNode() *Node {
-	tls := t.tls()
-	if tls == nil || t.ptr == 0 {
+	if t == nil || t.parser == nil {
 		return &Node{}
 	}
-	node := ts_tree_root_node(tls, t.ptr)
-	return &Node{node: node, tls: tls}
+	t.parser.mu.Lock()
+	defer t.parser.mu.Unlock()
+	if t.ptr == 0 || t.parser.tls == nil {
+		return &Node{}
+	}
+	node := ts_tree_root_node(t.parser.tls, t.ptr)
+	return &Node{node: node, tls: t.parser.tls, mu: &t.parser.mu}
+}
+
+func (n *Node) lock() {
+	if n != nil && n.mu != nil {
+		n.mu.Lock()
+	}
+}
+
+func (n *Node) unlock() {
+	if n != nil && n.mu != nil {
+		n.mu.Unlock()
+	}
 }
 
 // Type returns the node type as a string.
@@ -158,6 +199,12 @@ func (n *Node) Type() string {
 	if n == nil || n.tls == nil {
 		return ""
 	}
+	n.lock()
+	defer n.unlock()
+	return n.typeUnlocked()
+}
+
+func (n *Node) typeUnlocked() string {
 	ptr := ts_node_type(n.tls, n.node)
 	if ptr == 0 {
 		return ""
@@ -170,6 +217,8 @@ func (n *Node) ChildCount() uint32 {
 	if n == nil || n.tls == nil {
 		return 0
 	}
+	n.lock()
+	defer n.unlock()
 	return ts_node_child_count(n.tls, n.node)
 }
 
@@ -178,8 +227,10 @@ func (n *Node) Child(index uint32) *Node {
 	if n == nil || n.tls == nil {
 		return &Node{}
 	}
+	n.lock()
+	defer n.unlock()
 	node := ts_node_child(n.tls, n.node, index)
-	return &Node{node: node, tls: n.tls}
+	return &Node{node: node, tls: n.tls, mu: n.mu}
 }
 
 // FieldNameForChild returns the field name for the child at the given index.
@@ -187,6 +238,8 @@ func (n *Node) FieldNameForChild(index uint32) string {
 	if n == nil || n.tls == nil {
 		return ""
 	}
+	n.lock()
+	defer n.unlock()
 	ptr := ts_node_field_name_for_child(n.tls, n.node, index)
 	if ptr == 0 {
 		return ""
@@ -199,6 +252,8 @@ func (n *Node) NamedChildCount() uint32 {
 	if n == nil || n.tls == nil {
 		return 0
 	}
+	n.lock()
+	defer n.unlock()
 	return ts_node_named_child_count(n.tls, n.node)
 }
 
@@ -207,8 +262,10 @@ func (n *Node) NamedChild(index uint32) *Node {
 	if n == nil || n.tls == nil {
 		return &Node{}
 	}
+	n.lock()
+	defer n.unlock()
 	node := ts_node_named_child(n.tls, n.node, index)
-	return &Node{node: node, tls: n.tls}
+	return &Node{node: node, tls: n.tls, mu: n.mu}
 }
 
 // StartByte returns the start byte offset.
@@ -216,6 +273,8 @@ func (n *Node) StartByte() uint32 {
 	if n == nil || n.tls == nil {
 		return 0
 	}
+	n.lock()
+	defer n.unlock()
 	return ts_node_start_byte(n.tls, n.node)
 }
 
@@ -224,6 +283,8 @@ func (n *Node) EndByte() uint32 {
 	if n == nil || n.tls == nil {
 		return 0
 	}
+	n.lock()
+	defer n.unlock()
 	return ts_node_end_byte(n.tls, n.node)
 }
 
@@ -232,6 +293,8 @@ func (n *Node) String() string {
 	if n == nil || n.tls == nil {
 		return ""
 	}
+	n.lock()
+	defer n.unlock()
 	ptr := ts_node_string(n.tls, n.node)
 	if ptr == 0 {
 		return ""
@@ -246,6 +309,12 @@ func (n *Node) IsNull() bool {
 	if n == nil || n.tls == nil {
 		return true
 	}
+	n.lock()
+	defer n.unlock()
+	return n.isNullUnlocked()
+}
+
+func (n *Node) isNullUnlocked() bool {
 	return ts_node_is_null(n.tls, n.node) != 0
 }
 
@@ -254,6 +323,8 @@ func (n *Node) IsNamed() bool {
 	if n == nil || n.tls == nil {
 		return false
 	}
+	n.lock()
+	defer n.unlock()
 	return ts_node_is_named(n.tls, n.node) != 0
 }
 
@@ -262,6 +333,8 @@ func (n *Node) IsExtra() bool {
 	if n == nil || n.tls == nil {
 		return false
 	}
+	n.lock()
+	defer n.unlock()
 	return ts_node_is_extra(n.tls, n.node) != 0
 }
 
@@ -270,6 +343,8 @@ func (n *Node) IsError() bool {
 	if n == nil || n.tls == nil {
 		return false
 	}
+	n.lock()
+	defer n.unlock()
 	return ts_node_is_error(n.tls, n.node) != 0
 }
 
@@ -278,6 +353,8 @@ func (n *Node) HasError() bool {
 	if n == nil || n.tls == nil {
 		return false
 	}
+	n.lock()
+	defer n.unlock()
 	return ts_node_has_error(n.tls, n.node) != 0
 }
 
@@ -286,6 +363,8 @@ func (n *Node) HasChanges() bool {
 	if n == nil || n.tls == nil {
 		return false
 	}
+	n.lock()
+	defer n.unlock()
 	return ts_node_has_changes(n.tls, n.node) != 0
 }
 
@@ -295,4 +374,33 @@ func (n *Node) PrintTree() string {
 		return "(null)"
 	}
 	return n.String()
+}
+
+// lockPair locks a and b in pointer order to avoid deadlocks when both are needed.
+// Either may be nil. Returns an unlock function.
+func lockPair(a, b *sync.Mutex) (unlock func()) {
+	switch {
+	case a == nil && b == nil:
+		return func() {}
+	case a == nil:
+		b.Lock()
+		return b.Unlock
+	case b == nil:
+		a.Lock()
+		return a.Unlock
+	case a == b:
+		a.Lock()
+		return a.Unlock
+	default:
+		first, second := a, b
+		if uintptr(unsafe.Pointer(a)) > uintptr(unsafe.Pointer(b)) {
+			first, second = b, a
+		}
+		first.Lock()
+		second.Lock()
+		return func() {
+			second.Unlock()
+			first.Unlock()
+		}
+	}
 }
