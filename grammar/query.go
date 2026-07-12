@@ -145,8 +145,15 @@ func (c *QueryCursor) Delete() {
 
 // ExecuteMatches runs the query over root and returns all matches.
 // The temporary cursor is GC-managed.
+// Returns nil if the query is unusable or root is nil/null.
 func (q *Query) ExecuteMatches(root *Node, source []byte) []QueryMatch {
+	if q == nil || q.ptr == 0 || q.tls == nil || root.IsNull() {
+		return nil
+	}
 	cursor := q.NewCursor()
+	if cursor.ptr == 0 {
+		return nil
+	}
 
 	ts_query_cursor_exec(q.tls, cursor.ptr, q.ptr, root.node)
 
