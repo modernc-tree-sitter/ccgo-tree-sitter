@@ -16,8 +16,6 @@ const (
 	rootModulePath    = "github.com/modernc-tree-sitter/ccgo-tree-sitter"
 	grammarModulePath = rootModulePath + "/grammar"
 	moduleGoVersion   = "1.25.0"
-	// Keep in sync with root go.mod require modernc.org/libc.
-	libcModuleVersion = "v1.67.6"
 	localPseudoVer    = "v0.0.0"
 )
 
@@ -117,6 +115,10 @@ func listGrammarLangs(grammarDir string) ([]string, error) {
 }
 
 func writeCoreGoMod(grammarDir string) error {
+	libcVer, err := currentLibcVersion()
+	if err != nil {
+		return err
+	}
 	content := fmt.Sprintf(`module %s
 
 go %s
@@ -124,11 +126,15 @@ go %s
 require modernc.org/libc %s
 
 replace modernc.org/libc => ../third-party/libc
-`, grammarModulePath, moduleGoVersion, libcModuleVersion)
+`, grammarModulePath, moduleGoVersion, libcVer)
 	return os.WriteFile(filepath.Join(grammarDir, "go.mod"), []byte(content), 0644)
 }
 
 func writeLangGoMod(grammarDir, lang string) error {
+	libcVer, err := currentLibcVersion()
+	if err != nil {
+		return err
+	}
 	content := fmt.Sprintf(`module %s/%s
 
 go %s
@@ -141,7 +147,7 @@ require (
 replace %s => ../
 
 replace modernc.org/libc => ../../third-party/libc
-`, grammarModulePath, lang, moduleGoVersion, grammarModulePath, localPseudoVer, libcModuleVersion, grammarModulePath)
+`, grammarModulePath, lang, moduleGoVersion, grammarModulePath, localPseudoVer, libcVer, grammarModulePath)
 	return os.WriteFile(filepath.Join(grammarDir, lang, "go.mod"), []byte(content), 0644)
 }
 
@@ -227,7 +233,11 @@ func updateRootGoMod(outputDir string, langs []string) error {
 			return err
 		}
 	}
-	f.AddNewRequire("modernc.org/libc", libcModuleVersion, false)
+	libcVer, err := currentLibcVersion()
+	if err != nil {
+		return err
+	}
+	f.AddNewRequire("modernc.org/libc", libcVer, false)
 
 	f.Cleanup()
 	out, err := f.Format()
