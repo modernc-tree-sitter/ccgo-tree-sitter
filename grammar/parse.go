@@ -17,34 +17,51 @@ type ParseNode struct {
 }
 
 func BuildParseNode(n *Node, source []byte, fieldName string) *ParseNode {
-	if n.IsNull() {
+	if n == nil || n.tls == nil {
 		return nil
 	}
 
-	start := n.StartByte()
-	end := n.EndByte()
+	// Snapshot under one lock, unlock before recurse (children share n.mu).
+	n.lock()
+	if n.isNullUnlocked() {
+		n.unlock()
+		return nil
+	}
+	start := n.startByteUnlocked()
+	end := n.endByteUnlocked()
+	typ := n.typeUnlocked()
+	count := n.childCountUnlocked()
+	var children []*Node
+	var fields []string
+	if count > 0 {
+		children = make([]*Node, count)
+		fields = make([]string, count)
+		for i := uint32(0); i < count; i++ {
+			children[i] = n.childUnlocked(i)
+			fields[i] = n.fieldNameForChildUnlocked(i)
+		}
+	}
+	n.unlock()
+
 	node := &ParseNode{
-		Type:      n.Type(),
+		Type:      typ,
 		Field:     fieldName,
 		StartByte: start,
 		EndByte:   end,
 	}
-
-	if n.ChildCount() == 0 && int(end) <= len(source) && start <= end {
-		node.Text = string(source[start:end])
+	if count == 0 {
+		if int(end) <= len(source) && start <= end {
+			node.Text = string(source[start:end])
+		}
 		return node
 	}
 
-	count := n.ChildCount()
 	node.Children = make([]*ParseNode, 0, count)
 	for i := uint32(0); i < count; i++ {
-		child := n.Child(i)
-		field := n.FieldNameForChild(i)
-		childNode := BuildParseNode(child, source, field)
+		childNode := BuildParseNode(children[i], source, fields[i])
 		if childNode != nil {
 			node.Children = append(node.Children, childNode)
 		}
 	}
-
 	return node
 }
