@@ -127,7 +127,7 @@ func TestLanguageFixtures(t *testing.T) {
 				t.Fatalf("failed to set language %q", language)
 			}
 
-			tree := parser.ParseString(string(source))
+			tree := parser.ParseBytes(source)
 			rootNode := tree.RootNode()
 			if rootNode.IsNull() {
 				t.Fatalf("root node is null for fixture %s", fixturePath)
