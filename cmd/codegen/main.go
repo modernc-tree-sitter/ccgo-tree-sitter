@@ -8,7 +8,6 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
-	"sort"
 	"strings"
 
 	"github.com/spf13/cobra"
@@ -153,23 +152,10 @@ func run(cmd *cobra.Command, args []string) error {
 
 func updateLanguagesGo(outputDir string) error {
 	grammarDir := filepath.Join(outputDir, "grammar")
-	entries, err := os.ReadDir(grammarDir)
+	languages, err := listGrammarLangs(grammarDir)
 	if err != nil {
 		return err
 	}
-
-	var languages []string
-	for _, entry := range entries {
-		if !entry.IsDir() {
-			continue
-		}
-		// Match listGrammarLangs: only real grammar packages (have api.go).
-		if _, err := os.Stat(filepath.Join(grammarDir, entry.Name(), "api.go")); err != nil {
-			continue
-		}
-		languages = append(languages, entry.Name())
-	}
-	sort.Strings(languages)
 
 	moduleName := "github.com/modernc-tree-sitter/ccgo-tree-sitter"
 
