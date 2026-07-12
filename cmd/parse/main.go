@@ -48,9 +48,10 @@ func run(languageName, filename string) error {
 		return fmt.Errorf("error reading file: %w", err)
 	}
 
-	// Resolve language
+	// Resolve language. Get can return (nil, true) if a nil Language was
+	// registered; treat that like an unsupported name so we never SetLanguage(nil).
 	lang, ok := grammar.Get(strings.ToLower(languageName))
-	if !ok {
+	if !ok || lang == nil {
 		return fmt.Errorf(
 			"unsupported language: %s\nsupported languages: %s",
 			languageName,
