@@ -7,7 +7,7 @@ ORGS=(tree-sitter tree-sitter-grammars)
 
 cd ./third-party
 for ORG in "${ORGS[@]}"; do
-	for REPO in $(gh repo list "$ORG" -t '{{range .}}{{printf "%s\n" .name}}{{end}}' --json name | grep -e '^tree-sitter-' | grep -v template); do
+	for REPO in $(gh repo list "$ORG" --limit 1000 -t '{{range .}}{{printf "%s\n" .name}}{{end}}' --json name | grep -e '^tree-sitter-' | grep -v template); do
 		if [[ ! -d "$REPO" ]]; then
 			git submodule add "ssh://git@github.com/$ORG/$REPO" "$REPO"
 		fi
