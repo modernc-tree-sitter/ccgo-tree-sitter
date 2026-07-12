@@ -410,7 +410,7 @@ func (n *Node) HasChanges() bool {
 	return ts_node_has_changes(n.tls, n.node) != 0
 }
 
-// PrintTree prints the node tree in S-expression format.
+// PrintTree returns the node tree in S-expression format, or "(null)" if the node is null.
 func (n *Node) PrintTree() string {
 	if n.IsNull() {
 		return "(null)"
