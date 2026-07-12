@@ -59,15 +59,36 @@ func TestSupportedLanguages(t *testing.T) {
 	}
 }
 
+// registerStub temporarily installs stubLang under name and restores the prior
+// registry entry (or deletes the key) in t.Cleanup so tests do not clobber
+// production language registrations from blank-imports.
+func registerStub(t *testing.T, name string) {
+	t.Helper()
+	mu.Lock()
+	prev, had := registry[name]
+	registry[name] = stubLang
+	mu.Unlock()
+	t.Cleanup(func() {
+		mu.Lock()
+		defer mu.Unlock()
+		if had {
+			registry[name] = prev
+		} else {
+			delete(registry, name)
+		}
+	})
+}
+
 func TestGetByExtension(t *testing.T) {
-	// Register names referenced by mapping / direct-match extensions.
+	// Names referenced by mapping / direct-match extensions. Use registerStub
+	// so real grammar entries are restored after the test.
 	for _, name := range []string{
 		"javascript", "typescript", "tsx", "python", "ruby", "rust", "go",
 		"c", "cpp", "lua", "json", "c_sharp", "kotlin", "yaml", "markdown",
 		"bash", "toml", "html", "css", "xml", "nix", "terraform", "hcl",
 		"vue", "svelte", "zig", "julia",
 	} {
-		Register(name, stubLang)
+		registerStub(t, name)
 	}
 
 	cases := []struct {
