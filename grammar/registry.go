@@ -123,14 +123,19 @@ var extensionToLanguage = map[string]string{
 	"scm":   "query", // tree-sitter query files
 }
 
-// Register adds a new grammar to the registry
+// Register associates name with lang in the process-wide registry.
+// Re-registering the same name overwrites the previous entry silently.
+// Names are case-sensitive map keys (exact match for Get) and should match
+// the values used by GetByExtension's extension map. An empty name is stored
+// as a normal key if passed.
 func Register(name string, lang Language) {
 	mu.Lock()
 	defer mu.Unlock()
 	registry[name] = lang
 }
 
-// Get retrieves a grammar by name
+// Get returns the language registered under name, or false if none.
+// Lookup is case-sensitive (exact key match on the name passed to Register).
 func Get(name string) (Language, bool) {
 	mu.RLock()
 	defer mu.RUnlock()
