@@ -3,6 +3,7 @@ package grammar
 import (
 	"fmt"
 	"runtime"
+	"sync"
 	"unsafe"
 
 	"modernc.org/libc"
@@ -11,13 +12,20 @@ import (
 // Query wraps a compiled tree-sitter query.
 //
 // Ownership is GC-managed via runtime cleanup. Explicit Delete is optional.
+//
+// Query methods are safe for concurrent use. An internal mutex serializes
+// access to the native query and TLS; callers do not need external locking.
+// ExecuteMatches also coordinates with the root Node's lock when the node
+// comes from a different owner (e.g. a Parser tree).
 type Query struct {
+	mu      sync.Mutex
 	ptr     uintptr
 	tls     *libc.TLS
 	cleanup runtime.Cleanup
 }
 
 // QueryCursor wraps a query cursor. Cleanup pins the parent *Query.
+// Methods are safe for concurrent use; they lock the parent Query.
 type QueryCursor struct {
 	ptr     uintptr
 	query   *Query
@@ -102,7 +110,12 @@ func freeQuery(r queryRes) {
 }
 
 func freeCursor(r cursorRes) {
-	if r.ptr == 0 || r.query == nil || r.query.tls == nil {
+	if r.ptr == 0 || r.query == nil {
+		return
+	}
+	r.query.mu.Lock()
+	defer r.query.mu.Unlock()
+	if r.query.tls == nil {
 		return
 	}
 	ts_query_cursor_delete(r.query.tls, r.ptr)
@@ -110,7 +123,12 @@ func freeCursor(r cursorRes) {
 
 // Delete eagerly frees the query. Optional: the GC will free it if omitted.
 func (q *Query) Delete() {
-	if q == nil || q.ptr == 0 {
+	if q == nil {
+		return
+	}
+	q.mu.Lock()
+	defer q.mu.Unlock()
+	if q.ptr == 0 {
 		return
 	}
 	q.cleanup.Stop()
@@ -121,7 +139,16 @@ func (q *Query) Delete() {
 
 // NewCursor creates a cursor for this query.
 func (q *Query) NewCursor() *QueryCursor {
-	if q == nil || q.ptr == 0 {
+	if q == nil {
+		return &QueryCursor{}
+	}
+	q.mu.Lock()
+	defer q.mu.Unlock()
+	return q.newCursorUnlocked()
+}
+
+func (q *Query) newCursorUnlocked() *QueryCursor {
+	if q.ptr == 0 || q.tls == nil {
 		return &QueryCursor{}
 	}
 	ptr := ts_query_cursor_new(q.tls)
@@ -134,7 +161,7 @@ func (q *Query) NewCursor() *QueryCursor {
 
 // Delete eagerly frees the cursor. Optional: the GC will free it if omitted.
 func (c *QueryCursor) Delete() {
-	if c == nil || c.ptr == 0 {
+	if c == nil || c.ptr == 0 || c.query == nil {
 		return
 	}
 	c.cleanup.Stop()
@@ -146,11 +173,23 @@ func (c *QueryCursor) Delete() {
 // ExecuteMatches runs the query over root and returns all matches.
 // The temporary cursor is GC-managed.
 // Returns nil if the query is unusable or root is nil/null.
+// Safe for concurrent use; coordinates locks with the root node when needed.
 func (q *Query) ExecuteMatches(root *Node, source []byte) []QueryMatch {
-	if q == nil || q.ptr == 0 || q.tls == nil || root.IsNull() {
+	if q == nil || q.ptr == 0 {
 		return nil
 	}
-	cursor := q.NewCursor()
+	var rootMu *sync.Mutex
+	if root != nil {
+		rootMu = root.mu
+	}
+	unlock := lockPair(rootMu, &q.mu)
+	defer unlock()
+
+	if q.tls == nil || root == nil || root.tls == nil || root.isNullUnlocked() {
+		return nil
+	}
+
+	cursor := q.newCursorUnlocked()
 	if cursor.ptr == 0 {
 		return nil
 	}
@@ -163,14 +202,19 @@ func (q *Query) ExecuteMatches(root *Node, source []byte) []QueryMatch {
 		captures := make([]QueryCapture, 0, rawMatch.Fcapture_count)
 		for i := uint16(0); i < rawMatch.Fcapture_count; i++ {
 			rawCapture := (*TSQueryCapture)(unsafe.Pointer(rawMatch.Fcaptures + uintptr(i)*unsafe.Sizeof(TSQueryCapture{})))
-			name := q.captureName(rawCapture.Findex)
-			node := &Node{node: rawCapture.Fnode, tls: q.tls}
-			start := node.StartByte()
-			end := node.EndByte()
+			name := q.captureNameUnlocked(rawCapture.Findex)
+			// Capture nodes share the query TLS; we already hold q.mu.
+			start := ts_node_start_byte(q.tls, rawCapture.Fnode)
+			end := ts_node_end_byte(q.tls, rawCapture.Fnode)
+			typePtr := ts_node_type(q.tls, rawCapture.Fnode)
+			typeName := ""
+			if typePtr != 0 {
+				typeName = libc.GoString(typePtr)
+			}
 			capture := QueryCapture{
 				Index:     rawCapture.Findex,
 				Name:      name,
-				Type:      node.Type(),
+				Type:      typeName,
 				StartByte: start,
 				EndByte:   end,
 			}
@@ -192,7 +236,7 @@ func (q *Query) ExecuteMatches(root *Node, source []byte) []QueryMatch {
 	return matches
 }
 
-func (q *Query) captureName(captureIndex uint32) string {
+func (q *Query) captureNameUnlocked(captureIndex uint32) string {
 	var length uint32
 	ptr := ts_query_capture_name_for_id(q.tls, q.ptr, captureIndex, uintptr(unsafe.Pointer(&length)))
 	if ptr == 0 || length == 0 {
