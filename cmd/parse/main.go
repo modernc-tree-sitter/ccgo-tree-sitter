@@ -65,7 +65,7 @@ func run(languageName, filename string) error {
 	}
 
 	// Parse
-	tree := parser.ParseString(string(source))
+	tree := parser.ParseBytes(source)
 
 	query := querySource
 	if queryFile != "" {
