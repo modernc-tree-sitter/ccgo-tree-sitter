@@ -646,7 +646,7 @@ func (t *Transpiler) transpileGrammarFile(grammarPath, inputC, outputGo, workDir
 // runCcgo invokes ccgo on raw C sources. ccgo runs its own preprocessor using
 // CC (via NewConfig) for system includes/predefines; we pass -I/-D/-std.
 // forceInclude, if non-empty, is passed as -include (forced header).
-func (t *Transpiler) runCcgo(workDir string, sources []string, outputPath string, includes, extraDefines []string, forceInclude string) error {
+func (t *Transpiler) runCcgo(workDir string, sources []string, outputPath string, includes, extraDefines []string, forceInclude string) (err error) {
 	outputArg := outputPath
 	if rel, err := filepath.Rel(workDir, outputPath); err == nil {
 		outputArg = rel
@@ -690,7 +690,12 @@ func (t *Transpiler) runCcgo(workDir string, sources []string, outputPath string
 	if err := os.Chdir(workDir); err != nil {
 		return err
 	}
-	defer os.Chdir(origDir)
+	// Failed restore leaves later codegen steps in the temp workdir.
+	defer func() {
+		if restoreErr := os.Chdir(origDir); restoreErr != nil && err == nil {
+			err = fmt.Errorf("restore working directory: %w", restoreErr)
+		}
+	}()
 
 	// NewConfig probes CC for predefines and system include paths.
 	cc := resolveCC(t.GOOS, t.GOARCH)
