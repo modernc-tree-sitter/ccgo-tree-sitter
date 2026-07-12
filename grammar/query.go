@@ -115,7 +115,12 @@ func freeCursor(r cursorRes) {
 	}
 	r.query.mu.Lock()
 	defer r.query.mu.Unlock()
-	if r.query.tls == nil {
+	freeCursorUnlocked(r)
+}
+
+// freeCursorUnlocked deletes the native cursor. Caller must hold r.query.mu.
+func freeCursorUnlocked(r cursorRes) {
+	if r.ptr == 0 || r.query == nil || r.query.tls == nil {
 		return
 	}
 	ts_query_cursor_delete(r.query.tls, r.ptr)
@@ -171,7 +176,7 @@ func (c *QueryCursor) Delete() {
 }
 
 // ExecuteMatches runs the query over root and returns all matches.
-// The temporary cursor is GC-managed.
+// The temporary cursor is freed before return (no need to wait for GC).
 // Returns nil if the query is unusable or root is nil/null.
 // Safe for concurrent use; coordinates locks with the root node when needed.
 func (q *Query) ExecuteMatches(root *Node, source []byte) []QueryMatch {
@@ -231,8 +236,11 @@ func (q *Query) ExecuteMatches(root *Node, source []byte) []QueryMatch {
 		})
 	}
 
-	// cursor is GC-managed (AddCleanup); keep it live until we finish matching.
-	runtime.KeepAlive(cursor)
+	// Eager free under q.mu (already held); freeCursor would re-lock.
+	cursor.cleanup.Stop()
+	freeCursorUnlocked(cursorRes{ptr: cursor.ptr, query: q})
+	cursor.ptr = 0
+	cursor.query = nil
 	return matches
 }
 
