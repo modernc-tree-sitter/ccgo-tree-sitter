@@ -746,7 +746,10 @@ func runCcgoIsolated(goos, goarch string, args []string) error {
 	flag.Usage = func() {}
 
 	// Redirect stderr to capture output
-	r, w, _ := os.Pipe()
+	r, w, err := os.Pipe()
+	if err != nil {
+		return fmt.Errorf("create stderr pipe: %w", err)
+	}
 	os.Stderr = w
 
 	var stderrBuf bytes.Buffer
@@ -758,9 +761,11 @@ func runCcgoIsolated(goos, goarch string, args []string) error {
 
 	// Run ccgo
 	t := ccgo.NewTask(goos, goarch, args, io.Discard, w, nil)
-	err := t.Main()
+	err = t.Main()
 
-	w.Close()
+	if closeErr := w.Close(); closeErr != nil && err == nil {
+		err = fmt.Errorf("close stderr pipe: %w", closeErr)
+	}
 	<-done
 
 	if err != nil {
