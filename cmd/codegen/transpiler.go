@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	_ "embed"
 	"flag"
 	"fmt"
 	"io"
@@ -601,17 +602,15 @@ func hostDefinesForCcgo(goos, goarch string) []string {
 	return out
 }
 
+//go:embed atomic_stubs.h
+var atomicStubsHeader string
+
 // writeAtomicStubsHeader writes static inline __atomic_* helpers forced into
 // every TU via ccgo -include (separate .c static inlines are not visible).
+// Content is the embedded atomic_stubs.h (single source of truth).
 func writeAtomicStubsHeader(dir string) (string, error) {
 	path := filepath.Join(dir, "atomic_stubs.h")
-	const src = "" +
-		"#ifndef CCGO_TREE_SITTER_ATOMIC_STUBS_H\n" +
-		"#define CCGO_TREE_SITTER_ATOMIC_STUBS_H\n" +
-		"static inline unsigned int __atomic_add_fetch(volatile unsigned int *p, unsigned int v, int m) { (void)m; *p += v; return *p; }\n" +
-		"static inline unsigned int __atomic_sub_fetch(volatile unsigned int *p, unsigned int v, int m) { (void)m; *p -= v; return *p; }\n" +
-		"#endif\n"
-	if err := os.WriteFile(path, []byte(src), 0644); err != nil {
+	if err := os.WriteFile(path, []byte(atomicStubsHeader), 0644); err != nil {
 		return "", err
 	}
 	return path, nil
