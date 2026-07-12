@@ -14,15 +14,15 @@ import (
 )
 
 var (
-	TREE_SITTER_PATH = "./third-party/tree-sitter"
-	OUTPUT_DIR       = "."
+	treeSitterPath   = "./third-party/tree-sitter"
+	defaultOutputDir = "."
 	targetGOOS       string
 	targetGOARCH     string
 	keepTemp         bool
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "tree-sitter-go",
+	Use:   "codegen",
 	Short: "Transpile tree-sitter C code to Go using ccgo",
 	Long: `A tool to transpile tree-sitter core library and grammars from C to Go.
 
@@ -70,13 +70,13 @@ func main() {
 
 func runModules(cmd *cobra.Command, args []string) error {
 	tidy, _ := cmd.Flags().GetBool("tidy")
-	slog.Info("writing grammar modules", "dir", OUTPUT_DIR, "tidy", tidy)
-	if err := ensureGrammarModules(OUTPUT_DIR); err != nil {
+	slog.Info("writing grammar modules", "dir", defaultOutputDir, "tidy", tidy)
+	if err := ensureGrammarModules(defaultOutputDir); err != nil {
 		return err
 	}
 	if tidy {
 		slog.Info("tidying workspace modules")
-		if err := tidyGrammarModules(OUTPUT_DIR); err != nil {
+		if err := tidyGrammarModules(defaultOutputDir); err != nil {
 			return err
 		}
 	}
@@ -87,15 +87,15 @@ func run(cmd *cobra.Command, args []string) error {
 	slog.Info("compiling for target", "GOOS", targetGOOS, "GOARCH", targetGOARCH, "CC", preprocessorIdentity(targetGOOS, targetGOARCH))
 	// Create transpiler
 	transpiler := &Transpiler{
-		TreeSitterPath: TREE_SITTER_PATH,
+		TreeSitterPath: treeSitterPath,
 		GOOS:           targetGOOS,
 		GOARCH:         targetGOARCH,
 		KeepTemp:       keepTemp,
 	}
 
 	// Transpile core
-	slog.Info("transpiling tree-sitter core", "path", TREE_SITTER_PATH)
-	coreOutput := filepath.Join(OUTPUT_DIR, "grammar")
+	slog.Info("transpiling tree-sitter core", "path", treeSitterPath)
+	coreOutput := filepath.Join(defaultOutputDir, "grammar")
 	if err := transpiler.TranspileCore(coreOutput); err != nil {
 		return fmt.Errorf("failed to transpile core: %w", err)
 	}
@@ -129,7 +129,7 @@ func run(cmd *cobra.Command, args []string) error {
 	// Transpile grammars (one unit per language name; monorepos may contribute multiple)
 	for i, unit := range units {
 		slog.Info("transpiling grammar", "index", i+1, "total", len(units), "grammar", unit.Name, "path", unit.Path, "priority", unit.Priority)
-		if err := transpiler.TranspileGrammar(unit.Path, unit.Name, OUTPUT_DIR+"/grammar"); err != nil {
+		if err := transpiler.TranspileGrammar(unit.Path, unit.Name, filepath.Join(defaultOutputDir, "grammar")); err != nil {
 			slog.Warn("failed to transpile grammar, skipping", "grammar", unit.Name, "path", unit.Path, "error", err)
 			fmt.Fprintf(summaryWriter, "- `%s/%s` `%s`: ❌\n", targetGOOS, targetGOARCH, unit.Name)
 			continue
@@ -138,12 +138,12 @@ func run(cmd *cobra.Command, args []string) error {
 	}
 
 	slog.Info("updating languages registry in cmd/parse/languages.go")
-	if err := updateLanguagesGo(OUTPUT_DIR); err != nil {
+	if err := updateLanguagesGo(defaultOutputDir); err != nil {
 		return fmt.Errorf("failed to update languages registry: %w", err)
 	}
 
 	slog.Info("writing per-grammar go.mod and go.work")
-	if err := ensureGrammarModules(OUTPUT_DIR); err != nil {
+	if err := ensureGrammarModules(defaultOutputDir); err != nil {
 		return fmt.Errorf("failed to write grammar modules: %w", err)
 	}
 
