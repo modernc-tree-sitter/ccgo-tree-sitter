@@ -2,6 +2,7 @@ package grammar
 
 import (
 	"path/filepath"
+	"sort"
 	"strings"
 	"sync"
 )
@@ -10,6 +11,117 @@ var (
 	registry = make(map[string]Language)
 	mu       sync.RWMutex
 )
+
+// extensionToLanguage maps file extensions (no leading dot, lowercase) to
+// registered language names. Only unambiguous mappings for languages this repo
+// ships. Extensions that equal a registered name are handled by Get first.
+var extensionToLanguage = map[string]string{
+	// Existing public mappings (keep behavior)
+	"js":   "javascript",
+	"ts":   "typescript",
+	"py":   "python",
+	"rb":   "ruby",
+	"rs":   "rust",
+	"go":   "go",
+	"c":    "c",
+	"cpp":  "cpp",
+	"h":    "c",
+	"hpp":  "cpp",
+	"lua":  "lua",
+	"json": "json",
+
+	// JavaScript / TypeScript family
+	"mjs":    "javascript",
+	"cjs":    "javascript",
+	"jsx":    "javascript",
+	"mts":    "typescript",
+	"cts":    "typescript",
+	"tsx":    "tsx",
+	"vue":    "vue",
+	"svelte": "svelte",
+	"astro":  "astro",
+
+	// Web markup / style
+	"css":  "css",
+	"html": "html",
+	"htm":  "html",
+	"xml":  "xml",
+	"dtd":  "dtd",
+
+	// C / C++ extras
+	"cc":  "cpp",
+	"cxx": "cpp",
+	"hh":  "cpp",
+	"hxx": "cpp",
+
+	// Systems
+	"zig":  "zig",
+	"ha":   "hare",
+	"cu":   "cuda",
+	"cuh":  "cuda",
+	"glsl": "glsl",
+	"vert": "glsl",
+	"frag": "glsl",
+
+	// JVM / .NET / mobile
+	"java":  "java",
+	"kt":    "kotlin",
+	"kts":   "kotlin",
+	"scala": "scala",
+	"cs":    "c_sharp",
+	"dart":  "dart",
+
+	// Scripting / shells
+	"pyi":  "python",
+	"sh":   "bash",
+	"bash": "bash",
+	"zsh":  "bash",
+	"tcl":  "tcl",
+	"pp":   "puppet",
+
+	// Functional
+	"hs":   "haskell",
+	"lhs":  "haskell",
+	"ml":   "ocaml",
+	"mli":  "ocaml_interface",
+	"ex":   "elixir",
+	"exs":  "elixir",
+	"jl":   "julia",
+	"lisp": "commonlisp",
+	"asd":  "commonlisp",
+
+	// Data / config
+	"yaml":      "yaml",
+	"yml":       "yaml",
+	"toml":      "toml",
+	"csv":       "csv",
+	"tsv":       "tsv",
+	"psv":       "psv",
+	"md":        "markdown",
+	"markdown":  "markdown",
+	"ron":       "ron",
+	"po":        "po",
+	"pot":       "po",
+	"beancount": "beancount",
+	"bean":      "beancount",
+
+	// Infra
+	"nix":   "nix",
+	"tf":    "terraform",
+	"hcl":   "hcl",
+	"bicep": "bicep",
+	"cmake": "cmake",
+	"sol":   "solidity",
+	"cairo": "cairo",
+
+	// Build / other
+	"mk":    "make",
+	"make":  "make",
+	"ino":   "arduino",
+	"diff":  "diff",
+	"patch": "diff",
+	"scm":   "query", // tree-sitter query files
+}
 
 // Register adds a new grammar to the registry
 func Register(name string, lang Language) {
@@ -26,7 +138,7 @@ func Get(name string) (Language, bool) {
 	return lang, ok
 }
 
-// List returns all registered grammar names
+// List returns all registered grammar names in sorted order.
 func List() []string {
 	mu.RLock()
 	defer mu.RUnlock()
@@ -34,41 +146,32 @@ func List() []string {
 	for name := range registry {
 		names = append(names, name)
 	}
+	sort.Strings(names)
 	return names
 }
 
-// GetByExtension tries to find a grammar based on file extension
+// GetByExtension tries to find a grammar based on file extension.
+// Matching is case-insensitive on the extension.
 func GetByExtension(filename string) (Language, bool) {
-	ext := strings.TrimPrefix(filepath.Ext(filename), ".")
+	ext := strings.ToLower(strings.TrimPrefix(filepath.Ext(filename), "."))
+	if ext == "" {
+		return nil, false
+	}
 
-	// Direct match
+	// Direct match against registered language name
 	if lang, ok := Get(ext); ok {
 		return lang, ok
 	}
 
-	// Common mappings
-	mapping := map[string]string{
-		"js":   "javascript",
-		"ts":   "typescript",
-		"py":   "python",
-		"rb":   "ruby",
-		"rs":   "rust",
-		"go":   "go",
-		"c":    "c",
-		"cpp":  "cpp",
-		"h":    "c",
-		"hpp":  "cpp",
-		"lua":  "lua",
-		"json": "json",
-	}
-
-	if name, ok := mapping[ext]; ok {
+	if name, ok := extensionToLanguage[ext]; ok {
 		return Get(name)
 	}
 
 	return nil, false
 }
 
+// SupportedLanguages returns a comma-separated list of registered language
+// names in sorted order, or "none" if the registry is empty.
 func SupportedLanguages() string {
 	langs := List()
 	if len(langs) == 0 {
