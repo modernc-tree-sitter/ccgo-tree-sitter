@@ -79,6 +79,9 @@ func run(languageName, filename string) error {
 
 	// Convert parse tree to JSON
 	root := tree.RootNode()
+	if root.IsNull() {
+		return fmt.Errorf("parse failed: tree root is null")
+	}
 	if query != "" {
 		compiledQuery, err := grammar.NewQuery(lang, query)
 		if err != nil {
