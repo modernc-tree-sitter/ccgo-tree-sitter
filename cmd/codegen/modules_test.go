@@ -8,6 +8,10 @@ import (
 )
 
 func TestWriteLangGoMod(t *testing.T) {
+	libcVer, err := currentLibcVersion()
+	if err != nil {
+		t.Fatal(err)
+	}
 	dir := t.TempDir()
 	langDir := filepath.Join(dir, "python")
 	if err := os.MkdirAll(langDir, 0755); err != nil {
@@ -27,7 +31,7 @@ func TestWriteLangGoMod(t *testing.T) {
 	for _, want := range []string{
 		"module github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/python",
 		"github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar v0.0.0",
-		"modernc.org/libc " + libcModuleVersion,
+		"modernc.org/libc " + libcVer,
 		"replace github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar => ../",
 		"replace modernc.org/libc => ../../third-party/libc",
 	} {
@@ -38,6 +42,10 @@ func TestWriteLangGoMod(t *testing.T) {
 }
 
 func TestWriteCoreGoMod(t *testing.T) {
+	libcVer, err := currentLibcVersion()
+	if err != nil {
+		t.Fatal(err)
+	}
 	dir := t.TempDir()
 	if err := writeCoreGoMod(dir); err != nil {
 		t.Fatal(err)
@@ -49,7 +57,7 @@ func TestWriteCoreGoMod(t *testing.T) {
 	s := string(data)
 	for _, want := range []string{
 		"module github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar",
-		"require modernc.org/libc " + libcModuleVersion,
+		"require modernc.org/libc " + libcVer,
 		"replace modernc.org/libc => ../third-party/libc",
 	} {
 		if !strings.Contains(s, want) {
