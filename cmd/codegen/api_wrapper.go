@@ -6,14 +6,6 @@ import (
 	"path/filepath"
 )
 
-func getModuleName(outputDir string) string {
-	moduleName := filepath.Base(outputDir)
-	if moduleName == "." {
-		moduleName = "github.com/modernc-tree-sitter/ccgo-tree-sitter"
-	}
-	return moduleName
-}
-
 // coreAPITemplate is the seed for grammar/api.go when missing. Keep in sync with
 // the hand-maintained grammar/api.go (CString + destroyer finalizers).
 // coreAPITemplate seeds grammar/api.go when missing. Keep in sync with grammar/api.go.
