@@ -201,7 +201,9 @@ func updateRootGoMod(outputDir string, langs []string) error {
 		if dropPath == "" {
 			break
 		}
-		_ = f.DropRequire(dropPath)
+		if err := f.DropRequire(dropPath); err != nil {
+			return fmt.Errorf("drop require %s: %w", dropPath, err)
+		}
 	}
 	for {
 		var dropPath string
@@ -214,7 +216,9 @@ func updateRootGoMod(outputDir string, langs []string) error {
 		if dropPath == "" {
 			break
 		}
-		_ = f.DropReplace(dropPath, "")
+		if err := f.DropReplace(dropPath, ""); err != nil {
+			return fmt.Errorf("drop replace %s: %w", dropPath, err)
+		}
 	}
 
 	for _, m := range mods {
