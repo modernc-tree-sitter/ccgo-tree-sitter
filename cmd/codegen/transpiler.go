@@ -784,7 +784,7 @@ func setupGoMod(dir string) error {
 	}
 
 	goModPath := filepath.Join(dir, "go.mod")
-	goModContent := "module treesitter\n\ngo 1.25\n\nrequire modernc.org/libc " + libcVer + "\n"
+	goModContent := "module treesitter\n\ngo " + moduleGoVersion + "\n\nrequire modernc.org/libc " + libcVer + "\n"
 	if err := os.WriteFile(goModPath, []byte(goModContent), 0644); err != nil {
 		return err
 	}
