@@ -69,7 +69,10 @@ func main() {
 }
 
 func runModules(cmd *cobra.Command, args []string) error {
-	tidy, _ := cmd.Flags().GetBool("tidy")
+	tidy, err := cmd.Flags().GetBool("tidy")
+	if err != nil {
+		return fmt.Errorf("failed to get --tidy flag: %w", err)
+	}
 	slog.Info("writing grammar modules", "dir", defaultOutputDir, "tidy", tidy)
 	if err := ensureGrammarModules(defaultOutputDir); err != nil {
 		return err
