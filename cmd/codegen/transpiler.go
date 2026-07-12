@@ -369,18 +369,6 @@ func fixLineDirectivePaths(src string) string {
 	})
 }
 
-func sanitizePreprocessedFile(path string) error {
-	data, err := os.ReadFile(path)
-	if err != nil {
-		return err
-	}
-	sanitized := sanitizePreprocessedC(string(data))
-	if sanitized == string(data) {
-		return nil
-	}
-	return os.WriteFile(path, []byte(sanitized), 0644)
-}
-
 func preprocessorIdentity(goos, goarch string) string {
 	ccFields, err := splitCompilerEnv(resolveCC(goos, goarch))
 	if err != nil || len(ccFields) == 0 {
