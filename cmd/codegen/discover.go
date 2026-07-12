@@ -134,11 +134,6 @@ func normalizeGrammarName(name string) string {
 	return strings.ReplaceAll(name, "-", "_")
 }
 
-// extractGrammarName preserves the old helper for callers that pass a path.
-func extractGrammarName(path string) string {
-	return normalizeGrammarName(path)
-}
-
 // grammarPriority ranks candidates; lower is preferred. Unwanted locations sort last
 // so first-wins on name keeps product grammars over schema/dialect/example copies.
 func grammarPriority(parserC, repoRoot string) int {
