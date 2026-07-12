@@ -456,7 +456,7 @@ func (t *Transpiler) TranspileCore(outputDir string) error {
 // from the unit path.
 func (t *Transpiler) TranspileGrammar(grammarPath, grammarName, outputDir string) error {
 	if grammarName == "" {
-		grammarName = extractGrammarName(grammarPath)
+		grammarName = normalizeGrammarName(grammarPath)
 	}
 
 	// Check parser.c exists
