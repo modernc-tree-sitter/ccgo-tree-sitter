@@ -15241,6 +15241,8 @@ type __predefined_wchar_t = uint16
 
 type __predefined_ptrdiff_t = int64
 
+type uint32_t = uint32
+
 type __gnuc_va_list = uintptr
 
 type va_list = uintptr
@@ -15393,8 +15395,6 @@ type int16_t = int16
 type uint16_t = uint16
 
 type int32_t = int32
-
-type uint32_t = uint32
 
 type int64_t = int64
 

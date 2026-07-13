@@ -967,6 +967,8 @@ type __predefined_wchar_t = int32
 
 type __predefined_ptrdiff_t = int64
 
+type uint32_t = uint32
+
 type size_t = uint64
 
 type ssize_t = int64
@@ -1028,8 +1030,6 @@ type intmax_t = int64
 type uint8_t = uint8
 
 type uint16_t = uint16
-
-type uint32_t = uint32
 
 type uint64_t = uint64
 
@@ -31627,7 +31627,7 @@ func ts_subtree_retain(tls *libc.TLS, _self Subtree) {
 	*(*Subtree)(unsafe.Pointer(bp)) = _self
 	var v1 bool
 	var v3 uintptr
-	var v4 uint32
+	var v4 uint32_t
 	_, _, _ = v1, v3, v4
 	if int32(*(*uint8)(unsafe.Pointer(bp + 0))&0x1>>0) != 0 {
 		return
@@ -31638,7 +31638,7 @@ func ts_subtree_retain(tls *libc.TLS, _self Subtree) {
 	_ = v1 || libc.Bool(libc.Int32FromInt32(0) != 0)
 	v3 = *(*uintptr)(unsafe.Pointer(bp))
 	_ = int32(__ATOMIC_SEQ_CST)
-	*(*uint32)(unsafe.Pointer(v3)) += uint32(1)
+	*(*uint32_t)(unsafe.Pointer(v3)) += uint32(1)
 	v4 = libc.AtomicLoadPUint32(v3)
 	goto _5
 _5:
@@ -31659,11 +31659,10 @@ func ts_subtree_release(tls *libc.TLS, pool uintptr, _self Subtree) {
 	defer tls.Free(48)
 	*(*Subtree)(unsafe.Pointer(bp + 16)) = _self
 	var children, new_contents, new_contents1, v10, v13, v15, v4, v7, v8, v9 uintptr
-	var i, new_capacity1, new_size, v12, v2 uint32_t
+	var i, new_capacity1, new_size, v12, v2, v5 uint32_t
 	var v1 bool
 	var v11 size_t
 	var v19 MutableSubtree
-	var v5 uint32
 	var _ /* child at bp+32 */ Subtree
 	var _ /* result at bp+8 */ MutableSubtree
 	var _ /* tree at bp+24 */ MutableSubtree
@@ -31678,7 +31677,7 @@ func ts_subtree_release(tls *libc.TLS, pool uintptr, _self Subtree) {
 	_ = v1 || libc.Bool(libc.Int32FromInt32(0) != 0)
 	v4 = *(*uintptr)(unsafe.Pointer(bp + 16))
 	_ = int32(__ATOMIC_SEQ_CST)
-	*(*uint32)(unsafe.Pointer(v4)) -= uint32(1)
+	*(*uint32_t)(unsafe.Pointer(v4)) -= uint32(1)
 	v5 = libc.AtomicLoadPUint32(v4)
 	goto _6
 _6:
@@ -31765,7 +31764,7 @@ _3:
 				_ = v1 || libc.Bool(libc.Int32FromInt32(0) != 0)
 				v4 = *(*uintptr)(unsafe.Pointer(bp + 32))
 				_ = int32(__ATOMIC_SEQ_CST)
-				*(*uint32)(unsafe.Pointer(v4)) -= uint32(1)
+				*(*uint32_t)(unsafe.Pointer(v4)) -= uint32(1)
 				v5 = libc.AtomicLoadPUint32(v4)
 				goto _30
 			_30:

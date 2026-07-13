@@ -1738,6 +1738,8 @@ type __predefined_wchar_t = int32
 
 type __predefined_ptrdiff_t = int64
 
+type uint32_t = uint32
+
 type __int8_t = int8
 
 type __uint8_t = uint8
@@ -2254,8 +2256,6 @@ type uint_least64_t = uint64
 type int_fast64_t = int64
 
 type uint_fast64_t = uint64
-
-type uint32_t = uint32
 
 type int_least32_t = int32
 
@@ -33614,7 +33614,7 @@ func ts_subtree_retain(tls *libc.TLS, _self Subtree) {
 	defer tls.Free(16)
 	*(*Subtree)(unsafe.Pointer(bp)) = _self
 	var v2 uintptr
-	var v3 uint32
+	var v3 uint32_t
 	_, _ = v2, v3
 	if int32(*(*uint8)(unsafe.Pointer(bp + 0))&0x1>>0) != 0 {
 		return
@@ -33624,7 +33624,7 @@ func ts_subtree_retain(tls *libc.TLS, _self Subtree) {
 	}
 	v2 = *(*uintptr)(unsafe.Pointer(bp))
 	_ = int32(__ATOMIC_SEQ_CST)
-	*(*uint32)(unsafe.Pointer(v2)) += uint32(1)
+	*(*uint32_t)(unsafe.Pointer(v2)) += uint32(1)
 	v3 = libc.AtomicLoadPUint32(v2)
 	goto _4
 _4:
@@ -33644,10 +33644,9 @@ func ts_subtree_release(tls *libc.TLS, pool uintptr, _self Subtree) {
 	defer tls.Free(48)
 	*(*Subtree)(unsafe.Pointer(bp + 16)) = _self
 	var children, new_contents, new_contents1, v12, v14, v3, v6, v7, v8, v9 uintptr
-	var i, new_capacity1, new_size, v1, v11 uint32_t
+	var i, new_capacity1, new_size, v1, v11, v4 uint32_t
 	var v10 size_t
 	var v18 MutableSubtree
-	var v4 uint32
 	var _ /* child at bp+32 */ Subtree
 	var _ /* result at bp+8 */ MutableSubtree
 	var _ /* tree at bp+24 */ MutableSubtree
@@ -33661,7 +33660,7 @@ func ts_subtree_release(tls *libc.TLS, pool uintptr, _self Subtree) {
 	}
 	v3 = *(*uintptr)(unsafe.Pointer(bp + 16))
 	_ = int32(__ATOMIC_SEQ_CST)
-	*(*uint32)(unsafe.Pointer(v3)) -= uint32(1)
+	*(*uint32_t)(unsafe.Pointer(v3)) -= uint32(1)
 	v4 = libc.AtomicLoadPUint32(v3)
 	goto _5
 _5:
@@ -33747,7 +33746,7 @@ _2:
 				}
 				v3 = *(*uintptr)(unsafe.Pointer(bp + 32))
 				_ = int32(__ATOMIC_SEQ_CST)
-				*(*uint32)(unsafe.Pointer(v3)) -= uint32(1)
+				*(*uint32_t)(unsafe.Pointer(v3)) -= uint32(1)
 				v4 = libc.AtomicLoadPUint32(v3)
 				goto _28
 			_28:
