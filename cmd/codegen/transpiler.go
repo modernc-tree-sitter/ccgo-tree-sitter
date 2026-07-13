@@ -758,10 +758,10 @@ func runCcgoIsolated(goos, goarch string, args []string) error {
 	os.Stderr = w
 
 	var stderrBuf bytes.Buffer
-	done := make(chan struct{})
+	done := make(chan error, 1)
 	go func() {
-		io.Copy(&stderrBuf, r)
-		close(done)
+		_, copyErr := io.Copy(&stderrBuf, r)
+		done <- copyErr
 	}()
 
 	// Run ccgo
@@ -771,7 +771,14 @@ func runCcgoIsolated(goos, goarch string, args []string) error {
 	if closeErr := w.Close(); closeErr != nil && err == nil {
 		err = fmt.Errorf("close stderr pipe: %w", closeErr)
 	}
-	<-done
+	if copyErr := <-done; copyErr != nil {
+		// Prefer combining so a truncated drain does not hide a real ccgo failure.
+		if err != nil {
+			err = fmt.Errorf("%w; drain stderr: %v", err, copyErr)
+		} else {
+			err = fmt.Errorf("drain stderr: %w", copyErr)
+		}
+	}
 
 	if err != nil {
 		return fmt.Errorf("%w\nstderr: %s", err, stderrBuf.String())
