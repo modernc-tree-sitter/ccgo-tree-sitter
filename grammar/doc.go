@@ -27,4 +27,10 @@
 // core-*.go and per-language grammar-*.go are codegen output
 // (mise run codegen). Do not edit them by hand; change sources or the
 // generator and regenerate.
+//
+// # Line index
+//
+// LineIndex converts tree-sitter byte offsets to 1-based lines and 0-based
+// columns (byte offset within the line). Build once per source with
+// NewLineIndex or NewLineIndexBytes; lookups are O(log lines).
 package grammar
