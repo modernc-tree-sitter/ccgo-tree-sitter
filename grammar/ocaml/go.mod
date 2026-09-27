@@ -3,7 +3,7 @@ module github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/ocaml
 go 1.25.0
 
 require (
-	github.com/modernc-tree-sitter/ccgo-tree-sitter/core v0.0.0-20260907205036-8fdfa3f25c9a
+	github.com/modernc-tree-sitter/ccgo-tree-sitter/core v0.0.0-20260927183436-febb7f868b50
 	modernc.org/libc v1.67.6
 )
 
