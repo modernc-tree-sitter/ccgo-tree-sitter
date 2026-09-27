@@ -27,10 +27,17 @@ func TestWriteLangGoMod(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+	coreVer, err := coreGrammarPseudoVersion()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if coreVer == "v0.0.0" || !strings.Contains(coreVer, "-") {
+		t.Fatalf("core grammar version must be a commit pseudo-version, got %s", coreVer)
+	}
 	s := string(data)
 	for _, want := range []string{
 		"module github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/python",
-		"github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar v0.0.0",
+		"github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar " + coreVer,
 		"modernc.org/libc " + libcVer,
 		"replace github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar => ../",
 		"replace modernc.org/libc => " + libcReplacePath + " " + libcReplaceVer,
