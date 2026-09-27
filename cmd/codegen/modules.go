@@ -205,6 +205,7 @@ func writeGoWork(outputDir string, langs []string) error {
 	b.WriteString("use (\n")
 	b.WriteString("\t.\n")
 	b.WriteString("\t./core\n")
+	b.WriteString("\t./core/integration\n")
 	for _, lang := range langs {
 		fmt.Fprintf(&b, "\t./grammar/%s\n", lang)
 	}

@@ -3,6 +3,7 @@ go 1.25.0
 use (
 	.
 	./core
+	./core/integration
 	./grammar/COBOL
 	./grammar/ada
 	./grammar/agda

@@ -1,5 +1,3 @@
-//go:build corelocal
-
 package grammar_test
 
 import (
