@@ -1,10 +1,12 @@
+//go:build corelocal
+
 package grammar_test
 
 import (
 	"sync"
 	"testing"
 
-	"github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar"
+	"github.com/modernc-tree-sitter/ccgo-tree-sitter/core"
 	gogrammar "github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/go"
 	jsongrammar "github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/json"
 )

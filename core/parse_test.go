@@ -1,9 +1,11 @@
+//go:build corelocal
+
 package grammar_test
 
 import (
 	"testing"
 
-	"github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar"
+	"github.com/modernc-tree-sitter/ccgo-tree-sitter/core"
 	jsongrammar "github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/json"
 )
 
