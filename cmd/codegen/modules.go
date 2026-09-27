@@ -192,10 +192,8 @@ require (
 	modernc.org/libc %s
 )
 
-replace %s => ../../core
-
 replace modernc.org/libc => %s %s
-`, grammarModulePath, lang, moduleGoVersion, coreModulePath, coreVer, libcVer, coreModulePath, libcReplacePath, libcReplaceVer)
+`, grammarModulePath, lang, moduleGoVersion, coreModulePath, coreVer, libcVer, libcReplacePath, libcReplaceVer)
 	return os.WriteFile(filepath.Join(grammarDir, lang, "go.mod"), []byte(content), 0644)
 }
 
@@ -276,11 +274,12 @@ func updateRootGoMod(outputDir string, langs []string) error {
 		}
 	}
 
+	coreVer, err := coreGrammarPseudoVersion()
+	if err != nil {
+		return err
+	}
 	for _, m := range mods {
-		f.AddNewRequire(m.path, localPseudoVer, false)
-		if err := f.AddReplace(m.path, "", m.dir, ""); err != nil {
-			return err
-		}
+		f.AddNewRequire(m.path, coreVer, false)
 	}
 	libcVer, err := currentLibcVersion()
 	if err != nil {

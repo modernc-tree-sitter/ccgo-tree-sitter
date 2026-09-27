@@ -39,7 +39,7 @@ func TestWriteLangGoMod(t *testing.T) {
 		"module github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/python",
 		"github.com/modernc-tree-sitter/ccgo-tree-sitter/core " + coreVer,
 		"modernc.org/libc " + libcVer,
-		"replace github.com/modernc-tree-sitter/ccgo-tree-sitter/core => ../../core",
+
 		"replace modernc.org/libc => " + libcReplacePath + " " + libcReplaceVer,
 	} {
 		if !strings.Contains(s, want) {
