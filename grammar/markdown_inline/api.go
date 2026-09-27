@@ -3,7 +3,7 @@ package grammar_markdown_inline
 import (
 	"unsafe"
 	"reflect"
-	"github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar"
+	"github.com/modernc-tree-sitter/ccgo-tree-sitter/core"
 )
 
 // Language returns the TSLanguage for markdown_inline with external scanner properly connected

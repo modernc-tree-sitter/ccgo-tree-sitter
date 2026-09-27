@@ -3,7 +3,7 @@ package grammar_dart
 import (
 	"unsafe"
 	"reflect"
-	"github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar"
+	"github.com/modernc-tree-sitter/ccgo-tree-sitter/core"
 )
 
 // Language returns the TSLanguage for dart with external scanner properly connected

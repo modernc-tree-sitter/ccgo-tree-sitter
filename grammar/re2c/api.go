@@ -2,7 +2,7 @@ package grammar_re2c
 
 import (
 	"unsafe"
-	"github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar"
+	"github.com/modernc-tree-sitter/ccgo-tree-sitter/core"
 )
 
 // Language returns the TSLanguage for re2c

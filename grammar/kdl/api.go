@@ -3,7 +3,7 @@ package grammar_kdl
 import (
 	"unsafe"
 	"reflect"
-	"github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar"
+	"github.com/modernc-tree-sitter/ccgo-tree-sitter/core"
 )
 
 // Language returns the TSLanguage for kdl with external scanner properly connected

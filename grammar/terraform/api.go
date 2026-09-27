@@ -3,7 +3,7 @@ package grammar_terraform
 import (
 	"unsafe"
 	"reflect"
-	"github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar"
+	"github.com/modernc-tree-sitter/ccgo-tree-sitter/core"
 )
 
 // Language returns the TSLanguage for terraform with external scanner properly connected

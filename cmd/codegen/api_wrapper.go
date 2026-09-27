@@ -103,7 +103,7 @@ func GenerateAPIWrapper(outputDir, grammarName string) error {
 
 import (
 	"unsafe"
-	"github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar"
+	"github.com/modernc-tree-sitter/ccgo-tree-sitter/core"
 )
 
 // Language returns the TSLanguage for %s
@@ -132,7 +132,7 @@ func GenerateAPIWrapperWithScanner(outputDir, grammarName string) error {
 import (
 	"unsafe"
 	"reflect"
-	"github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar"
+	"github.com/modernc-tree-sitter/ccgo-tree-sitter/core"
 )
 
 // Language returns the TSLanguage for %s with external scanner properly connected

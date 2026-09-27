@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar"
+	"github.com/modernc-tree-sitter/ccgo-tree-sitter/core"
 	"github.com/spf13/cobra"
 )
 

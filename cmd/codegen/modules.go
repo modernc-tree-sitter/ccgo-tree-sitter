@@ -17,6 +17,7 @@ import (
 
 const (
 	rootModulePath    = "github.com/modernc-tree-sitter/ccgo-tree-sitter"
+	coreModulePath    = rootModulePath + "/core"
 	grammarModulePath = rootModulePath + "/grammar"
 	moduleGoVersion   = "1.25.0"
 	localPseudoVer    = "v0.0.0"
@@ -37,7 +38,11 @@ func ensureGrammarModules(outputDir string) error {
 	if err := os.MkdirAll(grammarDir, 0755); err != nil {
 		return err
 	}
-	if err := writeCoreGoMod(grammarDir); err != nil {
+	coreDir := filepath.Join(abs, "core")
+	if err := os.MkdirAll(coreDir, 0755); err != nil {
+		return err
+	}
+	if err := writeCoreGoMod(coreDir); err != nil {
 		return err
 	}
 
@@ -133,7 +138,7 @@ go %s
 require modernc.org/libc %s
 
 replace modernc.org/libc => %s %s
-`, grammarModulePath, moduleGoVersion, libcVer, libcReplacePath, libcReplaceVer)
+`, coreModulePath, moduleGoVersion, libcVer, libcReplacePath, libcReplaceVer)
 	return os.WriteFile(filepath.Join(grammarDir, "go.mod"), []byte(content), 0644)
 }
 
@@ -187,10 +192,10 @@ require (
 	modernc.org/libc %s
 )
 
-replace %s => ../
+replace %s => ../../core
 
 replace modernc.org/libc => %s %s
-`, grammarModulePath, lang, moduleGoVersion, grammarModulePath, coreVer, libcVer, grammarModulePath, libcReplacePath, libcReplaceVer)
+`, grammarModulePath, lang, moduleGoVersion, coreModulePath, coreVer, libcVer, coreModulePath, libcReplacePath, libcReplaceVer)
 	return os.WriteFile(filepath.Join(grammarDir, lang, "go.mod"), []byte(content), 0644)
 }
 
@@ -199,7 +204,7 @@ func writeGoWork(outputDir string, langs []string) error {
 	b.WriteString("go " + moduleGoVersion + "\n\n")
 	b.WriteString("use (\n")
 	b.WriteString("\t.\n")
-	b.WriteString("\t./grammar\n")
+	b.WriteString("\t./core\n")
 	for _, lang := range langs {
 		fmt.Fprintf(&b, "\t./grammar/%s\n", lang)
 	}
@@ -227,14 +232,14 @@ func updateRootGoMod(outputDir string, langs []string) error {
 		path string
 		dir  string
 	}
-	mods := []modRef{{grammarModulePath, "./grammar"}}
+	mods := []modRef{{coreModulePath, "./core"}}
 	for _, lang := range langs {
 		mods = append(mods, modRef{grammarModulePath + "/" + lang, "./grammar/" + lang})
 	}
 	// Drop every local grammar require/replace we manage, including stale
 	// languages removed since the last run (prefix match, not only current set).
 	isManaged := func(path string) bool {
-		if path == grammarModulePath || path == "modernc.org/libc" {
+		if path == coreModulePath || path == grammarModulePath || path == "modernc.org/libc" {
 			return true
 		}
 		return strings.HasPrefix(path, grammarModulePath+"/")

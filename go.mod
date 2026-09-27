@@ -31,7 +31,7 @@ require (
 	modernc.org/sortutil v1.2.1 // indirect
 	modernc.org/strutil v1.2.1 // indirect
 	modernc.org/token v1.1.0 // indirect
-	github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar v0.0.0
+	github.com/modernc-tree-sitter/ccgo-tree-sitter/core v0.0.0
 	github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/COBOL v0.0.0
 	github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/ada v0.0.0
 	github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/agda v0.0.0
@@ -223,7 +223,7 @@ require (
 
 replace modernc.org/ccgo/v4 => github.com/modernc-tree-sitter/ccgo/v4 v4.0.0-20260711120204-5fee9207d50b
 
-replace github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar => ./grammar
+replace github.com/modernc-tree-sitter/ccgo-tree-sitter/core => ./core
 
 replace github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/COBOL => ./grammar/COBOL
 

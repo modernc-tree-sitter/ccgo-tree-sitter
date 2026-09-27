@@ -37,9 +37,9 @@ func TestWriteLangGoMod(t *testing.T) {
 	s := string(data)
 	for _, want := range []string{
 		"module github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/python",
-		"github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar " + coreVer,
+		"github.com/modernc-tree-sitter/ccgo-tree-sitter/core " + coreVer,
 		"modernc.org/libc " + libcVer,
-		"replace github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar => ../",
+		"replace github.com/modernc-tree-sitter/ccgo-tree-sitter/core => ../../core",
 		"replace modernc.org/libc => " + libcReplacePath + " " + libcReplaceVer,
 	} {
 		if !strings.Contains(s, want) {
@@ -63,7 +63,7 @@ func TestWriteCoreGoMod(t *testing.T) {
 	}
 	s := string(data)
 	for _, want := range []string{
-		"module github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar",
+		"module github.com/modernc-tree-sitter/ccgo-tree-sitter/core",
 		"require modernc.org/libc " + libcVer,
 		"replace modernc.org/libc => " + libcReplacePath + " " + libcReplaceVer,
 	} {
@@ -87,7 +87,7 @@ func TestEnsureGrammarModules(t *testing.T) {
 		t.Fatal(err)
 	}
 	for _, p := range []string{
-		filepath.Join(grammarDir, "go.mod"),
+		filepath.Join(root, "core", "go.mod"),
 		filepath.Join(langDir, "go.mod"),
 		filepath.Join(root, "go.work"),
 	} {
