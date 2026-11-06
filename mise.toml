@@ -1,6 +1,6 @@
 [tools]
 go = "1.26.4"
-uv = "0.11.26"
+uv = "0.13.7"
 "go:golang.org/x/tools/gopls" = "0.22.0"
 # Places grammar C sources (core:place); also used by CI prepare / add-grammar.
 "github:lucasew/workspaced" = "0.14.1"
