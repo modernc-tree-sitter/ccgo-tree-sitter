@@ -1350,7 +1350,7 @@
       "depName": "tree-sitter/tree-sitter",
       "packageName": "https://github.com/tree-sitter/tree-sitter",
       "currentValue": "master",
-      "currentDigest": "9fc2f486a8c1e1f5a4b1954cdcd240fcd09eb003",
+      "currentDigest": "cc6e9f970d47347e572f62d1420d60d8f1d758c4",
       "datasource": "git-refs"
     },
     {
