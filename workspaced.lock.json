@@ -506,7 +506,7 @@
       "depName": "nix-community/tree-sitter-nix",
       "packageName": "https://github.com/nix-community/tree-sitter-nix",
       "currentValue": "master",
-      "currentDigest": "3d0173d903e630b6e14d17f1cf79488791379ded",
+      "currentDigest": "e9f150648a7e0015b77f4c9b315648b389d6364e",
       "datasource": "git-refs"
     },
     {
