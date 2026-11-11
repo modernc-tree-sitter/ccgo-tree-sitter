@@ -218,7 +218,7 @@ require (
 	github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/yaml v0.0.0
 	github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/yuck v0.0.0
 	github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/zig v0.0.0
-	modernc.org/libc v1.67.6
+	modernc.org/libc v1.81.0
 )
 
 replace modernc.org/ccgo/v4 => github.com/modernc-tree-sitter/ccgo/v4 v4.0.0-20260711120204-5fee9207d50b
