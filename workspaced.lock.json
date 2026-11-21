@@ -1584,7 +1584,7 @@
       "depName": "tree-sitter/tree-sitter-scala",
       "packageName": "https://github.com/tree-sitter/tree-sitter-scala",
       "currentValue": "master",
-      "currentDigest": "e99057291c4b8b6053134201aec16c5885175d1d",
+      "currentDigest": "58473f4bc411af940b47777d420e593f93b51df5",
       "datasource": "git-refs"
     },
     {
