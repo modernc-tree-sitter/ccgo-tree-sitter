@@ -1,6 +1,6 @@
 module github.com/modernc-tree-sitter/ccgo-tree-sitter
 
-go 1.25.0
+go 1.26.0
 
 require (
 	github.com/spf13/cobra v1.10.2
@@ -14,23 +14,6 @@ require (
 	github.com/hashicorp/golang-lru/v2 v2.0.7 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
-	github.com/ncruces/go-strftime v1.0.0 // indirect
-	github.com/remyoudompheng/bigfft v0.0.0-20230129092748-24d4a6f8daec // indirect
-	github.com/spf13/pflag v1.0.9 // indirect
-	golang.org/x/exp v0.0.0-20251023183803-a4bb9ffd2546 // indirect
-	golang.org/x/mod v0.32.0
-	golang.org/x/sync v0.19.0 // indirect
-	golang.org/x/sys v0.42.0 // indirect
-	golang.org/x/tools v0.41.0 // indirect
-	modernc.org/cc/v4 v4.27.1 // indirect
-	modernc.org/gc/v2 v2.6.5 // indirect
-	modernc.org/gc/v3 v3.1.2 // indirect
-	modernc.org/mathutil v1.7.1 // indirect
-	modernc.org/memory v1.11.0 // indirect
-	modernc.org/opt v0.1.4 // indirect
-	modernc.org/sortutil v1.2.1 // indirect
-	modernc.org/strutil v1.2.1 // indirect
-	modernc.org/token v1.1.0 // indirect
 	github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar v0.0.0
 	github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/COBOL v0.0.0
 	github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/ada v0.0.0
@@ -218,7 +201,24 @@ require (
 	github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/yaml v0.0.0
 	github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/yuck v0.0.0
 	github.com/modernc-tree-sitter/ccgo-tree-sitter/grammar/zig v0.0.0
+	github.com/ncruces/go-strftime v1.0.0 // indirect
+	github.com/remyoudompheng/bigfft v0.0.0-20230129092748-24d4a6f8daec // indirect
+	github.com/spf13/pflag v1.0.9 // indirect
+	golang.org/x/exp v0.0.0-20251023183803-a4bb9ffd2546 // indirect
+	golang.org/x/mod v0.43.0
+	golang.org/x/sync v0.24.0 // indirect
+	golang.org/x/sys v0.49.0 // indirect
+	golang.org/x/tools v0.52.0 // indirect
+	modernc.org/cc/v4 v4.27.1 // indirect
+	modernc.org/gc/v2 v2.6.5 // indirect
+	modernc.org/gc/v3 v3.1.2 // indirect
 	modernc.org/libc v1.67.6
+	modernc.org/mathutil v1.7.1 // indirect
+	modernc.org/memory v1.11.0 // indirect
+	modernc.org/opt v0.1.4 // indirect
+	modernc.org/sortutil v1.2.1 // indirect
+	modernc.org/strutil v1.2.1 // indirect
+	modernc.org/token v1.1.0 // indirect
 )
 
 replace modernc.org/ccgo/v4 => github.com/modernc-tree-sitter/ccgo/v4 v4.0.0-20260711120204-5fee9207d50b
